@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="vi" data-type="software">
+<html lang="vi" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="page-type" content="software">
-  <meta name="site-kind" content="software">
-  <title>Nguyễn Phát Tài | Java Backend Architect & Systems Engineer</title>
-  <meta name="description" content="Portfolio của Nguyễn Phát Tài - Sinh viên Kỹ thuật Phần mềm Đại học FPT Cần Thơ. Chuyên sâu kiến trúc Java Backend, Jakarta EE 10, Spring Boot, MS SQL Server & Docker.">
+  <title>Nguyễn Phát Tài | Java Backend Architect &amp; Systems Engineer</title>
+  <meta name="description" content="Portfolio chính thức của Nguyễn Phát Tài - Sinh viên Kỹ thuật Phần mềm Đại học FPT Cần Thơ. Chuyên sâu kiến trúc Java Backend, Jakarta EE 10, Spring Boot, MS SQL Server &amp; Docker.">
   
   <!-- OpenGraph -->
   <meta property="og:title" content="Nguyễn Phát Tài | Java Backend Architect">
-  <meta property="og:description" content="Khám phá hệ thống phân tán, kiến trúc backend Java và các đồ án tiêu biểu tại Đại học FPT Cần Thơ.">
+  <meta property="og:description" content="Khám phá hệ sinh thái backend Java, cơ sở dữ liệu quan hệ và các đồ án tiêu biểu tại Đại học FPT Cần Thơ.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ngtaiphat1501.github.io">
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/161285867?v=4">
@@ -18,17 +16,14 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/161285867?v=4">
 
-  <!-- Fonts (Inter & Fira Code) -->
+  <!-- Fonts: Inter & Fira Code (đồng bộ chuẩn với GitHub) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Subtle Animated Grid Texture -->
-  <div class="bg-grid"></div>
 
   <!-- =========================================================================
        NAVIGATION BAR
@@ -37,28 +32,31 @@
     <div class="container nav-container">
       <a href="#hero" class="nav-brand">
         <img src="assets/avatar.jpg" alt="Nguyễn Phát Tài" class="brand-avatar" onerror="this.src='https://avatars.githubusercontent.com/u/161285867?v=4'">
-        <span>Nguyễn Phát Tài</span>
-        <span class="status-badge">
-          <span class="status-dot"></span>
-          <span>Open to Internships</span>
-        </span>
+        <div class="brand-text">
+          <span class="brand-name">Nguyễn Phát Tài</span>
+          <span class="brand-tag">@ngtaiphat1501</span>
+        </div>
       </a>
 
-      <ul class="nav-links">
-        <li><a href="#about" class="nav-link">Giới thiệu</a></li>
-        <li><a href="#tech" class="nav-link">Công nghệ</a></li>
-        <li><a href="#projects" class="nav-link">Dự án</a></li>
-        <li><a href="#roadmap" class="nav-link">Lộ trình</a></li>
-        <li><a href="#contact" class="nav-link">Liên hệ</a></li>
-      </ul>
+      <nav class="nav-menu">
+        <ul class="nav-links">
+          <li><a href="#about" class="nav-link">Giới thiệu</a></li>
+          <li><a href="#music" class="nav-link">Coding Vibes</a></li>
+          <li><a href="#tech" class="nav-link">Kỹ năng</a></li>
+          <li><a href="#projects" class="nav-link">Dự án</a></li>
+          <li><a href="#roadmap" class="nav-link">Lộ trình</a></li>
+          <li><a href="#telemetry" class="nav-link">GitHub Stats</a></li>
+          <li><a href="#contact" class="nav-link">Liên hệ</a></li>
+        </ul>
+      </nav>
 
       <div class="nav-actions">
-        <button class="btn btn-secondary open-cv-btn" title="Xem & Tải CV dạng PDF">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <button class="btn btn-primary open-cv-btn" title="Xem & Tải CV dạng PDF">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Tải CV (PDF)</span>
         </button>
-        <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" title="GitHub Profile">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener noreferrer" class="btn btn-github" title="Xem GitHub Profile">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
         </a>
       </div>
     </div>
@@ -66,223 +64,259 @@
 
   <main>
     <!-- =======================================================================
-         HERO SECTION
+         HERO SECTION (ĐỒNG BỘ 100% VỚI HEADER GITHUB PROFILE)
          ======================================================================= -->
     <section id="hero" class="hero-section">
-      <div class="container hero-grid">
+      <div class="container hero-container">
         
-        <!-- Left: Copy & Value Proposition -->
-        <div class="hero-content">
-          <div class="hero-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>FPT University Can Tho • Software Engineering</span>
-          </div>
-
-          <div class="hero-brand-wrap">
-            <h1 class="hero-name-hero">Nguyễn Phát Tài</h1>
-            <p class="hero-role-title">Java Backend Systems &amp; Distributed Architecture</p>
-            <div class="hero-spec-chips">
-              <span class="spec-chip">Java 21</span>
-              <span class="spec-chip">Jakarta EE 10</span>
-              <span class="spec-chip">Spring Boot</span>
-              <span class="spec-chip">MS SQL Server</span>
-              <span class="spec-chip">Docker</span>
-            </div>
-          </div>
-
-          <p class="hero-desc">
-            Mình là <strong>Nguyễn Phát Tài</strong>, kỹ sư phần mềm tập trung vào kiến trúc hệ thống với <strong>Java (Jakarta EE 10 / Spring)</strong>, tối ưu hóa cơ sở dữ liệu quan hệ <strong>MS SQL Server</strong> và đóng gói triển khai trên <strong>Docker</strong>.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-primary">
-              <span>Xem dự án tiêu biểu</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-            <button class="btn btn-secondary open-cv-btn">
-              <span>Hồ sơ năng lực (CV)</span>
-            </button>
-            <button class="btn btn-secondary copy-email-btn" title="Sao chép email">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <span>Copy Email</span>
-            </button>
+        <div class="hero-avatar-wrap">
+          <img src="assets/avatar.jpg" alt="Nguyễn Phát Tài" class="hero-avatar-img" onerror="this.src='https://avatars.githubusercontent.com/u/161285867?v=4'">
+          <div class="hero-avatar-status" title="Sẵn sàng thực tập kỳ chuyên ngành">
+            <span class="status-indicator"></span>
           </div>
         </div>
 
-        <!-- Right: Interactive Terminal -->
-        <div class="hero-terminal">
-          <div class="terminal-header">
-            <div class="terminal-dots">
-              <span class="terminal-dot red"></span>
-              <span class="terminal-dot yellow"></span>
-              <span class="terminal-dot green"></span>
-            </div>
-            <span class="terminal-title">tai@fpt-cantho: ~ (zsh)</span>
-            <span style="font-size: 0.75rem; color: #10b981;">● Online</span>
-          </div>
+        <h1 class="hero-name">Nguyễn Phát Tài</h1>
+        
+        <p class="hero-subtitle">
+          <strong>Software Engineering Student @ FPT University (Cần Thơ)</strong>
+        </p>
 
-          <div class="terminal-body" id="terminalOutput">
-            <div class="terminal-line">
-              <span class="terminal-prompt">➜</span> <span class="terminal-cmd">cat profile.json</span>
-              <div class="terminal-output">
-{<br>
-&nbsp;&nbsp;"name": "Nguyễn Phát Tài",<br>
-&nbsp;&nbsp;"role": "Java Backend &amp; Systems Engineer",<br>
-&nbsp;&nbsp;"university": "FPT University (Can Tho)",<br>
-&nbsp;&nbsp;"core": ["Java 21", "Jakarta EE 10", "SQL Server", "Docker"],<br>
-&nbsp;&nbsp;"focus": "High-throughput Enterprise Web Systems"<br>
-}
-              </div>
-            </div>
-            <div class="terminal-line">
-              <span class="terminal-prompt">➜</span> <span class="terminal-cmd">status --check</span>
-              <div class="terminal-output">
-✓ PRJ301 Capstone (Ftech LMS): Production-grade Docker &amp; VNPAY<br>
-✓ DBI202 &amp; CSD201: Completed with Distinction<br>
-✓ Sẵn sàng nhận lời mời thực tập kỳ chuyên ngành
-              </div>
-            </div>
-          </div>
+        <p class="hero-meta-role">
+          <em>Java Backend Architecture • Relational Databases • Scalable Web Systems</em>
+        </p>
 
-          <div style="padding: 0 16px 14px;">
-            <div class="terminal-input-row">
-              <span class="terminal-prompt">➜</span>
-              <input type="text" id="terminalInput" class="terminal-input" placeholder="Gõ 'help', 'skills', 'projects', 'cv' rồi gõ Enter..." autocomplete="off">
-            </div>
-          </div>
+        <!-- Typing Animation Banner (Đồng bộ với Readme Typing SVG trên GitHub) -->
+        <div class="typing-banner-box">
+          <span class="terminal-prompt">$&nbsp;</span>
+          <span class="typing-text" id="typingOutput">Java Backend &amp; Systems Architect</span>
+          <span class="typing-cursor">|</span>
+        </div>
+
+        <!-- Badges Bar (Campus, Focus, Status) -->
+        <div class="hero-badges-row">
+          <span class="badge-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>FPT University Can Tho</span>
+          </span>
+          <span class="badge-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f8fafc" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            <span>Java • SQL Server • Docker</span>
+          </span>
+          <span class="badge-item status-open">
+            <span class="status-dot-green"></span>
+            <span>Open to Internships</span>
+          </span>
+        </div>
+
+        <!-- Call to actions -->
+        <div class="hero-cta-row">
+          <a href="#projects" class="btn btn-primary">
+            <span>Xem đồ án tiêu biểu</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <button class="btn btn-outline open-cv-btn">
+            <span>Hồ sơ năng lực (CV)</span>
+          </button>
+          <button class="btn btn-outline copy-email-btn" title="Sao chép địa chỉ email">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>ngtaiphat1501@gmail.com</span>
+          </button>
         </div>
 
       </div>
     </section>
 
     <!-- =======================================================================
-         LO-FI & ANIME OST MUSIC PLAYER (Nghe Nhạc Tích Hợp)
-         ======================================================================= -->
-    <div class="container">
-      <div class="music-bar">
-        <div class="music-info">
-          <div class="music-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-          </div>
-          <div class="music-meta">
-            <span class="music-track" id="musicTrack">Lo-Fi Coding Beats &amp; Night Air</span>
-            <span class="music-artist" id="musicArtist">Chillhop Music • Deep Coding Focus</span>
-          </div>
-        </div>
-
-        <!-- Equalizer Animated Wave -->
-        <div class="visualizer" id="visualizer">
-          <div class="visualizer-bar"></div>
-          <div class="visualizer-bar"></div>
-          <div class="visualizer-bar"></div>
-          <div class="visualizer-bar"></div>
-          <div class="visualizer-bar"></div>
-          <div class="visualizer-bar"></div>
-        </div>
-
-        <div class="music-controls">
-          <button class="music-btn" id="prevBtn" title="Bài trước">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"/></svg>
-          </button>
-          <button class="music-btn play-btn" id="playBtn" title="Phát / Dừng">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </button>
-          <button class="music-btn" id="nextBtn" title="Bài kế tiếp">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- =======================================================================
-         ABOUT & ACADEMIC HIGHLIGHTS
+         ABOUT ME SECTION (GIỚI THIỆU BẢN THÂN)
          ======================================================================= -->
     <section id="about" class="section">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag">01 // Nền tảng học thuật</span>
-          <h2 class="section-title">Kỹ sư Phần mềm Đại học FPT Cần Thơ</h2>
+        <div class="section-title-wrap">
+          <h2 class="section-heading">About Me</h2>
+          <span class="section-line"></span>
         </div>
 
-        <div class="about-grid">
-          <div class="card">
-            <h3 class="card-title">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              Định hướng &amp; Thế mạnh Cốt lõi
-            </h3>
-            <ul class="card-list">
-              <li><strong>Kiến trúc Backend Java:</strong> Thành thạo phát triển ứng dụng phân tầng MVC / Layered Architecture trên Jakarta EE 10 và hệ sinh thái Spring Boot.</li>
-              <li><strong>Chuẩn hóa Cơ sở Dữ liệu:</strong> Thiết kế lược đồ quan hệ chuẩn (3NF), tối ưu hóa chỉ mục (Clustered / Non-Clustered Indexes) và Transaction Isolation Levels trên MS SQL Server 2022.</li>
-              <li><strong>Ảo hóa &amp; Đóng gói:</strong> Tự động hóa môi trường dịch vụ với multi-stage Dockerfile, docker-compose mạng nội bộ bảo mật cho database.</li>
-              <li><strong>Tư duy giải thuật:</strong> Nắm vững các cấu trúc dữ liệu kinh điển (BST, AVL, Graph Algorithms, Dynamic Programming) từ khóa CSD201.</li>
-            </ul>
-          </div>
+        <div class="about-card">
+          <p class="about-lead">
+            Xin chào! Mình là <strong>Nguyễn Phát Tài</strong>, sinh viên chuyên ngành <strong>Kỹ thuật Phần mềm</strong> tại <strong>Đại học FPT Cần Thơ</strong>.
+          </p>
 
-          <div class="card">
-            <h3 class="card-title">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-              Thành tích &amp; Học thuật (Academic Track)
-            </h3>
-            <ul class="card-list">
-              <li><strong>PRJ301 (Java Web Application):</strong> Xuất sắc hoàn thành đồ án Capstone hệ thống giáo dục trực tuyến Ftech với điểm số top đầu.</li>
-              <li><strong>DBI202 (Database Systems):</strong> Hoàn thành đồ án thiết kế CSDL thực tế, viết Stored Procedures và Trigger phức tạp.</li>
-              <li><strong>CSD201 (Data Structures &amp; Algorithms):</strong> Xây dựng các thuật toán tìm đường, nén dữ liệu và đồ thị bằng Java thuần.</li>
-              <li><strong>Nghiên cứu mở rộng:</strong> Microservices Communication (REST/gRPC), Docker Orchestration và thuật toán định lượng (Applied AI).</li>
-            </ul>
+          <div class="about-features-grid">
+            <div class="feature-box">
+              <div class="feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <div class="feature-content">
+                <h3 class="feature-title">Chuyên môn chính</h3>
+                <p class="feature-desc">
+                  Thiết kế kiến trúc Backend với <strong>Java (Jakarta EE 10 / Spring Boot)</strong>, chuẩn hóa cơ sở dữ liệu quan hệ <strong>MS SQL Server</strong> và đóng gói môi trường triển khai <strong>Docker</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div class="feature-box">
+              <div class="feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3fb950" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              </div>
+              <div class="feature-content">
+                <h3 class="feature-title">Nền tảng học thuật</h3>
+                <p class="feature-desc">
+                  Hoàn thành xuất sắc các đồ án thực hành Cấu trúc dữ liệu &amp; Giải thuật (<strong>CSD201</strong>), Cơ sở dữ liệu (<strong>DBI202</strong>) và Lập trình Web Java (<strong>PRJ301</strong>).
+                </p>
+              </div>
+            </div>
+
+            <div class="feature-box">
+              <div class="feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div class="feature-content">
+                <h3 class="feature-title">Đang nghiên cứu &amp; Mở rộng</h3>
+                <p class="feature-desc">
+                  Spring Boot Microservices, RESTful API Security, quản trị máy chủ Linux / Nginx và quy trình CI/CD tự động hóa với GitHub Actions.
+                </p>
+              </div>
+            </div>
+
+            <div class="feature-box">
+              <div class="feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+              </div>
+              <div class="feature-content">
+                <h3 class="feature-title">Định hướng tương lai</h3>
+                <p class="feature-desc">
+                  Hệ thống phân tích dữ liệu thông minh (Applied AI) và các thuật toán hỗ trợ quyết định định lượng (Quantitative Decision Systems).
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =======================================================================
-         TECH ARSENAL & SKILLS MATRIX
+         CODING VIBES & MUSIC (ĐỒNG BỘ MỤC MUSIC CỦA GITHUB)
+         ======================================================================= -->
+    <section id="music" class="section">
+      <div class="container">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Coding Vibes &amp; Music</h2>
+          <span class="section-line"></span>
+        </div>
+
+        <div class="music-card">
+          <div class="music-card-header">
+            <div class="music-now-playing">
+              <span class="music-note-icon">🎵</span>
+              <div>
+                <span class="music-vibing-tag">Currently Vibing To:</span>
+                <h3 class="music-track-title" id="musicTrack">Lo-Fi Coding Beats &amp; Night Air</h3>
+                <p class="music-artist-name" id="musicArtist">Chillhop Music • Coding Session</p>
+              </div>
+            </div>
+
+            <!-- Animated Equalizer Bars -->
+            <div class="equalizer" id="visualizer">
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+            </div>
+          </div>
+
+          <p class="music-quote">
+            <em>"Turning caffeine, chill lo-fi beats, and clean logic into scalable systems."</em>
+          </p>
+
+          <!-- Audio controls -->
+          <div class="music-player-controls">
+            <button class="ctrl-btn" id="prevBtn" title="Bài trước">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+            <button class="ctrl-btn ctrl-play" id="playBtn" title="Phát / Tạm dừng">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <button class="ctrl-btn" id="nextBtn" title="Bài tiếp theo">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+            
+            <div class="music-external-links">
+              <a href="https://open.spotify.com/playlist/37i9dQZF1DXdLEN7aqioXM" target="_blank" rel="noopener noreferrer" class="music-badge-btn spotify-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                <span>Spotify Playlist</span>
+              </a>
+              <a href="https://www.youtube.com/watch?v=jfKfPfyJRdk" target="_blank" rel="noopener noreferrer" class="music-badge-btn youtube-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                <span>Lofi Girl Radio</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         TECH STACK SECTION (SKILLICONS + ENTERPRISE BADGES CHUẨN GITHUB)
          ======================================================================= -->
     <section id="tech" class="section">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag">02 // Kỹ năng &amp; Công nghệ</span>
-          <h2 class="section-title">Kho vũ khí kỹ thuật (Tech Arsenal)</h2>
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Tech Stack</h2>
+          <span class="section-line"></span>
         </div>
 
-        <div class="tech-matrix">
+        <div class="tech-stack-card">
           
-          <!-- Column 1: Core Languages -->
-          <div class="card">
-            <div class="tech-group-title">// Ngôn ngữ lập trình</div>
-            <div class="tech-badges">
-              <span class="tech-pill">☕ Java (JDK 11 - 21)</span>
-              <span class="tech-pill">🔷 TypeScript</span>
-              <span class="tech-pill">⚡ JavaScript (ES6+)</span>
-              <span class="tech-pill">🐍 Python</span>
-              <span class="tech-pill">⚙️ C / C++</span>
-              <span class="tech-pill">🌐 HTML5 / CSS3</span>
+          <!-- Category 1: Languages & Core -->
+          <div class="tech-group">
+            <h3 class="tech-group-title">Languages &amp; Core</h3>
+            <div class="icons-row">
+              <a href="https://skillicons.dev" target="_blank" rel="noopener noreferrer">
+                <img src="https://skillicons.dev/icons?i=java,spring,ts,js,py,cpp,html,css&theme=dark" alt="Languages and Core" class="skill-icons-img">
+              </a>
             </div>
           </div>
 
-          <!-- Column 2: Backend & Frameworks -->
-          <div class="card">
-            <div class="tech-group-title">// Backend &amp; Kiến trúc</div>
-            <div class="tech-badges">
-              <span class="tech-pill">☕ Jakarta EE 10</span>
-              <span class="tech-pill">🍃 Spring Boot</span>
-              <span class="tech-pill">🐱 Apache Tomcat</span>
-              <span class="tech-pill">🛡️ RESTful API Security</span>
-              <span class="tech-pill">🔄 JPA / Hibernate</span>
-              <span class="tech-pill">📦 Apache Maven</span>
+          <!-- Category 2: Databases & DevOps -->
+          <div class="tech-group">
+            <h3 class="tech-group-title">Databases &amp; DevOps</h3>
+            <div class="icons-row">
+              <a href="https://skillicons.dev" target="_blank" rel="noopener noreferrer">
+                <img src="https://skillicons.dev/icons?i=mysql,postgres,docker,linux,nginx,maven,git&theme=dark" alt="Databases and DevOps" class="skill-icons-img">
+              </a>
             </div>
           </div>
 
-          <!-- Column 3: Databases & DevOps -->
-          <div class="card">
-            <div class="tech-group-title">// Dữ liệu &amp; Hạ tầng</div>
-            <div class="tech-badges">
-              <span class="tech-pill">🗄️ MS SQL Server</span>
-              <span class="tech-pill">🐘 PostgreSQL</span>
-              <span class="tech-pill">🐬 MySQL</span>
-              <span class="tech-pill">🐳 Docker &amp; Compose</span>
-              <span class="tech-pill">🐧 Linux (Ubuntu)</span>
-              <span class="tech-pill">🌐 Nginx</span>
+          <!-- Category 3: Developer Tools -->
+          <div class="tech-group">
+            <h3 class="tech-group-title">Developer Tools</h3>
+            <div class="icons-row">
+              <a href="https://skillicons.dev" target="_blank" rel="noopener noreferrer">
+                <img src="https://skillicons.dev/icons?i=idea,vscode,postman,github,githubactions&theme=dark" alt="Developer Tools" class="skill-icons-img">
+              </a>
             </div>
+          </div>
+
+          <!-- Enterprise Specialization Badges -->
+          <div class="enterprise-badges-row">
+            <span class="badge-pill">
+              <span class="badge-icon">☕</span>
+              <span>Jakarta EE 10</span>
+            </span>
+            <span class="badge-pill">
+              <span class="badge-icon">🐱</span>
+              <span>Apache Tomcat</span>
+            </span>
+            <span class="badge-pill">
+              <span class="badge-icon">🗄️</span>
+              <span>MS SQL Server 2022</span>
+            </span>
+            <span class="badge-pill">
+              <span class="badge-icon">🐳</span>
+              <span>Docker Compose</span>
+            </span>
           </div>
 
         </div>
@@ -290,236 +324,380 @@
     </section>
 
     <!-- =======================================================================
-         FEATURED SYSTEMS (Interactive Architecture & Highlights)
+         FEATURED SYSTEMS & CAPSTONE PROJECTS (ĐỒ ÁN TIÊU BIỂU)
          ======================================================================= -->
     <section id="projects" class="section">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag">03 // Đồ án tiêu biểu</span>
-          <h2 class="section-title">Hệ thống đã thiết kế &amp; Triển khai</h2>
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Featured Systems</h2>
+          <span class="section-line"></span>
         </div>
 
-        <!-- Project 1: Ftech LMS -->
-        <div class="project-card">
-          <div class="project-top">
-            <div>
-              <h3 class="project-title">
-                <span>Ftech_learning_online</span>
-                <span class="project-role-badge">PRJ301 Capstone • Fullstack Dev (Team 5)</span>
-              </h3>
-              <p style="color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.85rem; margin-top: 4px;">
-                Nền tảng Quản trị &amp; Học tập trực tuyến tích hợp thanh toán tự động
-              </p>
-            </div>
-            <a href="https://github.com/ngtaiphat1501/Ftech_learning_online" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              <span>Mã nguồn GitHub</span>
-            </a>
-          </div>
-
-          <p class="project-desc">
-            Đảm nhiệm thiết kế toàn bộ phân hệ <strong>Admin Dashboard</strong>, bộ lọc phân tích doanh thu khóa học trực quan (Chart.js), cơ chế sinh đơn hàng chuẩn <strong>Idempotency</strong>, kiểm chứng mã giảm giá tự động và tích hợp luồng cổng thanh toán <strong>VNPAY Sandbox</strong>. Đóng gói hoàn chỉnh runtime bằng <strong>multi-stage Dockerfile</strong> liên kết SQL Server 2022.
-          </p>
-
-          <!-- Interactive Request Tracer -->
-          <div class="architecture-box">
-            <div class="arch-header">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              <span>INTERACTIVE REQUEST TRACER // Luồng xử lý thanh toán Idempotent</span>
-              <button class="btn btn-ghost" id="runArchTracer" style="margin-left: auto; font-size: 0.75rem; border: 1px solid rgba(245, 158, 11, 0.3);">
-                ▶ Simulate Request Flow
-              </button>
+        <div class="projects-list">
+          
+          <!-- Project 1: Ftech_learning_online -->
+          <article class="project-box">
+            <div class="project-header">
+              <div class="project-title-area">
+                <h3 class="project-name">
+                  <a href="https://github.com/ngtaiphat1501/Ftech_learning_online" target="_blank" rel="noopener noreferrer">
+                    Ftech_learning_online
+                  </a>
+                </h3>
+                <span class="project-tag-featured">PRJ301 Capstone</span>
+              </div>
+              <span class="project-role-badge">Lead Backend &amp; Architecture (Team of 5) • Oct – Nov 2026</span>
             </div>
 
-            <div class="arch-flow">
-              <div class="arch-node" id="node-client">Client Web UI</div>
-              <span class="arch-arrow">➔</span>
-              <div class="arch-node" id="node-nginx">Nginx Proxy (:80)</div>
-              <span class="arch-arrow">➔</span>
-              <div class="arch-node" id="node-jakarta">Jakarta EE 10 (:8080)</div>
-              <span class="arch-arrow">➔</span>
-              <div class="arch-node" id="node-sql">SQL Server 2022</div>
-              <span class="arch-arrow">➔</span>
-              <div class="arch-node" id="node-vnpay">VNPAY Gateway</div>
+            <p class="project-desc">
+              Hệ thống Nền tảng Học tập Trực tuyến Toàn diện (LMS) phục vụ sinh viên và giảng viên với đầy đủ phân hệ quản trị, thanh toán sandbox và đóng gói containerized.
+            </p>
+
+            <ul class="project-bullets">
+              <li>Thiết kế &amp; xây dựng <strong>Admin Dashboard</strong> và <strong>Phân tích Doanh thu Tài chính</strong> trực quan với Chart.js.</li>
+              <li>Hiện thực hóa cơ chế <strong>Idempotent Checkout Generation</strong>, kiểm tra coupon hợp lệ và tích hợp cổng thanh toán giả lập VNPAY Sandbox (HMAC SHA-512).</li>
+              <li>Đóng gói môi trường thực thi với <strong>Multi-stage Dockerfile</strong> &amp; Docker Compose kết nối liền mạch với SQL Server 2022 trên mạng nội bộ bảo mật.</li>
+            </ul>
+
+            <div class="project-footer">
+              <div class="tech-tags">
+                <span class="tag">Java 21</span>
+                <span class="tag">Jakarta EE 10</span>
+                <span class="tag">Tomcat</span>
+                <span class="tag">SQL Server</span>
+                <span class="tag">Maven</span>
+                <span class="tag">Docker</span>
+              </div>
+              <a href="https://github.com/ngtaiphat1501/Ftech_learning_online" target="_blank" rel="noopener noreferrer" class="project-repo-link">
+                <span>View Repository</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
             </div>
-          </div>
+          </article>
+
+          <!-- Project 2: StudentManagementSystem -->
+          <article class="project-box">
+            <div class="project-header">
+              <div class="project-title-area">
+                <h3 class="project-name">
+                  <a href="https://github.com/ngtaiphat1501/StudentManagementSystem" target="_blank" rel="noopener noreferrer">
+                    StudentManagementSystem
+                  </a>
+                </h3>
+                <span class="project-tag-academic">Academic System</span>
+              </div>
+              <span class="project-role-badge">Java Developer (Team Project) • Mar 2026</span>
+            </div>
+
+            <p class="project-desc">
+              Hệ thống Quản lý Sinh viên &amp; Điểm số Học tập xây dựng theo kiến trúc hướng đối tượng chuẩn hóa, tách biệt logic nghiệp vụ và lưu trữ file nhị phân.
+            </p>
+
+            <ul class="project-bullets">
+              <li>Xây dựng cấu trúc phân tầng Java OOP rõ ràng (<code>models</code>, <code>services</code>, <code>managers</code>, <code>menus</code>, <code>utils</code>).</li>
+              <li>Hiện thực hóa 4 menu console phân quyền chặt chẽ theo vai trò (<code>Admin</code>, <code>Staff</code>, <code>Teacher</code>, <code>Student</code>).</li>
+              <li>Tách biệt domain models khỏi logic tuần tự hóa file nhị phân (Binary Serialization <code>.dat</code>).</li>
+            </ul>
+
+            <div class="project-footer">
+              <div class="tech-tags">
+                <span class="tag">Java OOP</span>
+                <span class="tag">Layered Architecture</span>
+                <span class="tag">Binary File I/O</span>
+                <span class="tag">Ant</span>
+              </div>
+              <a href="https://github.com/ngtaiphat1501/StudentManagementSystem" target="_blank" rel="noopener noreferrer" class="project-repo-link">
+                <span>View Repository</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </article>
+
         </div>
 
-        <!-- Project 2: StudentManagementSystem -->
-        <div class="project-card">
-          <div class="project-top">
-            <div>
-              <h3 class="project-title">
-                <span>StudentManagementSystem</span>
-                <span class="project-role-badge">Java Enterprise Architecture • Lead Dev</span>
-              </h3>
-              <p style="color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.85rem; margin-top: 4px;">
-                Hệ thống quản lý học vụ phân tầng OOP &amp; Lưu trữ nhị phân
-              </p>
-            </div>
-            <a href="https://github.com/ngtaiphat1501/StudentManagementSystem" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              <span>Mã nguồn GitHub</span>
-            </a>
-          </div>
-
-          <p class="project-desc">
-            Xây dựng kiến trúc phân tầng chuẩn OOP gồm <code>models</code>, <code>services</code>, <code>managers</code>, <code>menus</code>, <code>utils</code>. Tách biệt hoàn toàn logic nghiệp vụ với cơ chế tuần tự hóa nhị phân (Binary Serialization <code>.dat</code>). Thiết kế 4 cấp phân quyền giao diện dòng lệnh linh hoạt cho <strong>Admin, Staff, Teacher, Student</strong>.
-          </p>
-        </div>
+        <p class="repo-note">
+          <em>+ 25 private repositories covering coursework, university quiz tools, and algorithmic benchmarks.</em>
+        </p>
 
       </div>
     </section>
 
     <!-- =======================================================================
-         PROGRESSION ROADMAP
+         PROGRESSION ROADMAP (LỘ TRÌNH PHÁT TRIỂN)
          ======================================================================= -->
     <section id="roadmap" class="section">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag">04 // Định hướng tương lai</span>
-          <h2 class="section-title">Lộ trình nâng cao năng lực (Roadmap)</h2>
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Progression Roadmap</h2>
+          <span class="section-line"></span>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
-          <div class="card" style="border-top: 3px solid var(--accent-green);">
-            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-green);">STAGE 01 // HOÀN THÀNH</div>
-            <h4 style="font-size: 1.1rem; margin: 8px 0;">Java Enterprise Core</h4>
-            <p style="color: var(--text-secondary); font-size: 0.9rem;">Jakarta EE 10, Cấu trúc giải thuật CSD201, Cơ sở dữ liệu DBI202.</p>
+        <!-- Pipeline Bar -->
+        <div class="roadmap-pipeline">
+          <div class="pipe-node active">
+            <span class="pipe-num">01</span>
+            <span class="pipe-label">Java Enterprise</span>
           </div>
-
-          <div class="card" style="border-top: 3px solid var(--accent-cyan);">
-            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">STAGE 02 // ĐANG NÂNG CAO</div>
-            <h4 style="font-size: 1.1rem; margin: 8px 0;">Spring Boot &amp; Security</h4>
-            <p style="color: var(--text-secondary); font-size: 0.9rem;">RESTful APIs, Spring Security, JWT, JPA/Hibernate, Database Tuning.</p>
+          <span class="pipe-arrow">➔</span>
+          <div class="pipe-node in-progress">
+            <span class="pipe-num">02</span>
+            <span class="pipe-label">Spring Boot</span>
           </div>
-
-          <div class="card" style="border-top: 3px solid var(--text-muted);">
-            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">STAGE 03 // TIẾP THEO</div>
-            <h4 style="font-size: 1.1rem; margin: 8px 0;">Cloud &amp; DevOps</h4>
-            <p style="color: var(--text-secondary); font-size: 0.9rem;">Quản trị Linux, Nginx load balancing, CI/CD GitHub Actions tự động.</p>
+          <span class="pipe-arrow">➔</span>
+          <div class="pipe-node up-next">
+            <span class="pipe-num">03</span>
+            <span class="pipe-label">DevOps &amp; Cloud</span>
           </div>
-
-          <div class="card" style="border-top: 3px solid var(--accent-purple);">
-            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-purple);">STAGE 04 // NGHIÊN CỨU</div>
-            <h4 style="font-size: 1.1rem; margin: 8px 0;">Applied AI &amp; Quant</h4>
-            <p style="color: var(--text-secondary); font-size: 0.9rem;">Hệ thống phân tích dữ liệu lớn, mô hình hỗ trợ quyết định tự động hóa.</p>
+          <span class="pipe-arrow">➔</span>
+          <div class="pipe-node research">
+            <span class="pipe-num">04</span>
+            <span class="pipe-label">Applied AI</span>
           </div>
         </div>
+
+        <!-- Table Details -->
+        <div class="roadmap-table-wrap">
+          <table class="roadmap-table">
+            <thead>
+              <tr>
+                <th style="width: 70px;">Stage</th>
+                <th style="width: 260px;">Track</th>
+                <th>Focus Areas</th>
+                <th style="width: 140px; text-align: center;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-num">01</td>
+                <td class="col-track">Java Core &amp; Enterprise Systems</td>
+                <td>Jakarta EE 10, OOP Principles, Data Structures &amp; Algorithms (CSD201)</td>
+                <td style="text-align: center;"><span class="status-chip chip-green">Active</span></td>
+              </tr>
+              <tr>
+                <td class="col-num">02</td>
+                <td class="col-track">Spring Boot &amp; Microservices</td>
+                <td>RESTful APIs, Spring Security, JPA / Hibernate, Database Tuning</td>
+                <td style="text-align: center;"><span class="status-chip chip-blue">In Progress</span></td>
+              </tr>
+              <tr>
+                <td class="col-num">03</td>
+                <td class="col-track">DevOps &amp; Cloud Infrastructure</td>
+                <td>Multi-stage Docker, Linux Server Administration, Nginx, GitHub Actions CI/CD</td>
+                <td style="text-align: center;"><span class="status-chip chip-gray">Up Next</span></td>
+              </tr>
+              <tr>
+                <td class="col-num">04</td>
+                <td class="col-track">Applied AI &amp; Quantitative Systems</td>
+                <td>Analytical Software, Predictive Modeling, Quantitative Decision Systems</td>
+                <td style="text-align: center;"><span class="status-chip chip-purple">Research</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
     </section>
 
     <!-- =======================================================================
-         TELEMETRY & VISITOR VIEWS
+         SYSTEM TELEMETRY (CHỈ SỐ GITHUB THỜI GIAN THỰC)
          ======================================================================= -->
-    <section class="section">
-      <div class="container" style="text-align: center;">
-        <span class="section-tag">05 // Số liệu trực tiếp</span>
-        <h2 class="section-title" style="margin-bottom: 24px;">Telemetry &amp; Hoạt động GitHub</h2>
-
-        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
-          <img src="https://img.shields.io/badge/Commits_2026-124+-38bdf8?style=for-the-badge&logo=git&logoColor=white" alt="Commits">
-          <img src="https://img.shields.io/badge/Primary_Language-Java_90.3%25-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
-          <img src="https://img.shields.io/badge/Environment-Docker_&_Linux-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+    <section id="telemetry" class="section">
+      <div class="container">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">System Telemetry</h2>
+          <span class="section-line"></span>
         </div>
 
-        <div>
-          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px; font-family: var(--font-mono);">
-            // Profile Views Counter
+        <div class="telemetry-grid">
+          <!-- Card 1: Overall Stats -->
+          <div class="telemetry-box">
+            <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener noreferrer">
+              <img src="https://github-readme-stats.vercel.app/api?username=ngtaiphat1501&show_icons=true&count_private=true&bg_color=0d1117&border_color=30363d&title_color=38bdf8&text_color=c9d1d9&icon_color=38bdf8&border_radius=8" alt="GitHub Stats" class="telemetry-img">
+            </a>
+          </div>
+
+          <!-- Card 2: Top Languages -->
+          <div class="telemetry-box">
+            <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener noreferrer">
+              <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ngtaiphat1501&layout=compact&langs_count=6&bg_color=0d1117&border_color=30363d&title_color=38bdf8&text_color=c9d1d9&border_radius=8" alt="Top Languages" class="telemetry-img">
+            </a>
+          </div>
+
+          <!-- Card 3: Streak Stats -->
+          <div class="telemetry-box full-width">
+            <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener noreferrer">
+              <img src="https://streak-stats.demolab.com?user=ngtaiphat1501&background=0d1117&border=30363d&stroke=30363d&ring=38bdf8&fire=38bdf8&currStreakNum=f0f6fc&sideNums=f0f6fc&currStreakLabel=38bdf8&sideLabels=8b949e&dates=64748b&border_radius=8" alt="GitHub Streak" class="telemetry-img">
+            </a>
+          </div>
+
+          <!-- Card 4: Contribution Activity Graph -->
+          <div class="telemetry-box full-width">
+            <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener noreferrer">
+              <img src="https://github-readme-activity-graph.vercel.app/graph?username=ngtaiphat1501&bg_color=0d1117&color=8b949e&line=38bdf8&point=f0f6fc&area=true&area_color=0284c7&hide_border=false&radius=8&custom_title=Contribution%20Activity" alt="Contribution Activity Graph" class="telemetry-img">
+            </a>
+          </div>
+        </div>
+
+        <!-- Profile Views (Moe Counter) -->
+        <div class="views-counter-wrap">
+          <span class="counter-label">PROFILE VIEWS</span>
+          <img src="https://count.getloli.com/@ngtaiphat1501?theme=booru-lewd" alt="Moe Counter" class="moe-counter-img">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         CONTACT SECTION (LIÊN HỆ)
+         ======================================================================= -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Contact</h2>
+          <span class="section-line"></span>
+        </div>
+
+        <div class="contact-box">
+          <p class="contact-lead">
+            Sẵn sàng kết nối cho các cơ hội thực tập, đồ án công nghệ và dự án kỹ thuật phần mềm.
           </p>
-          <img src="https://count.getloli.com/@ngtaiphat1501?theme=booru-lewd" alt="Moe Anime Counter" style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+
+          <div class="contact-buttons-row">
+            <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener noreferrer" class="contact-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <span>GitHub / ngtaiphat1501</span>
+            </a>
+
+            <a href="mailto:ngtaiphat1501@gmail.com" class="contact-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>ngtaiphat1501@gmail.com</span>
+            </a>
+
+            <a href="https://cantho.fpt.edu.vn/" target="_blank" rel="noopener noreferrer" class="contact-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3fb950" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Campus FPT Cần Thơ</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
-
-    <!-- =======================================================================
-         CONTACT & FOOTER
-         ======================================================================= -->
-    <footer id="contact" class="footer">
-      <div class="container footer-grid">
-        <div>
-          <div style="font-weight: 700; font-size: 1.1rem; color: #f8fafc; margin-bottom: 4px;">Nguyễn Phát Tài</div>
-          <div class="footer-copy">
-            Software Engineering Student @ FPT University Can Tho • Can Tho Time: <span id="canthoTime" style="color: var(--accent-cyan); font-family: var(--font-mono);">00:00:00</span> (UTC+7)
-          </div>
-        </div>
-
-        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
-          <button class="btn btn-secondary copy-email-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span>ngtaiphat1501@gmail.com</span>
-          </button>
-          <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-            GitHub
-          </a>
-          <button class="btn btn-primary open-cv-btn">
-            Tải CV (PDF)
-          </button>
-        </div>
-      </div>
-    </footer>
   </main>
 
   <!-- =========================================================================
-       CV / RESUME MODAL & PRINT EXPORT
+       FOOTER
        ========================================================================= -->
-  <div class="modal-overlay" id="cvModal">
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <p>&copy; 2026 <strong>Nguyễn Phát Tài</strong>. Thiết kế &amp; lưu trữ độc lập trên GitHub Pages.</p>
+        <p class="footer-sub">Hệ thống đồng bộ với <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener noreferrer">github.com/ngtaiphat1501</a>.</p>
+      </div>
+      <div class="footer-right">
+        <span class="live-clock-badge">
+          <span class="status-dot-green"></span>
+          <span>Cần Thơ (UTC+7): </span>
+          <strong id="canthoTime">00:00:00</strong>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       CV / RESUME MODAL & PRINT (XEM VÀ IN PDF)
+       ========================================================================= -->
+  <div class="modal-overlay" id="cvModal" aria-hidden="true">
     <div class="modal-window">
-      <button class="modal-close-btn" id="closeCvBtn" title="Đóng">&times;</button>
-      
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
-        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-cyan);">HỒ SƠ NĂNG LỰC // CURRICULUM VITAE</span>
-        <button class="btn btn-primary" id="printCvBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-          <span>In / Xuất file PDF</span>
-        </button>
+      <div class="modal-header">
+        <div class="modal-title-area">
+          <h2 class="modal-title">Hồ Sơ Năng Lực (CV / Resume)</h2>
+          <p class="modal-subtitle">Nguyễn Phát Tài — Kỹ sư Phần mềm Java Backend</p>
+        </div>
+        <div class="modal-header-actions">
+          <button class="btn btn-primary print-cv-btn" onclick="window.print()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <span>In / Xuất PDF</span>
+          </button>
+          <button class="modal-close-btn" id="closeCvBtn" title="Đóng">&times;</button>
+        </div>
       </div>
 
-      <div class="cv-container">
+      <div class="modal-body print-sheet">
         <div class="cv-header">
-          <h2 class="cv-name">NGUYỄN PHÁT TÀI</h2>
-          <div class="cv-sub">SOFTWARE ENGINEERING STUDENT • JAVA BACKEND ARCHITECT</div>
-          <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 8px;">
-            📧 ngtaiphat1501@gmail.com &nbsp;|&nbsp; 📍 Cần Thơ, Việt Nam &nbsp;|&nbsp; 🔗 github.com/ngtaiphat1501
-          </p>
+          <div>
+            <h1 class="cv-name">NGUYỄN PHÁT TÀI</h1>
+            <p class="cv-role">KỸ SƯ PHẦN MỀM JAVA BACKEND &amp; HỆ THỐNG PHÂN TÁN</p>
+          </div>
+          <div class="cv-contact-col">
+            <p><strong>Email:</strong> ngtaiphat1501@gmail.com</p>
+            <p><strong>GitHub:</strong> github.com/ngtaiphat1501</p>
+            <p><strong>Trường:</strong> Đại học FPT Cần Thơ (Kỹ thuật Phần mềm)</p>
+            <p><strong>Portfolio:</strong> ngtaiphat1501.github.io</p>
+          </div>
         </div>
 
-        <div style="margin-bottom: 20px;">
-          <h4 style="color: var(--accent-cyan); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 8px;">1. Mục tiêu nghề nghiệp</h4>
-          <p style="font-size: 0.9rem; line-height: 1.6; color: #cbd5e1;">
-            Kỹ sư phần mềm xuất thân từ Đại học FPT Cần Thơ, chuyên sâu vào thiết kế kiến trúc Backend bằng Java (Jakarta EE 10 / Spring Boot), chuẩn hóa và tối ưu truy vấn CSDL MS SQL Server và đóng gói container với Docker. Mục tiêu gia nhập đội ngũ kỹ thuật doanh nghiệp, đảm nhiệm xây dựng các hệ thống dịch vụ có độ sẵn sàng cao, tính toàn vẹn giao dịch và hiệu năng vượt trội.
-          </p>
-        </div>
+        <hr class="cv-divider">
 
-        <div style="margin-bottom: 20px;">
-          <h4 style="color: var(--accent-cyan); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 8px;">2. Học vấn &amp; Nền tảng</h4>
-          <p style="font-size: 0.9rem; font-weight: 600;">Đại học FPT Cần Thơ (Khóa 2022 – Hiện tại)</p>
-          <p style="font-size: 0.85rem; color: #94a3b8;">Chuyên ngành: Kỹ thuật Phần mềm (Software Engineering)</p>
-          <ul style="font-size: 0.85rem; color: #cbd5e1; padding-left: 20px; margin-top: 6px;">
-            <li>Đồ án Web Java (PRJ301): Đạt điểm cao với đồ án Ftech Learning Online hoàn thiện quy trình thanh toán VNPAY sandbox &amp; Docker.</li>
-            <li>Cấu trúc dữ liệu &amp; Giải thuật (CSD201): Nắm vững BST, AVL, Hash Tables, Thuật toán đồ thị và tối ưu độ phức tạp.</li>
-            <li>Hệ quản trị CSDL (DBI202): Thành thạo thiết kế lược đồ quan hệ, Stored Procedure, Triggers, Views và Transaction Management.</li>
+        <section class="cv-section">
+          <h3 class="cv-section-title">MỤC TIÊU NGHỀ NGHIỆP</h3>
+          <p class="cv-text">
+            Sinh viên năm chuyên ngành Kỹ thuật Phần mềm Đại học FPT Cần Thơ tìm kiếm cơ hội <strong>Thực tập sinh Java Backend / Software Engineer</strong>. Mục tiêu đóng góp vào các hệ thống phân tán chịu tải cao, áp dụng kiến thức vững chắc về Jakarta EE 10, Spring Boot, tối ưu hóa cơ sở dữ liệu quan hệ MS SQL Server và đóng gói hạ tầng container Docker.
+          </p>
+        </section>
+
+        <section class="cv-section">
+          <h3 class="cv-section-title">HỌC VẤN &amp; THÀNH TÍCH</h3>
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <span class="cv-item-title">Đại học FPT Cần Thơ</span>
+              <span class="cv-item-date">2023 – Hiện tại</span>
+            </div>
+            <p class="cv-item-sub">Chuyên ngành: Kỹ thuật Phần mềm (Software Engineering)</p>
+            <ul class="cv-list">
+              <li>Hoàn thành xuất sắc đồ án Capstone <strong>PRJ301 (Java Web Applications)</strong>: Điểm số top đầu lớp với hệ thống LMS Ftech_learning_online.</li>
+              <li>Hoàn thành xuất sắc các môn chuyên ngành cốt lõi: <strong>DBI202</strong> (Hệ cơ sở dữ liệu quan hệ), <strong>CSD201</strong> (Cấu trúc dữ liệu &amp; Giải thuật bằng Java).</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="cv-section">
+          <h3 class="cv-section-title">KỸ NĂNG CHUYÊN MÔN</h3>
+          <ul class="cv-list">
+            <li><strong>Ngôn ngữ lập trình:</strong> Java (Java 8, 17, 21), TypeScript, JavaScript, Python, C++.</li>
+            <li><strong>Backend &amp; Frameworks:</strong> Jakarta EE 10 (Servlets, JSP, JSTL), Spring Boot, RESTful APIs, MVC Architecture, JDBC, JPA/Hibernate.</li>
+            <li><strong>Cơ sở dữ liệu:</strong> MS SQL Server 2022, MySQL, PostgreSQL (Thiết kế 3NF, Indexing, Stored Procedures, Triggers).</li>
+            <li><strong>DevOps &amp; Công cụ:</strong> Docker, Docker Compose, Linux CLI, Nginx, Git, Maven, Postman, IntelliJ IDEA.</li>
           </ul>
-        </div>
+        </section>
 
-        <div style="margin-bottom: 20px;">
-          <h4 style="color: var(--accent-cyan); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 8px;">3. Kỹ năng kỹ thuật</h4>
-          <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
-            • <strong>Ngôn ngữ:</strong> Java 21, TypeScript, JavaScript, Python, C/C++, SQL.<br>
-            • <strong>Backend &amp; Frameworks:</strong> Jakarta EE 10, Spring Boot, Apache Tomcat, RESTful APIs, Spring Security, JPA/Hibernate, Maven.<br>
-            • <strong>Cơ sở dữ liệu:</strong> MS SQL Server 2022, PostgreSQL, MySQL, Redis Caching.<br>
-            • <strong>DevOps &amp; Công cụ:</strong> Docker, Docker Compose, Linux Server, Nginx Reverse Proxy, Git, GitHub Actions, Postman.
-          </p>
-        </div>
+        <section class="cv-section">
+          <h3 class="cv-section-title">ĐỒ ÁN TIÊU BIỂU</h3>
+          
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <span class="cv-item-title">Ftech_learning_online — Hệ thống LMS Giáo dục Trực tuyến</span>
+              <span class="cv-item-date">10/2026 – 11/2026</span>
+            </div>
+            <p class="cv-item-sub">Vai trò: Lead Backend Developer &amp; Systems Architect (Đồ án PRJ301)</p>
+            <ul class="cv-list">
+              <li>Thiết kế toàn bộ kiến trúc MVC và cơ sở dữ liệu quan hệ kết nối MS SQL Server 2022 qua connection pool.</li>
+              <li>Phát triển phân hệ Admin Dashboard, thống kê báo cáo doanh thu tài chính và trạng thái khóa học với Chart.js.</li>
+              <li>Hiện thực hóa cơ chế thanh toán giả lập VNPAY Sandbox với mã hóa checksum HMAC SHA-512 và xác thực tính toàn vẹn dữ liệu.</li>
+              <li>Đóng gói toàn bộ ứng dụng và cơ sở dữ liệu bằng multi-stage Dockerfile và Docker Compose.</li>
+            </ul>
+          </div>
 
-        <div>
-          <h4 style="color: var(--accent-cyan); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 8px;">4. Dự án tiêu biểu</h4>
-          <p style="font-size: 0.9rem; font-weight: 600;">Ftech_learning_online (PRJ301 Capstone)</p>
-          <p style="font-size: 0.85rem; color: #94a3b8;">Fullstack Developer • Java 21, Jakarta EE 10, SQL Server 2022, Docker, VNPAY, Chart.js</p>
-          <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 4px;">
-            Thiết kế bảng phân tích doanh thu Admin, cơ chế sinh đơn hàng Idempotent ngăn ngừa thanh toán lặp, tích hợp VNPAY sandbox và đóng gói môi trường với multi-stage Dockerfile.
-          </p>
-        </div>
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <span class="cv-item-title">StudentManagementSystem — Hệ thống Quản lý Học vụ</span>
+              <span class="cv-item-date">03/2026</span>
+            </div>
+            <p class="cv-item-sub">Vai trò: Java OOP Developer</p>
+            <ul class="cv-list">
+              <li>Phát triển ứng dụng dòng lệnh đa phân quyền (Admin, Staff, Teacher, Student) theo nguyên lý hướng đối tượng SOLID.</li>
+              <li>Hiện thực hóa module tuần tự hóa file nhị phân (Binary Serialization) để lưu trữ và truy xuất dữ liệu an toàn.</li>
+            </ul>
+          </div>
+        </section>
       </div>
     </div>
   </div>

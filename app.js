@@ -1,25 +1,70 @@
 /**
- * Nguyễn Phát Tài - 2026 Developer Portfolio App Logic
- * Standalone, robust, 60fps micro-interactions
+ * Nguyễn Phát Tài - Developer Portfolio
+ * App Logic: Typewriter, Music Player, CV Modal, Time Clock
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initTypingBanner();
   initMusicPlayer();
-  initTerminal();
-  initArchTracer();
   initModals();
   initTimeClock();
 });
 
 // =============================================================================
-// 1. LO-FI & ANIME OST MUSIC PLAYER (Nghe Nhạc)
+// 1. TYPING BANNER (Đồng bộ với Readme Typing SVG trên GitHub)
+// =============================================================================
+function initTypingBanner() {
+  const el = document.getElementById('typingOutput');
+  if (!el) return;
+
+  const lines = [
+    "Java Backend & Systems Architect",
+    "Turning Coffee & Lo-Fi into Clean Code ☕",
+    "Building Scalable Software 🚀",
+    "Exploring Applied AI & Distributed Systems ✨"
+  ];
+
+  let lineIdx = 0;
+  let charIdx = 0;
+  let isDeleting = false;
+  let typingSpeed = 80;
+
+  function type() {
+    const current = lines[lineIdx % lines.length];
+
+    if (isDeleting) {
+      charIdx--;
+      el.textContent = current.substring(0, charIdx);
+      typingSpeed = 35;
+    } else {
+      charIdx++;
+      el.textContent = current.substring(0, charIdx);
+      typingSpeed = 75;
+    }
+
+    if (!isDeleting && charIdx === current.length) {
+      typingSpeed = 2200; // Hold at full text
+      isDeleting = true;
+    } else if (isDeleting && charIdx === 0) {
+      isDeleting = false;
+      lineIdx++;
+      typingSpeed = 400; // Pause before next line
+    }
+
+    setTimeout(type, typingSpeed);
+  }
+
+  type();
+}
+
+// =============================================================================
+// 2. CODING VIBES & MUSIC PLAYER
 // =============================================================================
 function initMusicPlayer() {
   const tracks = [
     {
       title: "Lo-Fi Coding Beats & Night Air",
       artist: "Chillhop Music • Coding Session",
-      // Reliable public streaming audio
       url: "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverending_Story.mp3"
     },
     {
@@ -50,8 +95,8 @@ function initMusicPlayer() {
     currentTrackIdx = (index + tracks.length) % tracks.length;
     const t = tracks[currentTrackIdx];
     audio.src = t.url;
-    trackEl.textContent = t.title;
-    artistEl.textContent = t.artist;
+    if (trackEl) trackEl.textContent = t.title;
+    if (artistEl) artistEl.textContent = t.artist;
   }
 
   let audioCtx = null;
@@ -79,7 +124,7 @@ function initMusicPlayer() {
       const notes = chords[chordIdx % chords.length];
       chordIdx++;
 
-      notes.forEach((freq, i) => {
+      notes.forEach((freq) => {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         const filter = audioCtx.createBiquadFilter();
@@ -90,24 +135,24 @@ function initMusicPlayer() {
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
-        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.04 / notes.length, audioCtx.currentTime + 0.3);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.8);
+        gain.gain.setValueAtTime(0, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.3);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.8);
 
         osc.connect(filter);
         filter.connect(gain);
         gain.connect(audioCtx.destination);
 
         osc.start();
-        osc.stop(audioCtx.currentTime + 3.0);
+        osc.stop(audioCtx.currentTime + 4.0);
       });
     }
 
     playChord();
-    synthInterval = setInterval(playChord, 3000);
+    synthInterval = setInterval(playChord, 3800);
   }
 
-  function stopSynth() {
+  function stopSynthProgression() {
     if (synthInterval) {
       clearInterval(synthInterval);
       synthInterval = null;
@@ -115,232 +160,102 @@ function initMusicPlayer() {
   }
 
   function togglePlay() {
-    if (!audio.src) {
-      loadTrack(0);
-    }
-
     if (isPlaying) {
       audio.pause();
-      stopSynth();
+      stopSynthProgression();
       isPlaying = false;
-      playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-      visualizer.classList.remove('active');
+      if (playBtn) playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+      if (visualizer) visualizer.classList.remove('playing');
     } else {
-      isPlaying = true;
-      playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-      visualizer.classList.add('active');
-      showToast("Đang phát: " + tracks[currentTrackIdx].title);
-
-      audio.play().catch(err => {
-        console.log("Using Web Audio Lo-Fi ambient synth:", err);
-        playSynthChordProgression();
-      });
+      loadTrack(currentTrackIdx);
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isPlaying = true;
+          if (visualizer) visualizer.classList.add('playing');
+          if (playBtn) playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+        }).catch(() => {
+          // Fallback to procedural synth chord progression
+          isPlaying = true;
+          playSynthChordProgression();
+          if (visualizer) visualizer.classList.add('playing');
+          if (playBtn) playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+        });
+      }
     }
   }
 
-  playBtn.addEventListener('click', togglePlay);
-  prevBtn.addEventListener('click', () => {
+  if (playBtn) playBtn.addEventListener('click', togglePlay);
+  if (prevBtn) prevBtn.addEventListener('click', () => {
     loadTrack(currentTrackIdx - 1);
-    if (isPlaying) audio.play();
+    if (isPlaying) { audio.play().catch(playSynthChordProgression); }
   });
-  nextBtn.addEventListener('click', () => {
+  if (nextBtn) nextBtn.addEventListener('click', () => {
     loadTrack(currentTrackIdx + 1);
-    if (isPlaying) audio.play();
+    if (isPlaying) { audio.play().catch(playSynthChordProgression); }
   });
-
   audio.addEventListener('ended', () => {
     loadTrack(currentTrackIdx + 1);
-    audio.play();
+    audio.play().catch(playSynthChordProgression);
   });
 
   loadTrack(0);
 }
 
 // =============================================================================
-// 2. HERO INTERACTIVE TERMINAL
-// =============================================================================
-function initTerminal() {
-  const terminalInput = document.getElementById('terminalInput');
-  const terminalOutput = document.getElementById('terminalOutput');
-
-  if (!terminalInput || !terminalOutput) return;
-
-  const commands = {
-    help: `Available commands:
-  • <span class="terminal-cmd">about</span>    : Background & Education
-  • <span class="terminal-cmd">skills</span>   : Tech stack breakdown
-  • <span class="terminal-cmd">projects</span> : Pinned system architectures
-  • <span class="terminal-cmd">contact</span>  : Quick links & email
-  • <span class="terminal-cmd">cv</span>       : Open & download CV (PDF)
-  • <span class="terminal-cmd">clear</span>    : Wipe terminal screen`,
-
-    about: `Nguyễn Phát Tài (@ngtaiphat1501)
-  Specialization: Java Backend Architecture & Distributed Systems
-  University    : FPT University Can Tho (K18 Software Engineering)
-  GPA / Awards  : Top scores in PRJ301, DBI202, CSD201
-  Status        : Open to Enterprise Internships & Junior Roles`,
-
-    skills: `[Languages] Java 21, TypeScript, Python, C++, SQL
-[Backend]   Jakarta EE 10, Spring Boot, Tomcat, RESTful APIs, Spring Security
-[Database]  MS SQL Server, PostgreSQL, MySQL, Redis
-[DevOps]    Docker, Docker Compose, Linux, Nginx, Git, Maven`,
-
-    projects: `1. Ftech_learning_online (PRJ301 Capstone)
-   -> Full-stack LMS, Revenue Analytics, VNPAY, Multi-stage Docker
-2. StudentManagementSystem (Academic System)
-   -> Layered OOP, Role-based CLI, Binary File Persistence (.dat)`,
-
-    contact: `Email   : ngtaiphat1501@gmail.com
-GitHub  : https://github.com/ngtaiphat1501
-Location: Can Tho, Vietnam (UTC+7)`,
-
-    cv: `Opening CV Resume viewer... (Press Esc to close)`
-  };
-
-  terminalInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const raw = terminalInput.value.trim().toLowerCase();
-      terminalInput.value = '';
-
-      if (!raw) return;
-
-      if (raw === 'clear') {
-        terminalOutput.innerHTML = '';
-        return;
-      }
-
-      if (raw === 'cv') {
-        openCvModal();
-      }
-
-      const response = commands[raw] || `zsh: command not found: ${raw}. Type <span class="terminal-cmd">help</span> for options.`;
-
-      const block = document.createElement('div');
-      block.className = 'terminal-line';
-      block.innerHTML = `<div><span class="terminal-prompt">➜</span> <span class="terminal-cmd">${raw}</span></div>
-                         <div class="terminal-output">${response}</div>`;
-      terminalOutput.appendChild(block);
-      terminalOutput.scrollTop = terminalOutput.scrollHeight;
-    }
-  });
-}
-
-// =============================================================================
-// 3. PRJ301 INTERACTIVE ARCHITECTURE TRACER
-// =============================================================================
-function initArchTracer() {
-  const runBtn = document.getElementById('runArchTracer');
-  if (!runBtn) return;
-
-  const nodes = [
-    { id: 'node-client', name: 'Browser Client', log: 'User checks out course with coupon' },
-    { id: 'node-nginx', name: 'Nginx Reverse Proxy', log: 'SSL Termination & Request Forwarding (:80 -> :8080)' },
-    { id: 'node-jakarta', name: 'Jakarta EE 10 (Tomcat 10.1)', log: 'Controllers validate token, generate idempotent order' },
-    { id: 'node-sql', name: 'MS SQL Server 2022', log: 'BEGIN TRAN: Lock coupon, INSERT Order, log ledger' },
-    { id: 'node-vnpay', name: 'VNPAY Sandbox Gateway', log: 'Checksum verified (HMAC-SHA512), status 00 SUCCESS' }
-  ];
-
-  let isTracing = false;
-
-  runBtn.addEventListener('click', () => {
-    if (isTracing) return;
-    isTracing = true;
-    runBtn.disabled = true;
-    runBtn.textContent = "Tracing Request Packet...";
-
-    let step = 0;
-
-    function highlightStep() {
-      // Clear previous
-      nodes.forEach(n => {
-        const el = document.getElementById(n.id);
-        if (el) el.style.borderColor = 'rgba(255,255,255,0.1)';
-      });
-
-      if (step < nodes.length) {
-        const cur = nodes[step];
-        const el = document.getElementById(cur.id);
-        if (el) {
-          el.style.borderColor = '#38bdf8';
-          el.style.boxShadow = '0 0 15px rgba(56, 189, 248, 0.5)';
-        }
-        showToast(`[Step ${step + 1}/5] ${cur.name}: ${cur.log}`);
-        step++;
-        setTimeout(highlightStep, 1000);
-      } else {
-        nodes.forEach(n => {
-          const el = document.getElementById(n.id);
-          if (el) {
-            el.style.borderColor = 'rgba(16, 185, 129, 0.4)';
-            el.style.boxShadow = 'none';
-          }
-        });
-        showToast("✓ Request hoàn tất: Idempotent Payment Verified & Data Committed!");
-        runBtn.disabled = false;
-        runBtn.textContent = "▶ Simulate Request Flow (Tracer)";
-        isTracing = false;
-      }
-    }
-
-    highlightStep();
-  });
-}
-
-// =============================================================================
-// 4. CV MODAL & DOWNLOAD LOGIC (Tải CV)
+// 3. CV MODAL & COPY ACTIONS
 // =============================================================================
 function initModals() {
   const cvModal = document.getElementById('cvModal');
   const openCvBtns = document.querySelectorAll('.open-cv-btn');
   const closeCvBtn = document.getElementById('closeCvBtn');
-  const printCvBtn = document.getElementById('printCvBtn');
+  const copyEmailBtns = document.querySelectorAll('.copy-email-btn');
 
-  window.openCvModal = function() {
-    cvModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  };
-
-  function closeCvModal() {
-    cvModal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-  }
-
-  openCvBtns.forEach(b => b.addEventListener('click', (e) => {
-    e.preventDefault();
-    openCvModal();
-  }));
-
-  if (closeCvBtn) closeCvBtn.addEventListener('click', closeCvModal);
-
-  cvModal.addEventListener('click', (e) => {
-    if (e.target === cvModal) closeCvModal();
+  openCvBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (cvModal) {
+        cvModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    });
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && cvModal.classList.contains('active')) {
-      closeCvModal();
-    }
-  });
+  if (closeCvBtn && cvModal) {
+    closeCvBtn.addEventListener('click', () => {
+      cvModal.classList.remove('open');
+      document.body.style.overflow = '';
+    });
 
-  if (printCvBtn) {
-    printCvBtn.addEventListener('click', () => {
-      window.print();
+    cvModal.addEventListener('click', (e) => {
+      if (e.target === cvModal) {
+        cvModal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && cvModal.classList.contains('open')) {
+        cvModal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
     });
   }
 
-  // Quick email copy buttons
-  const copyEmailBtns = document.querySelectorAll('.copy-email-btn');
   copyEmailBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      navigator.clipboard.writeText('ngtaiphat1501@gmail.com').then(() => {
-        showToast("✓ Đã sao chép email: ngtaiphat1501@gmail.com");
+      const email = 'ngtaiphat1501@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        showToast('✓ Đã sao chép email: ' + email);
+      }).catch(() => {
+        showToast('Email: ' + email);
       });
     });
   });
 }
 
 // =============================================================================
-// 5. REAL-TIME CẦN THƠ CLOCK
+// 4. REAL-TIME CẦN THƠ CLOCK
 // =============================================================================
 function initTimeClock() {
   const clockEl = document.getElementById('canthoTime');
@@ -348,7 +263,6 @@ function initTimeClock() {
 
   function update() {
     const now = new Date();
-    // Vietnam is UTC+7
     const options = {
       timeZone: 'Asia/Ho_Chi_Minh',
       hour: '2-digit',
@@ -364,7 +278,7 @@ function initTimeClock() {
 }
 
 // =============================================================================
-// 6. TOAST NOTIFICATION UTILITY
+// 5. TOAST NOTIFICATION
 // =============================================================================
 function showToast(msg) {
   let toast = document.querySelector('.toast');
@@ -379,7 +293,5 @@ function showToast(msg) {
 
   setTimeout(() => {
     toast.classList.remove('show');
-  }, 3200);
+  }, 3000);
 }
-
-
