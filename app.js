@@ -168,19 +168,6 @@ function initMusicPlayer() {
     synthInterval = setInterval(playChord, 3600);
   }
 
-        osc.connect(filter);
-        filter.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 4.0);
-      });
-    }
-
-    playChord();
-    synthInterval = setInterval(playChord, 3800);
-  }
-
   function stopSynthProgression() {
     if (synthInterval) {
       clearInterval(synthInterval);
