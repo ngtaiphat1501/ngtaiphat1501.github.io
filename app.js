@@ -64,33 +64,33 @@ function initMusicPlayer() {
   const tracks = [
     {
       title: "Blinding Lights",
-      artist: "The Weeknd • After Hours (Synthwave)",
-      url: "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverending_Story.mp3"
+      artist: "The Weeknd • After Hours",
+      url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/19/d6/60/19d660ff-e3a9-8377-15a3-ce4b28e89cac/mzaf_18422426156481158187.plus.aac.p.m4a"
     },
     {
       title: "Starboy (ft. Daft Punk)",
-      artist: "The Weeknd • Starboy (Electro Pop)",
-      url: "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3"
+      artist: "The Weeknd • Starboy",
+      url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/11/71/d6/1171d6ad-3c96-e027-2af6-58028426588c/mzaf_15137631797407745471.plus.aac.p.m4a"
     },
     {
       title: "Save Your Tears",
-      artist: "The Weeknd • After Hours (Synth-Pop)",
-      url: "https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg"
+      artist: "The Weeknd • After Hours",
+      url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8b/38/17/8b3817e4-c0e9-7e02-2654-3e2ecee93603/mzaf_18415642125637540903.plus.aac.p.m4a"
     },
     {
       title: "Die For You",
-      artist: "The Weeknd • Starboy (R&B Ballad)",
-      url: "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverending_Story.mp3"
+      artist: "The Weeknd • Starboy",
+      url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/50/50/1a/50501a86-bd74-e90d-8a56-68c9b5e6e7d6/mzaf_4588197682084244913.plus.aac.p.m4a"
     },
     {
-      title: "After Hours",
-      artist: "The Weeknd • After Hours (Dark Wave)",
-      url: "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3"
+      title: "Call Out My Name",
+      artist: "The Weeknd • My Dear Melancholy,",
+      url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d5/0a/ca/d50aca46-f871-b774-077a-22cbb42df336/mzaf_7520446500958405524.plus.aac.p.m4a"
     },
     {
       title: "Out of Time",
-      artist: "The Weeknd • Dawn FM (City Pop)",
-      url: "https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg"
+      artist: "The Weeknd • Dawn FM",
+      url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/79/b8/43/79b84369-15c3-5a5a-fb72-2334b00826e6/mzaf_4381874253449656759.plus.aac.p.m4a"
     }
   ];
 
