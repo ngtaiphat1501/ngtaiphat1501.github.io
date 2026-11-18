@@ -4,7 +4,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initHeroTypewriter();
   initMusicPlayer();
   initTerminal();
   initArchTracer();
@@ -383,49 +382,4 @@ function showToast(msg) {
   }, 3200);
 }
 
-// =============================================================================
-// 7. HERO TYPEWRITER (Dynamic Monospace Role Switcher)
-// =============================================================================
-function initHeroTypewriter() {
-  const roleEl = document.getElementById('typewriterRole');
-  if (!roleEl) return;
 
-  const roles = [
-    "Java Backend Architect",
-    "Full-Stack & Systems",
-    "Distributed Web Systems",
-    "Jakarta EE 10 & Spring Boot",
-    "Docker & Cloud DevOps"
-  ];
-
-  let roleIdx = 0;
-  let charIdx = 0;
-  let isDeleting = false;
-  let typingSpeed = 90;
-
-  function type() {
-    const current = roles[roleIdx % roles.length];
-    if (isDeleting) {
-      charIdx--;
-      roleEl.textContent = current.substring(0, charIdx);
-      typingSpeed = 35;
-    } else {
-      charIdx++;
-      roleEl.textContent = current.substring(0, charIdx);
-      typingSpeed = 85;
-    }
-
-    if (!isDeleting && charIdx === current.length) {
-      typingSpeed = 2000;
-      isDeleting = true;
-    } else if (isDeleting && charIdx === 0) {
-      isDeleting = false;
-      roleIdx++;
-      typingSpeed = 400;
-    }
-
-    setTimeout(type, typingSpeed);
-  }
-
-  type();
-}
