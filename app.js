@@ -37,7 +37,6 @@ function initMusicPlayer() {
   let currentTrackIdx = 0;
   let isPlaying = false;
   const audio = new Audio();
-  audio.crossOrigin = "anonymous";
   audio.volume = 0.65;
 
   const playBtn = document.getElementById('playBtn');
@@ -55,6 +54,66 @@ function initMusicPlayer() {
     artistEl.textContent = t.artist;
   }
 
+  let audioCtx = null;
+  let synthInterval = null;
+
+  function playSynthChordProgression() {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
+    const chords = [
+      [261.63, 329.63, 392.00, 493.88], // Cmaj7
+      [220.00, 261.63, 329.63, 392.00], // Am7
+      [174.61, 220.00, 261.63, 329.63], // Fmaj7
+      [196.00, 246.94, 293.66, 349.23]  // G7
+    ];
+
+    let chordIdx = 0;
+    function playChord() {
+      if (!isPlaying) return;
+      const notes = chords[chordIdx % chords.length];
+      chordIdx++;
+
+      notes.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const filter = audioCtx.createBiquadFilter();
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(600, audioCtx.currentTime);
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.04 / notes.length, audioCtx.currentTime + 0.3);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.8);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 3.0);
+      });
+    }
+
+    playChord();
+    synthInterval = setInterval(playChord, 3000);
+  }
+
+  function stopSynth() {
+    if (synthInterval) {
+      clearInterval(synthInterval);
+      synthInterval = null;
+    }
+  }
+
   function togglePlay() {
     if (!audio.src) {
       loadTrack(0);
@@ -62,22 +121,19 @@ function initMusicPlayer() {
 
     if (isPlaying) {
       audio.pause();
+      stopSynth();
       isPlaying = false;
       playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
       visualizer.classList.remove('active');
     } else {
-      audio.play().then(() => {
-        isPlaying = true;
-        playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-        visualizer.classList.add('active');
-        showToast("Đang phát: " + tracks[currentTrackIdx].title);
-      }).catch(err => {
-        console.warn("Autoplay block or network error, generating synth chord:", err);
-        // Fallback: visualizer works anyway
-        isPlaying = true;
-        visualizer.classList.add('active');
-        playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-        showToast("Đang mô phỏng Beats âm thanh Lo-Fi");
+      isPlaying = true;
+      playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+      visualizer.classList.add('active');
+      showToast("Đang phát: " + tracks[currentTrackIdx].title);
+
+      audio.play().catch(err => {
+        console.log("Using Web Audio Lo-Fi ambient synth:", err);
+        playSynthChordProgression();
       });
     }
   }
