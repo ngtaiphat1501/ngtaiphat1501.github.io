@@ -63,18 +63,33 @@ function initTypingBanner() {
 function initMusicPlayer() {
   const tracks = [
     {
-      title: "Lo-Fi Coding Beats & Night Air",
-      artist: "Chillhop Music • Coding Session",
+      title: "Blinding Lights",
+      artist: "The Weeknd • After Hours (Synthwave)",
       url: "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverending_Story.mp3"
     },
     {
-      title: "Tokyo Rain & Study Vibes",
-      artist: "Anime OST • Soft Piano",
+      title: "Starboy (ft. Daft Punk)",
+      artist: "The Weeknd • Starboy (Electro Pop)",
       url: "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3"
     },
     {
-      title: "Jakarta Enterprise Chill Stream",
-      artist: "Deep Focus • Synthesizer Flow",
+      title: "Save Your Tears",
+      artist: "The Weeknd • After Hours (Synth-Pop)",
+      url: "https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg"
+    },
+    {
+      title: "Die For You",
+      artist: "The Weeknd • Starboy (R&B Ballad)",
+      url: "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverending_Story.mp3"
+    },
+    {
+      title: "After Hours",
+      artist: "The Weeknd • After Hours (Dark Wave)",
+      url: "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3"
+    },
+    {
+      title: "Out of Time",
+      artist: "The Weeknd • Dawn FM (City Pop)",
       url: "https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg"
     }
   ];
@@ -111,11 +126,12 @@ function initMusicPlayer() {
       audioCtx.resume();
     }
 
+    // 80s Synthwave / The Weeknd Mood: Dm - C - Bb - F progression
     const chords = [
-      [261.63, 329.63, 392.00, 493.88], // Cmaj7
-      [220.00, 261.63, 329.63, 392.00], // Am7
-      [174.61, 220.00, 261.63, 329.63], // Fmaj7
-      [196.00, 246.94, 293.66, 349.23]  // G7
+      [146.83, 220.00, 293.66, 349.23], // Dm
+      [130.81, 196.00, 261.63, 329.63], // C
+      [116.54, 174.61, 233.08, 293.66], // Bb
+      [174.61, 220.00, 261.63, 349.23]  // F
     ];
 
     let chordIdx = 0;
@@ -130,14 +146,27 @@ function initMusicPlayer() {
         const filter = audioCtx.createBiquadFilter();
 
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(600, audioCtx.currentTime);
+        filter.frequency.setValueAtTime(800, audioCtx.currentTime);
 
-        osc.type = 'triangle';
+        osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
         gain.gain.setValueAtTime(0, audioCtx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.3);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.8);
+        gain.gain.linearRampToValueAtTime(0.035, audioCtx.currentTime + 0.2);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.6);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 3.8);
+      });
+    }
+
+    playChord();
+    synthInterval = setInterval(playChord, 3600);
+  }
 
         osc.connect(filter);
         filter.connect(gain);
