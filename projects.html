@@ -1,37 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Projects Showcase & Architecture Lab — Nguyễn Phát Tài (VLUX)</title>
-<meta name="description" content="Comprehensive engineering registry, architecture blueprints, and interactive live demos for projects built by Nguyễn Phát Tài (VluxChart Terminal, Ftech Learning Online, Student Management System).">
+<title>Projects Showcase — Nguyễn Phát Tài (VLUX)</title>
+<meta name="description" content="Trang tổng hợp dự án, kiến trúc hệ thống và demo kỹ thuật của Nguyễn Phát Tài (VLUX).">
 <meta name="color-scheme" content="dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --obs:#08090D;--surface:#0e1118;--card:#131722;--card-hover:#181d2c;
-  --silver:#C9D0DD;--ice:#F3F5FA;--blue:#829BCB;--accent:#38bdf8;--green:#3fb950;--gold:#eab308;--red:#f43f5e;
-  --mute:#8f9ab0;--line:rgba(201,208,221,.14);--line-bright:rgba(201,208,221,.28);
-  --sans:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  --bg:#07080c;--surface:#0d1017;--surface-card:#121622;--surface-hover:#171c2b;
+  --ice:#f3f5fa;--silver:#c2c9d6;--mute:#7c8799;
+  --line:rgba(255,255,255,0.08);--line-focus:rgba(56,189,248,0.4);
+  --accent:#38bdf8;--blue:#829bcb;--green:#3fb950;
+  --sans:"Be Vietnam Pro",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
   box-sizing:border-box;color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-behavior:smooth}
 body{
-  margin:0;background:radial-gradient(80vw 60vh at 75% 0,#161e30,transparent 70%),var(--obs);
+  margin:0;background:radial-gradient(75vw 55vh at 80% 0,#141c2e,transparent 70%),var(--bg);
   color:var(--silver);font:400 1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;
   min-height:100vh;overflow-x:hidden;
 }
 #bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1;display:block;pointer-events:none}
-a{color:inherit}
+a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 .wrap{width:min(1240px,100% - 3rem);margin-inline:auto}
 
 /* Header */
 header{
-  position:sticky;top:0;z-index:40;background:rgba(8,9,13,.82);
+  position:sticky;top:0;z-index:40;background:rgba(7,8,12,.82);
   -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line);
 }
@@ -39,34 +40,33 @@ header{
   display:flex;align-items:center;justify-content:space-between;height:68px;gap:1.5rem;
 }
 .brand{
-  display:flex;align-items:center;gap:.9rem;text-decoration:none;color:var(--ice);
+  display:flex;align-items:center;gap:.9rem;color:var(--ice);
 }
-.brand-logo{
-  font-weight:700;font-size:1.2rem;letter-spacing:.06em;
-}
+.brand-logo{font-weight:700;font-size:1.2rem;letter-spacing:.05em}
 .brand-logo sup{font-size:.55em;color:var(--accent)}
 .brand-badge{
-  font-family:var(--mono);font-size:.72rem;padding:.2rem .6rem;
-  background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25);
-  border-radius:99px;color:var(--accent);letter-spacing:.04em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.72rem;padding:.2rem .65rem;
+  background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.22);
+  border-radius:99px;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;
 }
-.nav-actions{display:flex;align-items:center;gap:1.2rem}
 .back-btn{
-  display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.1rem;
-  border:1px solid var(--line);border-radius:99px;text-decoration:none;
-  font-size:.84rem;color:var(--ice);background:rgba(20,24,34,.6);
-  transition:all .25s ease;
+  display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.15rem;
+  border:1px solid var(--line);border-radius:99px;font-size:.84rem;color:var(--ice);
+  background:rgba(18,22,34,.6);transition:all .25s ease;
 }
 .back-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(56,189,248,.08)}
 
-/* Hero Banner */
-.hero{padding:4.5rem 0 3rem}
+/* Hero Section */
+.hero{padding:4.5rem 0 2.5rem}
 .eyebrow{
   display:inline-flex;align-items:center;gap:.6rem;
   font-family:var(--mono);font-size:.78rem;color:var(--accent);
   text-transform:uppercase;letter-spacing:.12em;margin-bottom:1rem;
 }
-.eyebrow::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.eyebrow::before{
+  content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 12px var(--accent);
+}
 h1{
   font-size:clamp(2.4rem,5.5vw,4.4rem);font-weight:600;letter-spacing:-.03em;
   line-height:1.1;color:var(--ice);margin:0 0 1.2rem;
@@ -75,249 +75,185 @@ h1{
   font-size:clamp(1rem,1.2vw,1.15rem);color:var(--silver);max-width:68ch;margin:0 0 2.5rem;
 }
 
-/* Telemetry Stats Bar */
-.stats-strip{
+/* Quick Telemetry / Metrics Bar */
+.metrics-strip{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;
-  padding:1.4rem;background:rgba(19,23,34,.6);border:1px solid var(--line);
-  border-radius:16px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  padding:1.4rem;background:rgba(18,22,34,.6);border:1px solid var(--line);
+  border-radius:18px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
   margin-bottom:3.5rem;
 }
-.stat-box{display:flex;flex-direction:column;gap:.25rem}
-.stat-box b{
-  font-family:var(--mono);font-size:1.45rem;color:var(--ice);font-weight:600;letter-spacing:-.02em;
-}
-.stat-box span{font-size:.78rem;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
+.metric-box{display:flex;flex-direction:column;gap:.25rem}
+.metric-box b{font-family:var(--mono);font-size:1.45rem;color:var(--ice);font-weight:600}
+.metric-box span{font-size:.78rem;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
 
-/* Controls Bar (Filter + Search) */
+/* Controls Bar (Filters, Search, View Layout) */
 .controls-bar{
   display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
-  margin-bottom:2.2rem;flex-wrap:wrap;
+  margin-bottom:2.5rem;flex-wrap:wrap;
 }
-.filter-tabs{display:flex;gap:.6rem;flex-wrap:wrap}
+.filter-tabs{display:flex;gap:.55rem;flex-wrap:wrap}
 .flt-btn{
   padding:.55rem 1.15rem;border-radius:99px;border:1px solid var(--line);
-  background:rgba(19,23,34,.5);color:var(--silver);font:500 .84rem var(--sans);
+  background:rgba(18,22,34,.5);color:var(--silver);font:500 .84rem var(--sans);
   cursor:pointer;transition:all .25s ease;
 }
-.flt-btn:hover{color:var(--ice);border-color:var(--line-bright)}
+.flt-btn:hover{color:var(--ice);border-color:rgba(255,255,255,.2)}
 .flt-btn.active{
   background:var(--accent);color:#06080d;border-color:var(--accent);font-weight:600;
   box-shadow:0 0 20px rgba(56,189,248,.35);
 }
-.search-wrap{position:relative;min-width:260px}
+.search-box{position:relative;min-width:280px}
 .search-input{
-  width:100%;padding:.6rem 1rem .6rem 2.4rem;border-radius:99px;
-  background:rgba(14,17,24,.8);border:1px solid var(--line);color:var(--ice);
-  font:400 .85rem var(--sans);transition:border-color .25s;
+  width:100%;padding:.62rem 1rem .62rem 2.4rem;border-radius:99px;
+  background:rgba(13,16,23,.85);border:1px solid var(--line);color:var(--ice);
+  font:400 .86rem var(--sans);transition:border-color .25s;
 }
 .search-input:focus{outline:none;border-color:var(--accent)}
 .search-icon{
   position:absolute;left:.9rem;top:50%;transform:translateY(-50%);
-  width:14px;height:14px;opacity:.5;pointer-events:none;
+  width:14px;height:14px;opacity:.5;pointer-events:none;stroke:var(--silver);
 }
 
 /* Projects Catalog Grid */
-.proj-grid{
-  display:grid;grid-template-columns:1fr;gap:2.5rem;margin-bottom:5rem;
+.catalog-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:2rem;
+  margin-bottom:5rem;
 }
-.proj-card{
-  background:rgba(17,20,28,.75);border:1px solid var(--line);border-radius:24px;
-  padding:clamp(1.8rem,3.5vw,2.8rem);position:relative;overflow:hidden;
-  transition:all .35s cubic-bezier(.2,.7,.2,1);display:grid;
-  grid-template-columns:1fr;gap:2rem;
+.card-item{
+  background:rgba(18,22,34,.75);border:1px solid var(--line);border-radius:20px;
+  overflow:hidden;transition:all .35s cubic-bezier(.2,.7,.2,1);display:flex;
+  flex-direction:column;position:relative;cursor:pointer;
 }
-.proj-card:hover{
-  border-color:var(--line-bright);transform:translateY(-3px);
-  box-shadow:0 16px 48px -12px rgba(0,0,0,.7),0 0 32px rgba(130,155,203,.08);
+.card-item:hover{
+  border-color:rgba(56,189,248,.35);transform:translateY(-4px);
+  box-shadow:0 20px 48px -12px rgba(0,0,0,.75),0 0 28px rgba(56,189,248,.08);
 }
-.card-header{
-  display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
+
+/* Card Visual Thumbnail Slot */
+.card-thumb{
+  width:100%;height:190px;background:#090c13;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);
 }
-.card-meta{display:flex;flex-direction:column;gap:.4rem}
-.badge-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
-.cat-tag{
+.card-thumb-bg{
+  position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(56,189,248,.12),transparent 75%);
+}
+.card-thumb-placeholder{
+  font-family:var(--mono);font-size:.78rem;color:var(--mute);
+  display:flex;flex-direction:column;align-items:center;gap:.6rem;z-index:2;
+}
+.card-thumb-placeholder svg{width:32px;height:32px;opacity:.5;stroke:var(--silver)}
+.card-badge-top{
+  position:absolute;top:1rem;left:1rem;z-index:3;display:flex;gap:.5rem;
+}
+.status-tag{
+  font-family:var(--mono);font-size:.68rem;padding:.2rem .6rem;border-radius:99px;
+  background:rgba(8,10,15,.75);border:1px solid rgba(255,255,255,.1);
+  color:var(--silver);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+.status-tag.active{color:var(--green);border-color:rgba(63,185,80,.3)}
+
+/* Card Content Area */
+.card-content{padding:1.6rem;display:flex;flex-direction:column;flex:1}
+.card-category{
   font-family:var(--mono);font-size:.72rem;color:var(--accent);
-  background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);
-  padding:.2rem .65rem;border-radius:6px;text-transform:uppercase;letter-spacing:.05em;
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem;
 }
-.status-pill{
-  display:inline-flex;align-items:center;gap:.4rem;font-size:.74rem;color:var(--green);
-  font-family:var(--mono);
+.card-heading{
+  font-size:1.35rem;font-weight:600;color:var(--ice);margin:0 0 .6rem;
+  letter-spacing:-.02em;line-height:1.3;
 }
-.status-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
-.card-title{
-  font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:600;color:var(--ice);margin:.4rem 0 .2rem;
-  letter-spacing:-.02em;
+.card-summary{
+  font-size:.88rem;color:var(--silver);margin:0 0 1.4rem;line-height:1.6;
+  flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
 }
-.card-subtitle{font-size:.88rem;color:var(--mute)}
 
-.card-body p{margin:0 0 1.5rem;color:var(--silver);max-width:85ch;font-size:.95rem}
-
-/* Specs Bar */
-.specs-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;
-  background:rgba(10,12,18,.6);padding:1.2rem 1.4rem;border-radius:14px;
-  border:1px solid rgba(255,255,255,.05);margin-bottom:1.8rem;
-}
-.spec-item{display:flex;flex-direction:column;gap:.25rem}
-.spec-label{font-family:var(--mono);font-size:.7rem;color:var(--mute);text-transform:uppercase}
-.spec-val{font-size:.88rem;color:var(--ice);font-weight:500}
-
-/* Card Actions */
-.card-footer{
-  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
-  border-top:1px solid var(--line);padding-top:1.5rem;
-}
-.tags-list{display:flex;gap:.5rem;flex-wrap:wrap}
-.tag-badge{
-  font-family:var(--mono);font-size:.74rem;color:var(--mute);
+/* Card Tech Stack Tags */
+.card-tags{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.tech-pill{
+  font-family:var(--mono);font-size:.72rem;color:var(--mute);
   background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
-  padding:.25rem .65rem;border-radius:99px;
+  padding:.2rem .55rem;border-radius:6px;
 }
-.btn-group{display:flex;align-items:center;gap:.9rem}
-.primary-btn{
-  display:inline-flex;align-items:center;gap:.6rem;padding:.7rem 1.5rem;
-  background:var(--ice);color:var(--obs);font:600 .86rem var(--sans);
-  border-radius:99px;text-decoration:none;transition:all .25s ease;cursor:pointer;
-  border:none;
+
+/* Card Footer Actions */
+.card-actions{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  border-top:1px solid var(--line);padding-top:1.2rem;margin-top:auto;
 }
-.primary-btn:hover{background:#fff;box-shadow:0 0 24px rgba(243,245,250,.4);transform:scale(1.02)}
-.ghost-btn{
-  display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.3rem;
-  border:1px solid var(--line);border-radius:99px;color:var(--ice);
-  font:500 .86rem var(--sans);text-decoration:none;transition:all .25s ease;
-  background:transparent;cursor:pointer;
+.view-detail-btn{
+  display:inline-flex;align-items:center;gap:.45rem;font-size:.84rem;
+  color:var(--ice);font-weight:500;transition:gap .2s;
 }
-.ghost-btn:hover{border-color:var(--silver);background:rgba(255,255,255,.05)}
+.card-item:hover .view-detail-btn{color:var(--accent);gap:.7rem}
+.github-link-btn{
+  color:var(--mute);font-size:.84rem;display:inline-flex;align-items:center;gap:.35rem;
+  transition:color .2s;
+}
+.github-link-btn:hover{color:var(--ice)}
 
 /* ================================================================
-   MODAL / PROJECT DETAIL VIEW
+   GIAO DIỆN KHUNG XEM CHI TIẾT (DETAIL VIEW / MODAL SHELL)
    ================================================================ */
-.modal-overlay{
-  position:fixed;inset:0;z-index:100;background:rgba(4,5,8,.86);
+.detail-modal{
+  position:fixed;inset:0;z-index:100;background:rgba(4,6,10,.86);
   -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
   display:none;opacity:0;transition:opacity .3s ease;overflow-y:auto;
   padding:2rem 1rem;place-items:center;
 }
-.modal-overlay.open{display:grid;opacity:1}
-.modal-box{
-  background:#0c0f16;border:1px solid var(--line-bright);border-radius:24px;
-  width:min(1140px,100%);max-height:92vh;overflow-y:auto;position:relative;
+.detail-modal.open{display:grid;opacity:1}
+.detail-box{
+  background:#0c0f16;border:1px solid var(--line);border-radius:24px;
+  width:min(1080px,100%);max-height:92vh;overflow-y:auto;position:relative;
   box-shadow:0 24px 80px rgba(0,0,0,.9),0 0 40px rgba(56,189,248,.1);
   display:flex;flex-direction:column;margin:auto;
 }
-.modal-header{
-  position:sticky;top:0;z-index:20;background:rgba(12,15,22,.92);
+.detail-header{
+  position:sticky;top:0;z-index:20;background:rgba(12,15,22,.94);
   -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
   padding:1.4rem 2rem;border-bottom:1px solid var(--line);
   display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
 }
-.modal-title-area{display:flex;flex-direction:column;gap:.3rem}
-.modal-title-area h2{font-size:1.4rem;color:var(--ice);margin:0;font-weight:600}
-.modal-close-btn{
-  width:40px;height:40px;border-radius:50%;border:1px solid var(--line);
+.detail-title-group h2{font-size:1.35rem;color:var(--ice);margin:0;font-weight:600}
+.close-btn{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--line);
   background:rgba(255,255,255,.04);color:var(--ice);cursor:pointer;
-  display:grid;place-items:center;font-size:1.2rem;transition:all .2s ease;
+  display:grid;place-items:center;font-size:1.1rem;transition:all .2s;
 }
-.modal-close-btn:hover{background:rgba(255,255,255,.12);border-color:var(--silver);transform:rotate(90deg)}
+.close-btn:hover{background:rgba(255,255,255,.1);border-color:var(--silver);transform:rotate(90deg)}
 
-.modal-content{padding:2rem}
+.detail-body{padding:2rem}
 
-/* Detail Tab Controls */
-.detail-tabs{
-  display:flex;gap:.5rem;border-bottom:1px solid var(--line);padding-bottom:1rem;
-  margin-bottom:2rem;overflow-x:auto;scrollbar-width:none;
+/* Hero Media Viewport Slot (Nơi hiển thị hình ảnh / demo sau này) */
+.media-viewport-slot{
+  width:100%;height:380px;background:#06080c;border:1px solid var(--line);
+  border-radius:18px;overflow:hidden;position:relative;margin-bottom:2rem;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--mute);font-family:var(--mono);font-size:.85rem;gap:1rem;
 }
-.dtab{
-  padding:.6rem 1.2rem;border-radius:99px;border:1px solid transparent;
-  background:transparent;color:var(--mute);font:500 .85rem var(--sans);
-  cursor:pointer;transition:all .2s ease;white-space:nowrap;
-}
-.dtab:hover{color:var(--ice)}
-.dtab.active{
-  background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.35);
-  color:var(--accent);font-weight:600;
-}
-.tab-pane{display:none}
-.tab-pane.active{display:block;animation:fadeUp .3s ease both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.media-viewport-slot svg{width:48px;height:48px;opacity:.4;stroke:var(--silver)}
 
-/* Interactive Demo Container */
-.demo-canvas-wrap{
-  background:#07080c;border:1px solid var(--line);border-radius:18px;
-  overflow:hidden;position:relative;margin-bottom:1.5rem;
+/* Two Columns Specs Layout */
+.detail-grid{
+  display:grid;grid-template-columns:1.8fr 1fr;gap:2.5rem;
 }
-.demo-toolbar{
-  display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.2rem;
-  background:#0c0f16;border-bottom:1px solid var(--line);flex-wrap:wrap;gap:1rem;
+@media(max-width:860px){
+  .detail-grid{grid-template-columns:1fr}
+  .catalog-grid{grid-template-columns:1fr}
 }
-.demo-status{display:flex;align-items:center;gap:.8rem;font-family:var(--mono);font-size:.76rem}
-.demo-status-pill{color:var(--green);display:flex;align-items:center;gap:.4rem}
-.demo-status-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
-.demo-btn-group{display:flex;align-items:center;gap:.6rem}
-.demo-btn{
-  padding:.4rem .9rem;border-radius:6px;border:1px solid var(--line);
-  background:rgba(255,255,255,.05);color:var(--ice);font:500 .78rem var(--mono);
-  cursor:pointer;transition:all .2s;
-}
-.demo-btn:hover{background:rgba(255,255,255,.1);border-color:var(--accent);color:var(--accent)}
-.demo-btn.active{background:var(--accent);color:#08090d;border-color:var(--accent);font-weight:600}
 
-/* Telemetry Readout Box */
-.telemetry-row{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;
-  padding:1rem 1.2rem;background:#090b10;border-top:1px solid var(--line);
-  font-family:var(--mono);font-size:.76rem;
+.section-label{
+  font-family:var(--mono);font-size:.75rem;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:.8rem;
 }
-.tel-item{display:flex;flex-direction:column;gap:.2rem}
-.tel-label{color:var(--mute);font-size:.68rem;text-transform:uppercase}
-.tel-val{color:var(--accent);font-weight:600}
+.detail-desc-text{font-size:.95rem;color:var(--silver);line-height:1.75;margin:0 0 1.5rem}
 
-/* Architecture Flow Diagrams */
-.diagram-container{
-  background:#07090e;border:1px solid var(--line);border-radius:16px;
-  padding:2rem;margin-bottom:2rem;overflow-x:auto;
+.meta-panel{
+  background:rgba(18,22,34,.5);border:1px solid var(--line);border-radius:16px;
+  padding:1.4rem;display:flex;flex-direction:column;gap:1.2rem;
 }
-.pipeline-flow{
-  display:flex;align-items:center;justify-content:space-between;gap:1rem;min-width:760px;
-}
-.flow-node{
-  flex:1;background:rgba(18,22,32,.9);border:1px solid var(--line-bright);
-  border-radius:12px;padding:1.1rem;text-align:center;position:relative;
-  transition:all .25s ease;
-}
-.flow-node:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 24px rgba(56,189,248,.12)}
-.node-title{font-family:var(--mono);font-size:.78rem;font-weight:600;color:var(--ice);margin-bottom:.3rem}
-.node-sub{font-size:.72rem;color:var(--mute);line-height:1.4}
-.flow-arrow{color:var(--accent);font-size:1.4rem;user-select:none}
-
-/* Table styling for Audit Gates */
-.audit-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem}
-.audit-table th,.audit-table td{padding:.85rem 1.1rem;text-align:left;border-bottom:1px solid var(--line)}
-.audit-table th{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;color:var(--mute);background:rgba(255,255,255,.02)}
-.audit-table tr:hover td{background:rgba(255,255,255,.02)}
-.pass-tag{color:var(--green);font-family:var(--mono);font-weight:600;font-size:.76rem}
-
-/* Terminal CLI Emulator */
-.cli-window{
-  background:#050608;border:1px solid var(--line);border-radius:14px;
-  font-family:var(--mono);overflow:hidden;box-shadow:inset 0 0 40px rgba(0,0,0,.8);
-}
-.cli-header{
-  display:flex;align-items:center;gap:.5rem;padding:.7rem 1rem;
-  background:#0d1017;border-bottom:1px solid var(--line);font-size:.75rem;color:var(--mute);
-}
-.cli-dot{width:10px;height:10px;border-radius:50%}
-.cli-body{
-  padding:1.4rem;min-height:300px;max-height:420px;overflow-y:auto;
-  color:#a5d6ff;font-size:.84rem;line-height:1.6;
-}
-.cli-prompt{color:#7ee787}
-.cli-input-line{display:flex;align-items:center;gap:.5rem;margin-top:.8rem}
-.cli-input{
-  flex:1;background:transparent;border:none;color:#fff;font-family:var(--mono);
-  font-size:.84rem;outline:none;
-}
+.meta-row{display:flex;flex-direction:column;gap:.25rem}
+.meta-lbl{font-family:var(--mono);font-size:.7rem;color:var(--mute);text-transform:uppercase}
+.meta-val{font-size:.88rem;color:var(--ice);font-weight:500}
 
 /* Footer */
 footer{
@@ -326,14 +262,6 @@ footer{
 }
 .footer-row{
   display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
-}
-
-@media(max-width:820px){
-  .nav-bar{height:auto;padding:1rem 0}
-  .controls-bar{flex-direction:column;align-items:stretch}
-  .search-wrap{min-width:auto;width:100%}
-  .modal-box{width:100%;max-height:100vh;border-radius:0}
-  .modal-content{padding:1.2rem}
 }
 </style>
 </head>
@@ -345,118 +273,90 @@ footer{
   <div class="wrap nav-bar">
     <a class="brand" href="index.html">
       <span class="brand-logo">VLUX<sup>®</sup></span>
-      <span class="brand-badge">Project Registry</span>
+      <span class="brand-badge">Projects Showcase</span>
     </a>
-    <div class="nav-actions">
-      <a class="back-btn" href="index.html">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        <span>Back to Portfolio</span>
-      </a>
-    </div>
+    <a class="back-btn" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span>Quay lại Portfolio</span>
+    </a>
   </div>
 </header>
 
 <main class="wrap">
   <!-- Hero Section -->
   <section class="hero">
-    <div class="eyebrow">Production Software · Quantitative Terminals · Architecture Registry</div>
-    <h1>All Projects &amp; Architecture Lab.</h1>
+    <div class="eyebrow">Engineering Registry · System Architecture · Live Showcase</div>
+    <h1>Projects Showcase &amp; Hub.</h1>
     <p class="hero-desc">
-      A centralized engineering directory of high-performance order flow terminals, distributed Java enterprise systems, and algorithmic core software built by <b>Nguyễn Phát Tài</b>. Select any project below to inspect architectural blueprints, specifications, and live web demos.
+      Không gian trưng bày toàn bộ các sản phẩm phần mềm, kiến trúc hệ thống và giải pháp kỹ thuật do <b>Nguyễn Phát Tài</b> xây dựng. Chọn bất kỳ dự án nào để xem cấu trúc tổng thể và thông tin chi tiết.
     </p>
 
-    <!-- Telemetry Stats Strip -->
-    <div class="stats-strip">
-      <div class="stat-box">
-        <b>3 Systems</b>
-        <span>Published Projects</span>
+    <!-- Quick Stats Telemetry Strip -->
+    <div class="metrics-strip">
+      <div class="metric-box">
+        <b id="totalProjectsCount">3 Dự Án</b>
+        <span>Tổng số dự án</span>
       </div>
-      <div class="stat-box">
-        <b style="color:var(--green)">41 / 41</b>
-        <span>Quality Gates Passed</span>
+      <div class="metric-box">
+        <b style="color:var(--accent)">14+ Công Nghệ</b>
+        <span>Hệ sinh thái kỹ thuật</span>
       </div>
-      <div class="stat-box">
-        <b style="color:var(--accent)">&gt;10,000 /s</b>
-        <span>Max Ingestion Throughput</span>
+      <div class="metric-box">
+        <b style="color:var(--green)">100% Mã Nguồn Mở</b>
+        <span>GitHub Public Repos</span>
       </div>
-      <div class="stat-box">
-        <b style="color:var(--gold)">0 Float Drift</b>
-        <span>Fixed-Point Arithmetic</span>
+      <div class="metric-box">
+        <b style="color:var(--silver)">Sẵn Sàng Trải Nghiệm</b>
+        <span>Kiến trúc &amp; Demo</span>
       </div>
     </div>
 
-    <!-- Filter & Search Controls -->
+    <!-- Filter & Search Controls Bar -->
     <div class="controls-bar">
       <div class="filter-tabs" id="filterTabs">
-        <button class="flt-btn active" data-filter="all">All Systems (3)</button>
-        <button class="flt-btn" data-filter="systems">Systems &amp; Quantitative (1)</button>
-        <button class="flt-btn" data-filter="enterprise">Enterprise Java (1)</button>
-        <button class="flt-btn" data-filter="academic">Academic &amp; CLI (1)</button>
+        <button class="flt-btn active" data-filter="all">Tất Cả (3)</button>
+        <button class="flt-btn" data-filter="systems">Systems &amp; Quantitative</button>
+        <button class="flt-btn" data-filter="backend">Backend &amp; Enterprise</button>
+        <button class="flt-btn" data-filter="tools">CLI &amp; Core Architecture</button>
       </div>
-      <div class="search-wrap">
+      <div class="search-box">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" id="searchInput" class="search-input" placeholder="Search by stack, keyword...">
+        <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm theo tên hoặc công nghệ...">
       </div>
     </div>
 
-    <!-- Projects Grid -->
-    <div class="proj-grid" id="projGrid">
-
-      <!-- PROJECT 1: VLUXCHART -->
-      <article class="proj-card" data-category="systems" data-search="vluxchart rust tauri react typescript websockets canvas quantitative order flow footprint">
-        <div class="card-header">
-          <div class="card-meta">
-            <div class="badge-row">
-              <span class="cat-tag">Systems &amp; Quantitative</span>
-              <span class="status-pill">Active Live System</span>
-              <span class="cat-tag" style="color:var(--mute)">Nov 2026 · Lead Developer</span>
-            </div>
-            <h2 class="card-title">VluxChart Terminal</h2>
-            <div class="card-subtitle">High-Performance Order Flow Analytics &amp; Microstructure Terminal</div>
+    <!-- Project Cards Grid (GIAO DIỆN TỔNG) -->
+    <div class="catalog-grid" id="catalogGrid">
+      
+      <!-- CARD 1 -->
+      <article class="card-item" data-category="systems" onclick="previewProjectModal(1)">
+        <div class="card-thumb">
+          <div class="card-thumb-bg"></div>
+          <div class="card-badge-top">
+            <span class="status-tag active">● Live System</span>
+            <span class="status-tag">Personal Project</span>
+          </div>
+          <div class="card-thumb-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span>[Khung Thumbnail / Visual Preview]</span>
           </div>
         </div>
-
-        <div class="card-body">
-          <p>
-            An institutional-grade desktop trading terminal engineered in <b>Rust 2021</b> and <b>Tauri 2</b>, featuring real-time footprint cluster charting, diagonal imbalance detection (300%), Options Gamma Exposure (GEX) profiling, and sub-millisecond MT5 tick bridging. Validated across 8 strict deployment gates (G0–G7) with zero floating-point drift.
+        <div class="card-content">
+          <div class="card-category">Systems &amp; Quantitative</div>
+          <h2 class="card-heading">VluxChart Terminal</h2>
+          <p class="card-summary">
+            Hệ thống phân tích Order Flow &amp; vi cấu trúc thị trường tốc độ cao viết bằng Rust và Tauri 2, hỗ trợ luồng dữ liệu WebSocket đa sàn và kết xuất đồ họa nến Footprint thời gian thực.
           </p>
-
-          <div class="specs-grid">
-            <div class="spec-item">
-              <span class="spec-label">Engine Core</span>
-              <span class="spec-val">Rust 2021 + Tokio MPSC</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Desktop &amp; UI</span>
-              <span class="spec-val">Tauri 2 + React 19 + Canvas2D</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Data Ingestion</span>
-              <span class="spec-val">Bybit &amp; Binance WebSockets + MT5</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Audit Result</span>
-              <span class="spec-val" style="color:var(--green)">41/41 Passed in 65.47s</span>
-            </div>
+          <div class="card-tags">
+            <span class="tech-pill">Rust</span>
+            <span class="tech-pill">Tauri 2</span>
+            <span class="tech-pill">React 19</span>
+            <span class="tech-pill">WebSockets</span>
+            <span class="tech-pill">Canvas2D</span>
           </div>
-        </div>
-
-        <div class="card-footer">
-          <div class="tags-list">
-            <span class="tag-badge">Rust</span>
-            <span class="tag-badge">Tauri 2</span>
-            <span class="tag-badge">React 19</span>
-            <span class="tag-badge">TypeScript</span>
-            <span class="tag-badge">Canvas2D</span>
-            <span class="tag-badge">WebSockets</span>
-            <span class="tag-badge">WAL CRC32</span>
-          </div>
-          <div class="btn-group">
-            <button class="primary-btn" onclick="openProjectModal('vluxchart')">
-              <span>View Deep-Dive &amp; Demo</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
-            <a class="ghost-btn" href="https://github.com/ngtaiphat1501/VluxChart" target="_blank" rel="noopener">
+          <div class="card-actions">
+            <span class="view-detail-btn">Xem chi tiết &amp; Demo →</span>
+            <a class="github-link-btn" href="https://github.com/ngtaiphat1501/VluxChart" target="_blank" rel="noopener" onclick="event.stopPropagation()">
               <span>GitHub</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
             </a>
@@ -464,61 +364,35 @@ footer{
         </div>
       </article>
 
-      <!-- PROJECT 2: FTECH LEARNING ONLINE -->
-      <article class="proj-card" data-category="enterprise" data-search="ftech java jakarta tomcat sql server docker compose maven vnpay chartjs analytics">
-        <div class="card-header">
-          <div class="card-meta">
-            <div class="badge-row">
-              <span class="cat-tag">Enterprise Java</span>
-              <span class="status-pill" style="color:var(--blue)">Capstone Project</span>
-              <span class="cat-tag" style="color:var(--mute)">Oct – Nov 2026 · Fullstack Dev (Team of 5)</span>
-            </div>
-            <h2 class="card-title">Ftech Learning Online</h2>
-            <div class="card-subtitle">Scalable Enterprise Course Platform &amp; Revenue Analytics</div>
+      <!-- CARD 2 -->
+      <article class="card-item" data-category="backend" onclick="previewProjectModal(2)">
+        <div class="card-thumb">
+          <div class="card-thumb-bg"></div>
+          <div class="card-badge-top">
+            <span class="status-tag" style="color:var(--accent)">● Capstone</span>
+            <span class="status-tag">Fullstack Team</span>
+          </div>
+          <div class="card-thumb-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6Z"/></svg>
+            <span>[Khung Thumbnail / Visual Preview]</span>
           </div>
         </div>
-
-        <div class="card-body">
-          <p>
-            PRJ301 capstone e-learning platform architected with <b>Java 21</b> and <b>Jakarta EE 10</b> on Apache Tomcat. Implemented idempotent checkout generation, coupon validation, an automated VNPAY sandbox payment flow, and interactive financial revenue analytics with Chart.js. Packaged in multi-stage Docker linked to SQL Server 2022.
+        <div class="card-content">
+          <div class="card-category">Backend &amp; Enterprise</div>
+          <h2 class="card-heading">Ftech Learning Online</h2>
+          <p class="card-summary">
+            Nền tảng đào tạo trực tuyến chuẩn Jakarta EE 10 trên Apache Tomcat, tích hợp dashboard phân tích doanh thu, cổng thanh toán VNPAY sandbox và container hóa hoàn chỉnh với Docker.
           </p>
-
-          <div class="specs-grid">
-            <div class="spec-item">
-              <span class="spec-label">Language &amp; Web</span>
-              <span class="spec-val">Java 21 + Jakarta EE 10 + Tomcat</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Database</span>
-              <span class="spec-val">MS SQL Server 2022 (Normalized)</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">DevOps &amp; Infra</span>
-              <span class="spec-val">Docker Compose + Multi-stage Build</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Fintech Gateway</span>
-              <span class="spec-val">VNPAY Sandbox (Idempotent Flow)</span>
-            </div>
+          <div class="card-tags">
+            <span class="tech-pill">Java 21</span>
+            <span class="tech-pill">Jakarta EE 10</span>
+            <span class="tech-pill">Tomcat</span>
+            <span class="tech-pill">SQL Server</span>
+            <span class="tech-pill">Docker</span>
           </div>
-        </div>
-
-        <div class="card-footer">
-          <div class="tags-list">
-            <span class="tag-badge">Java 21</span>
-            <span class="tag-badge">Jakarta EE 10</span>
-            <span class="tag-badge">Tomcat</span>
-            <span class="tag-badge">SQL Server</span>
-            <span class="tag-badge">Docker</span>
-            <span class="tag-badge">VNPAY</span>
-            <span class="tag-badge">Chart.js</span>
-          </div>
-          <div class="btn-group">
-            <button class="primary-btn" onclick="openProjectModal('ftech')">
-              <span>View Deep-Dive &amp; Demo</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
-            <a class="ghost-btn" href="https://github.com/ngtaiphat1501/Ftech_learning_online" target="_blank" rel="noopener">
+          <div class="card-actions">
+            <span class="view-detail-btn">Xem chi tiết &amp; Demo →</span>
+            <a class="github-link-btn" href="https://github.com/ngtaiphat1501/Ftech_learning_online" target="_blank" rel="noopener" onclick="event.stopPropagation()">
               <span>GitHub</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
             </a>
@@ -526,60 +400,35 @@ footer{
         </div>
       </article>
 
-      <!-- PROJECT 3: STUDENT MANAGEMENT SYSTEM -->
-      <article class="proj-card" data-category="academic" data-search="student management java oop layered cli binary file ant serialization">
-        <div class="card-header">
-          <div class="card-meta">
-            <div class="badge-row">
-              <span class="cat-tag">Academic &amp; CLI</span>
-              <span class="status-pill" style="color:var(--silver)">Academic Architecture</span>
-              <span class="cat-tag" style="color:var(--mute)">Mar 2026 · Java Developer (Team Project)</span>
-            </div>
-            <h2 class="card-title">Student Management System</h2>
-            <div class="card-subtitle">Decoupled Layered Java OOP System &amp; Binary Persistence</div>
+      <!-- CARD 3 -->
+      <article class="card-item" data-category="tools" onclick="previewProjectModal(3)">
+        <div class="card-thumb">
+          <div class="card-thumb-bg"></div>
+          <div class="card-badge-top">
+            <span class="status-tag">● Academic System</span>
+            <span class="status-tag">Core OOP</span>
+          </div>
+          <div class="card-thumb-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m4 17 6-6-6-6M12 19h8"/></svg>
+            <span>[Khung Thumbnail / Visual Preview]</span>
           </div>
         </div>
-
-        <div class="card-body">
-          <p>
-            An academic system structured around clean Java OOP principles and strict layered separation (<code>models</code>, <code>services</code>, <code>managers</code>, <code>menus</code>, <code>utils</code>). Built 4 role-based CLI console interfaces for Admin, Staff, Teacher, and Student with decoupled binary file serialization (<code>.dat</code> persistence).
+        <div class="card-content">
+          <div class="card-category">CLI &amp; Core Architecture</div>
+          <h2 class="card-heading">Student Management System</h2>
+          <p class="card-summary">
+            Hệ thống quản lý sinh viên phân lớp theo chuẩn thiết kế hướng đối tượng Java OOP, bao gồm 4 menu phân quyền người dùng và lưu trữ dữ liệu nhị phân tách biệt.
           </p>
-
-          <div class="specs-grid">
-            <div class="spec-item">
-              <span class="spec-label">Architecture</span>
-              <span class="spec-val">Strict Layered Java OOP</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Interfaces</span>
-              <span class="spec-val">4 Role-based CLI Menus</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Storage Engine</span>
-              <span class="spec-val">Binary File Serialization (.dat)</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Build System</span>
-              <span class="spec-val">Apache Ant</span>
-            </div>
+          <div class="card-tags">
+            <span class="tech-pill">Java OOP</span>
+            <span class="tech-pill">Layered CLI</span>
+            <span class="tech-pill">File I/O</span>
+            <span class="tech-pill">Binary Serialization</span>
+            <span class="tech-pill">Ant</span>
           </div>
-        </div>
-
-        <div class="card-footer">
-          <div class="tags-list">
-            <span class="tag-badge">Java OOP</span>
-            <span class="tag-badge">Layered Architecture</span>
-            <span class="tag-badge">File I/O</span>
-            <span class="tag-badge">Binary Serialization</span>
-            <span class="tag-badge">CLI Interface</span>
-            <span class="tag-badge">Apache Ant</span>
-          </div>
-          <div class="btn-group">
-            <button class="primary-btn" onclick="openProjectModal('student-ms')">
-              <span>View Deep-Dive &amp; Demo</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
-            <a class="ghost-btn" href="https://github.com/ngtaiphat1501/StudentManagementSystem" target="_blank" rel="noopener">
+          <div class="card-actions">
+            <span class="view-detail-btn">Xem chi tiết &amp; Demo →</span>
+            <a class="github-link-btn" href="https://github.com/ngtaiphat1501/StudentManagementSystem" target="_blank" rel="noopener" onclick="event.stopPropagation()">
               <span>GitHub</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
             </a>
@@ -592,23 +441,73 @@ footer{
 </main>
 
 <!-- ================================================================
-     MODAL POPUP DETAIL VIEW
+     KHUNG XEM CHI TIẾT TỔNG QUÁT (PROJECT DETAIL VIEW SHELL)
      ================================================================ -->
-<div class="modal-overlay" id="projectModal" role="dialog" aria-modal="true">
-  <div class="modal-box">
+<div class="detail-modal" id="detailModal" role="dialog" aria-modal="true">
+  <div class="detail-box">
     
     <!-- Modal Sticky Header -->
-    <div class="modal-header">
-      <div class="modal-title-area">
-        <span class="cat-tag" id="modalCategory" style="align-self:flex-start">Category</span>
-        <h2 id="modalTitle">Project Title</h2>
+    <div class="detail-header">
+      <div class="detail-title-group">
+        <span class="card-category" id="modalCategory" style="margin:0">Mảng Dự Án</span>
+        <h2 id="modalTitle">Tiêu Đề Dự Án</h2>
       </div>
-      <button class="modal-close-btn" onclick="closeProjectModal()" aria-label="Close modal">✕</button>
+      <button class="close-btn" onclick="closeProjectModal()" aria-label="Đóng giao diện chi tiết">✕</button>
     </div>
 
-    <!-- Modal Content Body -->
-    <div class="modal-content" id="modalContent">
-      <!-- Injected via JavaScript based on project id -->
+    <!-- Modal Content Body (Bố Cục Khung Chi Tiết) -->
+    <div class="detail-body">
+      
+      <!-- Khung Trình Diễn Hình Ảnh / Live Demo sau này -->
+      <div class="media-viewport-slot" id="modalMediaSlot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="m8 21 4-4 4 4M12 17v4"/></svg>
+        <span>[Vị trí khung hiển thị hình ảnh chụp màn hình / video hoặc Live Demo trực tiếp]</span>
+        <span style="font-size:.74rem;color:var(--mute)">(Khung này sẽ được gắn demo hoặc ảnh thực tế khi bạn duyệt xong giao diện tổng)</span>
+      </div>
+
+      <!-- Bố Cục Thông Tin 2 Cột -->
+      <div class="detail-grid">
+        
+        <!-- Cột Trái: Mô Tả Kiến Trúc & Nghiệp Vụ -->
+        <div>
+          <div class="section-label">Tổng Quan &amp; Bài Toán Giải Quyết</div>
+          <p class="detail-desc-text" id="modalDesc1">
+            Mô tả nghiệp vụ tổng quan của dự án, bối cảnh thực hiện và các tính năng chính đã được hiện thực hóa.
+          </p>
+
+          <div class="section-label">Kiến Trúc Kỹ Thuật &amp; Triển Khai</div>
+          <p class="detail-desc-text" id="modalDesc2">
+            Mô tả kiến trúc hệ thống, các giải pháp công nghệ, giải thuật tối ưu hóa và quy trình kiểm thử/đóng gói container.
+          </p>
+        </div>
+
+        <!-- Cột Phải: Thông Số Kỹ Thuật & Liên Kết -->
+        <div>
+          <div class="meta-panel">
+            <div class="meta-row">
+              <span class="meta-lbl">Vai Trò Đảm Nhiệm</span>
+              <span class="meta-val" id="modalRole">Lead Developer</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-lbl">Thời Gian Thực Hiện</span>
+              <span class="meta-val" id="modalTimeline">2026</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-lbl">Công Nghệ Cốt Lõi</span>
+              <span class="meta-val" id="modalStack">Rust · Tauri 2 · WebSockets</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-lbl">Mã Nguồn Dự Án</span>
+              <a class="meta-val" id="modalRepoLink" href="#" target="_blank" rel="noopener" style="color:var(--accent);display:inline-flex;align-items:center;gap:.3rem">
+                <span>Xem trên GitHub</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
@@ -621,761 +520,109 @@ footer{
       <b>VLUX® Project Hub</b> — Nguyễn Phát Tài · FPT University Cần Thơ
     </div>
     <div style="display:flex;gap:1.5rem">
-      <a href="index.html" style="color:var(--silver)">Portfolio</a>
-      <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener" style="color:var(--silver)">GitHub</a>
-      <a href="mailto:ngtaiphat1501@gmail.com" style="color:var(--silver)">Contact</a>
+      <a href="index.html" style="color:var(--silver)">Portfolio Chính</a>
+      <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener" style="color:var(--silver)">GitHub Profile</a>
+      <a href="mailto:ngtaiphat1501@gmail.com" style="color:var(--silver)">Liên Hệ</a>
     </div>
   </div>
 </footer>
 
 <script>
 /* ================================================================
-   DATA REPOSITORY FOR ALL PROJECTS
+   DỮ LIỆU KHUNG MẪU TỔNG QUÁT (CHƯA GẮN NỘI DUNG CHI TIẾT)
    ================================================================ */
-const PROJECTS = {
-  "vluxchart": {
+const PROJECT_SHELLS = {
+  1: {
     title: "VluxChart Terminal",
     category: "Systems & Quantitative",
-    repoUrl: "https://github.com/ngtaiphat1501/VluxChart",
-    tabs: [
-      { id: "demo", label: "1. Live Footprint Demo" },
-      { id: "arch", label: "2. Architecture & Data Flow" },
-      { id: "audit", label: "3. Institutional Audit (G0–G7)" },
-      { id: "specs", label: "4. Microstructure Features" }
-    ],
-    renderTab: function(tabId) {
-      if (tabId === "demo") {
-        return `
-          <div class="demo-canvas-wrap">
-            <div class="demo-toolbar">
-              <div class="demo-status">
-                <span class="demo-status-pill">FEED CONNECTED</span>
-                <span>INSTRUMENT: <b>BTCUSDT.P (Bybit Linear)</b></span>
-              </div>
-              <div class="demo-btn-group">
-                <button class="demo-btn active" id="btnToggleFeed" onclick="toggleFeedSimulation()">Pause Feed</button>
-                <button class="demo-btn" onclick="addSpikeTick()">Simulate Trade Spike</button>
-                <button class="demo-btn" onclick="resetChart()">Reset</button>
-              </div>
-            </div>
-
-            <!-- Canvas Footprint Renderer -->
-            <canvas id="footprintCanvas" width="900" height="380" style="width:100%;height:380px;display:block;background:#06080c"></canvas>
-
-            <div class="telemetry-row">
-              <div class="tel-item"><span class="tel-label">Current Mark Price</span><span class="tel-val" id="telPrice">92,450.50</span></div>
-              <div class="tel-item"><span class="tel-label">Aggressor Delta</span><span class="tel-val" id="telDelta" style="color:var(--green)">+142.80 BTC</span></div>
-              <div class="tel-item"><span class="tel-label">Engine Pipeline Latency</span><span class="tel-val">0.38 ms</span></div>
-              <div class="tel-item"><span class="tel-label">Queue Invariants</span><span class="tel-val" style="color:var(--green)">Zero Float Drift (rust_decimal)</span></div>
-            </div>
-          </div>
-          <p style="font-size:.84rem;color:var(--mute);margin:0">
-            * Interactive Web Canvas Simulation: Demonstrates VluxChart's Bid x Ask cluster rendering, Diagonal Imbalance detection (300%), Point of Control (POC), and Delta volume accounting. The native desktop app runs this at 60 FPS in Rust & Tauri 2.
-          </p>
-        `;
-      } else if (tabId === "arch") {
-        return `
-          <div class="diagram-container">
-            <h3 style="color:var(--ice);font-size:1.1rem;margin:0 0 1.5rem">Multi-Threaded Order Flow Pipeline</h3>
-            <div class="pipeline-flow">
-              <div class="flow-node">
-                <div class="node-title">Public WebSockets</div>
-                <div class="node-sub">Bybit Linear &amp; Binance Futures + MT5 Tick Bridge</div>
-              </div>
-              <div class="flow-arrow">➔</div>
-              <div class="flow-node" style="border-color:var(--accent)">
-                <div class="node-title">Tokio MPSC Queue</div>
-                <div class="node-sub">16,384 slots bounded channel with non-blocking backpressure</div>
-              </div>
-              <div class="flow-arrow">➔</div>
-              <div class="flow-node">
-                <div class="node-title">WAL &amp; CRC32 Log</div>
-                <div class="node-sub">Append-only crash recovery; zero data loss on abrupt abort</div>
-              </div>
-              <div class="flow-arrow">➔</div>
-              <div class="flow-node" style="border-color:var(--gold)">
-                <div class="node-title">Fixed-Point Math</div>
-                <div class="node-sub">rust_decimal accounting: Buy + Sell + Unknown == Total</div>
-              </div>
-              <div class="flow-arrow">➔</div>
-              <div class="flow-node">
-                <div class="node-title">Tauri 2 IPC</div>
-                <div class="node-sub">125ms throttled snapshots dispatch to React 19</div>
-              </div>
-            </div>
-          </div>
-
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
-            <div style="background:rgba(255,255,255,.02);padding:1.4rem;border-radius:12px;border:1px solid var(--line)">
-              <h4 style="color:var(--ice);margin:0 0 .5rem">1. Bounded Backpressure &amp; Zero Memory Leaks</h4>
-              <p style="font-size:.88rem;color:var(--mute);margin:0">
-                During high-volatility news events (&gt;10,000 trades/sec), unbounded queues crash systems with OOM. VluxChart's bounded Tokio MPSC channel drops or coalesces telemetry without choking the operating system.
-              </p>
-            </div>
-            <div style="background:rgba(255,255,255,.02);padding:1.4rem;border-radius:12px;border:1px solid var(--line)">
-              <h4 style="color:var(--ice);margin:0 0 .5rem">2. Zero Float Drift Invariant</h4>
-              <p style="font-size:.88rem;color:var(--mute);margin:0">
-                Standard IEEE 754 floats cause fractional drift in financial sums over time. VluxChart utilizes fixed-point <code>rust_decimal</code> to guarantee <code>TotalVolume == BuyVolume + SellVolume + UnknownVolume</code> down to the exact Satoshi.
-              </p>
-            </div>
-          </div>
-        `;
-      } else if (tabId === "audit") {
-        return `
-          <h3 style="color:var(--ice);font-size:1.1rem;margin:0 0 .5rem">Institutional Audit &amp; Quality Gates (G0 – G7)</h3>
-          <p style="font-size:.86rem;color:var(--mute);margin:0 0 1.5rem">
-            VluxChart passed all <b>41 automated tests</b> with 100% success rate across 8 rigorous architectural deployment gates in 65.47s.
-          </p>
-          <div style="overflow-x:auto">
-            <table class="audit-table">
-              <thead>
-                <tr>
-                  <th>Gate</th>
-                  <th>Category</th>
-                  <th>Test Scope</th>
-                  <th>Status</th>
-                  <th>Metric / Result</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><b>G0</b></td>
-                  <td>Source Proof</td>
-                  <td>Bybit Linear &amp; Binance WS schemas, Gold contract validity, tick invariants</td>
-                  <td><span class="pass-tag">PASSED (6/6)</span></td>
-                  <td>100% schema match</td>
-                </tr>
-                <tr>
-                  <td><b>G1</b></td>
-                  <td>Foundation</td>
-                  <td>Cargo workspace architecture, Windows CI/CD pipeline, Tauri 2 shell</td>
-                  <td><span class="pass-tag">PASSED (4/4)</span></td>
-                  <td>Zero build warnings</td>
-                </tr>
-                <tr>
-                  <td><b>G2</b></td>
-                  <td>Data Core</td>
-                  <td>Bounded dedup filter, sequence gap detection, WAL CRC32 crash recovery</td>
-                  <td><span class="pass-tag">PASSED (5/5)</span></td>
-                  <td>Zero data loss on simulated crash</td>
-                </tr>
-                <tr>
-                  <td><b>G3</b></td>
-                  <td>Analytics Core</td>
-                  <td>Footprint clusters, Steidlmayer Value Area (VAH/VAL/POC), Imbalance, CVD</td>
-                  <td><span class="pass-tag">PASSED (5/5)</span></td>
-                  <td>Golden volume invariants hold</td>
-                </tr>
-                <tr>
-                  <td><b>G4</b></td>
-                  <td>Desktop Terminal</td>
-                  <td>IPC DTO serialization, lifecycle state, React 19 production build</td>
-                  <td><span class="pass-tag">PASSED (5/5)</span></td>
-                  <td>Vite production compilation verified</td>
-                </tr>
-                <tr>
-                  <td><b>G5</b></td>
-                  <td>Performance</td>
-                  <td>Throughput (&gt;10k trades/s), pipeline latency &lt;1ms, 100k trade soak test</td>
-                  <td><span class="pass-tag">PASSED (6/6)</span></td>
-                  <td>&lt;1ms latency, 0 memory leaks</td>
-                </tr>
-                <tr>
-                  <td><b>G6</b></td>
-                  <td>Security &amp; Audit</td>
-                  <td>Secret &amp; API key scan, third-party licenses, SHA-256 package checksums</td>
-                  <td><span class="pass-tag">PASSED (5/5)</span></td>
-                  <td>0 credential leaks detected</td>
-                </tr>
-                <tr>
-                  <td><b>G7</b></td>
-                  <td>Pilot Signoff</td>
-                  <td>Multi-asset live switching, zero float drift, emergency rollback test</td>
-                  <td><span class="pass-tag">PASSED (5/5)</span></td>
-                  <td>100% acceptance signoff</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        `;
-      } else if (tabId === "specs") {
-        return `
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
-            <div style="background:rgba(255,255,255,.02);padding:1.4rem;border-radius:12px;border:1px solid var(--line)">
-              <h4 style="color:var(--accent);margin:0 0 .5rem">Order Flow &amp; Footprint Clusters</h4>
-              <ul style="padding-left:1.2rem;margin:0;font-size:.88rem;color:var(--silver);display:grid;gap:.5rem">
-                <li>Real-time Bid x Ask cluster bars with Diagonal Imbalance detection (300%).</li>
-                <li>Order Flow Absorption warnings and Naked Point of Control (nPOC) tracing.</li>
-                <li>Steidlmayer Market Profile (TPO, VAH, VAL, POC) calculation.</li>
-                <li>Cumulative Volume Delta (CVD) &amp; multi-speed VWAP with &plusmn;1&sigma;, 2&sigma;, 3&sigma; bands.</li>
-              </ul>
-            </div>
-            <div style="background:rgba(255,255,255,.02);padding:1.4rem;border-radius:12px;border:1px solid var(--line)">
-              <h4 style="color:var(--gold);margin:0 0 .5rem">Options GEX &amp; Greeks Terminal</h4>
-              <ul style="padding-left:1.2rem;margin:0;font-size:.88rem;color:var(--silver);display:grid;gap:.5rem">
-                <li>Gamma Exposure (GEX) profiling across strikes (0DTE, Weekly, Monthly).</li>
-                <li>Call Walls, Put Walls, and market Max Pain calculations.</li>
-                <li>Black-Scholes Greeks (Delta, Gamma, Vega, Theta) with Implied Volatility inversion.</li>
-              </ul>
-            </div>
-            <div style="background:rgba(255,255,255,.02);padding:1.4rem;border-radius:12px;border:1px solid var(--line)">
-              <h4 style="color:var(--green);margin:0 0 .5rem">DOM Heatmap &amp; MBO Icebergs</h4>
-              <ul style="padding-left:1.2rem;margin:0;font-size:.88rem;color:var(--silver);display:grid;gap:.5rem">
-                <li>Level 2 Order Book state tracking with sub-millisecond updates.</li>
-                <li>Liquidity depth heatmap buffer tracking passive limit placement.</li>
-                <li>Market-by-Order (MBO) Iceberg detection and FIFO queue position simulation.</li>
-              </ul>
-            </div>
-          </div>
-        `;
-      }
-    }
+    role: "Lead Developer (Personal Project)",
+    timeline: "Nov 2026",
+    stack: "Rust 2021 · Tauri 2 · React 19 · WebSockets · Canvas2D",
+    repo: "https://github.com/ngtaiphat1501/VluxChart",
+    desc1: "Hệ thống terminal desktop phân tích vi cấu trúc thị trường (Order Flow, Footprint Clusters, Options GEX) với tốc độ cao, xử lý luồng dữ liệu giao dịch trực tiếp từ Bybit Linear và Binance Futures.",
+    desc2: "Kiến trúc bất đồng bộ xây dựng bằng Rust core (Tokio MPSC bounded channel, WAL CRC32 crash recovery, rust_decimal zero-float arithmetic) kết nối với giao diện React 19 / Canvas2D tối ưu 60 FPS."
   },
-
-  "ftech": {
+  2: {
     title: "Ftech Learning Online",
-    category: "Enterprise Java",
-    repoUrl: "https://github.com/ngtaiphat1501/Ftech_learning_online",
-    tabs: [
-      { id: "analytics", label: "1. Interactive Analytics & Checkout" },
-      { id: "arch", label: "2. Docker & Enterprise Architecture" },
-      { id: "security", label: "3. Database & Idempotency" }
-    ],
-    renderTab: function(tabId) {
-      if (tabId === "analytics") {
-        return `
-          <div class="demo-canvas-wrap">
-            <div class="demo-toolbar">
-              <div class="demo-status">
-                <span class="demo-status-pill" style="color:var(--blue)">ADMIN ANALYTICS SIMULATION</span>
-                <span>METRICS: <b>Weekly Platform Revenue (VND)</b></span>
-              </div>
-              <div class="demo-btn-group">
-                <button class="demo-btn active" onclick="refreshFtechChart(7)">7 Days</button>
-                <button class="demo-btn" onclick="refreshFtechChart(30)">30 Days</button>
-                <button class="demo-btn" onclick="triggerCheckoutDemo()">Test VNPAY Flow</button>
-              </div>
-            </div>
-
-            <canvas id="ftechCanvas" width="900" height="340" style="width:100%;height:340px;display:block;background:#06080c"></canvas>
-
-            <div class="telemetry-row">
-              <div class="tel-item"><span class="tel-label">Total Revenue</span><span class="tel-val" id="ftechRev">184,500,000 VND</span></div>
-              <div class="tel-item"><span class="tel-label">Enrolled Students</span><span class="tel-val">1,420</span></div>
-              <div class="tel-item"><span class="tel-label">Coupon Conversion</span><span class="tel-val" style="color:var(--green)">18.4%</span></div>
-              <div class="tel-item"><span class="tel-label">Payment Gateway</span><span class="tel-val" style="color:var(--blue)">VNPAY Sandbox (Idempotent)</span></div>
-            </div>
-          </div>
-          <p style="font-size:.84rem;color:var(--mute);margin:0">
-            * Interactive Financial Analytics Simulator: Demonstrates the Chart.js visual analytics and idempotent coupon checkout logic authored in the PRJ301 capstone project.
-          </p>
-        `;
-      } else if (tabId === "arch") {
-        return `
-          <div class="diagram-container">
-            <h3 style="color:var(--ice);font-size:1.1rem;margin:0 0 1.5rem">Containerized Jakarta EE 10 Topology</h3>
-            <div class="pipeline-flow">
-              <div class="flow-node">
-                <div class="node-title">Browser Client</div>
-                <div class="node-sub">HTML5, CSS3, JS, Chart.js Dashboards</div>
-              </div>
-              <div class="flow-arrow">➔</div>
-              <div class="flow-node" style="border-color:var(--blue)">
-                <div class="node-title">Tomcat Container</div>
-                <div class="node-sub">Jakarta EE 10, Auth Filters, Servlets, Session Mgmt</div>
-              </div>
-              <div class="flow-arrow">➔</div>
-              <div class="flow-node">
-                <div class="node-title">DAO Layer</div>
-                <div class="node-sub">JDBC Connection Pooling &amp; Parametrized Queries</div>
-              </div>
-              <div class="flow-arrow">➔</div>
-              <div class="flow-node" style="border-color:var(--accent)">
-                <div class="node-title">MS SQL Server 2022</div>
-                <div class="node-sub">Normalized schema, ACID Transactions, Stored Procedures</div>
-              </div>
-            </div>
-          </div>
-          <div style="background:rgba(255,255,255,.02);padding:1.4rem;border-radius:12px;border:1px solid var(--line)">
-            <h4 style="color:var(--ice);margin:0 0 .5rem">Multi-Stage Dockerfile Architecture</h4>
-            <p style="font-size:.88rem;color:var(--mute);margin:0">
-              Authored multi-stage builds using Maven to compile dependencies in a build container, producing a clean WAR artifact copied into a lightweight Apache Tomcat runtime image, linked seamlessly with SQL Server 2022 via Docker Compose.
-            </p>
-          </div>
-        `;
-      } else if (tabId === "security") {
-        return `
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
-            <div style="background:rgba(255,255,255,.02);padding:1.4rem;border-radius:12px;border:1px solid var(--line)">
-              <h4 style="color:var(--blue);margin:0 0 .5rem">Idempotent Payment &amp; VNPAY Gateway</h4>
-              <p style="font-size:.88rem;color:var(--mute)">
-                Checkout order tokens are generated idempotently with unique UUID transaction IDs. Even if users double-click or network packets duplicate, duplicate billing is strictly prevented.
-              </p>
-            </div>
-            <div style="background:rgba(255,255,255,.02);padding:1.4rem;border-radius:12px;border:1px solid var(--line)">
-              <h4 style="color:var(--accent);margin:0 0 .5rem">Relational Schema Normalization</h4>
-              <p style="font-size:.88rem;color:var(--mute)">
-                Normalized database schemas designed in DBI202 to 3NF standards: Courses, Instructors, Enrollments, Reviews, Discount Coupons, and Invoices with foreign key integrity.
-              </p>
-            </div>
-          </div>
-        `;
-      }
-    }
+    category: "Backend & Enterprise",
+    role: "Fullstack Developer (Team of 5)",
+    timeline: "Oct – Nov 2026",
+    stack: "Java 21 · Jakarta EE 10 · Tomcat · SQL Server 2022 · Docker Compose",
+    repo: "https://github.com/ngtaiphat1501/Ftech_learning_online",
+    desc1: "Đồ án tốt nghiệp PRJ301: Nền tảng học trực tuyến quy mô doanh nghiệp với phân quyền đa vai trò, quản lý khóa học, mã giảm giá và cổng thanh toán trực tuyến VNPAY sandbox.",
+    desc2: "Mô hình MVC phân tầng nghiêm ngặt với Jakarta EE Servlets/Filters, tối ưu hóa cơ sở dữ liệu quan hệ SQL Server chuẩn 3NF, và đóng gói môi trường triển khai tự động bằng multi-stage Dockerfile."
   },
-
-  "student-ms": {
+  3: {
     title: "Student Management System",
-    category: "Academic & CLI",
-    repoUrl: "https://github.com/ngtaiphat1501/StudentManagementSystem",
-    tabs: [
-      { id: "cli", label: "1. Interactive CLI Terminal" },
-      { id: "oop", label: "2. Layered Architecture" },
-      { id: "storage", label: "3. Binary Serialization" }
-    ],
-    renderTab: function(tabId) {
-      if (tabId === "cli") {
-        return `
-          <div class="cli-window">
-            <div class="cli-header">
-              <span class="cli-dot" style="background:#ff5f56"></span>
-              <span class="cli-dot" style="background:#ffbd2e"></span>
-              <span class="cli-dot" style="background:#27c93f"></span>
-              <span style="margin-left:.6rem">java -jar StudentManagementSystem.jar (Simulation)</span>
-            </div>
-            <div class="cli-body" id="cliScreen">
-======================================================
-  STUDENT MANAGEMENT SYSTEM - ENTERPRISE CLI v1.0
-  Authored by: Nguyen Phat Tai (VLUX)
-======================================================
-[INFO] Loading binary database from student_records.dat...
-[INFO] Successfully loaded 142 records. Database integrity OK.
-
---- MAIN ROLE-BASED PORTAL ---
-1. Admin Portal (Full CRUD, User Management)
-2. Staff Portal (Course Registration & Schedules)
-3. Teacher Portal (Grade Input, Transcripts)
-4. Student Portal (Self-Service View Transcripts)
-5. Exit System
-
-Type option (1-5) and press Enter or click quick buttons below:
-            </div>
-            <div style="padding:.8rem 1rem;background:#090b10;border-top:1px solid var(--line);display:flex;gap:.6rem;flex-wrap:wrap">
-              <button class="demo-btn" onclick="cliInput('1')">Option 1: Admin</button>
-              <button class="demo-btn" onclick="cliInput('2')">Option 2: Staff</button>
-              <button class="demo-btn" onclick="cliInput('3')">Option 3: Teacher</button>
-              <button class="demo-btn" onclick="cliInput('4')">Option 4: Student</button>
-              <button class="demo-btn" onclick="cliInput('clear')">Clear Screen</button>
-            </div>
-          </div>
-          <p style="font-size:.84rem;color:var(--mute);margin:.8rem 0 0">
-            * Web Terminal Emulator: Simulates the role-based console menus and Java model/service operations written in the project.
-          </p>
-        `;
-      } else if (tabId === "oop") {
-        return `
-          <div class="diagram-container">
-            <h3 style="color:var(--ice);font-size:1.1rem;margin:0 0 1.5rem">Layered OOP Separation of Concerns</h3>
-            <div class="pipeline-flow">
-              <div class="flow-node">
-                <div class="node-title">Console UI Menus</div>
-                <div class="node-sub">AdminMenu, StaffMenu, TeacherMenu, StudentMenu</div>
-              </div>
-              <div class="flow-arrow">➔</div>
-              <div class="flow-node" style="border-color:var(--silver)">
-                <div class="node-title">Service Layer</div>
-                <div class="node-sub">StudentService, GradeService, AuthenticationService</div>
-              </div>
-              <div class="flow-arrow">➔</div>
-              <div class="flow-node" style="border-color:var(--accent)">
-                <div class="node-title">Domain Models</div>
-                <div class="node-sub">Student, Teacher, Course, Grade, Transcript</div>
-              </div>
-              <div class="flow-arrow">➔</div>
-              <div class="flow-node">
-                <div class="node-title">Persistence Manager</div>
-                <div class="node-sub">Binary File I/O (FileInputStream / ObjectInputStream)</div>
-              </div>
-            </div>
-          </div>
-          <p style="font-size:.88rem;color:var(--silver);margin:0">
-            Strict decoupling prevents UI menus from touching raw files directly. All persistence is encapsulated through dedicated managers, keeping domain logic testable and clean.
-          </p>
-        `;
-      } else if (tabId === "storage") {
-        return `
-          <div style="background:rgba(255,255,255,.02);padding:1.4rem;border-radius:12px;border:1px solid var(--line)">
-            <h4 style="color:var(--ice);margin:0 0 .5rem">Decoupled Binary Serialization (.dat files)</h4>
-            <p style="font-size:.88rem;color:var(--mute);margin:0 0 1rem">
-              Java serialization is leveraged via <code>java.io.Serializable</code> with explicitly declared <code>serialVersionUID</code> to safeguard against class version incompatibility.
-            </p>
-            <pre style="background:#06080c;padding:1rem;border-radius:8px;font-family:var(--mono);font-size:.8rem;color:#7ee787;overflow-x:auto;margin:0">
-public class Student implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private String studentId;
-    private String fullName;
-    private double gpa;
-    // Getters, Setters, Business Logic
-}</pre>
-          </div>
-        `;
-      }
-    }
+    category: "CLI & Core Architecture",
+    role: "Java Developer (Team Project)",
+    timeline: "Mar 2026",
+    stack: "Java OOP · Layered CLI · File I/O · Binary Serialization · Ant",
+    repo: "https://github.com/ngtaiphat1501/StudentManagementSystem",
+    desc1: "Hệ thống quản lý hồ sơ và bảng điểm sinh viên với 4 giao diện dòng lệnh độc lập phân quyền cho Quản trị viên, Cán bộ, Giảng viên và Sinh viên.",
+    desc2: "Thiết kế phân lớp OOP chặt chẽ (Models, Services, Managers, Menus), tách biệt hoàn toàn giữa luồng xử lý nghiệp vụ và cơ chế lưu trữ nhị phân tuần tự hóa (.dat)."
   }
 };
 
-/* ================================================================
-   INTERACTION: MODAL CONTROLS & DEEP LINKING
-   ================================================================ */
-let activeProjId = null;
-let activeTabId = null;
-let footInterval = null;
-let footRunning = true;
-
-function openProjectModal(id, defaultTab) {
-  const p = PROJECTS[id];
+function previewProjectModal(id) {
+  const p = PROJECT_SHELLS[id];
   if (!p) return;
-  activeProjId = id;
-  window.location.hash = id;
-
   document.getElementById("modalCategory").textContent = p.category;
   document.getElementById("modalTitle").textContent = p.title;
+  document.getElementById("modalRole").textContent = p.role;
+  document.getElementById("modalTimeline").textContent = p.timeline;
+  document.getElementById("modalStack").textContent = p.stack;
+  document.getElementById("modalRepoLink").href = p.repo;
+  document.getElementById("modalDesc1").textContent = p.desc1;
+  document.getElementById("modalDesc2").textContent = p.desc2;
 
-  const contentArea = document.getElementById("modalContent");
-  const initialTab = defaultTab || p.tabs[0].id;
-  activeTabId = initialTab;
-
-  let tabsHtml = `<div class="detail-tabs">`;
-  p.tabs.forEach(t => {
-    tabsHtml += `<button class="dtab ${t.id === initialTab ? 'active' : ''}" onclick="switchDetailTab('${t.id}')">${t.label}</button>`;
-  });
-  tabsHtml += `</div><div id="tabPaneContent"></div>`;
-
-  tabsHtml += `
-    <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:1.5rem;margin-top:2.5rem;flex-wrap:wrap;gap:1rem">
-      <div style="display:flex;gap:1rem">
-        <a class="ghost-btn" href="${p.repoUrl}" target="_blank" rel="noopener">
-          <span>View Source on GitHub</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
-        </a>
-      </div>
-      <button class="primary-btn" onclick="closeProjectModal()">Close View (ESC)</button>
-    </div>
-  `;
-
-  contentArea.innerHTML = tabsHtml;
-  document.getElementById("tabPaneContent").innerHTML = p.renderTab(initialTab);
-
-  const overlay = document.getElementById("projectModal");
-  overlay.classList.add("open");
+  const modal = document.getElementById("detailModal");
+  modal.classList.add("open");
   document.body.style.overflow = "hidden";
-
-  initTabSubsystems(id, initialTab);
-}
-
-function switchDetailTab(tabId) {
-  if (!activeProjId) return;
-  activeTabId = tabId;
-  const p = PROJECTS[activeProjId];
-  document.querySelectorAll(".dtab").forEach((btn, idx) => {
-    btn.classList.toggle("active", p.tabs[idx].id === tabId);
-  });
-  document.getElementById("tabPaneContent").innerHTML = p.renderTab(tabId);
-  initTabSubsystems(activeProjId, tabId);
 }
 
 function closeProjectModal() {
-  const overlay = document.getElementById("projectModal");
-  overlay.classList.remove("open");
+  const modal = document.getElementById("detailModal");
+  modal.classList.remove("open");
   document.body.style.overflow = "";
-  if (footInterval) clearInterval(footInterval);
-  activeProjId = null;
-  history.replaceState(null, null, ' ');
 }
 
-// Close on ESC
+// Đóng modal khi bấm ESC
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && activeProjId) closeProjectModal();
+  if (e.key === "Escape") closeProjectModal();
 });
 
-// Close when clicking overlay backdrop
-document.getElementById("projectModal").addEventListener("click", (e) => {
-  if (e.target.id === "projectModal") closeProjectModal();
+// Đóng modal khi bấm ra ngoài khung
+document.getElementById("detailModal").addEventListener("click", (e) => {
+  if (e.target.id === "detailModal") closeProjectModal();
 });
 
-/* ================================================================
-   LIVE FOOTPRINT CHART SIMULATION (VLUXCHART)
-   ================================================================ */
-let simulatedCandles = [
-  { time: "19:40", o: 92410, h: 92440, l: 92390, c: 92430, clusters: [
-    { p: 92440, b: 12.4, a: 3.1 }, { p: 92430, b: 45.2, a: 18.0 }, { p: 92420, b: 24.1, a: 85.4, imb: 'buy' }, { p: 92410, b: 19.8, a: 14.2 }, { p: 92400, b: 8.5, a: 6.2 }
-  ], delta: +48.2 },
-  { time: "19:45", o: 92430, h: 92465, l: 92420, c: 92455, clusters: [
-    { p: 92465, b: 8.2, a: 28.4, imb: 'sell' }, { p: 92455, b: 62.1, a: 34.0 }, { p: 92445, b: 104.5, a: 22.1, poc: true }, { p: 92435, b: 42.0, a: 15.3 }, { p: 92425, b: 11.2, a: 9.0 }
-  ], delta: +102.5 },
-  { time: "19:50", o: 92455, h: 92470, l: 92435, c: 92445, clusters: [
-    { p: 92470, b: 4.1, a: 16.5 }, { p: 92460, b: 21.0, a: 44.2, imb: 'sell' }, { p: 92450, b: 82.4, a: 78.1, poc: true }, { p: 92440, b: 35.6, a: 12.0 }, { p: 92430, b: 14.8, a: 8.4 }
-  ], delta: -12.4 }
-];
-
-function drawFootprint() {
-  const cv = document.getElementById("footprintCanvas");
-  if (!cv) return;
-  const ctx = cv.getContext("2d");
-  const W = cv.width, H = cv.height;
-  ctx.clearRect(0, 0, W, H);
-
-  // Background grid
-  ctx.strokeStyle = "rgba(255,255,255,0.04)";
-  ctx.lineWidth = 1;
-  for (let y = 30; y < H - 50; y += 40) {
-    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
-  }
-
-  const slotW = 180;
-  const startX = 60;
-
-  simulatedCandles.forEach((c, i) => {
-    const x = startX + i * (slotW + 35);
-    const isUp = c.c >= c.o;
-
-    // Wick & body center
-    ctx.strokeStyle = isUp ? "#3fb950" : "#f43f5e";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(x + slotW / 2, 40);
-    ctx.lineTo(x + slotW / 2, H - 90);
-    ctx.stroke();
-
-    // Clusters rendering
-    c.clusters.forEach((cl, idx) => {
-      const cy = 60 + idx * 40;
-      const rowW = slotW - 20;
-      const rx = x + 10;
-
-      // POC highlight
-      if (cl.poc) {
-        ctx.fillStyle = "rgba(234,179,8,0.18)";
-        ctx.fillRect(rx, cy - 14, rowW, 28);
-        ctx.strokeStyle = "#eab308";
-        ctx.lineWidth = 1;
-        ctx.strokeRect(rx, cy - 14, rowW, 28);
-      } else {
-        ctx.fillStyle = "rgba(255,255,255,0.03)";
-        ctx.fillRect(rx, cy - 14, rowW, 28);
-      }
-
-      // Imbalance coloring
-      ctx.font = "11px 'JetBrains Mono', monospace";
-      ctx.textAlign = "left";
-      ctx.fillStyle = cl.imb === 'buy' ? "#3fb950" : "#8f9ab0";
-      ctx.fillText(cl.b.toFixed(1), rx + 8, cy + 4);
-
-      // Price label in middle
-      ctx.textAlign = "center";
-      ctx.fillStyle = cl.poc ? "#eab308" : "#eef2f8";
-      ctx.fillText(cl.p.toString(), rx + rowW / 2, cy + 4);
-
-      // Ask volume on right
-      ctx.textAlign = "right";
-      ctx.fillStyle = cl.imb === 'sell' ? "#f43f5e" : "#8f9ab0";
-      ctx.fillText(cl.a.toFixed(1), rx + rowW - 8, cy + 4);
-    });
-
-    // Time & Delta footer
-    ctx.font = "11px 'JetBrains Mono', monospace";
-    ctx.textAlign = "center";
-    ctx.fillStyle = "#8f9ab0";
-    ctx.fillText(c.time, x + slotW / 2, H - 45);
-
-    // Delta bar
-    ctx.fillStyle = c.delta >= 0 ? "rgba(63,185,80,0.8)" : "rgba(244,63,94,0.8)";
-    ctx.fillText("Δ " + (c.delta >= 0 ? "+" : "") + c.delta.toFixed(1), x + slotW / 2, H - 25);
-  });
-}
-
-function initTabSubsystems(projId, tabId) {
-  if (projId === "vluxchart" && tabId === "demo") {
-    footRunning = true;
-    drawFootprint();
-    if (footInterval) clearInterval(footInterval);
-    footInterval = setInterval(() => {
-      if (!footRunning) return;
-      // Simulate micro price fluctuation
-      const last = simulatedCandles[simulatedCandles.length - 1];
-      const clusterIdx = Math.floor(Math.random() * last.clusters.length);
-      const isBid = Math.random() > 0.45;
-      if (isBid) {
-        last.clusters[clusterIdx].b += +(Math.random() * 2.5).toFixed(1);
-        last.delta += 1.2;
-      } else {
-        last.clusters[clusterIdx].a += +(Math.random() * 2.5).toFixed(1);
-        last.delta -= 1.2;
-      }
-      const priceElem = document.getElementById("telPrice");
-      const deltaElem = document.getElementById("telDelta");
-      if (priceElem) {
-        priceElem.textContent = (92440 + Math.random() * 20).toFixed(2);
-      }
-      if (deltaElem) {
-        deltaElem.textContent = (last.delta >= 0 ? "+" : "") + last.delta.toFixed(1) + " BTC";
-        deltaElem.style.color = last.delta >= 0 ? "var(--green)" : "var(--red)";
-      }
-      drawFootprint();
-    }, 850);
-  } else if (projId === "ftech" && tabId === "analytics") {
-    drawFtechChart(7);
-  }
-}
-
-function toggleFeedSimulation() {
-  footRunning = !footRunning;
-  const btn = document.getElementById("btnToggleFeed");
-  if (btn) btn.textContent = footRunning ? "Pause Feed" : "Resume Feed";
-}
-
-function addSpikeTick() {
-  const last = simulatedCandles[simulatedCandles.length - 1];
-  last.clusters[1].b += 45.0;
-  last.clusters[1].imb = 'buy';
-  last.delta += 45.0;
-  drawFootprint();
-}
-
-function resetChart() {
-  simulatedCandles[simulatedCandles.length - 1].delta = +15.2;
-  drawFootprint();
-}
-
-/* ================================================================
-   FTECH ANALYTICS CANVAS SIMULATION
-   ================================================================ */
-function drawFtechChart(days) {
-  const cv = document.getElementById("ftechCanvas");
-  if (!cv) return;
-  const ctx = cv.getContext("2d");
-  const W = cv.width, H = cv.height;
-  ctx.clearRect(0, 0, W, H);
-
-  const points = days === 7 
-    ? [12, 18, 24, 21, 35, 48, 52] 
-    : [10, 14, 18, 15, 22, 28, 25, 32, 40, 38, 45, 52, 48, 60, 65, 70, 68, 75, 82, 90];
-  
-  const stepX = (W - 100) / (points.length - 1);
-  const maxVal = Math.max(...points) * 1.25;
-
-  // Grid
-  ctx.strokeStyle = "rgba(255,255,255,0.05)";
-  for (let y = 40; y < H - 40; y += 50) {
-    ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(W - 40, y); ctx.stroke();
-  }
-
-  // Gradient area
-  const grad = ctx.createLinearGradient(0, 0, 0, H);
-  grad.addColorStop(0, "rgba(56,189,248,0.35)");
-  grad.addColorStop(1, "rgba(56,189,248,0.0)");
-
-  ctx.beginPath();
-  points.forEach((val, i) => {
-    const x = 50 + i * stepX;
-    const y = H - 50 - (val / maxVal) * (H - 90);
-    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-  });
-  ctx.lineTo(50 + (points.length - 1) * stepX, H - 50);
-  ctx.lineTo(50, H - 50);
-  ctx.closePath();
-  ctx.fillStyle = grad;
-  ctx.fill();
-
-  // Line
-  ctx.beginPath();
-  ctx.strokeStyle = "#38bdf8";
-  ctx.lineWidth = 3;
-  points.forEach((val, i) => {
-    const x = 50 + i * stepX;
-    const y = H - 50 - (val / maxVal) * (H - 90);
-    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-  });
-  ctx.stroke();
-
-  // Circles
-  ctx.fillStyle = "#fff";
-  points.forEach((val, i) => {
-    const x = 50 + i * stepX;
-    const y = H - 50 - (val / maxVal) * (H - 90);
-    ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fill();
-  });
-}
-
-function refreshFtechChart(days) {
-  drawFtechChart(days);
-  const rev = document.getElementById("ftechRev");
-  if (rev) rev.textContent = days === 7 ? "184,500,000 VND" : "642,800,000 VND";
-}
-
-function triggerCheckoutDemo() {
-  alert("[VNPAY SANDBOX DEMO]\nIdempotent Transaction Generated!\nOrder ID: " + Math.random().toString(36).substring(2, 10).toUpperCase() + "\nStatus: SUCCESS (200 OK)");
-}
-
-/* ================================================================
-   CLI INTERACTIVE TERMINAL SIMULATION
-   ================================================================ */
-function cliInput(opt) {
-  const scr = document.getElementById("cliScreen");
-  if (!scr) return;
-
-  if (opt === "clear") {
-    scr.innerHTML = `[INFO] Terminal screen cleared.\nType 1: Admin | 2: Staff | 3: Teacher | 4: Student:`;
-    return;
-  }
-
-  let log = "\n\n$ select option: " + opt + "\n";
-  if (opt === "1") {
-    log += `[ACCESS: ADMIN ROLE VERIFIED]\n> Loading Student Master Registry...\n[ID: CE180123] Nguyen Phat Tai - Software Engineering - GPA: 3.82\n[ID: CE180456] Tran Van Bao - Information Assurance - GPA: 3.65\n[ID: CE180789] Le Thi Mai - Artificial Intelligence - GPA: 3.75\nOperation completed successfully. (Data flushed to .dat)`;
-  } else if (opt === "2") {
-    log += `[ACCESS: STAFF ROLE VERIFIED]\n> Active Course Schedules:\n- PRJ301: Web Java Applications (Tomcat, Docker)\n- CSD201: Data Structures & Algorithms\n- DBI202: Database Systems (MS SQL Server)\nSchedule status: ACTIVE (100% capacity).`;
-  } else if (opt === "3") {
-    log += `[ACCESS: TEACHER ROLE VERIFIED]\n> Grade Input Subsystem:\nEnter Student ID to modify or calculate GPA.\nTranscript generation: READY.`;
-  } else if (opt === "4") {
-    log += `[ACCESS: STUDENT SELF-SERVICE PORTAL]\nWelcome Student: Nguyen Phat Tai (CE180123)\nCompleted Credits: 84 / 140\nCurrent Cumulative GPA: 3.82 / 4.0\nStatus: Academic Excellence (Good Standing).`;
-  }
-  scr.innerHTML += log;
-  scr.scrollTop = scr.scrollHeight;
-}
-
-/* ================================================================
-   FILTER TABS & KEYWORD SEARCH
-   ================================================================ */
+// Bộ lọc danh mục
 const filterBtns = document.querySelectorAll(".flt-btn");
-const cards = document.querySelectorAll(".proj-card");
-const searchInput = document.getElementById("searchInput");
-
+const cards = document.querySelectorAll(".card-item");
 filterBtns.forEach(b => {
   b.addEventListener("click", () => {
     filterBtns.forEach(btn => btn.classList.remove("active"));
     b.classList.add("active");
     const filter = b.getAttribute("data-filter");
-    applyFilterAndSearch(filter, searchInput.value.toLowerCase().trim());
+    cards.forEach(c => {
+      const cat = c.getAttribute("data-category");
+      c.style.display = (filter === "all" || cat === filter) ? "flex" : "none";
+    });
   });
 });
 
+// Tìm kiếm nhanh
+const searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("input", (e) => {
-  const activeFilterBtn = document.querySelector(".flt-btn.active");
-  const filter = activeFilterBtn ? activeFilterBtn.getAttribute("data-filter") : "all";
-  applyFilterAndSearch(filter, e.target.value.toLowerCase().trim());
+  const q = e.target.value.toLowerCase().trim();
+  cards.forEach(c => {
+    const text = c.textContent.toLowerCase();
+    c.style.display = (!q || text.includes(q)) ? "flex" : "none";
+  });
 });
 
-function applyFilterAndSearch(filter, query) {
-  cards.forEach(card => {
-    const cat = card.getAttribute("data-category");
-    const searchData = card.getAttribute("data-search").toLowerCase();
-    const matchFilter = (filter === "all" || cat === filter);
-    const matchQuery = (!query || searchData.includes(query));
-    card.style.display = (matchFilter && matchQuery) ? "grid" : "none";
-  });
-}
-
-// Background subtle particle field
+// Particle background
 (function(){
   const cv = document.getElementById('bg');
   if (!cv) return;
@@ -1386,43 +633,23 @@ function applyFilterAndSearch(filter, query) {
     W = cv.width = window.innerWidth;
     H = cv.height = window.innerHeight;
   });
-
-  const pts = Array.from({length: 45}, () => ({
+  const pts = Array.from({length: 40}, () => ({
     x: Math.random() * W, y: Math.random() * H,
-    vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35
+    vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3
   }));
-
   function loop() {
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = "rgba(130,155,203,0.3)";
-    ctx.strokeStyle = "rgba(130,155,203,0.06)";
-
-    pts.forEach((p, i) => {
+    pts.forEach(p => {
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
       if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-      ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2); ctx.fill();
-
-      for (let j = i + 1; j < pts.length; j++) {
-        const dx = p.x - pts[j].x, dy = p.y - pts[j].y;
-        const d = Math.hypot(dx, dy);
-        if (d < 120) {
-          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
-        }
-      }
+      ctx.beginPath(); ctx.arc(p.x, p.y, 1.4, 0, Math.PI * 2); ctx.fill();
     });
     requestAnimationFrame(loop);
   }
   loop();
 })();
-
-// Check deep link hash on load
-window.addEventListener("DOMContentLoaded", () => {
-  const hash = window.location.hash.replace("#", "");
-  if (hash && PROJECTS[hash]) {
-    openProjectModal(hash);
-  }
-});
 </script>
 </body>
 </html>
