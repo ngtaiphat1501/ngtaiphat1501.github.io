@@ -1,64 +1,16 @@
 /**
- * Nguyễn Phát Tài - Developer Portfolio
- * App Logic: Typewriter, Music Player, CV Modal, Time Clock
+ * Nguyễn Phát Tài — Minimalist Portfolio Logic
+ * Focused: The Weeknd Audio Player with Real Vocals, Time Clock, Clipboard
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initTypingBanner();
   initMusicPlayer();
-  initModals();
+  initCopyEmail();
   initTimeClock();
 });
 
 // =============================================================================
-// 1. TYPING BANNER (Đồng bộ với Readme Typing SVG trên GitHub)
-// =============================================================================
-function initTypingBanner() {
-  const el = document.getElementById('typingOutput');
-  if (!el) return;
-
-  const lines = [
-    "Java Backend & Systems Architect",
-    "Turning Coffee & Lo-Fi into Clean Code ☕",
-    "Building Scalable Software 🚀",
-    "Exploring Applied AI & Distributed Systems ✨"
-  ];
-
-  let lineIdx = 0;
-  let charIdx = 0;
-  let isDeleting = false;
-  let typingSpeed = 80;
-
-  function type() {
-    const current = lines[lineIdx % lines.length];
-
-    if (isDeleting) {
-      charIdx--;
-      el.textContent = current.substring(0, charIdx);
-      typingSpeed = 35;
-    } else {
-      charIdx++;
-      el.textContent = current.substring(0, charIdx);
-      typingSpeed = 75;
-    }
-
-    if (!isDeleting && charIdx === current.length) {
-      typingSpeed = 2200; // Hold at full text
-      isDeleting = true;
-    } else if (isDeleting && charIdx === 0) {
-      isDeleting = false;
-      lineIdx++;
-      typingSpeed = 400; // Pause before next line
-    }
-
-    setTimeout(type, typingSpeed);
-  }
-
-  type();
-}
-
-// =============================================================================
-// 2. CODING VIBES & MUSIC PLAYER
+// 1. THE WEEKND MUSIC PLAYER (REAL VOCALS VIA APPLE MUSIC CDN)
 // =============================================================================
 function initMusicPlayer() {
   const tracks = [
@@ -97,7 +49,7 @@ function initMusicPlayer() {
   let currentTrackIdx = 0;
   let isPlaying = false;
   const audio = new Audio();
-  audio.volume = 0.65;
+  audio.volume = 0.70;
 
   const playBtn = document.getElementById('playBtn');
   const prevBtn = document.getElementById('prevBtn');
@@ -105,6 +57,7 @@ function initMusicPlayer() {
   const trackEl = document.getElementById('musicTrack');
   const artistEl = document.getElementById('musicArtist');
   const visualizer = document.getElementById('visualizer');
+  const vinylDisc = document.getElementById('vinylDisc');
 
   function loadTrack(index) {
     currentTrackIdx = (index + tracks.length) % tracks.length;
@@ -114,153 +67,56 @@ function initMusicPlayer() {
     if (artistEl) artistEl.textContent = t.artist;
   }
 
-  let audioCtx = null;
-  let synthInterval = null;
-
-  function playSynthChordProgression() {
-    if (!audioCtx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContext();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-
-    // 80s Synthwave / The Weeknd Mood: Dm - C - Bb - F progression
-    const chords = [
-      [146.83, 220.00, 293.66, 349.23], // Dm
-      [130.81, 196.00, 261.63, 329.63], // C
-      [116.54, 174.61, 233.08, 293.66], // Bb
-      [174.61, 220.00, 261.63, 349.23]  // F
-    ];
-
-    let chordIdx = 0;
-    function playChord() {
-      if (!isPlaying) return;
-      const notes = chords[chordIdx % chords.length];
-      chordIdx++;
-
-      notes.forEach((freq) => {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        const filter = audioCtx.createBiquadFilter();
-
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(800, audioCtx.currentTime);
-
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
-        gain.gain.setValueAtTime(0, audioCtx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.035, audioCtx.currentTime + 0.2);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.6);
-
-        osc.connect(filter);
-        filter.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 3.8);
-      });
-    }
-
-    playChord();
-    synthInterval = setInterval(playChord, 3600);
-  }
-
-  function stopSynthProgression() {
-    if (synthInterval) {
-      clearInterval(synthInterval);
-      synthInterval = null;
-    }
-  }
-
   function togglePlay() {
     if (isPlaying) {
       audio.pause();
-      stopSynthProgression();
       isPlaying = false;
-      if (playBtn) playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+      if (playBtn) playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
       if (visualizer) visualizer.classList.remove('playing');
+      if (vinylDisc) vinylDisc.classList.remove('playing');
     } else {
       loadTrack(currentTrackIdx);
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          isPlaying = true;
-          if (visualizer) visualizer.classList.add('playing');
-          if (playBtn) playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-        }).catch(() => {
-          // Fallback to procedural synth chord progression
-          isPlaying = true;
-          playSynthChordProgression();
-          if (visualizer) visualizer.classList.add('playing');
-          if (playBtn) playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-        });
-      }
+      audio.play().then(() => {
+        isPlaying = true;
+        if (visualizer) visualizer.classList.add('playing');
+        if (vinylDisc) vinylDisc.classList.add('playing');
+        if (playBtn) playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+      }).catch(err => {
+        console.warn("Audio playback issue:", err);
+      });
     }
   }
 
   if (playBtn) playBtn.addEventListener('click', togglePlay);
+  
   if (prevBtn) prevBtn.addEventListener('click', () => {
     loadTrack(currentTrackIdx - 1);
-    if (isPlaying) { audio.play().catch(playSynthChordProgression); }
+    if (isPlaying) { audio.play(); }
   });
+
   if (nextBtn) nextBtn.addEventListener('click', () => {
     loadTrack(currentTrackIdx + 1);
-    if (isPlaying) { audio.play().catch(playSynthChordProgression); }
+    if (isPlaying) { audio.play(); }
   });
+
   audio.addEventListener('ended', () => {
     loadTrack(currentTrackIdx + 1);
-    audio.play().catch(playSynthChordProgression);
+    audio.play();
   });
 
   loadTrack(0);
 }
 
 // =============================================================================
-// 3. CV MODAL & COPY ACTIONS
+// 2. COPY EMAIL ACTION
 // =============================================================================
-function initModals() {
-  const cvModal = document.getElementById('cvModal');
-  const openCvBtns = document.querySelectorAll('.open-cv-btn');
-  const closeCvBtn = document.getElementById('closeCvBtn');
-  const copyEmailBtns = document.querySelectorAll('.copy-email-btn');
+function initCopyEmail() {
+  const copyBtns = document.querySelectorAll('.copy-email-btn');
+  const email = 'ngtaiphat1501@gmail.com';
 
-  openCvBtns.forEach(btn => {
+  copyBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (cvModal) {
-        cvModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-    });
-  });
-
-  if (closeCvBtn && cvModal) {
-    closeCvBtn.addEventListener('click', () => {
-      cvModal.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-
-    cvModal.addEventListener('click', (e) => {
-      if (e.target === cvModal) {
-        cvModal.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && cvModal.classList.contains('open')) {
-        cvModal.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-    });
-  }
-
-  copyEmailBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const email = 'ngtaiphat1501@gmail.com';
       navigator.clipboard.writeText(email).then(() => {
         showToast('✓ Đã sao chép email: ' + email);
       }).catch(() => {
@@ -271,7 +127,7 @@ function initModals() {
 }
 
 // =============================================================================
-// 4. REAL-TIME CẦN THƠ CLOCK
+// 3. REAL-TIME CẦN THƠ CLOCK
 // =============================================================================
 function initTimeClock() {
   const clockEl = document.getElementById('canthoTime');
@@ -294,7 +150,7 @@ function initTimeClock() {
 }
 
 // =============================================================================
-// 5. TOAST NOTIFICATION
+// 4. TOAST NOTIFICATION
 // =============================================================================
 function showToast(msg) {
   let toast = document.querySelector('.toast');
@@ -309,5 +165,5 @@ function showToast(msg) {
 
   setTimeout(() => {
     toast.classList.remove('show');
-  }, 3000);
+  }, 2800);
 }
