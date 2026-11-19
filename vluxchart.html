@@ -16,7 +16,7 @@
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-behavior:smooth}
-html,body{max-width:100%;overflow-x:hidden}
+html,body{max-width:100%;overflow-x:clip}
 body{
   margin:0;min-height:100svh;
   background:radial-gradient(70vw 60vh at 80% 0,#1b2234,transparent 70%),var(--obs);
@@ -81,16 +81,20 @@ h1{
 /* architecture & modules (vertical scroll stream) */
 .sec-title{font-size:clamp(1.8rem,3.6vw,2.5rem);font-weight:500;color:var(--ice);letter-spacing:-.02em;margin:0 0 1rem}
 .pillars-section{margin-bottom:5.5rem;padding-top:2.5rem;border-top:1px solid var(--line)}
-.pv-wrap{display:grid;grid-template-columns:5fr 7fr;gap:clamp(2rem, 5vw, 4.5rem)}
-.pv-aside{height:100%}
+.pv-wrap{display:grid;grid-template-columns:minmax(300px,4.6fr) 7.4fr;gap:clamp(2rem, 4.5vw, 4.5rem);align-items:stretch;position:relative}
+.pv-aside{height:100%;position:relative}
 @media(max-width:880px){
   .pv-wrap{grid-template-columns:1fr;gap:2rem}
-  .pv-sticky{position:static!important}
+  .pv-sticky{position:static!important;max-height:none!important}
 }
-.pv-sticky{position:sticky;top:6rem;display:grid;gap:1.2rem}
+.pv-sticky{
+  position:sticky;top:5.5rem;display:grid;gap:1.2rem;
+  max-height:calc(100vh - 6.5rem);overflow-y:auto;scrollbar-width:none
+}
+.pv-sticky::-webkit-scrollbar{display:none}
 .pv-lead{font-size:.95rem;color:var(--mute);line-height:1.7;margin:0}
 
-.pv-nav{display:grid;gap:.5rem;margin-top:1rem}
+.pv-nav{display:grid;gap:.5rem;margin-top:.4rem}
 .pv-step{
   display:flex;align-items:center;gap:.9rem;padding:.75rem 1.1rem;border-radius:14px;
   border:1px solid transparent;color:var(--mute);font-size:.88rem;
@@ -99,11 +103,25 @@ h1{
 .pv-step:hover{color:var(--ice);background:rgba(201,208,221,.05)}
 .pv-step.on{
   color:var(--ice);border-color:rgba(130,155,203,.35);
-  background:linear-gradient(90deg, rgba(130,155,203,.12), transparent);
+  background:linear-gradient(90deg, rgba(130,155,203,.14), transparent);
   box-shadow:inset 3px 0 0 var(--blue)
 }
 .pv-idx{font-size:.82rem;font-weight:600;letter-spacing:.05em;color:var(--blue);font-variant-numeric:tabular-nums}
 .pv-step.on .pv-idx{color:var(--ice)}
+
+.pv-active-box{
+  padding:1rem 1.2rem;border-radius:14px;
+  background:linear-gradient(135deg,rgba(130,155,203,.1),rgba(20,24,34,.6));
+  border:1px solid rgba(130,155,203,.28);display:grid;gap:.3rem;transition:border-color .3s
+}
+.pv-ab-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);font-weight:600}
+.pv-ab-title{font-size:.92rem;font-weight:500;color:var(--ice);line-height:1.4}
+.pv-ab-metric{font-size:.8rem;color:var(--silver);font-family:Consolas,monospace}
+
+.pv-quick-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem;margin-top:.2rem}
+.pv-stat{padding:.6rem .8rem;border-radius:10px;background:rgba(201,208,221,.04);border:1px solid rgba(201,208,221,.08);display:grid;gap:.12rem}
+.pv-stat-n{font-size:.9rem;font-weight:600;color:var(--ice);font-variant-numeric:tabular-nums}
+.pv-stat-l{font-size:.7rem;color:var(--mute);letter-spacing:.02em}
 
 /* Vertical cards stream */
 .pv-cards{display:grid;gap:2rem}
@@ -143,7 +161,7 @@ h1{
 .pv-card:hover .pv-card-preview img{transform:scale(1.025)}
 
 /* video demo showcase */
-.video-section{margin-bottom:4.5rem}
+.video-section{margin-bottom:5rem}
 .video-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
 .video-frame{
   position:relative;border-radius:20px;overflow:hidden;
@@ -153,20 +171,85 @@ h1{
 }
 .video-frame video{width:100%;height:100%;object-fit:cover;display:block}
 
-/* blueprint ready container */
-.blueprint-card{
-  padding:2.5rem;border-radius:20px;margin-bottom:4.5rem;
-  border:1px dashed rgba(130,155,203,.35);
-  background:linear-gradient(145deg,rgba(20,24,34,.45),rgba(14,17,24,.3));
-  display:grid;gap:1rem;position:relative
+/* Research Documentation & Whitepaper Section */
+.research-section{
+  margin-bottom:5.5rem;padding:clamp(1.8rem,4vw,3.2rem);border-radius:24px;
+  background:linear-gradient(150deg,rgba(18,22,30,.85),rgba(11,13,18,.92));
+  border:1px solid rgba(201,208,221,.18);
+  box-shadow:0 24px 60px -15px rgba(0,0,0,.75),0 0 35px rgba(130,155,203,.08);
+  position:relative;overflow:hidden
 }
-.bp-badge{
-  width:max-content;padding:.3rem .75rem;border-radius:99px;
-  background:rgba(130,155,203,.15);border:1px solid rgba(130,155,203,.3);
-  font-size:.78rem;color:var(--ice);letter-spacing:.03em
+.research-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1.5rem;margin-bottom:2rem;border-bottom:1px solid var(--line);padding-bottom:1.8rem}
+.research-meta-badge{display:inline-flex;align-items:center;gap:.6rem;font-size:.78rem;letter-spacing:.08em;color:var(--blue);font-weight:600;text-transform:uppercase;margin-bottom:.6rem}
+.research-meta-badge .dot{width:7px;height:7px;border-radius:50%;background:#38BDF8;box-shadow:0 0 10px #38BDF8}
+.research-title{font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:600;color:var(--ice);letter-spacing:-.02em;margin:0 0 .5rem;line-height:1.2}
+.research-sub{font-size:clamp(.92rem,1.4vw,1.02rem);color:var(--mute);margin:0;max-width:68ch;line-height:1.6}
+
+/* Academic Metadata Grid */
+.meta-strip{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;
+  padding:1.2rem 1.4rem;border-radius:14px;background:rgba(201,208,221,.04);
+  border:1px solid rgba(201,208,221,.1);margin-bottom:2.2rem
 }
-.blueprint-card h3{margin:0;font-size:1.35rem;font-weight:500;color:var(--ice)}
-.blueprint-card p{margin:0;font-size:.92rem;color:var(--mute);line-height:1.7;max-width:65ch}
+.meta-strip-item{display:grid;gap:.25rem}
+.ms-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--blue)}
+.ms-val{font-size:.9rem;font-weight:500;color:var(--ice)}
+
+/* Tab switcher */
+.rpt-nav{display:flex;gap:.5rem;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:1rem;margin-bottom:2rem}
+.rpt-tab{
+  all:unset;cursor:pointer;padding:.65rem 1.15rem;border-radius:10px;font-size:.85rem;font-weight:500;
+  color:var(--mute);border:1px solid transparent;background:transparent;
+  transition:all .25s ease;display:inline-flex;align-items:center;gap:.5rem
+}
+.rpt-tab:hover{color:var(--ice);background:rgba(201,208,221,.06)}
+.rpt-tab.on{
+  color:var(--ice);background:rgba(130,155,203,.15);border-color:rgba(130,155,203,.35);
+  box-shadow:0 4px 15px rgba(0,0,0,.3)
+}
+.rpt-tab:focus-visible{outline:2px solid var(--blue)}
+
+/* Tab contents */
+.rpt-panel{display:none}
+.rpt-panel.on{display:grid;gap:1.8rem;animation:panelFade .35s ease}
+@keyframes panelFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* Editorial article blocks */
+.rpt-block{padding:1.8rem;border-radius:16px;background:rgba(23,26,34,.55);border:1px solid rgba(201,208,221,.12)}
+.rpt-block h4{margin:0 0 1rem;font-size:1.22rem;font-weight:600;color:var(--ice);display:flex;align-items:center;gap:.6rem}
+.rpt-block h5{margin:1.4rem 0 .6rem;font-size:.98rem;font-weight:500;color:var(--blue)}
+.rpt-block p{margin:0 0 1rem;font-size:.92rem;color:var(--silver);line-height:1.75}
+.rpt-block p:last-child{margin-bottom:0}
+
+/* Math formula highlight box */
+.math-box{
+  padding:1rem 1.4rem;border-radius:10px;background:rgba(130,155,203,.08);
+  border:1px solid rgba(130,155,203,.25);border-left:3px solid var(--blue);
+  font-family:"Courier New",Consolas,monospace;font-size:.95rem;color:var(--ice);
+  margin:1.1rem 0;display:flex;align-items:center;justify-content:center;text-align:center
+}
+
+/* Benchmark & Specs tables */
+.tbl-wrap{overflow-x:auto;margin:1.2rem 0;border-radius:12px;border:1px solid rgba(201,208,221,.14)}
+.rpt-table{width:100%;border-collapse:collapse;font-size:.85rem;text-align:left}
+.rpt-table th{background:rgba(201,208,221,.07);color:var(--ice);font-weight:600;padding:.85rem 1rem;border-bottom:1px solid var(--line);letter-spacing:.02em}
+.rpt-table td{padding:.85rem 1rem;border-bottom:1px solid rgba(201,208,221,.08);color:var(--silver);vertical-align:top}
+.rpt-table tr:last-child td{border-bottom:none}
+.rpt-table tr:hover td{background:rgba(201,208,221,.03)}
+.rpt-table .tag-pass{display:inline-block;padding:.2rem .55rem;border-radius:6px;background:rgba(74,222,128,.15);color:#4ADE80;font-weight:600;font-size:.78rem}
+.rpt-table .mono{font-family:Consolas,monospace;color:var(--ice)}
+
+/* Pipeline Stage Cards */
+.pipeline-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1rem;margin:1.2rem 0}
+.p-step{padding:1.3rem;border-radius:12px;background:rgba(201,208,221,.03);border:1px solid rgba(201,208,221,.1);display:grid;gap:.5rem}
+.p-num{font-size:.75rem;letter-spacing:.08em;color:var(--blue);font-weight:600}
+.p-title{font-size:.95rem;font-weight:600;color:var(--ice)}
+.p-desc{font-size:.82rem;color:var(--mute);line-height:1.6;margin:0}
+
+/* References List */
+.ref-list{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+.ref-list li{padding:.85rem 1.1rem;border-radius:10px;background:rgba(201,208,221,.03);border:1px solid rgba(201,208,221,.08);font-size:.84rem;color:var(--silver);line-height:1.6}
+.ref-list strong{color:var(--ice)}
 
 /* bottom navigation */
 .btm-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;padding-top:3rem;border-top:1px solid var(--line)}
@@ -293,6 +376,19 @@ footer{margin-top:4rem;display:flex;justify-content:space-between;flex-wrap:wrap
             <a href="#pillar-3" class="pv-step"><span class="pv-idx">03</span> <span class="pv-label">Microstructure Analytics</span></a>
             <a href="#pillar-4" class="pv-step"><span class="pv-idx">04</span> <span class="pv-label">60 FPS Hardware Visuals</span></a>
           </div>
+
+          <div class="pv-active-box" id="pvActiveBox">
+            <div class="pv-ab-label">Đang xem phân hệ</div>
+            <div class="pv-ab-title" id="pvAbTitle">01 / High-Precision Concurrency Engine</div>
+            <div class="pv-ab-metric" id="pvAbMetric">18,450 tx/s · Zero-float rust_decimal accounting</div>
+          </div>
+
+          <div class="pv-quick-stats">
+            <div class="pv-stat"><span class="pv-stat-n">18,450</span><span class="pv-stat-l">tx/s Throughput</span></div>
+            <div class="pv-stat"><span class="pv-stat-n">0.18ms</span><span class="pv-stat-l">p50 Latency</span></div>
+            <div class="pv-stat"><span class="pv-stat-n">0 Byte</span><span class="pv-stat-l">WAL Crash Loss</span></div>
+            <div class="pv-stat"><span class="pv-stat-n">60.2</span><span class="pv-stat-l">Render FPS</span></div>
+          </div>
         </div>
       </div>
 
@@ -412,16 +508,414 @@ footer{margin-top:4rem;display:flex;justify-content:space-between;flex-wrap:wrap
         Your browser does not support the video tag.
       </video>
     </div>
-    <div class="caption">
-      <span>Giao diện thực chiến: Phân tích Footprint cụm lệnh, Imbalance xếp tầng và khớp lệnh trực tiếp qua MT5.</span>
-      <span>Thời lượng: 00:35 · Hỗ trợ tải trực tiếp MP4 hoặc kéo từ YouTube</span>
-    </div>
   </section>
 
-  <section class="blueprint-card">
-    <div class="bp-badge">Sẵn sàng tích hợp</div>
-    <h3>Khung nội dung chi tiết &amp; Tài liệu kỹ thuật</h3>
-    <p>Khung trang này đã sẵn sàng để tích hợp chi tiết nội dung, báo cáo benchmark hiệu năng, demo video hoặc tài liệu kỹ thuật chuyên sâu theo nội dung bạn sẽ cung cấp tiếp theo.</p>
+  <!-- Comprehensive Systems Research & Engineering Specification -->
+  <section class="research-section" id="research">
+    <div class="research-header">
+      <div>
+        <div class="research-meta-badge"><span class="dot"></span> <span>Báo cáo nghiên cứu khoa học &amp; Thiết kế hệ thống</span></div>
+        <h2 class="research-title">VluxChart Research &amp; Engineering Specification.</h2>
+        <p class="research-sub">Hệ thống phân tích vi cấu trúc thị trường, sổ lệnh và dòng tiền khối lượng độ trễ thấp trên nền tảng Rust và Tauri 2. Tài liệu kỹ thuật chuyên sâu và nghiệm thu thực nghiệm 41/41 Gates.</p>
+      </div>
+      <a class="btn" href="assets/projects/VLUXCHART_RESEARCH_REPORT.md" target="_blank" download="VLUXCHART_RESEARCH_REPORT.md">
+        <span>Tải báo cáo gốc (.MD)</span> <i>↓</i>
+      </a>
+    </div>
+
+    <!-- Metadata Grid -->
+    <div class="meta-strip">
+      <div class="meta-strip-item">
+        <span class="ms-label">Tác giả / Nhà nghiên cứu</span>
+        <span class="ms-val">Nguyễn Tài Phát (VLUX)</span>
+      </div>
+      <div class="meta-strip-item">
+        <span class="ms-label">Đơn vị thực hiện</span>
+        <span class="ms-val">Đại học FPT</span>
+      </div>
+      <div class="meta-strip-item">
+        <span class="ms-label">Thời gian hoàn thành</span>
+        <span class="ms-val">Tháng 11/2026</span>
+      </div>
+      <div class="meta-strip-item">
+        <span class="ms-label">Trạng thái nghiệm thu</span>
+        <span class="ms-val" style="color:#4ADE80">41/41 Gate G0–G7 (100% Passed)</span>
+      </div>
+      <div class="meta-strip-item">
+        <span class="ms-label">Mô hình kiến trúc</span>
+        <span class="ms-val">Local-First · Zero Float Drift</span>
+      </div>
+    </div>
+
+    <!-- Tab navigation -->
+    <div class="rpt-nav" role="tablist" aria-label="Báo cáo phân hệ">
+      <button class="rpt-tab on" role="tab" aria-selected="true" data-tab="tab-abstract">
+        <span>01</span> Tóm tắt &amp; Đặt vấn đề
+      </button>
+      <button class="rpt-tab" role="tab" aria-selected="false" data-tab="tab-contributions">
+        <span>02</span> 5 Đóng góp &amp; Thuật toán
+      </button>
+      <button class="rpt-tab" role="tab" aria-selected="false" data-tab="tab-pipeline">
+        <span>03</span> Kiến trúc Pipeline &amp; Tech Stack
+      </button>
+      <button class="rpt-tab" role="tab" aria-selected="false" data-tab="tab-benchmarks">
+        <span>04</span> Thực nghiệm &amp; Benchmark 41 Gates
+      </button>
+      <button class="rpt-tab" role="tab" aria-selected="false" data-tab="tab-future">
+        <span>05</span> Hạn chế &amp; Tài liệu tham khảo
+      </button>
+    </div>
+
+    <!-- Tab Panels -->
+    <!-- Tab 1: Abstract & Motivation -->
+    <div class="rpt-panel on" id="tab-abstract" role="tabpanel">
+      <div class="rpt-block">
+        <h4><span style="color:var(--blue)">§</span> TÓM TẮT NGHIÊN CỨU (ABSTRACT)</h4>
+        <p>Trong giao dịch tài chính hiện đại (cả thị trường truyền thống và tiền mã hóa), biểu đồ nến Nhật truyền thống (OHLC Candlestick) chỉ ghi nhận bốn mức giá (Mở - Cao - Thấp - Đóng) trong một khung thời gian cố định, làm mất đi hoàn toàn bản chất cung cầu vi mô diễn ra giữa bên mua và bên bán. Các giải pháp phần mềm phân tích dòng lệnh chuyên nghiệp hiện nay (như Bookmap, Sierra Chart, Jigsaw) hầu hết là mã nguồn đóng thương mại đắt đỏ, phụ thuộc vào công nghệ C++ cũ trên Windows hoặc các nền tảng web có độ trễ lớn và thường xuyên gặp sai số làm tròn số thập phân trôi (Float Drift).</p>
+        <p>Nghiên cứu này đề xuất và hiện thực hóa <strong>VluxChart</strong> — một nền tảng phân tích vi cấu trúc thị trường (Market Microstructure) và dòng lệnh (Order Flow) theo kiến trúc Cục bộ (Local-first), mã nguồn mở, đạt chuẩn kiểm định cấp định chế tài chính. Hệ thống được xây dựng trên lõi ngôn ngữ <strong>Rust</strong> (đa luồng bất đồng bộ Tokio, quản lý bộ nhớ an toàn không cần Garbage Collector) kết hợp với vỏ giao diện native <strong>Tauri 2</strong> và tầng hiển thị đồ họa tăng tốc phần cứng <strong>Canvas/WebGL</strong>.</p>
+        
+        <h5>KẾT QUẢ THỰC NGHIỆM ĐỊNH LƯỢNG NỔI BẬT:</h5>
+        <div class="pipeline-grid">
+          <div class="p-step">
+            <span class="p-num">01 / THROUGHPUT</span>
+            <span class="p-title">18.450 tx/giây</span>
+            <p class="p-desc">Vượt 84.5% so với yêu cầu thiết kế ban đầu (10.000 tx/s), xử lý nhẹ nhàng bão lệnh flash crash.</p>
+          </div>
+          <div class="p-step">
+            <span class="p-num">02 / PIPELINE LATENCY</span>
+            <span class="p-title">p50 = 0.18 ms · p95 = 0.42 ms</span>
+            <p class="p-desc">Toàn bộ đường ống xử lý nằm trong ngưỡng sub-millisecond, triệt tiêu độ trễ hiển thị.</p>
+          </div>
+          <div class="p-step">
+            <span class="p-num">03 / DATA INTEGRITY</span>
+            <span class="p-title">100% Fixed-Point &amp; 0 Byte Loss</span>
+            <p class="p-desc">Loại trừ 100% sai số dấu phẩy động bằng số nguyên cố định 64/128-bit; WAL CRC32 khôi phục hoàn hảo.</p>
+          </div>
+          <div class="p-step">
+            <span class="p-num">04 / RENDER FIDELITY</span>
+            <span class="p-title">60.2 FPS Khóa Cứng</span>
+            <p class="p-desc">Duy trì khung hình mượt mà nhờ thuật toán Viewport Culling và tách biệt luồng I/O với luồng GPU.</p>
+          </div>
+        </div>
+        <p style="font-size:.82rem;color:var(--mute);margin-top:1rem"><strong>Từ khóa (Keywords):</strong> Vi cấu trúc thị trường (Market Microstructure), Dòng lệnh (Order Flow), Nến Footprint, Fixed-Point Arithmetic, Rust, Tauri 2, MetaTrader 5 C-API, Gamma Exposure (GEX).</p>
+      </div>
+
+      <div class="rpt-block">
+        <h4><span style="color:var(--blue)">§ 1</span> ĐẶT VẤN ĐỀ &amp; Ý TƯỞNG NGHIÊN CỨU (RESEARCH MOTIVATION)</h4>
+        <h5>1.1. Hạn chế cốt lõi của Biểu đồ Nến Truyền thống (OHLC Candlestick)</h5>
+        <p>Kể từ khi được phát minh bởi Munehisa Homma vào thế kỷ 18, biểu đồ nến Nhật là công cụ thống trị phân tích kỹ thuật. Tuy nhiên, trong môi trường giao dịch điện tử tần suất cao (HFT), mô hình nến truyền thống bộc lộ những nhược điểm chí mạng:</p>
+        <p>— <strong>Mất mát thông tin vi cấu trúc:</strong> Nến 1 phút có giá mở cửa 65.000 và đóng cửa 65.050 chỉ cho thấy giá tăng 50 USD. Nó không cho biết giá tăng do người mua chủ động quét cạn thanh khoản bên bán (Aggressive Buying) hay do người bán rút lệnh chờ (Liquidity Pulling).<br>
+        — <strong>Hiện tượng "Ảo ảnh thanh khoản" (Liquidity Mirage):</strong> Nến rút chân (Pinbar) không thể hiện được liệu tại đáy có sự hấp thụ lệnh bán quy mô lớn của tổ chức (Absorption) hay chỉ là thị trường thanh khoản mỏng (Thin Market) tự trôi.</p>
+
+        <h5>1.2. Hiện trạng các giải pháp trên thị trường</h5>
+        <p>— <strong>Sierra Chart / Bookmap / Jigsaw DayTradr:</strong> Chi phí bản quyền rất cao ($50 - $200/tháng), phần mềm đóng kín mã nguồn, kiến trúc C++ cũ kỹ khó tích hợp giao diện người dùng hiện đại, người dùng không thể kiểm chứng tính đúng đắn của thuật toán bên dưới.<br>
+        — <strong>TradingView / Nền tảng Web:</strong> Chạy trên trình duyệt với JavaScript thuần, dễ bị nghẽn đơn luồng (Event Loop blocking) khi gặp biến động mạnh, không hỗ trợ lưu trữ cục bộ Write-Ahead Log và thường tính toán khối lượng bằng kiểu <code>number</code> (IEEE 754 float) gây ra sai số lũy kế.</p>
+
+        <h5>1.3. Ý tưởng nghiên cứu &amp; Câu hỏi khoa học</h5>
+        <p>1. <em>Liệu có thể xây dựng một hệ thống phân tích Order Flow chạy hoàn toàn cục bộ (Local-first), mã nguồn mở, vừa đạt tốc độ xử lý cấp vi giây của Rust vừa sở hữu giao diện đồ họa hiện đại của React/Tauri 2?</em><br>
+        2. <em>Làm thế nào để đảm bảo tính liêm chính và bất biến tuyệt đối của dữ liệu tài chính (Zero Float Drift), bảo đảm không mất 1 byte dữ liệu khi máy tính đột ngột tắt nguồn?</em><br>
+        3. <em>Làm thế nào để đồng bộ hóa và chuẩn hóa luồng dữ liệu giữa các sàn Crypto phi tập trung (Bybit, Binance qua WebSocket) và các sàn Ngoại hối/Vàng bán lẻ (MetaTrader 5 qua IPC)?</em></p>
+      </div>
+    </div>
+
+    <!-- Tab 2: 5 Contributions -->
+    <div class="rpt-panel" id="tab-contributions" role="tabpanel">
+      <div class="rpt-block">
+        <h4><span style="color:var(--blue)">§ 2</span> 5 ĐÓNG GÓP MỚI CỦA ĐỀ TÀI (RESEARCH CONTRIBUTIONS)</h4>
+        
+        <h5>Đóng góp 1: Hệ thống Số học Tài chính Bất biến (Zero-Float-Drift Arithmetic)</h5>
+        <p>Đề tài bác bỏ việc sử dụng số thực dấu phẩy động (<code>float</code>, <code>double</code>, IEEE-754) trong tính toán khối lượng và giá thành. Xây dựng crate độc lập <code>data-contract</code> định nghĩa kiểu số nguyên tỉ lệ <code>PriceTicks</code> (tỉ lệ 10<sup>-5</sup>) và <code>ScaledQuantity</code> (tỉ lệ 10<sup>-8</sup>).</p>
+        <div class="math-box">TotalVolume ≡ BuyVolume + SellVolume + UnknownVolume</div>
+        <p>Chứng minh và kiểm định thành công đẳng thức bảo toàn khối lượng ở mọi cấp độ thanh nến, triệt tiêu hoàn toàn hiện tượng lệch số tích lũy (Float Drift) trong giao dịch định lượng.</p>
+
+        <h5>Đóng góp 2: Bộ Thuật Toán Vi Cấu Trúc Khối Lượng Thời Gian Thực</h5>
+        <p>— <strong>Thuật toán Diagonal Imbalance (Mất cân bằng chéo):</strong> So sánh chéo trực tiếp giữa khối lượng khớp Ask tại giá P và Bid tại giá P - 1 tick với ngưỡng R ≥ 3.0 (300%), chỉ rõ sự mất cân đối cục bộ của phe mua hoặc phe bán.<br>
+        — <strong>Thuật toán Steidlmayer Market Profile 70% Value Area:</strong> Triển khai thuật toán mở rộng đối xứng 2 chiều từ Point of Control (POC) đạt chuẩn lý thuyết phân phối xác suất mà không làm giảm tốc độ render.<br>
+        — <strong>Thuật toán phát hiện Lệnh Cá Mập Ẩn (MBO Iceberg Detection):</strong> Phân tích sự bất thường giữa khối lượng lệnh khớp thực tế và biến động độ sâu sổ lệnh Level 2, phát hiện chính xác các vị trí cá mập chèn lệnh ẩn để gom hàng hoặc phân phối.</p>
+
+        <h5>Đóng góp 3: Mô Hình Tích Hợp Quyền Chọn Gamma Exposure (Options GEX)</h5>
+        <p>Lần đầu tiên đưa mô hình định giá quyền chọn phân tích vi cấu trúc Black-Scholes và đường cong biến động (IV Smile) vào một ứng dụng phân tích Order Flow máy tính để bàn mở. Định vị chính xác các bức tường Gamma (Call Wall, Put Wall) và điểm Max Pain, giải thích hành vi phòng hộ (Hedging) của các nhà tạo lập thị trường (Market Makers).</p>
+
+        <h5>Đóng góp 4: Kiến Trúc Hiệu Năng Cao Phân Tầng (Multi-Tier Architecture)</h5>
+        <p>Thiết kế mô hình kết hợp <strong>Rust Tokio Actor + Ring Buffer Lock-free + Tauri 2 IPC + GPU Viewport Culling</strong>. Giải quyết triệt để bài toán "Thắt nút cổ chai giao diện" (UI Bottleneck) thường thấy ở các app Electron: VluxChart chỉ chiếm <strong>18.4 MB RAM</strong> khi ngâm tải 100.000 lệnh và giữ vững <strong>60 FPS</strong> trên màn hình.</p>
+
+        <h5>Đóng góp 5: Cầu Nối Chuẩn Hóa MetaTrader 5 C-API (Real MT5 Live Bridge)</h5>
+        <p>Xây dựng thành công cầu nối cục bộ thời gian thực từ Python sang MT5 Terminal C-API trên Windows. Tự động dò tìm mã ký hiệu (Symbol Auto-Resolution) giải quyết triệt để sự khác biệt quy ước đặt tên vàng giữa các sàn (Exness <code>XAUUSDm</code>, IC Markets <code>XAUUSD</code>, Pepperstone <code>XAUUSD.a</code>).</p>
+      </div>
+    </div>
+
+    <!-- Tab 3: Pipeline & Tech Stack -->
+    <div class="rpt-panel" id="tab-pipeline" role="tabpanel">
+      <div class="rpt-block">
+        <h4><span style="color:var(--blue)">§ 3</span> BẢNG CÔNG NGHỆ &amp; CÔNG CỤ SỬ DỤNG (TECHNOLOGY STACK)</h4>
+        <div class="tbl-wrap">
+          <table class="rpt-table">
+            <thead>
+              <tr>
+                <th>Thành Phần</th>
+                <th>Công Nghệ / Thư Viện</th>
+                <th>Lý Do Lựa Chọn &amp; Ưu Điểm Kỹ Thuật</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Ngôn Ngữ Lõi (Core Engine)</strong></td>
+                <td><span class="mono">Rust (2021 Edition)</span></td>
+                <td>Hiệu năng tiệm cận C/C++, kiểm soát bộ nhớ qua cơ chế Ownership/Borrow Checker, loại bỏ hoàn toàn lỗi Data Race, không có độ trễ dọn rác (No Garbage Collection pauses).</td>
+              </tr>
+              <tr>
+                <td><strong>Bất Đồng Bộ &amp; I/O</strong></td>
+                <td><span class="mono">Tokio Runtime + Crossbeam</span></td>
+                <td>Mô hình I/O bất đồng bộ non-blocking hàng đầu thế giới, quản lý hàng chục ngàn kết nối WebSocket và message passing độ trễ micro-giây.</td>
+              </tr>
+              <tr>
+                <td><strong>Vỏ Ứng Dụng (Desktop Shell)</strong></td>
+                <td><span class="mono">Tauri 2 (Rust-based)</span></td>
+                <td>Thay thế Electron. Sử dụng WebView2 native của Windows giúp ứng dụng nhẹ hơn 90%, tiết kiệm 80% RAM và giao tiếp IPC cực nhanh.</td>
+              </tr>
+              <tr>
+                <td><strong>Giao Diện &amp; Đồ Họa</strong></td>
+                <td><span class="mono">React 19, TypeScript, Canvas2D / WebGL</span></td>
+                <td>Hệ thống kiểu dữ liệu tĩnh mạnh mẽ, Canvas vẽ nến và cụm số Footprint trực tiếp lên GPU, culling các điểm ảnh nằm ngoài khung nhìn.</td>
+              </tr>
+              <tr>
+                <td><strong>Nhật Ký Dữ Liệu Bền Vững</strong></td>
+                <td><span class="mono">Custom WAL + CRC32Fast</span></td>
+                <td>Ghi nhật ký tuần tự (append-only) trên đĩa SSD với kiểm tra mã băm CRC32, đảm bảo khôi phục trạng thái tức thì sau sự cố.</td>
+              </tr>
+              <tr>
+                <td><strong>Cầu Nối Dữ Liệu MT5</strong></td>
+                <td><span class="mono">Python 3.11 + MetaTrader5 C-API</span></td>
+                <td>Giao tiếp trực tiếp với tiến trình bộ nhớ của MetaTrader 5 trên Windows, đọc tick thực và gửi lệnh với độ trễ nội bộ &lt; 1ms.</td>
+              </tr>
+              <tr>
+                <td><strong>Kiểm Thử &amp; CI/CD</strong></td>
+                <td><span class="mono">Pytest + Cargo Test Workspace</span></td>
+                <td>Tự động hóa 41 bài test xuyên suốt 8 cổng chất lượng (G0 - G7) và tích hợp liên tục (CI) trên GitHub Actions.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rpt-block">
+        <h4><span style="color:var(--blue)">§ 4</span> LUỒNG KIẾN TRÚC HỆ THỐNG &amp; HÀNH TRÌNH 1 TICK DƯỚI 1ms</h4>
+        <p>Hệ thống hoạt động theo mô hình đường ống tuần tự khép kín (End-to-End Reactive Pipeline) gồm 6 tầng độc lập:</p>
+        <div class="pipeline-grid">
+          <div class="p-step">
+            <span class="p-num">TẦNG 1 / INGESTION</span>
+            <span class="p-title">Thu thập Dữ liệu Đa sàn</span>
+            <p class="p-desc">Bybit V5 Linear WSS, Binance USD-M WSS, MetaTrader 5 C-API Bridge và Options Chain Feed.</p>
+          </div>
+          <div class="p-step">
+            <span class="p-num">TẦNG 2 / QUALITY ENGINE</span>
+            <span class="p-title">Chuẩn hóa &amp; Lọc Trùng</span>
+            <p class="p-desc">Bounded Dedup Ring Filter (65.536 phần tử), Sequence Gap Detection và chuẩn hóa Fixed-Point.</p>
+          </div>
+          <div class="p-step">
+            <span class="p-num">TẦNG 3 / RAW JOURNAL WAL</span>
+            <span class="p-title">Lưu trữ Nhật ký Bền bỉ</span>
+            <p class="p-desc">Append-only Binary Writer với mã băm kiểm tra toàn vẹn CRC32 và Atomic Checkpoint.</p>
+          </div>
+          <div class="p-step">
+            <span class="p-num">TẦNG 4 / MARKET ENGINE</span>
+            <span class="p-title">Lõi Phân tích Vi cấu trúc</span>
+            <p class="p-desc">BarManager 1m/5m, Footprint Bid x Ask, Diagonal Imbalance 300%, Steidlmayer Profile, L2 Heatmap, Options GEX.</p>
+          </div>
+          <div class="p-step">
+            <span class="p-num">TẦNG 5 / COORDINATOR</span>
+            <span class="p-title">Điều phối Trạng thái</span>
+            <p class="p-desc">Snapshot Ring Buffer DTO, Deterministic Replayer Engine và bộ xuất báo cáo CSV thời gian thực.</p>
+          </div>
+          <div class="p-step">
+            <span class="p-num">TẦNG 6 / PRESENTATION</span>
+            <span class="p-title">Giao diện Tauri 2 &amp; GPU</span>
+            <p class="p-desc">Tauri 2 IPC Native Bridge, Footprint Canvas WebGL 60 FPS Culling, DOM Ladder, Tape và MT5 Live Panel.</p>
+          </div>
+        </div>
+
+        <h5>Hành trình 1 Tick dữ liệu trong vòng dưới 1 mili-giây (0.18 – 0.42 ms):</h5>
+        <p>1. <strong>Tiếp nhận:</strong> Một giao dịch mới từ Bybit hoặc MT5 xuất hiện.<br>
+        2. <strong>Kiểm tra tính hợp lệ:</strong> <code>BoundedDedupFilter</code> kiểm tra mã <code>trade_id</code> trong bộ đệm 65.536 phần tử để loại bỏ lệnh trùng; bộ đếm sequence kiểm tra xem có bị mất gói tin mạng hay không.<br>
+        3. <strong>Ghi nhật ký WAL:</strong> Giao dịch được mã hóa nhị phân ghi tức thì vào tệp nhật ký <code>raw_journal</code> cùng mã băm CRC32.<br>
+        4. <strong>Cập nhật Vi cấu trúc:</strong> Giá được quy đổi thành bước giá nguyên <code>PriceTicks</code>; Cập nhật ô khối lượng trong cụm nến <code>FootprintCell</code>; Kiểm tra điều kiện Diagonal Imbalance R ≥ 300%; Tính toán lại VWAP và CVD lũy kế.<br>
+        5. <strong>Gửi Snapshot IPC:</strong> <code>AppCoordinator</code> tạo gói dữ liệu nén <code>SnapshotDTO</code> đẩy qua cầu nối IPC của Tauri 2.<br>
+        6. <strong>Vẽ lên màn hình:</strong> <code>FootprintCanvas</code> chỉ vẽ lại các thanh nến nằm trong khung nhìn (Viewport Culling), hoàn tất chu trình trong <strong>0.18 – 0.42 mili-giây</strong>.</p>
+      </div>
+    </div>
+
+    <!-- Tab 4: Benchmarks & 41 Gates -->
+    <div class="rpt-panel" id="tab-benchmarks" role="tabpanel">
+      <div class="rpt-block">
+        <h4><span style="color:var(--blue)">§ 5.1</span> BẢNG TỔNG HỢP CÁC CHỈ SỐ THỰC NGHIỆM ĐO ĐẠC</h4>
+        <p>Hệ thống đã trải qua quá trình đo đạc hiệu năng khắc nghiệt trên máy trạm Windows 64-bit (12 luồng xử lý):</p>
+        <div class="tbl-wrap">
+          <table class="rpt-table">
+            <thead>
+              <tr>
+                <th>Tiêu Chí Đo Lường</th>
+                <th>Chỉ Tiêu Ban Đầu</th>
+                <th>Kết Quả Thực Nghiệm</th>
+                <th>Mức Độ Vượt Chỉ Tiêu</th>
+                <th>Đánh Giá Kỹ Thuật</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Throughput (Thông lượng nạp lệnh)</strong></td>
+                <td>≥ 10.000 tx/s</td>
+                <td><strong class="mono" style="color:var(--ice)">18.450 tx/s</strong></td>
+                <td><span class="tag-pass">Vượt +84.5%</span></td>
+                <td>Xử lý nhẹ nhàng các đợt flash crash hoặc bão tin CPI.</td>
+              </tr>
+              <tr>
+                <td><strong>Median Latency (p50)</strong></td>
+                <td>&lt; 0.50 ms</td>
+                <td><strong class="mono" style="color:#4ADE80">0.18 ms</strong></td>
+                <td><span class="tag-pass">Nhanh hơn 64.0%</span></td>
+                <td>Cực kỳ ấn tượng đối với hệ thống chạy trên máy tính cá nhân.</td>
+              </tr>
+              <tr>
+                <td><strong>95th Percentile Latency (p95)</strong></td>
+                <td>&lt; 1.00 ms</td>
+                <td><strong class="mono" style="color:#4ADE80">0.42 ms</strong></td>
+                <td><span class="tag-pass">Nhanh hơn 58.0%</span></td>
+                <td>Đảm bảo tính thời gian thực (Sub-millisecond guarantee).</td>
+              </tr>
+              <tr>
+                <td><strong>Worst-case Latency (p99)</strong></td>
+                <td>&lt; 2.00 ms</td>
+                <td><strong class="mono" style="color:#4ADE80">0.89 ms</strong></td>
+                <td><span class="tag-pass">Nhanh hơn 55.5%</span></td>
+                <td>Độ biến thiên độ trễ (Jitter) cực kỳ thấp.</td>
+              </tr>
+              <tr>
+                <td><strong>Ngâm tải bộ nhớ (100k Trades Soak)</strong></td>
+                <td>0 memory leak</td>
+                <td><strong class="mono" style="color:var(--ice)">18.4 MB (phẳng)</strong></td>
+                <td><span class="tag-pass">Tuyệt đối</span></td>
+                <td>Không bị phình bộ nhớ như các ứng dụng Java hay Electron.</td>
+              </tr>
+              <tr>
+                <td><strong>Tốc độ khung hình (Render FPS)</strong></td>
+                <td>≥ 60 FPS</td>
+                <td><strong class="mono" style="color:var(--ice)">60.2 FPS</strong></td>
+                <td><span class="tag-pass">Đạt chuẩn</span></td>
+                <td>Canvas WebGL không gây giật lag khi người dùng zoom/pan chart.</td>
+              </tr>
+              <tr>
+                <td><strong>Khôi phục sự cố WAL CRC32</strong></td>
+                <td>100% toàn vẹn</td>
+                <td><strong class="mono" style="color:#4ADE80">100% (0 byte loss)</strong></td>
+                <td><span class="tag-pass">Hoàn hảo</span></td>
+                <td>Kiểm thử kill process giữa chừng vẫn khôi phục chính xác 100%.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rpt-block">
+        <h4><span style="color:var(--blue)">§ 5.2</span> KẾT QUẢ NGHIỆM THU 41 BÀI KIỂM TRA GATE G0 – G7</h4>
+        <p>Hệ thống tuân thủ quy trình kiểm thử đóng băng cửa kiểm soát (Gate Quality Control) đạt 100% PASSED trong 65.47 giây:</p>
+        <div class="tbl-wrap">
+          <table class="rpt-table">
+            <thead>
+              <tr>
+                <th>Cổng Kiểm Soát (Gate)</th>
+                <th>Số Bài Test</th>
+                <th>Phạm Vi Kiểm Thử &amp; Xác Thực</th>
+                <th>Trạng Thái</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Gate G0</strong></td>
+                <td><span class="mono">6 / 6</span></td>
+                <td>Xác thực nguồn dữ liệu thật Bybit, Binance, Gold MT5 và tính bất biến của volume.</td>
+                <td><span class="tag-pass">PASSED 100%</span></td>
+              </tr>
+              <tr>
+                <td><strong>Gate G1</strong></td>
+                <td><span class="mono">4 / 4</span></td>
+                <td>Cấu trúc Cargo workspace và kiểm thử CI tự động trên GitHub Actions.</td>
+                <td><span class="tag-pass">PASSED 100%</span></td>
+              </tr>
+              <tr>
+                <td><strong>Gate G2</strong></td>
+                <td><span class="mono">5 / 5</span></td>
+                <td>Khử trùng lặp, phát hiện gap dữ liệu và crash recovery Write-Ahead Log.</td>
+                <td><span class="tag-pass">PASSED 100%</span></td>
+              </tr>
+              <tr>
+                <td><strong>Gate G3</strong></td>
+                <td><span class="mono">5 / 5</span></td>
+                <td>Độ chính xác tuyệt đối của nến Footprint, POC, VWAP, Diagonal Imbalance.</td>
+                <td><span class="tag-pass">PASSED 100%</span></td>
+              </tr>
+              <tr>
+                <td><strong>Gate G4</strong></td>
+                <td><span class="mono">5 / 5</span></td>
+                <td>Tính toàn vẹn DTO, vòng đời trạng thái app và production build Vite.</td>
+                <td><span class="tag-pass">PASSED 100%</span></td>
+              </tr>
+              <tr>
+                <td><strong>Gate G5</strong></td>
+                <td><span class="mono">6 / 6</span></td>
+                <td>Kiểm thử tải cao tần, độ trễ vi giây sub-millisecond và culling khung hình 60 FPS.</td>
+                <td><span class="tag-pass">PASSED 100%</span></td>
+              </tr>
+              <tr>
+                <td><strong>Gate G6</strong></td>
+                <td><span class="mono">5 / 5</span></td>
+                <td>Quét an ninh mã nguồn, kiểm toán không rò rỉ secret key, bản quyền OSS.</td>
+                <td><span class="tag-pass">PASSED 100%</span></td>
+              </tr>
+              <tr>
+                <td><strong>Gate G7</strong></td>
+                <td><span class="mono">5 / 5</span></td>
+                <td>Thử nghiệm phiên giao dịch trực tiếp Pilot 0 crash, kiểm tra trôi số float.</td>
+                <td><span class="tag-pass">PASSED 100%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:.8rem;font-size:.88rem;color:#4ADE80">👉 <strong>Tổng kết nghiệm thu: 41/41 bài test tự động đều ĐẠT (100% PASSED) trong 65.47 giây.</strong></p>
+      </div>
+    </div>
+
+    <!-- Tab 5: Limitations, Future & References -->
+    <div class="rpt-panel" id="tab-future" role="tabpanel">
+      <div class="rpt-block">
+        <h4><span style="color:var(--blue)">§ 6</span> NHỮNG HẠN CHẾ VÀ HƯỚNG PHÁT TRIỂN TIẾP THEO (LIMITATIONS &amp; FUTURE WORK)</h4>
+        <p>Với tinh thần liêm chính học thuật, nghiên cứu thẳng thắn nhìn nhận những mặt hạn chế hiện tại:</p>
+        <p>1. <strong>Dữ liệu MBO (Market-by-Order) của sàn truyền thống (CME):</strong><br>
+        Hiện tại dữ liệu MBO của VluxChart được phát hiện thông qua thuật toán phân tích biến động thanh khoản Level 2 và dòng tick khớp thực tế. Để có dữ liệu MBO gốc trực tiếp (Direct ITCH Protocol) từ sàn CME (Chicago Mercantile Exchange), cần có tài khoản thuê bao dữ liệu định chế từ các nhà cung cấp như Rithmic hoặc CQG.</p>
+        <p>2. <strong>Hỗ trợ Hệ điều hành:</strong><br>
+        Bản phát hành hiện tại được tối ưu chuyên biệt cho hệ điều hành <strong>Windows 64-bit</strong> (do phụ thuộc vào MetaTrader 5 C-API chạy trên Windows). Việc chuyển đổi sang macOS/Linux đang cần giải pháp giả lập Wine cho MT5.</p>
+        
+        <h5>HƯỚNG PHÁT TRIỂN TRONG TƯƠNG LAI:</h5>
+        <p>— Mở rộng hỗ trợ kết nối trực tiếp giao thức <strong>FIX Protocol</strong> để kết nối trực tiếp với các quỹ định chế và Prime Brokers.<br>
+        — Ứng dụng mô hình mạng nơ-ron Transformer nhẹ (On-device Lightweight Neural Network) để phân tích chuỗi thời gian Delta và cảnh báo xác suất đảo chiều dựa trên các điểm Hấp thụ thanh khoản (Absorption Zones).</p>
+      </div>
+
+      <div class="rpt-block">
+        <h4><span style="color:var(--blue)">§ 7</span> KẾT LUẬN &amp; TÀI LIỆU THAM KHẢO (REFERENCES)</h4>
+        <p>Đề tài nghiên cứu đã thành công trong việc xây dựng hoàn chỉnh nền tảng <strong>VluxChart</strong> — chứng minh rằng hoàn toàn có thể kết hợp sức mạnh xử lý song song, an toàn bộ nhớ của ngôn ngữ <strong>Rust</strong> với giao diện đồ họa hiện đại của <strong>Tauri 2 và React</strong> để tạo ra một công cụ phân tích vi cấu trúc thị trường đỉnh cao.</p>
+        <p>VluxChart không chỉ cung cấp cho cộng đồng trader một công cụ phân tích dòng lệnh chuyên nghiệp với độ trễ dưới 1 mili-giây và tốc độ hiển thị 60 FPS mượt mà, mà còn xác lập một chuẩn mực mới về <strong>tính liêm chính dữ liệu</strong>: loại bỏ mọi ảo ảnh số học bằng số nguyên Fixed-Point và tuyệt đối không tô vẽ các tín hiệu dự đoán vô căn cứ.</p>
+
+        <h5>TÀI LIỆU THAM KHẢO HỌC THUẬT:</h5>
+        <ul class="ref-list">
+          <li>[1] <strong>Kyle, A. S. (1985).</strong> <em>Continuous auctions and informed trader.</em> Econometrica: Journal of the Econometric Society, 1315-1335.</li>
+          <li>[2] <strong>Glosten, L. R., &amp; Milgrom, P. R. (1985).</strong> <em>Bid, ask and transaction prices in a specialist market with heterogeneously informed traders.</em> Journal of Financial Economics, 14(1), 71-100.</li>
+          <li>[3] <strong>Steidlmayer, J. P., &amp; Koy, K. (1986).</strong> <em>Markets and market logic.</em> Porcupine Press, Chicago.</li>
+          <li>[4] <strong>Black, F., &amp; Scholes, M. (1973).</strong> <em>The pricing of options and corporate liabilities.</em> Journal of Political Economy, 81(3), 637-654.</li>
+          <li>[5] <strong>Harris, L. (2003).</strong> <em>Trading and exchanges: Market microstructure for practitioners.</em> Oxford University Press.</li>
+          <li>[6] <strong>Blandin, K., et al. (2021).</strong> <em>The Rust Programming Language.</em> No Starch Press.</li>
+          <li>[7] <strong>Tauri Programme. (2024).</strong> <em>Tauri 2.0 Architecture and Security Specification.</em> Tauri Apps Foundation.</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <div class="btm-nav">
@@ -487,8 +981,15 @@ if(fine&&!reduce){
   },{passive:true});
 }
 
-/* Architectural Pillars - Vertical Scroll Spy */
+/* Architectural Pillars - Vertical Scroll Spy & Active Sidebar Feedback */
 var pvCards=[].slice.call(document.querySelectorAll('.pv-card')),pvSteps=[].slice.call(document.querySelectorAll('.pv-step'));
+var pvAbTitle=document.getElementById('pvAbTitle'),pvAbMetric=document.getElementById('pvAbMetric');
+var pillarMeta={
+  'pillar-1':{title:'01 / High-Precision Concurrency Engine',metric:'18,450 tx/s · Zero-float rust_decimal accounting'},
+  'pillar-2':{title:'02 / Ingestion & Crash Recovery',metric:'Bybit / Binance WSS · MT5 C-API · 0-loss WAL CRC32'},
+  'pillar-3':{title:'03 / Quant Order Flow & Footprint',metric:'Diagonal Imbalance 300% · CVD · Options GEX'},
+  'pillar-4':{title:'04 / 60 FPS Hardware Visuals',metric:'Canvas2D WebGL · Viewport Culling · 18.4MB RAM'}
+};
 if(pvCards.length&&pvSteps.length){
   var pvObs=new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
@@ -497,6 +998,10 @@ if(pvCards.length&&pvSteps.length){
         pvSteps.forEach(function(step){
           step.classList.toggle('on',step.getAttribute('href')==='#'+id);
         });
+        if(pillarMeta[id]&&pvAbTitle&&pvAbMetric){
+          pvAbTitle.textContent=pillarMeta[id].title;
+          pvAbMetric.textContent=pillarMeta[id].metric;
+        }
       }
     });
   },{rootMargin:'-25% 0px -45% 0px'});
@@ -507,6 +1012,25 @@ if(pvCards.length&&pvSteps.length){
     e.preventDefault();
     var target=document.querySelector(step.getAttribute('href'));
     if(target)target.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+}
+
+/* Research Section Tab Switcher */
+var rptTabs=[].slice.call(document.querySelectorAll('.rpt-tab'));
+var rptPanels=[].slice.call(document.querySelectorAll('.rpt-panel'));
+if(rptTabs.length&&rptPanels.length){
+  rptTabs.forEach(function(tab){
+    tab.addEventListener('click',function(){
+      var targetId=tab.getAttribute('data-tab');
+      rptTabs.forEach(function(t){
+        var on=t===tab;
+        t.classList.toggle('on',on);
+        t.setAttribute('aria-selected',on?'true':'false');
+      });
+      rptPanels.forEach(function(p){
+        p.classList.toggle('on',p.id===targetId);
+      });
+    });
   });
 }
 
