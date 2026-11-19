@@ -129,21 +129,18 @@ footer{margin-top:7rem;display:flex;justify-content:space-between;flex-wrap:wrap
 p,.lead,.role{text-shadow:0 1px 20px rgba(8,9,13,.85)}.hero-row p{color:var(--ice)}
 [data-mag]{transition-property:translate,background-color,color,border-color;transition-duration:.4s,.3s,.3s,.3s;transition-timing-function:cubic-bezier(.2,.7,.2,1),ease,ease,ease}
 .wk{position:relative}.wk::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px circle at var(--sx,50%) var(--sy,50%),rgba(130,155,203,.13),transparent 60%);opacity:0;transition:opacity .35s}.wk:hover::after{opacity:1}
-.stk{display:grid;grid-template-columns:7fr 5fr;gap:clamp(1.5rem,5vw,4rem);margin-top:2rem;align-items:center}
-.orb{position:relative;height:clamp(380px,44vw,520px);cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none}.orb.drag{cursor:grabbing}
-.tg{position:absolute;left:50%;top:50%;display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:0;border:0;background:none;color:var(--ice);font:500 .7rem var(--sans);white-space:nowrap;cursor:pointer;will-change:transform,opacity;text-shadow:0 1px 8px rgba(8,9,13,.9)}
-.tg .ic{width:56px;height:56px;border-radius:13px;display:grid;place-items:center;overflow:hidden;transition:box-shadow .25s,filter .25s}
-.tg .ic img{width:100%;height:100%;display:block;pointer-events:none;-webkit-user-drag:none}
+.stk{display:flex;justify-content:center;align-items:center;margin-top:2.5rem;position:relative}
+.orb{position:relative;width:100%;max-width:800px;height:clamp(440px,54vw,600px);cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none}.orb.drag{cursor:grabbing}
+.tg{position:absolute;left:50%;top:50%;display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:0;border:0;background:none;color:var(--ice);font:500 .75rem var(--sans);white-space:nowrap;cursor:pointer;will-change:transform,opacity;text-shadow:0 1px 8px rgba(8,9,13,.9)}
+.tg .ic{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;overflow:hidden;background:rgba(20,24,34,.75);border:1px solid rgba(255,255,255,.08);transition:box-shadow .25s,filter .25s,transform .25s}
+.tg .ic img{width:36px;height:36px;display:block;pointer-events:none;-webkit-user-drag:none;object-fit:contain}
+.tg .ic img[src*="skillicons.dev"]{width:100%;height:100%}
 .tg .ic.m{background:linear-gradient(145deg,#2a3040,#1a1e29);border:1px solid var(--line)}.tg .ic b{font:700 .95rem var(--sans);color:var(--ice);letter-spacing:-.02em}
-.tg.used .ic{box-shadow:0 8px 20px rgba(0,0,0,.45)}
-.tg.learn .ic{filter:saturate(.55) brightness(.82);box-shadow:0 0 0 1px var(--silver),0 8px 18px rgba(0,0,0,.35)}
-.tg.sel .ic{filter:none;box-shadow:0 0 0 2px var(--blue),0 0 26px rgba(130,155,203,.55)}.tg:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:15px}
-.orb.static{height:auto;display:flex;flex-wrap:wrap;gap:.6rem;align-content:center;cursor:default}.orb.static .tg{position:static}
-.stk-side{display:grid;gap:1.4rem}.flt{display:flex;flex-wrap:wrap;gap:.5rem}
-.flt button{all:unset;cursor:pointer;font:500 .78rem var(--sans);color:var(--mute);padding:.38rem .85rem;border:1px solid var(--line);border-radius:99px;transition:color .25s,border-color .25s,background .25s}
-.flt button:hover{color:var(--ice)}.flt button[aria-pressed=true]{color:var(--ice);border-color:var(--silver);background:rgba(201,208,221,.08)}.flt button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-#skInfo{min-height:9rem;padding-top:1.2rem;border-top:1px solid var(--line)}#skInfo h3{font-size:1.35rem;margin-bottom:.5rem}#skInfo .meta{color:var(--blue);font-size:.82rem;margin:0 0 .6rem}#skInfo p{margin:0;max-width:40ch}
-@media(max-width:820px){.stk{grid-template-columns:1fr}.orb{height:360px}}
+.tg.used .ic{box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.tg.learn .ic{filter:saturate(.65) brightness(.88);box-shadow:0 0 0 1px var(--silver),0 8px 20px rgba(0,0,0,.4)}
+.tg.sel .ic{filter:none;box-shadow:0 0 0 2px var(--blue),0 0 28px rgba(130,155,203,.6)}.tg:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:15px}
+.orb.static{height:auto;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;align-content:center;cursor:default}.orb.static .tg{position:static}
+@media(max-width:820px){.orb{height:400px}}
 </style>
 </head>
 <body>
@@ -183,14 +180,10 @@ p,.lead,.role{text-shadow:0 1px 20px rgba(8,9,13,.85)}.hero-row p{color:var(--ic
 
 <section id="stack" data-m="0.4,0.82,0.1,0.14,0.55,0.62,0.85,.85"><div class="wrap">
 <h2>Tech stack.</h2>
-<p style="max-width:56ch;margin:1.5rem 0 0">Drag the sphere, or move your mouse over it, to turn it. Click an icon to see how I use it.</p>
+<p style="max-width:56ch;margin:1.5rem 0 0">Drag the sphere or move your cursor to explore the stack.</p>
 <div class="stk">
 <div id="orb" class="orb" role="group" aria-label="Tech stack sphere"></div>
-<div class="stk-side">
-<div id="flt" class="flt" role="group" aria-label="Filter technologies"><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="used" aria-pressed="false">Used in projects</button><button type="button" data-f="learn" aria-pressed="false">Studying</button></div>
-<div id="skInfo" aria-live="polite"></div>
-<p class="tiny key" style="margin:0"><i class="k used"></i>Used in projects <i class="k learn"></i>Studying</p>
-</div></div>
+</div>
 </div></section>
 
 <section id="work" data-m="0.5,0.72,-0.1,0.12,0.6,0.64,0.74,.8"><div class="wrap">
@@ -395,37 +388,43 @@ if(snd){snd.addEventListener('click',function(){setOn(!pref.on);});
 /* tech stack: draggable 3D tag sphere with filters and a detail panel */
 (function(){var orb=document.getElementById('orb');if(!orb)return;
  var IC='https://skillicons.dev/icons?i=';
- /* [name, area, used|learn, note, skillicons.dev id (null = monogram tile), monogram] */
- var D=[['Java 21','Backend','used','Main language across coursework and the PRJ301 capstone, Ftech Learning Online.','java'],
-  ['Jakarta EE 10','Backend','used','Web layer of the capstone, running on Apache Tomcat.',null,'EE'],
-  ['Apache Tomcat','Backend','used','Servlet container for the Ftech Learning Online capstone.',null,'Tc'],
-  ['Maven','Backend','used','Build and dependency management for the capstone.','maven'],
-  ['Apache Ant','Backend','used','Build tool for the Student Management System project.',null,'Ant'],
-  ['Spring Boot','Backend','learn','Studying next, together with Spring Security, REST APIs and microservices.','spring'],
-  ['SQL Server','Data','used','Normalized schemas in coursework (DBI202) and the capstone, on SQL Server 2022.',null,'SQL'],
-  ['Hibernate','Data','learn','Studying object-relational mapping (JPA / Hibernate) alongside Spring Boot.','hibernate'],
-  ['PostgreSQL','Data','learn','Studying, together with database tuning.','postgres'],
-  ['Python','Data','learn','Studying, as a starting point for applied AI and quantitative work.','py'],
-  ['Docker','DevOps','used','Multi-stage Dockerfile and Docker Compose that run the capstone together with SQL Server 2022.','docker'],
-  ['Git','DevOps','used','Version control, projects hosted on GitHub.','git'],
-  ['Linux','DevOps','learn','Studying Linux administration.','linux'],
-  ['Nginx','DevOps','learn','Studying, as part of deployment.','nginx'],
-  ['GitHub Actions','DevOps','learn','Studying CI/CD pipelines.','githubactions'],
-  ['Chart.js','Frontend','used','Admin dashboard and revenue analytics in the capstone.',null,'Ch'],
-  ['HTML5','Frontend','used','Front end for the capstone and personal projects, including this site.','html'],
-  ['CSS3','Frontend','used','Layouts and styling for the capstone and personal projects, including this site.','css'],
-  ['JavaScript','Frontend','used','Front-end scripting for the capstone and personal projects, including this site.','js']];
+   /* [name, area, used|learn, note, skillicons.dev id or full icon URL, monogram] */
+  var D=[['Java 21','Backend','used','Main language across coursework and the PRJ301 capstone, Ftech Learning Online.','java'],
+   ['Spring Boot','Backend','learn','Studying next, together with Spring Security, REST APIs and microservices.','spring'],
+   ['Jakarta EE 10','Backend','used','Web layer of the capstone, running on Apache Tomcat.','eclipse'],
+   ['Apache Tomcat','Backend','used','Servlet container for the Ftech Learning Online capstone.','https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tomcat/tomcat-original.svg'],
+   ['SQL Server','Data','used','Normalized schemas in coursework (DBI202) and the capstone, on SQL Server 2022.','https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg'],
+   ['PostgreSQL','Data','learn','Studying, together with database tuning.','postgres'],
+   ['MySQL','Data','used','Relational database design and query optimization.','mysql'],
+   ['Hibernate','Data','learn','Studying object-relational mapping (JPA / Hibernate) alongside Spring Boot.','hibernate'],
+   ['Docker','DevOps','used','Multi-stage Dockerfile and Docker Compose that run the capstone together with SQL Server 2022.','docker'],
+   ['Git','DevOps','used','Version control, projects hosted on GitHub.','git'],
+   ['GitHub Actions','DevOps','learn','Studying CI/CD pipelines.','githubactions'],
+   ['Linux','DevOps','learn','Studying Linux administration.','linux'],
+   ['Nginx','DevOps','learn','Studying, as part of deployment.','nginx'],
+   ['Maven','DevOps','used','Build and dependency management for the capstone.','maven'],
+   ['Apache Ant','DevOps','used','Build tool for the Student Management System project.','https://cdn.simpleicons.org/apacheant/E05243'],
+   ['Python','Data','learn','Studying, as a starting point for applied AI and quantitative work.','py'],
+   ['C++','Core','used','Algorithms and data structures benchmarks.','cpp'],
+   ['TypeScript','Frontend','learn','Modern strongly typed JavaScript development.','ts'],
+   ['JavaScript','Frontend','used','Front-end scripting for web projects.','js'],
+   ['HTML5','Frontend','used','Modern semantic markup.','html'],
+   ['CSS3','Frontend','used','Responsive styling and CSS architecture.','css'],
+   ['IntelliJ IDEA','Tools','used','Primary Java and enterprise development IDE.','idea'],
+   ['VS Code','Tools','used','Editor for scripting, frontend, and config files.','vscode'],
+   ['Postman','Tools','used','API testing and endpoint verification.','postman'],
+   ['Chart.js','Frontend','used','Admin dashboard and revenue analytics in the capstone.','https://cdn.simpleicons.org/chartdotjs/FF6384']];
  var info=document.getElementById('skInfo'),fb=[].slice.call(document.querySelectorAll('#flt button')),N=D.length,P=[],tags=[],i,st=reduce;
  for(i=0;i<N;i++){var y=1-(i+.5)/N*2,r=Math.sqrt(1-y*y),th=i*2.399963,b=document.createElement('button');P.push([Math.cos(th)*r,y,Math.sin(th)*r]);
   b.type='button';b.className='tg '+D[i][2];b.setAttribute('aria-label',D[i][0]+', '+(D[i][2]==='used'?'used in projects':'studying'));
   var ic=document.createElement('span'),cap=document.createElement('span');ic.className='ic';cap.textContent=D[i][0];
-  if(D[i][4]){var im=new Image();im.alt='';im.draggable=false;im.loading='lazy';im.src=IC+D[i][4];(function(ic,im,m){im.onerror=function(){ic.textContent='';ic.classList.add('m');var t=document.createElement('b');t.textContent=m;ic.appendChild(t);};})(ic,im,D[i][0].slice(0,2));ic.appendChild(im);}
+  if(D[i][4]){var im=new Image();im.alt='';im.draggable=false;im.loading='lazy';im.src=D[i][4].indexOf('http')===0?D[i][4]:IC+D[i][4];(function(ic,im,m){im.onerror=function(){ic.textContent='';ic.classList.add('m');var t=document.createElement('b');t.textContent=m;ic.appendChild(t);};})(ic,im,D[i][0].slice(0,2));ic.appendChild(im);}
   else{ic.classList.add('m');var t=document.createElement('b');t.textContent=D[i][5]||D[i][0].slice(0,2);ic.appendChild(t);}
   b.appendChild(ic);b.appendChild(cap);orb.appendChild(b);tags.push(b);}
  var used=D.filter(function(d){return d[2]==='used';}).length;
- function summary(){info.innerHTML='<h3></h3><p class="meta"></p><p></p>';info.children[0].textContent=N+' technologies';info.children[1].textContent=used+' used in projects · '+(N-used)+' studying';info.children[2].textContent='Pick an icon to see where I use it.';}
+ function summary(){if(info){info.innerHTML='<h3></h3><p class="meta"></p><p></p>';info.children[0].textContent=N+' technologies';info.children[1].textContent=used+' used in projects · '+(N-used)+' studying';info.children[2].textContent='Pick an icon to see where I use it.';}}
  var W=0,H=0,R=0,sel=-1,fil='all',wx=0,wy=.0035,go=-1,drag=null,moved=false,hover=false,pt={x:0,y:0},run=false,raf=0,lt=0,born=0;
- function size(){W=orb.clientWidth;H=orb.clientHeight;R=Math.max(80,Math.min(W/2-64,H/2-24));}
+ function size(){W=orb.clientWidth;H=orb.clientHeight;R=Math.max(110,Math.min(W/2-70,H/2-30));}
  function ok(k){var d=D[k];return fil==='all'||fil===d[2]||fil===d[1];}
  function rotY(a){var c=Math.cos(a),s=Math.sin(a);P.forEach(function(p){var x=p[0]*c+p[2]*s,z=-p[0]*s+p[2]*c;p[0]=x;p[2]=z;});}
  function rotX(a){var c=Math.cos(a),s=Math.sin(a);P.forEach(function(p){var y=p[1]*c-p[2]*s,z=p[1]*s+p[2]*c;p[1]=y;p[2]=z;});}
@@ -441,7 +440,7 @@ if(snd){snd.addEventListener('click',function(){setOn(!pref.on);});
   var k=Math.min(1,(t-born)/1100);render(1-Math.pow(1-k,3));raf=requestAnimationFrame(frame);}
  function start(){if(st||run)return;run=true;lt=performance.now();if(!born)born=lt;raf=requestAnimationFrame(frame);}
  function pick(k,snd){if(k===sel)return;sel=k;tags.forEach(function(t,j){t.classList.toggle('sel',j===k);});
-  var d=D[k];info.innerHTML='<h3></h3><p class="meta"></p><p></p>';info.children[0].textContent=d[0];info.children[1].textContent=(d[2]==='used'?'Used in projects':'Studying');info.children[2].textContent=d[3];
+  if(info){var d=D[k];info.innerHTML='<h3></h3><p class="meta"></p><p></p>';info.children[0].textContent=d[0];info.children[1].textContent=(d[2]==='used'?'Used in projects':'Studying');info.children[2].textContent=d[3];}
   if(!st)go=k;if(snd&&typeof chipSound==='function')chipSound(tags[k],6);}
  orb.addEventListener('click',function(e){var b=e.target.closest('.tg');if(!b||moved)return;pick(tags.indexOf(b),true);});
  orb.addEventListener('focusin',function(e){if(e.target.matches&&e.target.matches('.tg:focus-visible'))pick(tags.indexOf(e.target),true);});
