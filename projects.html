@@ -131,7 +131,7 @@ a.tile:hover::after{opacity:1}
 /* Thêm dự án: chỉ cần thêm 1 slug vào mảng — số thứ tự tự sinh. */
 /* img: đường dẫn ảnh/video bìa, ví dụ "assets/projects/vluxchart.jpg" (để trống = khung trống) */
 var PROJECTS=[
-  {slug:"vluxchart", title:"VluxChart Terminal",        desc:"Order flow & market microstructure desktop terminal.", img:""},
+  {slug:"vluxchart", title:"VluxChart Terminal",        desc:"Order flow & market microstructure desktop terminal.", img:"assets/projects/vluxchart.jpg", url:"vluxchart.html"},
   {slug:"ftech",     title:"Ftech Learning Online",     desc:"Online learning platform on Jakarta EE with payments.", img:""},
   {slug:"student-ms",title:"Student Management System", desc:"Role-based Java OOP command-line system.",              img:""}
 ];
@@ -144,7 +144,7 @@ for(var i=0;i<Math.max(SLOTS,PROJECTS.length);i++){
   var li=mk('li'),p=PROJECTS[i],a,shot=mk('div','shot');
   li.style.setProperty('--i',i);
   if(p){
-    a=mk('a','tile');a.href='#'+p.slug;a.id='p-'+p.slug;
+    a=mk('a','tile');a.href=p.url||('#'+p.slug);a.id='p-'+p.slug;
     if(p.img){var m;if(/\.(mp4|webm)$/i.test(p.img)){m=document.createElement('video');m.src=p.img;m.muted=m.loop=m.autoplay=m.playsInline=true;}
       else{m=new Image();m.src=p.img;m.alt='';m.loading='lazy';}shot.appendChild(m);}
     else shot.appendChild(mk('em',null,pad(i+1)));
@@ -168,10 +168,11 @@ requestAnimationFrame(function(){
   setTimeout(function(){veil.className='';},520);
 });
 document.addEventListener('click',function(e){
-  var a=e.target.closest('a[href="index.html"], a[href^="index.html#"]');
+  var a=e.target.closest('a[href$=".html"], a[href^="index.html#"]');
   if(!a||e.metaKey||e.ctrlKey||e.shiftKey)return;
-  e.preventDefault();
   var targetHref=a.getAttribute('href');
+  if(!targetHref||targetHref.startsWith('#'))return;
+  e.preventDefault();
   veil.querySelector('span').textContent='VLUX';
   veil.className='in';
   setTimeout(function(){location.href=targetHref;},520);
