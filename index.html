@@ -337,13 +337,18 @@ document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#
 /* sound: native HTML5 Weeknd audio playlist with auto-hide panel */
 var snd=document.getElementById('snd'),box=document.getElementById('sndbox'),panel=document.getElementById('sndpanel'),bMus=document.getElementById('sMus'),vol=document.getElementById('sVol'),lb=snd.querySelector('.lb'),bars=[].slice.call(snd.querySelectorAll('.eq i'));
 var eqOn=false,playing=false,hideTimer=null;
-var pref={on:false,mus:true,vol:.7};
-try{var sv=JSON.parse(localStorage.getItem('vlux-snd')||'null');if(sv)pref=Object.assign(pref,sv);}catch(e){}
+var pref={on:false,mus:true,vol:.8};
+try{
+ var sv=JSON.parse(localStorage.getItem('vlux-snd')||'null');
+ if(sv)pref=Object.assign(pref,sv);
+}catch(e){}
+pref.mus=true;
+if(typeof pref.vol!=='number'||pref.vol<=0.05)pref.vol=0.8;
 function save(){try{localStorage.setItem('vlux-snd',JSON.stringify(pref));}catch(e){}}
 
 var tracks=[
- {title:"Blinding Lights",src:"assets/audio/blinding-lights.mp3"},
- {title:"Starboy",src:"assets/audio/starboy.mp3"}
+ {title:"Blinding Lights",src:"assets/audio/blinding-lights.mp3",alt:"https://ngtaiphat1501.github.io/assets/audio/blinding-lights.mp3"},
+ {title:"Starboy",src:"assets/audio/starboy.mp3",alt:"https://ngtaiphat1501.github.io/assets/audio/starboy.mp3"}
 ];
 var curTrack=0;
 var audio=new Audio();
@@ -351,10 +356,21 @@ audio.preload="auto";
 audio.src=tracks[curTrack].src;
 audio.volume=pref.vol;
 
+audio.addEventListener('error',function(){
+ console.warn('Audio load error on '+audio.src+', trying alternate URL...');
+ if(tracks[curTrack].alt&&audio.src!==tracks[curTrack].alt){
+  audio.src=tracks[curTrack].alt;
+  if(pref.on&&pref.mus)audio.play().catch(function(e){console.error(e);});
+ }
+});
+
 audio.addEventListener('ended',function(){
  curTrack=(curTrack+1)%tracks.length;
  audio.src=tracks[curTrack].src;
- audio.play().catch(function(e){});
+ audio.play().catch(function(e){
+  audio.src=tracks[curTrack].alt;
+  audio.play().catch(function(err){console.error(err);});
+ });
 });
 
 audio.addEventListener('play',function(){
@@ -403,7 +419,17 @@ box.addEventListener('mouseleave',function(){
 function refresh(){
  var m=pref.on&&pref.mus;
  if(m){
-  audio.play().catch(function(e){});
+  audio.volume=pref.vol;
+  var p=audio.play();
+  if(p&&p.catch){
+   p.catch(function(err){
+    console.warn("Direct play failed, trying online URL...", err);
+    if(audio.src!==tracks[curTrack].alt){
+     audio.src=tracks[curTrack].alt;
+     audio.play().catch(function(e){console.error(e);});
+    }
+   });
+  }
  }else{
   audio.pause();
  }
@@ -418,7 +444,9 @@ function refresh(){
 }
 
 function setOn(v){
- pref.on=v;save();
+ pref.on=v;
+ pref.mus=true;
+ save();
  if(v){
   showPanel();
   scheduleHidePanel();
