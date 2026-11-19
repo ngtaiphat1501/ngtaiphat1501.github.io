@@ -1,16 +1,15 @@
-# BÁO CÁO DỰ ÁN VÀ THIẾT KẾ HỆ THỐNG
+# BÁO CÁO NGHIÊN CỨU KỸ THUẬT CÁ NHÂN & THIẾT KẾ HỆ THỐNG
 ## HỆ THỐNG PHÂN TÍCH VI CẤU TRÚC THỊ TRƯỜNG VÀ DÒNG LỆNH ĐỘ TRỄ THẤP TRÊN NỀN TẢNG RUST VÀ TAURI 2 (VLUXCHART)
 
 ---
 
-**THÔNG TIN ĐỀ TÀI / RESEARCH METADATA:**
-- **Tên đề tài tiếng Việt:** Nghiên cứu và Xây dựng Nền tảng Phân tích Vi cấu trúc Thị trường, Sổ lệnh và Dòng tiền Khối lượng Độ trễ Thấp VluxChart
-- **Tên đề tài tiếng Anh:** Research and Development of a Low-Latency Market Microstructure and Order Flow Analytics Platform (VluxChart)
-- **Tác giả / Nhà nghiên cứu:** Nguyễn Tài Phát *(Cần xác nhận)*
-- **Đơn vị thực hiện:** Đại học FPT *(Cần xác nhận)*
-- **Giảng viên hướng dẫn (nếu có):** *(Cần bổ sung)*
-- **Thời gian thực hiện:** Tháng 11/2026
-- **Trạng thái mã nguồn:** Mã nguồn mở cục bộ, kiểm thử 41/41 Gate G0–G7 đạt 100%
+**THÔNG TIN DỰ ÁN & BẢN QUYỀN KỸ THUẬT:**
+- **Tên dự án tiếng Việt:** Nghiên cứu Cá nhân và Xây dựng Nền tảng Phân tích Vi cấu trúc Thị trường, Sổ lệnh và Dòng tiền Khối lượng Độ trễ Thấp VluxChart
+- **Tên dự án tiếng Anh:** Independent Research and Development of a Low-Latency Market Microstructure and Order Flow Analytics Platform (VluxChart)
+- **Tác giả / Kỹ sư thiết kế:** Nguyễn Tài Phát (VLUX)
+- **Phân loại dự án:** Dự án Nghiên cứu Kỹ thuật Cá nhân Độc lập (Independent Personal Engineering Project)
+- **Thời gian hoàn thiện:** Tháng 11/2026
+- **Trạng thái mã nguồn:** Mã nguồn mở cục bộ, kiểm thử nghiệm thu 41/41 Gate G0–G7 đạt 100%
 
 ---
 
@@ -195,7 +194,7 @@ Hệ thống tuân thủ quy trình kiểm thử đóng băng cửa kiểm soát
 
 ## 6. NHỮNG HẠN CHẾ VÀ HƯỚNG PHÁT TRIỂN TIẾP THEO (LIMITATIONS & FUTURE WORK)
 
-Với tinh thần liêm chính học thuật, nghiên cứu thẳng thắn nhìn nhận những mặt hạn chế hiện tại:
+Với tinh thần kỹ thuật nghiêm túc và thực tế, dự án nhìn nhận thẳng thắn những mặt hạn chế hiện tại:
 1. **Dữ liệu MBO (Market-by-Order) của sàn truyền thống (CME):**
    - Hiện tại dữ liệu MBO của VluxChart được phát hiện thông qua thuật toán phân tích biến động thanh khoản Level 2 và dòng tick khớp thực tế.
    - Để có dữ liệu MBO gốc trực tiếp (Direct ITCH Protocol) từ sàn CME (Chicago Mercantile Exchange), cần có tài khoản thuê bao dữ liệu đắt đỏ từ các nhà cung cấp như Rithmic hoặc CQG.
