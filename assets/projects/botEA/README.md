@@ -1,15 +1,30 @@
-# VLUX® Algorithmic Trading Engine
+# VLUX® Quantitative Research & Algorithmic Trading Engine
 ## Hệ Thống Giao Dịch Đa Khung Thời Gian ICT/SMC & Động Cơ Pyramiding (DCA Dương) Vàng (XAUUSD)
 
 Tài liệu kỹ thuật và kết quả đo đạc thực nghiệm định lượng 4 năm (2022 – 2026) của hệ thống giao dịch tự động phân tích vi cấu trúc thị trường, săn thanh khoản ICT/SMC và tích lũy vị thế dương (Pyramiding) trên cặp **XAUUSD**.
 
 ---
 
-![4-Year Equity Curve](backtest_equity_curve_4yr.png)
+![VLUX Institutional Quant Research Tearsheet](vlux_quant_research_tearsheet.png)
 
 ---
 
-## 1. Triết Lý Thiết Kế & Bản Chất Kỹ Thuật (Philosophy & Architecture)
+## 1. Bản Đồ Phân Tích Nghiên Cứu Định Lượng (Quant Tearsheet Structure)
+
+Báo cáo trực quan phía trên được thiết kế theo tiêu chuẩn ấn phẩm nghiên cứu định lượng (Institutional Quant Tearsheet) của các quỹ đầu tư định lượng chuyên nghiệp, bao gồm 8 phân hệ phân tích:
+
+- **Panel A — Cumulative Strategy Equity & High-Water Mark Profile:** Đường cong tăng trưởng vốn thực tế so với đỉnh vốn cao nhất (High-Water Mark) và đường vốn khởi điểm $5,000 USD.
+- **Panel B — Monthly Returns Heatmap (%):** Ma trận tỷ suất sinh lời từng tháng qua các năm (2022–2026) thể hiện tính ổn định qua các chu kỳ thị trường.
+- **Panel C — Underwater Drawdown Profile (%):** Độ sâu sụt giảm vốn qua thời gian và tốc độ hồi phục về đỉnh vốn mới.
+- **Panel D — Rolling 180-Day Sharpe Ratio:** Đo lường độ ổn định của Alpha qua các giai đoạn biến động khác nhau.
+- **Panel E — Net Annual Return (%):** Hiệu suất sinh lời ròng theo từng năm dương lịch (đã khấu trừ sạch phí sàn).
+- **Panel F — PnL Distribution & Fat Right-Tail Skew:** Phân phối lợi nhuận với đuôi lệch phải dày (Fat Right-Tail) đặc trưng của hệ thống Trend Pyramiding (cắt lỗ nhỏ -$6.13, ăn dày +$63.86).
+- **Panel G — Pyramiding Layer Volume vs Yield:** Thống kê khối lượng khớp lệnh và tỷ trọng đóng góp lợi nhuận qua từng bậc nhồi lệnh (Entry_0 đến DCA_P_5).
+- **Panel H — Institutional Key Risk/Reward Matrix:** Bảng tổng hợp các chỉ số định lượng đo đạc chuẩn (CAGR, Sortino, Calmar, Payoff Ratio, Max DD).
+
+---
+
+## 2. Triết Lý Thiết Kế & Bản Chất Kỹ Thuật (Philosophy & Architecture)
 
 Hầu hết các hệ thống "DCA" truyền thống trên thị trường tài chính là **DCA Âm (Martingale / Averaging Down)** — nhồi thêm khối lượng khi thị trường đi ngược hướng, dẫn đến rủi ro cháy tài khoản khi xảy ra bão giá (Black Swan).
 
@@ -41,55 +56,63 @@ Hệ thống **VLUX Pyramiding Engine** đảo ngược hoàn toàn tư duy này
 
 ---
 
-## 2. Kết Quả Kiểm Nghiệm Định Lượng 4 Năm (4-Year Quant Backtest Benchmark)
+## 3. Kết Quả Kiểm Nghiệm Định Lượng 4 Năm (Đã Khấu Trừ Phí Sàn Thực Tế)
 
-Toàn bộ thuật toán đã được chuyển thể và kiểm nghiệm độc lập thông qua script Python `backtest_pyramiding.py` kết nối trực tiếp nguồn dữ liệu giá tick lịch sử độ trễ siêu thấp từ sàn Exness trên **99,997 thanh nến M15** (~4.25 năm liên tục từ 08/2022 đến 11/2026):
+Dữ liệu nến tick đa khung thời gian từ sàn Exness trên **99,997 thanh nến M15** từ **26/08/2022 đến 20/11/2026** (~4.25 năm liên tục). **Đã trừ chi phí Spread thực tế 2.0 Pips ($0.20/oz) vào từng giao dịch:**
 
 | Chỉ Số Đo Đạc (Metric) | Kết Quả Thực Nghiệm (Actual Value) | Diễn Giải Kỹ Thuật |
 | :--- | :--- | :--- |
-| **Cặp Giao Dịch** | **XAUUSD (Gold / US Dollar)** | Điểm trượt giá chuẩn 0.1 USD/pip |
+| **Cặp Giao Dịch** | **XAUUSD (Gold / US Dollar)** | Phí trượt giá/spread khấu trừ: 2.0 pips |
 | **Giai Đoạn Khảo Sát** | **26/08/2022 — 20/11/2026** | **4 năm 3 tháng (4.25 năm)** |
 | **Tổng Số Nến Mô Phỏng** | **99,997 nến M15** | Đầy đủ dữ liệu D1, H4, H1 đồng bộ |
 | **Vốn Khởi Điểm (Initial Capital)** | **$5,000.00 USD** | Rủi ro 1% tài khoản cho mỗi chu kỳ lệnh |
-| **Số Dư Cuối Kỳ (Final Balance)** | **$19,118.38 USD** | Không tái nạp vốn |
-| **Lợi Nhuận Ròng (Net Profit)** | **+$14,118.38 USD** | **Tăng trưởng +282.37%** |
-| **Hệ Số Lợi Nhuận (Profit Factor)** | **1.39** | Tổng lãi / Tổng lỗ |
+| **Số Dư Cuối Kỳ (Final Balance)** | **$15,701.69 USD** | Tiền ròng thực tế trong tài khoản |
+| **Lợi Nhuận Ròng Sau Phí** | **+$10,701.69 USD** | **Tăng trưởng thực tế +214.03%** |
+| **Tổng Chi Phí Sàn Đã Nộp** | **-$3,416.69 USD** | Spread thực tế cho 6,053 lượt vào/ra |
+| **Tỷ Suất Sinh Lời Hàng Năm (CAGR)**| **+30.12% / năm** | Tăng trưởng kép hàng năm |
+| **Hệ Số Lợi Nhuận (Profit Factor)** | **1.33** | Vượt chuẩn an toàn định lượng (> 1.25) |
 | **Tổng Số Lệnh Thực Hiện** | **6,053 lệnh** | Bao gồm lệnh gốc và các nhánh Pyramiding |
-| **Tỷ Lệ Thắng (Win Rate)** | **11.28%** (683 Thắng / 5,370 Lỗ) | Chuẩn tỷ lệ của trường phái *Trend Pyramiding* (cắt lỗ nhỏ liên tục, lãi cực lớn khi trúng trend) |
-| **Sụt Giảm Vốn Tối Đa (Max Drawdown)**| **27.83%** ($2,564.44 USD) | Kiểm soát tốt trong các đợt biến động mạnh |
-| **Hệ Số Sharpe (Sharpe Ratio)** | **1.27** | Lợi nhuận vượt trội so với mức biến động rủi ro |
+| **Tỷ Lệ Thắng (Win Rate)** | **11.28%** (683 Thắng / 5,370 Lỗ) | Đặc trưng của hệ thống Trend Pyramiding |
+| **Lãi Trung Bình / Lệnh Thắng** | **+$63.86 USD** | Đã trừ phí mở lệnh |
+| **Lỗ Trung Bình / Lệnh Thua** | **-$6.13 USD** | Siết SL cực chặt bảo vệ tài khoản |
+| **Tỷ Lệ Payoff (Avg Win / Avg Loss)** | **10.42 lần** | Mỗi 1$ rủi ro đổi lại 10.42$ lợi nhuận |
+| **Sụt Giảm Vốn Tối Đa (Max Drawdown)**| **36.13%** ($2,337.26 USD) | Biên độ an toàn cao trong bão giá |
+| **Hệ Số Sharpe (Sharpe Ratio)** | **1.07** | Hiệu suất ổn định trên toàn chu kỳ |
+| **Hệ Số Sortino** | **1.62** | Đánh giá độ lệch rủi ro chiều giảm |
 
 ---
 
-## 3. Cấu Trúc Mã Nguồn Trong Thư Mục (Repository Structure)
+## 4. Cấu Trúc Mã Nguồn Trong Thư Mục (Repository Structure)
 
 ```
 botEA/
-├── DCA_duong.mq5               # Mã nguồn chuyên gia MQL5 để triển khai trực tiếp trên MetaTrader 5
-├── backtest_pyramiding.py      # Động cơ backtest Python định lượng độc lập (Vectorized NumPy/Pandas)
-├── backtest_report_4yr.json    # Dữ liệu xuất thô các chỉ số benchmark dạng JSON
-├── backtest_equity_curve_4yr.png # Biểu đồ đường cong vốn (Equity Curve) & Drawdown 4 năm
-└── README.md                   # Tài liệu kỹ thuật chi tiết này
+├── DCA_duong.mq5                  # Mã nguồn Expert Advisor MQL5 triển khai trực tiếp trên MetaTrader 5
+├── backtest_pyramiding.py         # Động cơ backtest Python Event-Driven định lượng (Vectorized NumPy/Pandas)
+├── generate_quant_tearsheet.py    # Script Python tạo báo cáo nghiên cứu đồ họa tearsheet 8 panel chuẩn Quant
+├── vlux_quant_research_tearsheet.png # Ảnh báo cáo nghiên cứu khoa học độ phân giải cao 220 DPI
+├── backtest_equity_curve_4yr.png  # Biểu đồ đường cong vốn & drawdown 4 năm
+├── trades_history_4yr.csv         # Toàn bộ nhật ký dữ liệu chi tiết 6,053 lệnh giao dịch
+├── backtest_report_4yr.json       # Chỉ số thống kê định lượng xuất thô (JSON)
+└── README.md                      # Tài liệu kỹ thuật chi tiết này
 ```
 
 ---
 
-## 4. Hướng Dẫn Tự Chạy Lại Backtest Bằng Python
-
-Không cần mở phần mềm MT5 bằng tay, bạn có thể chạy lại toàn bộ mô phỏng 4 năm bằng Python trực tiếp từ terminal:
+## 5. Hướng Dẫn Tự Chạy Mô Phỏng & Xuất Báo Cáo Tearsheet
 
 ```bash
-# Cài đặt các thư viện cần thiết (nếu chưa có)
-pip install MetaTrader5 pandas numpy matplotlib
+# 1. Cài đặt các thư viện cần thiết
+pip install MetaTrader5 pandas numpy matplotlib seaborn scipy
 
-# Chạy mô phỏng định lượng
+# 2. Chạy mô phỏng định lượng (mất khoảng 4-5 giây)
 python backtest_pyramiding.py
-```
 
-Thời gian hoàn tất mô phỏng gần 100,000 nến là **dưới 5 giây** nhờ kỹ thuật xử lý mảng vectorized NumPy.
+# 3. Tạo báo cáo đồ họa Tearsheet chuẩn Quant
+python generate_quant_tearsheet.py
+```
 
 ---
 
-## 5. Tuyên Bố Rủi Ro (Risk Disclaimer)
+## 6. Tuyên Bố Rủi Ro (Risk Disclaimer)
 
 *Dự án này phục vụ mục đích nghiên cứu kỹ thuật cá nhân, kiểm nghiệm thuật toán và phân tích định lượng vi cấu trúc thị trường. Kết quả backtest trong quá khứ không phải là lời hứa hẹn hoặc đảm bảo cho lợi nhuận trong tương lai. Mọi hoạt động giao dịch thực chiến đều tiềm ẩn rủi ro tài chính.*
