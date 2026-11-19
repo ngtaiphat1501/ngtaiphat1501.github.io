@@ -29,6 +29,7 @@ def run_backtest():
 
     symbol = "XAUUSD"
     pip_size = 0.1  # 1 pip in XAUUSD = 0.1 USD
+    spread_usd = 0.20  # Spread cost per oz (0.20 USD = 2.0 pips standard Exness fee)
     
     print(f"Loading 4-year multi-timeframe dataset for {symbol}...")
     df_d1 = fetch_chunked(symbol, mt5.TIMEFRAME_D1, 2022, 2026)
@@ -205,7 +206,8 @@ def run_backtest():
                         
                 if reason != '':
                     pnl_pts = (exit_price - pos['entry']) if pos['side'] == 1 else (pos['entry'] - exit_price)
-                    pnl_usd = pnl_pts * (pos['lot'] * 100.0)
+                    fee_usd = spread_usd * (pos['lot'] * 100.0)
+                    pnl_usd = (pnl_pts * (pos['lot'] * 100.0)) - fee_usd
                     balance += pnl_usd
                     pos['exit_price'] = exit_price
                     pos['close_time'] = cur_t
