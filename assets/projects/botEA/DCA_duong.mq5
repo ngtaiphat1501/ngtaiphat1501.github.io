@@ -7,12 +7,13 @@
 #property strict
 
 //====================================================================
-// GHI CHU QUAN TRONG:
-// - Day la KHUNG SUON logic ICT/SMC don gian hoa, KHONG phai loi khuyen
-//   tai chinh va KHONG dam bao loi nhuan. Ban PHAI backtest tren
-//   Strategy Tester va toi uu tham so truoc khi dung tien that.
-// - Cac ham FindFVG / FindOrderBlock / CheckCRT la phien ban don gian
-//   hoa cua khai niem ICT, ban co the tinh chinh sau nay.
+// ⚠️ TUYÊN BỐ MIỄN TRỪ TRÁCH NHIỆM & CẢNH BÁO RỦI RO (LEGAL DISCLAIMER):
+// 1. MÃ NGUỒN NÀY CHỈ PHỤC VỤ MỤC ĐÍCH NGHIÊN CỨU HỌC THUẬT & THAM KHẢO LẬP TRÌNH.
+// 2. TUYỆT ĐỐI KHÔNG PHẢI LÀ LỜI KHUYÊN HOẶC KHUYẾN NGHỊ ĐẦU TƯ TÀI CHÍNH.
+// 3. TÁC GIẢ KHÔNG CHỊU BẤT KỲ TRÁCH NHIỆM PHÁP LÝ HOẶC TÀI CHÍNH NÀO
+//    ĐỐI VỚI BẤT KỲ TỔN THẤT NÀO PHÁT SINH TỪ VIỆC SỬ DỤNG MÃ NGUỒN NÀY.
+// 4. GIAO DỊCH VÀNG (XAUUSD) ĐÒN BẨY CAO TIỀM ẨN NGUY CƠ RỦI RO RẤT LỚN.
+//    KẾT QUẢ QUÁ KHỨ HOÀN TOÀN KHÔNG ĐẢM BẢO HIỆU SUẤT TRONG TƯƠNG LAI.
 //====================================================================
 
 enum ENUM_BIAS { BIAS_NONE = 0, BIAS_BUY = 1, BIAS_SELL = -1 };

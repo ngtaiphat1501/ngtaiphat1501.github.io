@@ -5,6 +5,14 @@ Tài liệu kỹ thuật và kết quả đo đạc thực nghiệm định lư�
 
 ---
 
+> [!CAUTION]
+> ### ⚠️ TUYÊN BỐ MIỄN TRỪ TRÁCH NHIỆM PHÁP LÝ & CẢNH BÁO RỦI RO
+> - **KHÔNG PHẢI LỜI KHUYÊN HOẶC KHUYẾN NGHỊ ĐẦU TƯ:** Toàn bộ nội dung, mã nguồn, biểu đồ và số liệu phân tích trong dự án này được công bố **DUY NHẤT VỚI MỤC ĐÍCH NGHIÊN CỨU KHOA HỌC KỸ THUẬT, THỰC NGHIỆM ĐỊNH LƯỢNG VÀ THAM KHẢO LẬP TRÌNH**. Tuyệt đối **KHÔNG** cấu thành lời khuyên đầu tư, khuyến nghị tài chính, tư vấn giao dịch hay lời mời chào tham gia thị trường dưới bất kỳ hình thức nào.
+> - **MIỄN TRỪ HOÀN TOÀN TRÁCH NHIỆM:** Tác giả và nhóm phát triển **hoàn toàn không chịu bất kỳ trách nhiệm pháp lý hoặc tài chính nào** đối với bất kỳ quyết định cá nhân, hành vi sao chép lệnh hay mọi khoản thua lỗ, mất mát tài sản nào phát sinh trực tiếp hoặc gián tiếp từ việc sử dụng mã nguồn hoặc tham chiếu số liệu từ dự án này.
+> - **CẢNH BÁO NGUY CƠ TỔN THẤT TÀI CHÍNH:** Giao dịch tài chính (đặc biệt là Vàng - XAUUSD, ngoại hối và các sản phẩm đòn bẩy cao) tiềm ẩn mức độ rủi ro rất cao và có thể dẫn đến **mất toàn bộ vốn đầu tư**. Mọi kết quả backtest trong quá khứ chỉ phản ánh kết quả thống kê trên tập dữ liệu lịch sử và **hoàn toàn không đảm bảo hay đại diện cho lợi nhuận trong tương lai**. Người tham khảo tự chịu 100% trách nhiệm đối với nguồn vốn của chính mình.
+
+---
+
 ![VLUX Institutional Quant Research Tearsheet](vlux_quant_research_tearsheet.png)
 
 ---
@@ -113,6 +121,9 @@ python generate_quant_tearsheet.py
 
 ---
 
-## 6. Tuyên Bố Rủi Ro (Risk Disclaimer)
+## 6. Tuyên Bố Rủi Ro & Miễn Trừ Trách Nhiệm Toàn Diện (Full Legal Disclaimer)
 
-*Dự án này phục vụ mục đích nghiên cứu kỹ thuật cá nhân, kiểm nghiệm thuật toán và phân tích định lượng vi cấu trúc thị trường. Kết quả backtest trong quá khứ không phải là lời hứa hẹn hoặc đảm bảo cho lợi nhuận trong tương lai. Mọi hoạt động giao dịch thực chiến đều tiềm ẩn rủi ro tài chính.*
+1. **Mục Đích Học Thuật:** Toàn bộ mã nguồn, tài liệu và dữ liệu phân tích thuộc dự án này được biên soạn độc lập bởi tác giả nhằm phục vụ mục đích nghiên cứu khoa học máy tính, lập trình hệ thống tài chính định lượng và kiểm nghiệm mô hình toán học cá nhân.
+2. **Không Khuyến Nghị Đầu Tư:** Nghiên cứu này tuyệt đối không phải là một dịch vụ tư vấn tài chính, tín hiệu giao dịch hay ủy thác đầu tư. Người đọc không được coi bất kỳ nội dung nào trong tài liệu này là lời khuyên mua, bán hoặc nắm giữ bất kỳ tài sản nào.
+3. **Miễn Trừ Mọi Trách Nhiệm:** Tác giả từ chối mọi trách nhiệm pháp lý đối với bất kỳ tổn thất, thiệt hại hoặc mất mát tài chính nào mà bất kỳ cá nhân hay tổ chức nào gánh chịu do việc áp dụng, sao chép hoặc dựa vào thông tin được cung cấp trong dự án này.
+4. **Quyết Định Tự Chịu Trách Nhiệm:** Giao dịch trên thị trường tài chính có rủi ro rất cao và không phù hợp với tất cả mọi người. Bạn phải tự chịu trách nhiệm hoàn toàn đối với mọi quyết định tài chính của chính mình.
