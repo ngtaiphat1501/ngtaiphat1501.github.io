@@ -212,10 +212,10 @@ p,.lead,.role{text-shadow:0 1px 20px rgba(8,9,13,.85)}.hero-row p{color:var(--ic
 <section id="work" data-m="0.5,0.72,-0.1,0.12,0.6,0.64,0.74,.8"><div class="wrap">
 <h2>Selected work.</h2>
 <article class="wk">
-<div class="wm"><span class="tiny">Quantitative Desktop System · Nov 2026<br>Lead developer, personal project</span><a class="link" href="https://github.com/ngtaiphat1501/DeepChart" target="_blank" rel="noopener">View on GitHub</a></div>
-<div><h3>DeepChart Desktop</h3>
-<ul><li>Engineered a high-performance desktop market footprint &amp; delta analytics engine with Rust and Tauri 2.</li><li>Ingested real-time public market trade streams via WebSockets (Bybit Linear &amp; Binance Futures) through a bounded Tokio MPSC queue with non-blocking backpressure.</li><li>Implemented append-only raw trade journaling (.ndjson) and zero-float volume accounting (rust_decimal) with 125ms throttled Canvas2D rendering.</li></ul>
-<p class="tags tiny">Rust · Tauri 2 · Tokio · WebSockets · React · TypeScript · Canvas2D</p></div>
+<div class="wm"><span class="tiny">Quantitative Desktop System · Nov 2026<br>Lead developer, personal project</span><a class="link" href="https://github.com/ngtaiphat1501/VluxChart" target="_blank" rel="noopener">View on GitHub</a></div>
+<div><h3>VluxChart Terminal</h3>
+<ul><li>Engineered a high-performance order flow &amp; market microstructure desktop terminal with Rust, Tauri 2 and React 19.</li><li>Ingested real-time trade feeds via WebSockets (Bybit Linear &amp; Binance Futures) and MT5 bridge with zero-loss WAL CRC32 crash recovery.</li><li>Implemented Footprint clusters, Diagonal Imbalance (300%), Options GEX profiling, and zero-float volume accounting (rust_decimal) at 60 FPS.</li></ul>
+<p class="tags tiny">Rust · Tauri 2 · React 19 · TypeScript · Tokio · WebSockets · Canvas2D</p></div>
 </article>
 <article class="wk off">
 <div class="wm"><span class="tiny">PRJ301 capstone · Oct – Nov 2026<br>Fullstack developer, team of 5</span><a class="link" href="https://github.com/ngtaiphat1501/Ftech_learning_online" target="_blank" rel="noopener">View on GitHub</a></div>
@@ -238,7 +238,7 @@ p,.lead,.role{text-shadow:0 1px 20px rgba(8,9,13,.85)}.hero-row p{color:var(--ic
 <li><span class="tiny">Active</span><h3>Java core &amp; enterprise systems<span>Jakarta EE 10, OOP principles, data structures &amp; algorithms.</span></h3></li>
 <li><span class="tiny">In progress</span><h3>Spring Boot &amp; microservices<span>RESTful APIs, Spring Security, JPA / Hibernate, database tuning.</span></h3></li>
 <li><span class="tiny">Up next</span><h3>DevOps &amp; cloud infrastructure<span>Multi-stage Docker, Linux administration, Nginx, GitHub Actions CI/CD.</span></h3></li>
-<li><span class="tiny">Active</span><h3>Applied AI &amp; quantitative systems<span>Analytical software, predictive modeling, quantitative decision systems (DeepChart).</span></h3></li>
+<li><span class="tiny">Active</span><h3>Applied AI &amp; quantitative systems<span>Analytical software, predictive modeling, quantitative decision systems (VluxChart).</span></h3></li>
 </ol></div></section>
 
 <section id="contact" data-m="0.5,0.25,0,0,0.5,0.62,0.85,.7"><div class="wrap">
@@ -255,7 +255,7 @@ var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var X={"Backend engineering":["Backend engineering","Java 21 and Jakarta EE 10 on Tomcat, built in layers with Maven. Currently studying Spring Boot, REST API security and JPA / Hibernate."],
 "Relational data":["Relational data","Normalized schemas on MS SQL Server, used in real coursework and my capstone. Studying PostgreSQL and database tuning."],
 "Deployment":["Deployment","Multi-stage Docker builds and Docker Compose, with SQL Server 2022 in the stack. Studying Linux, Nginx and GitHub Actions CI/CD."],
-"Applied AI & quantitative":["Applied AI & quantitative","High-throughput market analytics and quantitative systems, featuring DeepChart (Rust & Tauri 2 footprint & delta engine) and predictive modeling."]};
+"Applied AI & quantitative":["Applied AI & quantitative","High-throughput market analytics and quantitative systems, featuring VluxChart (Rust & Tauri 2 order flow terminal) and predictive modeling."]};
 var txt=document.getElementById('xpTxt'),btns=[].slice.call(document.querySelectorAll('#xpList button'));
 function parse(s){var a=s.split(',').map(Number);return{lx:a[0],ly:a[1],ox:a[2],oy:a[3],t:[a[4],a[5],a[6]],dim:a[7],sc:0};}
 var secM=null,xpM=parse(btns[0].dataset.m),inXp=false;
@@ -517,11 +517,11 @@ if(snd){
    ['Maven','DevOps','used','Build and dependency management for the capstone.','maven'],
    ['Apache Ant','DevOps','used','Build tool for the Student Management System project.','https://cdn.simpleicons.org/apacheant/E05243'],
    ['Python','Data','learn','Studying, as a starting point for applied AI and quantitative work.','py'],
-   ['Rust','Core','used','High-performance engine language for DeepChart Desktop footprint and delta analytics.','rust'],
+   ['Rust','Core','used','High-performance engine language for VluxChart order flow & microstructure terminal.','rust'],
    ['C++','Core','used','Algorithms and data structures benchmarks.','cpp'],
-   ['TypeScript','Frontend','used','Typed client logic and Canvas2D rendering in DeepChart Desktop.','ts'],
-   ['React','Frontend','used','Component UI for DeepChart Desktop footprint and trade monitors.','react'],
-   ['Tauri','Frontend','used','Desktop framework powering DeepChart with Rust core and web frontend.','tauri'],
+   ['TypeScript','Frontend','used','Typed client logic and Canvas2D rendering in VluxChart Terminal.','ts'],
+   ['React','Frontend','used','Component UI for VluxChart order flow & trade monitors.','react'],
+   ['Tauri','Frontend','used','Desktop framework powering VluxChart with Rust core and web frontend.','tauri'],
    ['JavaScript','Frontend','used','Front-end scripting for web projects.','js'],
    ['HTML5','Frontend','used','Modern semantic markup.','html'],
    ['CSS3','Frontend','used','Responsive styling and CSS architecture.','css'],
