@@ -78,50 +78,61 @@ h1{
 .spec-val{font-size:1.05rem;font-weight:500;color:var(--ice)}
 .spec-sub{font-size:.82rem;color:var(--mute)}
 
-/* architecture & modules (horizontal scroll) */
-.sec-title{font-size:clamp(1.8rem,3.6vw,2.5rem);font-weight:500;color:var(--ice);letter-spacing:-.02em;margin:0 0 2rem}
-.pillars-section{margin-bottom:4.5rem}
-.pillars-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
-.pillars-ctrl{display:flex;align-items:center;gap:.8rem}
-.p-btn{
-  all:unset;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);
-  display:grid;place-items:center;color:var(--ice);font-size:1.1rem;cursor:pointer;
-  background:rgba(20,24,34,.6);transition:border-color .3s,background .3s,color .3s,transform .2s
+/* architecture & modules (vertical scroll stream) */
+.sec-title{font-size:clamp(1.8rem,3.6vw,2.5rem);font-weight:500;color:var(--ice);letter-spacing:-.02em;margin:0 0 1rem}
+.pillars-section{margin-bottom:5.5rem;padding-top:2.5rem;border-top:1px solid var(--line)}
+.pv-wrap{display:grid;grid-template-columns:5fr 7fr;gap:clamp(2rem, 5vw, 4.5rem)}
+.pv-aside{height:100%}
+@media(max-width:880px){
+  .pv-wrap{grid-template-columns:1fr;gap:2rem}
+  .pv-sticky{position:static!important}
 }
-.p-btn:hover{border-color:var(--silver);background:rgba(201,208,221,.12);transform:scale(1.05)}
-.p-counter{font-size:.85rem;color:var(--mute);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.pv-sticky{position:sticky;top:6rem;display:grid;gap:1.2rem}
+.pv-lead{font-size:.95rem;color:var(--mute);line-height:1.7;margin:0}
 
-.pillars-track{
-  display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;padding:1rem 0 1.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch
+.pv-nav{display:grid;gap:.5rem;margin-top:1rem}
+.pv-step{
+  display:flex;align-items:center;gap:.9rem;padding:.75rem 1.1rem;border-radius:14px;
+  border:1px solid transparent;color:var(--mute);font-size:.88rem;
+  transition:all .3s cubic-bezier(.2,.7,.2,1);cursor:pointer;background:none;text-decoration:none
 }
-.pillars-track::-webkit-scrollbar{display:none}
+.pv-step:hover{color:var(--ice);background:rgba(201,208,221,.05)}
+.pv-step.on{
+  color:var(--ice);border-color:rgba(130,155,203,.35);
+  background:linear-gradient(90deg, rgba(130,155,203,.12), transparent);
+  box-shadow:inset 3px 0 0 var(--blue)
+}
+.pv-idx{font-size:.82rem;font-weight:600;letter-spacing:.05em;color:var(--blue);font-variant-numeric:tabular-nums}
+.pv-step.on .pv-idx{color:var(--ice)}
 
-.pillar-card{
-  flex:0 0 clamp(320px, 46vw, 540px);scroll-snap-align:start;
-  padding:2.2rem;border-radius:22px;
+/* Vertical cards stream */
+.pv-cards{display:grid;gap:2rem}
+.pv-card{
+  padding:2.6rem;border-radius:24px;
   background:linear-gradient(145deg,rgba(23,26,34,.9),rgba(17,20,28,.75));
   border:1px solid var(--card-border);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
-  display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;
-  position:relative;overflow:hidden;transition:border-color .35s,transform .35s,box-shadow .35s
+  display:flex;flex-direction:column;gap:1.5rem;
+  position:relative;overflow:hidden;
+  transition:border-color .4s,transform .4s,box-shadow .4s
 }
-.pillar-card:hover{border-color:rgba(130,155,203,.45);box-shadow:0 16px 40px -12px rgba(0,0,0,.7),0 0 24px rgba(130,155,203,.1)}
+.pv-card:hover{
+  border-color:rgba(130,155,203,.5);
+  box-shadow:0 20px 48px -14px rgba(0,0,0,.8),0 0 28px rgba(130,155,203,.12);
+  transform:translateY(-3px)
+}
+.pv-card-top{display:flex;justify-content:space-between;align-items:baseline}
+.pv-card-tag{font-size:.78rem;letter-spacing:.08em;color:var(--blue);font-weight:600;text-transform:uppercase}
+.pv-card-num{font-size:3.5rem;font-weight:300;line-height:.8;color:rgba(201,208,221,.12);letter-spacing:-.04em}
 
-.p-top{display:flex;justify-content:space-between;align-items:flex-start}
-.p-num{font-size:3.2rem;font-weight:300;line-height:.8;color:rgba(201,208,221,.12);letter-spacing:-.04em}
-.p-tag{font-size:.76rem;letter-spacing:.08em;color:var(--blue);font-weight:500;text-transform:uppercase}
+.pv-card h3{margin:0;font-size:clamp(1.35rem,2.2vw,1.65rem);font-weight:500;color:var(--ice);letter-spacing:-.01em}
+.pv-card p{margin:0;font-size:.92rem;color:var(--mute);line-height:1.7}
 
-.p-body h3{font-size:clamp(1.25rem,2.2vw,1.55rem);font-weight:500;color:var(--ice);margin:0 0 .8rem;letter-spacing:-.01em}
-.p-body p{margin:0 0 1.2rem;font-size:.9rem;color:var(--mute);line-height:1.65}
-.p-bullets{list-style:none;padding:0;margin:0 0 1.2rem;display:grid;gap:.5rem}
-.p-bullets li{font-size:.85rem;color:var(--silver);position:relative;padding-left:1.2rem;line-height:1.55}
-.p-bullets li::before{content:"—";position:absolute;left:0;color:var(--blue)}
+.pv-bullets{list-style:none;padding:0;margin:0;display:grid;gap:.65rem}
+.pv-bullets li{font-size:.88rem;color:var(--silver);position:relative;padding-left:1.3rem;line-height:1.6}
+.pv-bullets li::before{content:"—";position:absolute;left:0;color:var(--blue)}
 
-.p-footer{display:flex;flex-wrap:wrap;gap:.5rem;border-top:1px solid var(--line);padding-top:1.2rem}
-.p-pill{font-size:.75rem;padding:.25rem .65rem;border-radius:6px;background:rgba(201,208,221,.07);color:var(--ice)}
-
-.pillars-prog-bar{width:100%;height:2px;background:rgba(201,208,221,.12);border-radius:2px;position:relative;overflow:hidden;margin-bottom:4.5rem}
-.pillars-prog-thumb{position:absolute;top:0;left:0;height:100%;width:25%;background:linear-gradient(90deg,var(--blue),var(--ice));border-radius:2px;transition:left .2s ease-out,width .2s ease-out}
+.pv-footer{display:flex;flex-wrap:wrap;gap:.5rem;border-top:1px solid var(--line);padding-top:1.4rem;margin-top:.4rem}
+.pv-pill{font-size:.75rem;padding:.28rem .7rem;border-radius:6px;background:rgba(201,208,221,.07);color:var(--ice)}
 
 /* video demo showcase */
 .video-section{margin-bottom:4.5rem}
@@ -260,116 +271,108 @@ footer{margin-top:4rem;display:flex;justify-content:space-between;flex-wrap:wrap
     </div>
   </section>
 
-  <!-- Architectural Pillars - Horizontal Scroll Showcase -->
+  <!-- Architectural Pillars - Vertical Scroll Stream -->
   <section class="pillars-section">
-    <div class="pillars-header">
-      <div>
-        <h2 class="sec-title" style="margin:0 0 .4rem">Architectural Pillars.</h2>
-        <span style="font-size:.85rem;color:var(--mute)">Cuộn ngang hoặc bấm mũi tên để khám phá 4 phân hệ kiến trúc cốt lõi.</span>
-      </div>
-      <div class="pillars-ctrl">
-        <span class="p-counter" id="pillarsCounter">01 / 04</span>
-        <button type="button" class="p-btn" id="pillarsPrev" aria-label="Previous pillar">←</button>
-        <button type="button" class="p-btn" id="pillarsNext" aria-label="Next pillar">→</button>
-      </div>
-    </div>
-
-    <div class="pillars-track" id="pillarsTrack">
-      <article class="pillar-card">
-        <div class="p-top">
-          <span class="p-tag">01 / CORE RUNTIME</span>
-          <span class="p-num">01</span>
+    <div class="pv-wrap">
+      <div class="pv-aside">
+        <div class="pv-sticky">
+          <div class="meta-tag"><span class="dot"></span> <span>Systems Architecture</span></div>
+          <h2 class="sec-title">Architectural Pillars.</h2>
+          <p class="pv-lead">Bốn phân hệ kỹ thuật cốt lõi định hình nên năng lực phân tích vi cấu trúc thị trường và tốc độ xử lý tick của VluxChart Terminal. Cuộn xuống để xem từng phân hệ.</p>
+          <div class="pv-nav" id="pvNav">
+            <a href="#pillar-1" class="pv-step on"><span class="pv-idx">01</span> <span class="pv-label">High-Precision Engine</span></a>
+            <a href="#pillar-2" class="pv-step"><span class="pv-idx">02</span> <span class="pv-label">Market Feeds &amp; WAL</span></a>
+            <a href="#pillar-3" class="pv-step"><span class="pv-idx">03</span> <span class="pv-label">Microstructure Analytics</span></a>
+            <a href="#pillar-4" class="pv-step"><span class="pv-idx">04</span> <span class="pv-label">60 FPS Hardware Visuals</span></a>
+          </div>
         </div>
-        <div class="p-body">
-          <h3>High-Precision Engine</h3>
-          <p>Multi-threaded async Tokio runtime with non-blocking channel pipelining. Solves floating-point inaccuracy by enforcing exact fixed-point arithmetic.</p>
-          <ul class="p-bullets">
+      </div>
+
+      <div class="pv-cards">
+        <article class="pv-card" id="pillar-1">
+          <div class="pv-card-top">
+            <span class="pv-card-tag">01 / CORE RUNTIME</span>
+            <span class="pv-card-num">01</span>
+          </div>
+          <h3>High-Precision Concurrency Engine</h3>
+          <p>Multi-threaded async Tokio runtime with non-blocking channel pipelining. Solves floating-point inaccuracy by enforcing exact fixed-point arithmetic across all financial volume calculations.</p>
+          <ul class="pv-bullets">
             <li>Zero-float volume accounting via <code>rust_decimal</code> to eliminate rounding errors in aggregate ticks.</li>
-            <li>Low-latency ring buffer queues processing up to 100,000 tick updates/second.</li>
+            <li>Low-latency ring buffer queues processing up to 100,000 tick updates per second.</li>
             <li>Fine-grained memory budgeting with zero garbage collection pauses.</li>
           </ul>
-        </div>
-        <div class="p-footer">
-          <span class="p-pill">Rust 2021</span>
-          <span class="p-pill">Tokio Async</span>
-          <span class="p-pill">rust_decimal</span>
-          <span class="p-pill">Zero Float Drift</span>
-        </div>
-      </article>
+          <div class="pv-footer">
+            <span class="pv-pill">Rust 2021</span>
+            <span class="pv-pill">Tokio Async</span>
+            <span class="pv-pill">rust_decimal</span>
+            <span class="pv-pill">Zero Float Drift</span>
+          </div>
+        </article>
 
-      <article class="pillar-card">
-        <div class="p-top">
-          <span class="p-tag">02 / INGESTION &amp; RECOVERY</span>
-          <span class="p-num">02</span>
-        </div>
-        <div class="p-body">
-          <h3>Market Feeds &amp; WAL</h3>
+        <article class="pv-card" id="pillar-2">
+          <div class="pv-card-top">
+            <span class="pv-card-tag">02 / INGESTION &amp; CRASH RECOVERY</span>
+            <span class="pv-card-num">02</span>
+          </div>
+          <h3>Market Feeds &amp; Zero-Loss WAL</h3>
           <p>Dual parallel WebSocket subscribers for Bybit Linear and Binance Futures feeds, linked with a low-latency local IPC bridge to MetaTrader 5 (MT5).</p>
-          <ul class="p-bullets">
+          <ul class="pv-bullets">
             <li>Append-only Write-Ahead Logging (WAL) with CRC32 checksums for zero-loss crash recovery.</li>
             <li>Automatic reconnect &amp; sequence gap backfilling without stalling chart rendering.</li>
             <li>Bidirectional tick synchronization between MT5 terminal and desktop analytical engine.</li>
           </ul>
-        </div>
-        <div class="p-footer">
-          <span class="p-pill">WebSockets</span>
-          <span class="p-pill">Bybit Linear</span>
-          <span class="p-pill">Binance Futures</span>
-          <span class="p-pill">MT5 IPC Bridge</span>
-          <span class="p-pill">WAL CRC32</span>
-        </div>
-      </article>
+          <div class="pv-footer">
+            <span class="pv-pill">WebSockets</span>
+            <span class="pv-pill">Bybit Linear</span>
+            <span class="pv-pill">Binance Futures</span>
+            <span class="pv-pill">MT5 IPC Bridge</span>
+            <span class="pv-pill">WAL CRC32</span>
+          </div>
+        </article>
 
-      <article class="pillar-card">
-        <div class="p-top">
-          <span class="p-tag">03 / QUANT ANALYTICS</span>
-          <span class="p-num">03</span>
-        </div>
-        <div class="p-body">
-          <h3>Microstructure Profiling</h3>
-          <p>Institutional order flow analytics decomposing candle volume into granular bid/ask aggressive execution layers.</p>
-          <ul class="p-bullets">
+        <article class="pv-card" id="pillar-3">
+          <div class="pv-card-top">
+            <span class="pv-card-tag">03 / QUANT ORDER FLOW</span>
+            <span class="pv-card-num">03</span>
+          </div>
+          <h3>Microstructure &amp; Cluster Analytics</h3>
+          <p>Institutional order flow analytics decomposing candle volume into granular bid/ask aggressive execution layers in real time.</p>
+          <ul class="pv-bullets">
             <li>Real-time Footprint clusters: bid-ask volume delta computed on every tick level.</li>
             <li>Diagonal Imbalance algorithm (300% ratio) with automated cluster stacking.</li>
             <li>Cumulative Volume Delta (CVD) divergences &amp; Volume Profile (VPOC, VAH, VAL).</li>
             <li>Options Gamma Exposure (GEX) profiling for spot and derivative liquidity regimes.</li>
           </ul>
-        </div>
-        <div class="p-footer">
-          <span class="p-pill">Footprint</span>
-          <span class="p-pill">Diagonal Imbalance</span>
-          <span class="p-pill">CVD Divergence</span>
-          <span class="p-pill">Volume Profile</span>
-          <span class="p-pill">Options GEX</span>
-        </div>
-      </article>
+          <div class="pv-footer">
+            <span class="pv-pill">Footprint</span>
+            <span class="pv-pill">Diagonal Imbalance</span>
+            <span class="pv-pill">CVD Divergence</span>
+            <span class="pv-pill">Volume Profile</span>
+            <span class="pv-pill">Options GEX</span>
+          </div>
+        </article>
 
-      <article class="pillar-card">
-        <div class="p-top">
-          <span class="p-tag">04 / HARDWARE GRAPHICS</span>
-          <span class="p-num">04</span>
-        </div>
-        <div class="p-body">
-          <h3>60 FPS Hardware Visuals</h3>
+        <article class="pv-card" id="pillar-4">
+          <div class="pv-card-top">
+            <span class="pv-card-tag">04 / GRAPHICS &amp; WORKSPACE</span>
+            <span class="pv-card-num">04</span>
+          </div>
+          <h3>60 FPS Hardware-Accelerated Visuals</h3>
           <p>Zero-overhead Tauri 2 IPC and custom Canvas2D rendering pipeline designed to sustain a locked 60 FPS under high-frequency market surges.</p>
-          <ul class="p-bullets">
+          <ul class="pv-bullets">
             <li>Decoupled data ingestion thread from rendering loop to prevent frame stutters.</li>
             <li>Dynamic viewport culling: renders only active price levels on screen.</li>
             <li>Native multi-window workspace supporting detached multi-monitor setups.</li>
           </ul>
-        </div>
-        <div class="p-footer">
-          <span class="p-pill">Tauri 2</span>
-          <span class="p-pill">React 19</span>
-          <span class="p-pill">TypeScript</span>
-          <span class="p-pill">Canvas2D</span>
-          <span class="p-pill">60 FPS Native</span>
-        </div>
-      </article>
-    </div>
-
-    <div class="pillars-prog-bar">
-      <div class="pillars-prog-thumb" id="pillarsThumb"></div>
+          <div class="pv-footer">
+            <span class="pv-pill">Tauri 2</span>
+            <span class="pv-pill">React 19</span>
+            <span class="pv-pill">TypeScript</span>
+            <span class="pv-pill">Canvas2D</span>
+            <span class="pv-pill">60 FPS Native</span>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -465,34 +468,27 @@ if(fine&&!reduce){
   },{passive:true});
 }
 
-/* Pillars horizontal scroll controller */
-var pTrack=document.getElementById('pillarsTrack'),pThumb=document.getElementById('pillarsThumb'),pCounter=document.getElementById('pillarsCounter');
-var pPrev=document.getElementById('pillarsPrev'),pNext=document.getElementById('pillarsNext');
-if(pTrack){
-  var pCards=pTrack.querySelectorAll('.pillar-card');
-  function updatePillars(){
-    var maxS=pTrack.scrollWidth-pTrack.clientWidth;
-    var ratio=maxS>0?pTrack.scrollLeft/maxS:0;
-    if(pThumb){
-      var w=Math.max(20,(pTrack.clientWidth/pTrack.scrollWidth)*100);
-      pThumb.style.width=w+'%';
-      pThumb.style.left=(ratio*(100-w))+'%';
-    }
-    var cardW=pCards[0]?pCards[0].offsetWidth+24:340;
-    var idx=Math.min(pCards.length,Math.max(1,Math.round(pTrack.scrollLeft/cardW)+1));
-    if(pCounter)pCounter.textContent='0'+idx+' / 0'+pCards.length;
-  }
-  pTrack.addEventListener('scroll',updatePillars,{passive:true});
-  if(pPrev)pPrev.addEventListener('click',function(){pTrack.scrollBy({left:-pTrack.clientWidth*0.75,behavior:'smooth'});});
-  if(pNext)pNext.addEventListener('click',function(){pTrack.scrollBy({left:pTrack.clientWidth*0.75,behavior:'smooth'});});
-  /* Mouse wheel horizontal translation */
-  pTrack.addEventListener('wheel',function(e){
-    if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){
-      var canL=pTrack.scrollLeft>0&&e.deltaY<0,canR=pTrack.scrollLeft<pTrack.scrollWidth-pTrack.clientWidth&&e.deltaY>0;
-      if(canL||canR){e.preventDefault();pTrack.scrollLeft+=e.deltaY*1.2;}
-    }
-  },{passive:false});
-  updatePillars();
+/* Architectural Pillars - Vertical Scroll Spy */
+var pvCards=[].slice.call(document.querySelectorAll('.pv-card')),pvSteps=[].slice.call(document.querySelectorAll('.pv-step'));
+if(pvCards.length&&pvSteps.length){
+  var pvObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var id=entry.target.id;
+        pvSteps.forEach(function(step){
+          step.classList.toggle('on',step.getAttribute('href')==='#'+id);
+        });
+      }
+    });
+  },{rootMargin:'-25% 0px -45% 0px'});
+  pvCards.forEach(function(card){pvObs.observe(card);});
+  document.addEventListener('click',function(e){
+    var step=e.target.closest('.pv-step');
+    if(!step)return;
+    e.preventDefault();
+    var target=document.querySelector(step.getAttribute('href'));
+    if(target)target.scrollIntoView({behavior:'smooth',block:'center'});
+  });
 }
 
 /* text scramble decode */
