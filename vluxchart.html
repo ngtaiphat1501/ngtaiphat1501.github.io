@@ -78,21 +78,61 @@ h1{
 .spec-val{font-size:1.05rem;font-weight:500;color:var(--ice)}
 .spec-sub{font-size:.82rem;color:var(--mute)}
 
-/* architecture & modules */
+/* architecture & modules (horizontal scroll) */
 .sec-title{font-size:clamp(1.8rem,3.6vw,2.5rem);font-weight:500;color:var(--ice);letter-spacing:-.02em;margin:0 0 2rem}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:1.5rem;margin-bottom:4.5rem}
-.mod-card{
-  padding:1.8rem;border-radius:18px;
-  background:linear-gradient(145deg,rgba(23,26,34,.8),rgba(17,20,28,.65));
-  border:1px solid var(--card-border);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
-  display:grid;gap:.8rem;transition:border-color .3s,transform .3s;position:relative
+.pillars-section{margin-bottom:4.5rem}
+.pillars-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
+.pillars-ctrl{display:flex;align-items:center;gap:.8rem}
+.p-btn{
+  all:unset;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);
+  display:grid;place-items:center;color:var(--ice);font-size:1.1rem;cursor:pointer;
+  background:rgba(20,24,34,.6);transition:border-color .3s,background .3s,color .3s,transform .2s
 }
-.mod-card:hover{border-color:rgba(130,155,203,.4);transform:translateY(-3px)}
-.mod-num{font-size:.8rem;letter-spacing:.08em;color:var(--blue);font-weight:500}
-.mod-card h3{margin:0;font-size:1.25rem;font-weight:500;color:var(--ice);letter-spacing:-.01em}
-.mod-card p{margin:0;font-size:.88rem;color:var(--mute);line-height:1.6}
-.mod-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem}
-.mod-tag{font-size:.75rem;padding:.2rem .6rem;border-radius:6px;background:rgba(201,208,221,.07);color:var(--silver)}
+.p-btn:hover{border-color:var(--silver);background:rgba(201,208,221,.12);transform:scale(1.05)}
+.p-counter{font-size:.85rem;color:var(--mute);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+
+.pillars-track{
+  display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;padding:1rem 0 1.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch
+}
+.pillars-track::-webkit-scrollbar{display:none}
+
+.pillar-card{
+  flex:0 0 clamp(320px, 46vw, 540px);scroll-snap-align:start;
+  padding:2.2rem;border-radius:22px;
+  background:linear-gradient(145deg,rgba(23,26,34,.9),rgba(17,20,28,.75));
+  border:1px solid var(--card-border);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;
+  position:relative;overflow:hidden;transition:border-color .35s,transform .35s,box-shadow .35s
+}
+.pillar-card:hover{border-color:rgba(130,155,203,.45);box-shadow:0 16px 40px -12px rgba(0,0,0,.7),0 0 24px rgba(130,155,203,.1)}
+
+.p-top{display:flex;justify-content:space-between;align-items:flex-start}
+.p-num{font-size:3.2rem;font-weight:300;line-height:.8;color:rgba(201,208,221,.12);letter-spacing:-.04em}
+.p-tag{font-size:.76rem;letter-spacing:.08em;color:var(--blue);font-weight:500;text-transform:uppercase}
+
+.p-body h3{font-size:clamp(1.25rem,2.2vw,1.55rem);font-weight:500;color:var(--ice);margin:0 0 .8rem;letter-spacing:-.01em}
+.p-body p{margin:0 0 1.2rem;font-size:.9rem;color:var(--mute);line-height:1.65}
+.p-bullets{list-style:none;padding:0;margin:0 0 1.2rem;display:grid;gap:.5rem}
+.p-bullets li{font-size:.85rem;color:var(--silver);position:relative;padding-left:1.2rem;line-height:1.55}
+.p-bullets li::before{content:"—";position:absolute;left:0;color:var(--blue)}
+
+.p-footer{display:flex;flex-wrap:wrap;gap:.5rem;border-top:1px solid var(--line);padding-top:1.2rem}
+.p-pill{font-size:.75rem;padding:.25rem .65rem;border-radius:6px;background:rgba(201,208,221,.07);color:var(--ice)}
+
+.pillars-prog-bar{width:100%;height:2px;background:rgba(201,208,221,.12);border-radius:2px;position:relative;overflow:hidden;margin-bottom:4.5rem}
+.pillars-prog-thumb{position:absolute;top:0;left:0;height:100%;width:25%;background:linear-gradient(90deg,var(--blue),var(--ice));border-radius:2px;transition:left .2s ease-out,width .2s ease-out}
+
+/* video demo showcase */
+.video-section{margin-bottom:4.5rem}
+.video-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
+.video-frame{
+  position:relative;border-radius:20px;overflow:hidden;
+  border:1px solid rgba(201,208,221,.22);background:#090B10;
+  box-shadow:0 24px 60px -15px rgba(0,0,0,.85),0 0 35px rgba(130,155,203,.15);
+  aspect-ratio:16/9;display:grid;place-items:center
+}
+.video-frame video{width:100%;height:100%;object-fit:cover;display:block}
 
 /* blueprint ready container */
 .blueprint-card{
@@ -220,51 +260,140 @@ footer{margin-top:4rem;display:flex;justify-content:space-between;flex-wrap:wrap
     </div>
   </section>
 
-  <h2 class="sec-title">Architectural Pillars.</h2>
-  <section class="cards-grid">
-    <article class="mod-card">
-      <span class="mod-num">01 / CORE</span>
-      <h3>High-Precision Engine</h3>
-      <p>Multi-threaded async Tokio runtime with non-blocking channels. Uses <code>rust_decimal</code> to guarantee zero floating point roundoff errors during high-frequency volume calculations.</p>
-      <div class="mod-tags">
-        <span class="mod-tag">Rust</span>
-        <span class="mod-tag">Tokio</span>
-        <span class="mod-tag">rust_decimal</span>
+  <!-- Architectural Pillars - Horizontal Scroll Showcase -->
+  <section class="pillars-section">
+    <div class="pillars-header">
+      <div>
+        <h2 class="sec-title" style="margin:0 0 .4rem">Architectural Pillars.</h2>
+        <span style="font-size:.85rem;color:var(--mute)">Cuộn ngang hoặc bấm mũi tên để khám phá 4 phân hệ kiến trúc cốt lõi.</span>
       </div>
-    </article>
+      <div class="pillars-ctrl">
+        <span class="p-counter" id="pillarsCounter">01 / 04</span>
+        <button type="button" class="p-btn" id="pillarsPrev" aria-label="Previous pillar">←</button>
+        <button type="button" class="p-btn" id="pillarsNext" aria-label="Next pillar">→</button>
+      </div>
+    </div>
 
-    <article class="mod-card">
-      <span class="mod-num">02 / INGESTION</span>
-      <h3>Market Feeds &amp; WAL</h3>
-      <p>Dual parallel WebSocket feeds for Bybit Linear and Binance Futures alongside a low-latency MetaTrader 5 (MT5) bridge. Append-only WAL with CRC32 integrity verification for instant crash recovery.</p>
-      <div class="mod-tags">
-        <span class="mod-tag">WebSockets</span>
-        <span class="mod-tag">MT5 Bridge</span>
-        <span class="mod-tag">WAL CRC32</span>
-      </div>
-    </article>
+    <div class="pillars-track" id="pillarsTrack">
+      <article class="pillar-card">
+        <div class="p-top">
+          <span class="p-tag">01 / CORE RUNTIME</span>
+          <span class="p-num">01</span>
+        </div>
+        <div class="p-body">
+          <h3>High-Precision Engine</h3>
+          <p>Multi-threaded async Tokio runtime with non-blocking channel pipelining. Solves floating-point inaccuracy by enforcing exact fixed-point arithmetic.</p>
+          <ul class="p-bullets">
+            <li>Zero-float volume accounting via <code>rust_decimal</code> to eliminate rounding errors in aggregate ticks.</li>
+            <li>Low-latency ring buffer queues processing up to 100,000 tick updates/second.</li>
+            <li>Fine-grained memory budgeting with zero garbage collection pauses.</li>
+          </ul>
+        </div>
+        <div class="p-footer">
+          <span class="p-pill">Rust 2021</span>
+          <span class="p-pill">Tokio Async</span>
+          <span class="p-pill">rust_decimal</span>
+          <span class="p-pill">Zero Float Drift</span>
+        </div>
+      </article>
 
-    <article class="mod-card">
-      <span class="mod-num">03 / ANALYTICS</span>
-      <h3>Microstructure Profiling</h3>
-      <p>Footprint volume clusters, 300% Diagonal Imbalance detection with automated stacking, Cumulative Volume Delta (CVD), and Options Gamma Exposure (GEX) profiling.</p>
-      <div class="mod-tags">
-        <span class="mod-tag">Footprint</span>
-        <span class="mod-tag">Imbalance</span>
-        <span class="mod-tag">GEX Profile</span>
-      </div>
-    </article>
+      <article class="pillar-card">
+        <div class="p-top">
+          <span class="p-tag">02 / INGESTION &amp; RECOVERY</span>
+          <span class="p-num">02</span>
+        </div>
+        <div class="p-body">
+          <h3>Market Feeds &amp; WAL</h3>
+          <p>Dual parallel WebSocket subscribers for Bybit Linear and Binance Futures feeds, linked with a low-latency local IPC bridge to MetaTrader 5 (MT5).</p>
+          <ul class="p-bullets">
+            <li>Append-only Write-Ahead Logging (WAL) with CRC32 checksums for zero-loss crash recovery.</li>
+            <li>Automatic reconnect &amp; sequence gap backfilling without stalling chart rendering.</li>
+            <li>Bidirectional tick synchronization between MT5 terminal and desktop analytical engine.</li>
+          </ul>
+        </div>
+        <div class="p-footer">
+          <span class="p-pill">WebSockets</span>
+          <span class="p-pill">Bybit Linear</span>
+          <span class="p-pill">Binance Futures</span>
+          <span class="p-pill">MT5 IPC Bridge</span>
+          <span class="p-pill">WAL CRC32</span>
+        </div>
+      </article>
 
-    <article class="mod-card">
-      <span class="mod-num">04 / RENDER</span>
-      <h3>60 FPS Hardware Visuals</h3>
-      <p>Zero-overhead Tauri 2 IPC and hardware-accelerated Canvas2D multi-chart pipelines maintaining responsive 60 FPS execution under extreme volatility trade surges.</p>
-      <div class="mod-tags">
-        <span class="mod-tag">Tauri 2</span>
-        <span class="mod-tag">Canvas2D</span>
-        <span class="mod-tag">Multi-window</span>
+      <article class="pillar-card">
+        <div class="p-top">
+          <span class="p-tag">03 / QUANT ANALYTICS</span>
+          <span class="p-num">03</span>
+        </div>
+        <div class="p-body">
+          <h3>Microstructure Profiling</h3>
+          <p>Institutional order flow analytics decomposing candle volume into granular bid/ask aggressive execution layers.</p>
+          <ul class="p-bullets">
+            <li>Real-time Footprint clusters: bid-ask volume delta computed on every tick level.</li>
+            <li>Diagonal Imbalance algorithm (300% ratio) with automated cluster stacking.</li>
+            <li>Cumulative Volume Delta (CVD) divergences &amp; Volume Profile (VPOC, VAH, VAL).</li>
+            <li>Options Gamma Exposure (GEX) profiling for spot and derivative liquidity regimes.</li>
+          </ul>
+        </div>
+        <div class="p-footer">
+          <span class="p-pill">Footprint</span>
+          <span class="p-pill">Diagonal Imbalance</span>
+          <span class="p-pill">CVD Divergence</span>
+          <span class="p-pill">Volume Profile</span>
+          <span class="p-pill">Options GEX</span>
+        </div>
+      </article>
+
+      <article class="pillar-card">
+        <div class="p-top">
+          <span class="p-tag">04 / HARDWARE GRAPHICS</span>
+          <span class="p-num">04</span>
+        </div>
+        <div class="p-body">
+          <h3>60 FPS Hardware Visuals</h3>
+          <p>Zero-overhead Tauri 2 IPC and custom Canvas2D rendering pipeline designed to sustain a locked 60 FPS under high-frequency market surges.</p>
+          <ul class="p-bullets">
+            <li>Decoupled data ingestion thread from rendering loop to prevent frame stutters.</li>
+            <li>Dynamic viewport culling: renders only active price levels on screen.</li>
+            <li>Native multi-window workspace supporting detached multi-monitor setups.</li>
+          </ul>
+        </div>
+        <div class="p-footer">
+          <span class="p-pill">Tauri 2</span>
+          <span class="p-pill">React 19</span>
+          <span class="p-pill">TypeScript</span>
+          <span class="p-pill">Canvas2D</span>
+          <span class="p-pill">60 FPS Native</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="pillars-prog-bar">
+      <div class="pillars-prog-thumb" id="pillarsThumb"></div>
+    </div>
+  </section>
+
+  <!-- Live Demonstration Video Showcase -->
+  <section class="video-section">
+    <div class="video-header">
+      <div>
+        <h2 class="sec-title" style="margin:0 0 .4rem">Live Terminal Demonstration.</h2>
+        <span style="font-size:.85rem;color:var(--mute)">Order Flow &amp; Microstructure Execution Demo · 35s</span>
       </div>
-    </article>
+      <div class="meta-tag" style="margin:0"><span class="dot"></span> <span>60 FPS Demo Ready</span></div>
+    </div>
+
+    <div class="video-frame" id="videoFrame">
+      <video id="vDemo" controls playsinline preload="metadata" poster="assets/projects/vluxchart.jpg">
+        <source src="assets/projects/vluxchart-demo.mp4" type="video/mp4">
+        <source src="assets/projects/vluxchart.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="caption">
+      <span>Giao diện thực chiến: Phân tích Footprint cụm lệnh, Imbalance xếp tầng và khớp lệnh trực tiếp qua MT5.</span>
+      <span>Thời lượng: 00:35 · Hỗ trợ tải trực tiếp MP4 hoặc kéo từ YouTube</span>
+    </div>
   </section>
 
   <section class="blueprint-card">
@@ -334,6 +463,36 @@ if(fine&&!reduce){
       el.style.translate=Math.hypot(dx,dy)<R?(dx*.25).toFixed(1)+'px '+(dy*.25).toFixed(1)+'px':'';
     });
   },{passive:true});
+}
+
+/* Pillars horizontal scroll controller */
+var pTrack=document.getElementById('pillarsTrack'),pThumb=document.getElementById('pillarsThumb'),pCounter=document.getElementById('pillarsCounter');
+var pPrev=document.getElementById('pillarsPrev'),pNext=document.getElementById('pillarsNext');
+if(pTrack){
+  var pCards=pTrack.querySelectorAll('.pillar-card');
+  function updatePillars(){
+    var maxS=pTrack.scrollWidth-pTrack.clientWidth;
+    var ratio=maxS>0?pTrack.scrollLeft/maxS:0;
+    if(pThumb){
+      var w=Math.max(20,(pTrack.clientWidth/pTrack.scrollWidth)*100);
+      pThumb.style.width=w+'%';
+      pThumb.style.left=(ratio*(100-w))+'%';
+    }
+    var cardW=pCards[0]?pCards[0].offsetWidth+24:340;
+    var idx=Math.min(pCards.length,Math.max(1,Math.round(pTrack.scrollLeft/cardW)+1));
+    if(pCounter)pCounter.textContent='0'+idx+' / 0'+pCards.length;
+  }
+  pTrack.addEventListener('scroll',updatePillars,{passive:true});
+  if(pPrev)pPrev.addEventListener('click',function(){pTrack.scrollBy({left:-pTrack.clientWidth*0.75,behavior:'smooth'});});
+  if(pNext)pNext.addEventListener('click',function(){pTrack.scrollBy({left:pTrack.clientWidth*0.75,behavior:'smooth'});});
+  /* Mouse wheel horizontal translation */
+  pTrack.addEventListener('wheel',function(e){
+    if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){
+      var canL=pTrack.scrollLeft>0&&e.deltaY<0,canR=pTrack.scrollLeft<pTrack.scrollWidth-pTrack.clientWidth&&e.deltaY>0;
+      if(canL||canR){e.preventDefault();pTrack.scrollLeft+=e.deltaY*1.2;}
+    }
+  },{passive:false});
+  updatePillars();
 }
 
 /* text scramble decode */
