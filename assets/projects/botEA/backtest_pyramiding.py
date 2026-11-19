@@ -361,6 +361,12 @@ def run_backtest():
     net_profit = balance - initial_balance
     return_pct = (net_profit / initial_balance) * 100.0
     
+    avg_win = wins['pnl_usd'].mean() if len(wins) > 0 else 0.0
+    avg_loss = abs(losses['pnl_usd'].mean()) if len(losses) > 0 else 0.0
+    payoff_ratio = (avg_win / avg_loss) if avg_loss > 0 else 999.0
+    max_win = wins['pnl_usd'].max() if len(wins) > 0 else 0.0
+    max_loss = losses['pnl_usd'].min() if len(losses) > 0 else 0.0
+
     # Calculate Drawdown
     df_eq = pd.DataFrame({
         'time': pd.to_datetime(eq_times, unit='s'),
@@ -378,6 +384,21 @@ def run_backtest():
     daily_returns = df_eq['equity'].resample('D').last().pct_change(fill_method=None).dropna()
     sharpe = (daily_returns.mean() / (daily_returns.std() + 1e-9)) * np.sqrt(252) if len(daily_returns) > 1 else 0
     
+    # Yearly breakdown
+    df_trades['datetime'] = pd.to_datetime(df_trades['close_time'], unit='s')
+    df_trades['year'] = df_trades['datetime'].dt.year
+    yearly_stats = {}
+    for yr, group in df_trades.groupby('year'):
+        yr_wins = group[group['pnl_usd'] > 0]
+        yr_pnl = group['pnl_usd'].sum()
+        yearly_stats[int(yr)] = {
+            'total_trades': len(group),
+            'win_trades': len(yr_wins),
+            'win_rate': round((len(yr_wins) / len(group)) * 100.0, 2),
+            'net_profit_usd': round(yr_pnl, 2),
+            'profit_factor': round(yr_wins['pnl_usd'].sum() / abs(group[group['pnl_usd'] <= 0]['pnl_usd'].sum()), 2) if len(group[group['pnl_usd'] <= 0]) > 0 else 999.0
+        }
+    
     t_start_dt = datetime.fromtimestamp(m15_time[0])
     t_end_dt = datetime.fromtimestamp(m15_time[-1])
     
@@ -394,15 +415,25 @@ def run_backtest():
         'loss_trades': len(losses),
         'win_rate': round(win_rate, 2),
         'profit_factor': round(profit_factor, 2),
+        'avg_win_usd': round(avg_win, 2),
+        'avg_loss_usd': round(avg_loss, 2),
+        'payoff_ratio': round(payoff_ratio, 2),
+        'max_win_trade_usd': round(max_win, 2),
+        'max_loss_trade_usd': round(max_loss, 2),
         'max_drawdown_usd': round(max_dd_usd, 2),
         'max_drawdown_pct': round(max_dd_pct, 2),
-        'sharpe_ratio': round(sharpe, 2)
+        'sharpe_ratio': round(sharpe, 2),
+        'yearly_breakdown': yearly_stats
     }
     
     out_dir = r"D:\update profile\ngtaiphat1501.github.io\assets\projects\botEA"
     json_path = os.path.join(out_dir, "backtest_report_4yr.json")
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(metrics, f, indent=2, ensure_ascii=False)
+        
+    csv_path = os.path.join(out_dir, "trades_history_4yr.csv")
+    df_trades.to_csv(csv_path, index=False)
+    print(f"Exported all {total_trades} trades to: {csv_path}")
         
     print("\n" + "="*60)
     print("4-YEAR PYTHON QUANT BACKTEST RESULTS (2022 - 2026)")
