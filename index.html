@@ -1,407 +1,464 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nguyễn Phát Tài — Software Engineer</title>
-  <meta name="description" content="Portfolio của Nguyễn Phát Tài — Software Engineer chuyên sâu Java Backend, Kiến trúc hệ thống và Cloud Infrastructure.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VLUX — Nguyễn Phát Tài | Java Backend · Applied AI</title>
+<meta name="description" content="Nguyễn Phát Tài (VLUX) — Software Engineering student at FPT University Cần Thơ. Java backend, SQL Server, Docker; building toward applied AI and quantitative systems.">
+<meta property="og:title" content="VLUX — Nguyễn Phát Tài"><meta property="og:type" content="website"><meta property="og:url" content="https://ngtaiphat1501.github.io">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--obs:#08090D;--graph:#11141C;--char:#171A22;--silver:#C9D0DD;--ice:#F3F5FA;--blue:#829BCB;--mute:#a6aebd;--line:rgba(201,208,221,.18);
+--serif:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;--sans:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+body{margin:0;background:radial-gradient(70vw 60vh at 80% 0,#1b2234,transparent 70%),var(--obs);color:var(--silver);font:400 1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:2px}
+.wrap{width:min(1180px,100% - 3rem);margin-inline:auto}
+h1,h2,h3,.big{font-family:var(--serif);font-weight:500;color:var(--ice);margin:0;letter-spacing:-.03em;line-height:1.1}
+.tiny{font-size:.85rem;color:var(--mute)}
+section{padding:clamp(6rem,14vw,11rem) 0;min-height:80svh}
+header{position:fixed;inset:0 0 auto 0;z-index:20;padding-top:env(safe-area-inset-top,0px);background:linear-gradient(rgba(8,9,13,.7),rgba(8,9,13,0))}
+nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:1rem}
+.logo{font-family:var(--serif);font-size:1.15rem;color:var(--ice);text-decoration:none;letter-spacing:.05em}
+.logo sup{font-size:.5em;color:var(--mute)}
+nav ul{display:flex;gap:1.6rem;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
+nav ul a{font-size:.8rem;text-decoration:none;color:var(--mute);padding:.4rem 0;border-bottom:1px solid transparent;transition:color .3s,border-color .3s;white-space:nowrap}
+nav ul a:hover,nav ul a.on{color:var(--ice);border-color:var(--silver)}
+/* hero */
+#home{display:grid;align-items:end;min-height:100svh;padding:8rem 0 5rem}
+#home h1{font-size:clamp(3.4rem,12vw,9.5rem);letter-spacing:-.04em;line-height:.9;margin:0 0 2rem -.04em}
+#home h1 sup{font-size:.18em;vertical-align:top;color:var(--mute);margin-left:.3em;letter-spacing:0}
+.hero-row{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:end}
+.role{font-family:var(--serif);font-size:clamp(1.1rem,1.8vw,1.5rem);color:var(--ice);margin:0 0 .4rem;font-weight:400}
+.hero-row p{margin:0;max-width:38ch}
+.cta{display:flex;gap:1.6rem;align-items:center;margin-top:1.8rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.85rem 1.7rem;border:1px solid var(--silver);border-radius:99px;text-decoration:none;color:var(--ice);font-size:.85rem;transition:background .3s,color .3s}
+.btn:hover{background:var(--ice);color:var(--obs)}
+.link{text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;font-size:.9rem}
+.link:hover{border-color:var(--silver)}
+.rise{animation:rise 1.3s cubic-bezier(.2,.7,.2,1) both}
+.rise.d{animation-delay:.25s}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}}
+/* about */
+.about{display:grid;grid-template-columns:5fr 6fr;gap:clamp(2rem,6vw,6rem)}
+h2{font-size:clamp(2rem,4.4vw,3.5rem)}
+.lead{font-family:var(--serif);font-size:clamp(1.2rem,1.9vw,1.6rem);line-height:1.38;color:var(--ice);margin:0 0 2rem;font-weight:400}
+.about p{max-width:52ch}
+/* expertise */
+.xp{display:grid;grid-template-columns:6fr 5fr;gap:clamp(2rem,6vw,6rem);margin-top:4rem;align-items:start}
+.xp ul{list-style:none;margin:0;padding:0}
+.xp button{all:unset;display:block;width:100%;cursor:pointer;font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.3vw,2.6rem);line-height:1.15;letter-spacing:-.02em;color:rgba(243,245,250,.42);padding:.9rem 0;border-top:1px solid var(--line);transition:color .5s,padding-left .5s cubic-bezier(.2,.7,.2,1)}
+.xp li:last-child button{border-bottom:1px solid var(--line)}
+.xp button:hover,.xp button[aria-pressed=true]{color:var(--ice);padding-left:1.2rem}
+.xp button:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+#xpTxt{text-shadow:0 1px 22px rgba(8,9,13,.95);min-height:9rem;position:sticky;top:7rem;transition:opacity .35s}
+#xpTxt.out{opacity:0}
+#xpTxt h3{font-size:1.35rem;margin-bottom:.8rem}
+#xpTxt p{margin:0;max-width:40ch}
+/* philosophy */
+.ph{margin-top:4rem;display:grid;gap:clamp(2.5rem,6vw,5rem)}
+.ph p{margin:0;font-family:var(--serif);font-weight:400;color:var(--ice);font-size:clamp(2rem,5.2vw,4.6rem);line-height:1.08;letter-spacing:-.02em;max-width:18ch}
+.ph p small{display:block;margin-top:1rem;font:300 1rem/1.6 var(--sans);color:var(--silver);letter-spacing:0;max-width:44ch}
+.ph p:nth-child(2){margin-left:clamp(0rem,12vw,10rem)}
+.ph p:nth-child(3){margin-left:clamp(0rem,3vw,3rem)}
+.ph p:nth-child(4){margin-left:clamp(0rem,22vw,18rem)}
+.ph p:nth-child(5){margin-left:clamp(0rem,8vw,7rem);max-width:none}
+/* journey */
+.tl{list-style:none;margin:4rem 0 0;padding:0;position:relative}
+.tl::before{content:"";position:absolute;left:.45rem;top:.6rem;bottom:.6rem;width:1px;background:linear-gradient(var(--silver),var(--line))}
+.tl li{position:relative;display:grid;grid-template-columns:11rem 1fr;gap:1rem;padding:0 0 3rem 3rem;align-items:baseline}
+.tl li::before{content:"";position:absolute;left:0;top:.65rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--obs);border:1px solid var(--silver)}
+.tl h3{font-size:clamp(1.25rem,2.1vw,1.65rem)}
+.tl h3 span{display:block;font:300 1rem/1.6 var(--sans);color:var(--silver);margin-top:.4rem;letter-spacing:0}
+.todo{color:var(--blue)}
+/* contact */
+#contact{padding-bottom:4rem}
+#contact h2{font-size:clamp(2.2rem,5.6vw,4.6rem);max-width:15ch}
+.ct{margin-top:3rem;display:grid;gap:.7rem;font-family:var(--serif);font-size:clamp(1.1rem,1.7vw,1.45rem);font-weight:400}
+.ct a{text-decoration:none;color:var(--ice);width:max-content;max-width:100%;border-bottom:1px solid var(--line)}
+.ct a:hover{border-color:var(--silver)}
+footer{margin-top:7rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+@media(max-width:820px){
+ .hero-row,.about,.xp{grid-template-columns:1fr}
+ #xpTxt{position:static;min-height:11rem}
+ .tl li{grid-template-columns:1fr;gap:.2rem}
+ .ph p:nth-child(n){margin-left:0}
+ nav ul{gap:1rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rise{animation:none}*{transition:none!important}}
+.wk{display:grid;grid-template-columns:4fr 7fr;gap:clamp(1.5rem,5vw,5rem);padding:3rem 0;border-top:1px solid var(--line);margin-top:3rem}
+.wk.off{margin-left:clamp(0rem,8vw,7rem)}
+.wm{display:grid;gap:1rem;align-content:start}
+.wk h3{font-size:clamp(1.5rem,2.7vw,2.2rem);margin-bottom:1.2rem}
+.wk ul{margin:0 0 1.2rem;padding-left:1.1rem;display:grid;gap:.5rem;max-width:56ch}
+.wk .tags{color:var(--blue)}
+@media(max-width:820px){.wk{grid-template-columns:1fr}.wk.off{margin-left:0}}
 
-  <!-- OpenGraph -->
-  <meta property="og:title" content="Nguyễn Phát Tài — Software Engineer">
-  <meta property="og:description" content="Khám phá các dự án phần mềm, kho công nghệ và âm nhạc của Nguyễn Phát Tài.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ngtaiphat1501.github.io">
-  <meta property="og:image" content="https://avatars.githubusercontent.com/u/161285867?v=4">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/161285867?v=4">
-
-  <!-- Fonts: Geist / Inter & Fira Code -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css?v=3.0">
+#prog{position:fixed;top:0;left:0;height:2px;width:100%;background:linear-gradient(90deg,var(--blue),var(--ice));transform:scaleX(0);transform-origin:left;z-index:30}
+#veil{position:fixed;inset:0;z-index:50;background:#0b0d13;pointer-events:none;display:grid;place-items:center;clip-path:inset(0 0 100% 0)}
+#veil:not(.in):not(.out){transition:none}
+#veil.in,#veil.out{transition:clip-path .5s cubic-bezier(.7,0,.2,1)}
+#veil.in{clip-path:inset(0)}#veil.out{clip-path:inset(100% 0 0 0)}
+#veil span{font-size:1.1rem;color:var(--silver);letter-spacing:.04em}
+.js .rv{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.on{opacity:1;transform:none}
+#home .wrap{perspective:1100px}
+#home h1{font-weight:600;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-origin:left center;transition:transform .3s ease-out;background:linear-gradient(105deg,#8f9ab0 0%,#F3F5FA var(--gx,45%),#8f9ab0 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+#home h1 sup{-webkit-text-fill-color:var(--mute)}
+.wk{transition:transform .45s ease-out;will-change:transform}
+.key{display:flex;gap:1.2rem;align-items:center;margin-top:1rem}
+.k{display:inline-block;width:.9rem;height:.9rem;border-radius:50%;margin-right:.4rem;vertical-align:-1px}
+.k.used{background:var(--silver)}.k.learn{border:1px solid var(--silver)}
+.snd{display:flex;gap:.65rem;align-items:center;padding:.65rem 1.15rem;border:1px solid var(--line);border-radius:99px;background:rgba(8,9,13,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ice);font:500 .82rem var(--sans);cursor:pointer;transition:border-color .3s}
+.snd:hover{border-color:var(--silver)}
+.eq{display:flex;gap:2px;align-items:flex-end;height:14px}.eq i{display:block;width:3px;height:30%;background:var(--silver);border-radius:2px}
+.eq i{transition:height .09s linear}.snd.on .eq i{height:55%}
+.sndbox{position:fixed;right:max(1rem,env(safe-area-inset-right,0px));bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:25;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
+.sndpanel{display:none;align-items:center;gap:.4rem;padding:.4rem .55rem;border:1px solid var(--line);border-radius:99px;background:rgba(8,9,13,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.sndbox.on .sndpanel{display:flex}
+.sndpanel button{all:unset;cursor:pointer;font:500 .75rem var(--sans);color:var(--mute);padding:.32rem .7rem;border-radius:99px;border:1px solid transparent}
+.sndpanel button[aria-pressed=true]{color:var(--ice);border-color:var(--line);background:rgba(201,208,221,.08)}
+.sndpanel button:focus-visible{outline:2px solid var(--blue)}
+#sVol{width:80px;accent-color:var(--silver);cursor:pointer}
+p,.lead,.role{text-shadow:0 1px 20px rgba(8,9,13,.85)}.hero-row p{color:var(--ice)}
+[data-mag]{transition-property:translate,background-color,color,border-color;transition-duration:.4s,.3s,.3s,.3s;transition-timing-function:cubic-bezier(.2,.7,.2,1),ease,ease,ease}
+.wk{position:relative}.wk::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px circle at var(--sx,50%) var(--sy,50%),rgba(130,155,203,.13),transparent 60%);opacity:0;transition:opacity .35s}.wk:hover::after{opacity:1}
+.stk{display:grid;grid-template-columns:7fr 5fr;gap:clamp(1.5rem,5vw,4rem);margin-top:2rem;align-items:center}
+.orb{position:relative;height:clamp(380px,44vw,520px);cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none}.orb.drag{cursor:grabbing}
+.tg{position:absolute;left:50%;top:50%;display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:0;border:0;background:none;color:var(--ice);font:500 .7rem var(--sans);white-space:nowrap;cursor:pointer;will-change:transform,opacity;text-shadow:0 1px 8px rgba(8,9,13,.9)}
+.tg .ic{width:56px;height:56px;border-radius:13px;display:grid;place-items:center;overflow:hidden;transition:box-shadow .25s,filter .25s}
+.tg .ic img{width:100%;height:100%;display:block;pointer-events:none;-webkit-user-drag:none}
+.tg .ic.m{background:linear-gradient(145deg,#2a3040,#1a1e29);border:1px solid var(--line)}.tg .ic b{font:700 .95rem var(--sans);color:var(--ice);letter-spacing:-.02em}
+.tg.used .ic{box-shadow:0 8px 20px rgba(0,0,0,.45)}
+.tg.learn .ic{filter:saturate(.55) brightness(.82);box-shadow:0 0 0 1px var(--silver),0 8px 18px rgba(0,0,0,.35)}
+.tg.sel .ic{filter:none;box-shadow:0 0 0 2px var(--blue),0 0 26px rgba(130,155,203,.55)}.tg:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:15px}
+.orb.static{height:auto;display:flex;flex-wrap:wrap;gap:.6rem;align-content:center;cursor:default}.orb.static .tg{position:static}
+.stk-side{display:grid;gap:1.4rem}.flt{display:flex;flex-wrap:wrap;gap:.5rem}
+.flt button{all:unset;cursor:pointer;font:500 .78rem var(--sans);color:var(--mute);padding:.38rem .85rem;border:1px solid var(--line);border-radius:99px;transition:color .25s,border-color .25s,background .25s}
+.flt button:hover{color:var(--ice)}.flt button[aria-pressed=true]{color:var(--ice);border-color:var(--silver);background:rgba(201,208,221,.08)}.flt button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+#skInfo{min-height:9rem;padding-top:1.2rem;border-top:1px solid var(--line)}#skInfo h3{font-size:1.35rem;margin-bottom:.5rem}#skInfo .meta{color:var(--blue);font-size:.82rem;margin:0 0 .6rem}#skInfo p{margin:0;max-width:40ch}
+@media(max-width:820px){.stk{grid-template-columns:1fr}.orb{height:360px}}
+</style>
 </head>
 <body>
+<canvas id="bg" aria-hidden="true"></canvas><div id="prog" aria-hidden="true"></div><div class="sndbox" id="sndbox"><div class="sndpanel" role="group" aria-label="Sound settings"><button type="button" id="sMus" aria-pressed="true">Music</button><button type="button" id="sFx" aria-pressed="true">UI sounds</button><input id="sVol" type="range" min="0" max="1" step=".05" value=".7" aria-label="Volume"></div><button id="snd" class="snd" type="button" aria-pressed="false" aria-label="Toggle sound"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="lb">Sound off</span></button></div><div id="veil" aria-hidden="true"><span></span></div>
+<header><div class="wrap"><nav aria-label="Primary">
+<a class="logo" href="#home" aria-label="VLUX, home">VLUX<sup>®</sup></a>
+<ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#expertise">Expertise</a></li><li><a href="#stack">Stack</a></li><li><a href="#work">Work</a></li><li><a href="#journey">Roadmap</a></li><li><a href="#contact">Contact</a></li></ul>
+</nav></div></header>
 
-  <!-- Background Ambient Mesh -->
-  <div class="ambient-glow" aria-hidden="true"></div>
+<main>
+<section id="home" data-m="0.78,0.18,0,0,0.5,0.62,0.85,1"><div class="wrap">
+<h1 class="rise">VLUX<sup>®</sup></h1>
+<div class="hero-row rise d">
+<div><p class="role">Nguyễn Phát Tài</p><p class="role" style="color:var(--silver)">Engineering beyond boundaries.</p></div>
+<div><p>Software Engineering student at FPT University Cần Thơ. I build Java backend systems and I’m working toward applied AI and quantitative software.</p>
+<div class="cta"><a class="btn" href="#work">See my work</a><a class="link" href="#contact">Get in touch</a></div></div>
+</div></div></section>
 
-  <!-- =========================================================================
-       NAVIGATION
-       ========================================================================= -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#home" class="brand-link">
-        <span class="brand-symbol">◈</span>
-        <span class="brand-title">Nguyễn Phát Tài</span>
-      </a>
+<section id="about" data-m="0.22,0.45,0.12,0.06,0.62,0.66,0.78,.85"><div class="wrap about">
+<h2>Beyond the code.</h2>
+<div><p class="lead">I design backend systems with clean architecture, well-structured relational data and deployments that run the same everywhere.</p>
+<p>My coursework includes Data Structures &amp; Algorithms (CSD201), Databases (DBI202) and Java Web Programming (PRJ301). Right now I’m studying Spring Boot, REST API security, Linux and Nginx, and CI/CD. Longer term, I want to build intelligent data-analysis systems and decision-support algorithms.</p>
+<p class="tiny">Based in Cần Thơ, Vietnam. Open to internships.</p></div>
+</div></section>
 
-      <nav class="nav-links">
-        <a href="#projects" class="nav-item">Projects</a>
-        <a href="#stack" class="nav-item">Tech Stack</a>
-        <a href="#music" class="nav-item">Music</a>
-        <a href="#contact" class="nav-item">Contact</a>
-      </nav>
+<section id="expertise" data-m="0.7,0.3,0.05,-0.08,0.5,0.62,0.9,.9"><div class="wrap">
+<h2>Expertise.</h2>
+<div class="xp">
+<ul id="xpList">
+<li><button type="button" aria-pressed="true" data-m="0.74,0.22,0.0,-0.08,0.45,0.62,0.95,1">Backend engineering</button></li>
+<li><button type="button" aria-pressed="false" data-m="0.3,0.5,0.14,0.1,0.75,0.8,0.9,.95">Relational data</button></li>
+<li><button type="button" aria-pressed="false" data-m="0.55,0.9,0.08,0.16,0.35,0.5,0.8,.8">Deployment</button></li>
+<li><button type="button" aria-pressed="false" data-m="0.2,0.12,-0.12,0.05,0.6,0.62,0.7,.9">Applied AI &amp; quantitative</button></li>
+</ul>
+<div id="xpTxt" aria-live="polite"><h3></h3><p></p></div>
+</div></div></section>
 
-      <div class="header-cta">
-        <a href="mailto:ngtaiphat1501@gmail.com" class="btn-connect">
-          <span>Liên hệ</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
-        </a>
-      </div>
-    </div>
-  </header>
+<section id="stack" data-m="0.4,0.82,0.1,0.14,0.55,0.62,0.85,.85"><div class="wrap">
+<h2>Tech stack.</h2>
+<p style="max-width:56ch;margin:1.5rem 0 0">Drag the sphere, or move your mouse over it, to turn it. Click an icon to see how I use it.</p>
+<div class="stk">
+<div id="orb" class="orb" role="group" aria-label="Tech stack sphere"></div>
+<div class="stk-side">
+<div id="flt" class="flt" role="group" aria-label="Filter technologies"><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="used" aria-pressed="false">Used in projects</button><button type="button" data-f="learn" aria-pressed="false">Studying</button></div>
+<div id="skInfo" aria-live="polite"></div>
+<p class="tiny key" style="margin:0"><i class="k used"></i>Used in projects <i class="k learn"></i>Studying</p>
+</div></div>
+</div></section>
 
-  <main>
-    <!-- =======================================================================
-         HERO: CHỈ TÊN & LIÊN HỆ (MINIMALIST & CONFIDENT)
-         ======================================================================= -->
-    <section id="home" class="hero-minimal">
-      <div class="container">
-        
-        <div class="hero-identity">
-          <div class="avatar-ring">
-            <img src="assets/avatar.jpg" alt="Nguyễn Phát Tài" class="avatar-photo" onerror="this.src='https://avatars.githubusercontent.com/u/161285867?v=4'">
-            <span class="online-indicator" title="Available"></span>
-          </div>
+<section id="work" data-m="0.5,0.72,-0.1,0.12,0.6,0.64,0.74,.8"><div class="wrap">
+<h2>Selected work.</h2>
+<article class="wk">
+<div class="wm"><span class="tiny">PRJ301 capstone · Oct – Nov 2026<br>Fullstack developer, team of 5</span><a class="link" href="https://github.com/ngtaiphat1501/Ftech_learning_online">View on GitHub</a></div>
+<div><h3>Ftech Learning Online</h3>
+<ul><li>Designed and built the admin dashboard and revenue analytics with Chart.js.</li><li>Implemented idempotent checkout generation, coupon validation and a VNPAY sandbox payment flow.</li><li>Packaged the app with a multi-stage Dockerfile and Docker Compose, linked to SQL Server 2022.</li></ul>
+<p class="tags tiny">Java 21 · Jakarta EE 10 · Tomcat · SQL Server · Maven · Docker</p></div>
+</article>
+<article class="wk off">
+<div class="wm"><span class="tiny">Academic project · Mar 2026<br>Java developer, team project</span><a class="link" href="https://github.com/ngtaiphat1501/StudentManagementSystem">View on GitHub</a></div>
+<div><h3>Student Management System</h3>
+<ul><li>Structured a layered Java OOP architecture: models, services, managers, menus and utils.</li><li>Built four role-based command-line menus for Admin, Staff, Teacher and Student.</li><li>Kept domain models separate from binary file persistence (.dat files).</li></ul>
+<p class="tags tiny">Java OOP · Layered CLI · File I/O · Ant</p></div>
+</article>
+<p class="tiny" style="margin-top:3rem">Plus 25 private repositories of coursework, quiz tools and algorithm benchmarks.</p>
+</div></section>
 
-          <div class="identity-text">
-            <span class="role-badge">Software Engineer • Java Backend</span>
-            <h1 class="display-name">Nguyễn Phát Tài</h1>
-            <p class="minimal-tagline">Building resilient backend architectures &amp; scalable web systems.</p>
-          </div>
-        </div>
+<section id="journey" data-m="0.82,0.55,0.1,-0.12,0.5,0.6,0.85,.75"><div class="wrap">
+<h2>Roadmap.</h2>
+<ol class="tl">
+<li><span class="tiny">Active</span><h3>Java core &amp; enterprise systems<span>Jakarta EE 10, OOP principles, data structures &amp; algorithms.</span></h3></li>
+<li><span class="tiny">In progress</span><h3>Spring Boot &amp; microservices<span>RESTful APIs, Spring Security, JPA / Hibernate, database tuning.</span></h3></li>
+<li><span class="tiny">Up next</span><h3>DevOps &amp; cloud infrastructure<span>Multi-stage Docker, Linux administration, Nginx, GitHub Actions CI/CD.</span></h3></li>
+<li><span class="tiny">Research</span><h3>Applied AI &amp; quantitative systems<span>Analytical software, predictive modeling, quantitative decision systems.</span></h3></li>
+</ol></div></section>
 
-        <!-- Direct Contact Strip -->
-        <div class="contact-strip">
-          <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener noreferrer" class="contact-pill">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            <span>github.com/ngtaiphat1501</span>
-          </a>
+<section id="contact" data-m="0.5,0.25,0,0,0.5,0.62,0.85,.7"><div class="wrap">
+<h2>Let’s build something meaningful.</h2>
+<p style="max-width:44ch;margin-top:2rem">Looking for an internship, or have a project in mind? I’d like to hear about it.</p>
+<div class="ct"><a href="mailto:ngtaiphat1501@gmail.com">ngtaiphat1501@gmail.com</a><a href="https://github.com/ngtaiphat1501">github.com/ngtaiphat1501</a></div>
+<footer class="tiny"><span>VLUX® — Nguyễn Phát Tài · Cần Thơ</span><span>Engineering beyond boundaries.</span></footer>
+</div></section>
+</main>
 
-          <a href="mailto:ngtaiphat1501@gmail.com" class="contact-pill copy-email-btn" title="Sao chép email">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span>ngtaiphat1501@gmail.com</span>
-          </a>
+<script>
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var X={"Backend engineering":["Backend engineering","Java 21 and Jakarta EE 10 on Tomcat, built in layers with Maven. Currently studying Spring Boot, REST API security and JPA / Hibernate."],
+"Relational data":["Relational data","Normalized schemas on MS SQL Server, used in real coursework and my capstone. Studying PostgreSQL and database tuning."],
+"Deployment":["Deployment","Multi-stage Docker builds and Docker Compose, with SQL Server 2022 in the stack. Studying Linux, Nginx and GitHub Actions CI/CD."],
+"Applied AI & quantitative":["Applied AI & quantitative","A direction I’m researching: analytical software, predictive models and quantitative decision systems. I haven’t shipped work here yet."]};
+var txt=document.getElementById('xpTxt'),btns=[].slice.call(document.querySelectorAll('#xpList button'));
+function parse(s){var a=s.split(',').map(Number);return{lx:a[0],ly:a[1],ox:a[2],oy:a[3],t:[a[4],a[5],a[6]],dim:a[7],sc:0};}
+var secM=null,xpM=parse(btns[0].dataset.m),inXp=false;
+function show(b){var d=X[b.textContent];txt.classList.add('out');setTimeout(function(){txt.firstChild.textContent=d[0];txt.lastChild.textContent=d[1];txt.classList.remove('out');},reduce?0:220);
+ btns.forEach(function(o){o.setAttribute('aria-pressed',o===b);});xpM=parse(b.dataset.m);if(inXp)T=xpM;kick();}
+btns.forEach(function(b){['click','mouseenter','focus'].forEach(function(e){b.addEventListener(e,function(){show(b);});});});
+txt.innerHTML='<h3></h3><p></p>';show(btns[0]);
 
-          <span class="location-pill">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Can Tho, Vietnam</span>
-          </span>
-        </div>
+var prog=document.getElementById('prog'),an=null,adata=null,playing=false,au=0,scs=0;
+/* Interactive particle field: three depth layers with parallax; the cursor repels and links nearby points; click sends a burst */
+var cv=document.getElementById('bg'),ctx=cv.getContext('2d'),T=parse('0.78,0.18,0,0,0.5,0.62,0.85,1'),C=JSON.parse(JSON.stringify(T)),sc=0,ready=false,raf=0,W=0,H=0,P=[],S=[],XY=[],mp={x:-1e4,y:-1e4,on:false,nx:0,ny:0,sx:0,sy:0,gx:-1e4,gy:-1e4,ga:0},lt=0;
+function kick(){if(reduce&&ready)draw(0);else if(!raf&&ready)loop();}
+function mk(){var z=.25+.75*Math.random(),a=Math.random()*6.283,s=(.1+.25*Math.random())*z;return{x:Math.random()*W,y:Math.random()*H,z:z,bx:Math.cos(a)*s,by:Math.sin(a)*s,vx:0,vy:0,ph:Math.random()*6.283};}
+function size(){var d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=Math.round(W*d);cv.height=Math.round(H*d);ctx.setTransform(d,0,0,d,0,0);
+ var n=Math.round(Math.max(48,Math.min(130,W*H/13000)));if(W<700)n=Math.min(n,60);while(P.length<n)P.push(mk());P.length=n;if(ready)kick();}
+function burst(x,y){for(var i=0;i<P.length;i++){var q=XY[i];if(!q)continue;var dx=q[0]-x,dy=q[1]-y,d=Math.hypot(dx,dy)+.01;if(d<280){var f=(1-d/280)*4.5;P[i].vx+=dx/d*f;P[i].vy+=dy/d*f;}}
+ for(var j=0;j<14;j++){var a=Math.random()*6.283,s=2+Math.random()*3.2;S.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:1});}}
+function draw(t){
+ var dt=reduce?0:Math.min(.05,(t-lt)/1000||.016),f=dt*60;lt=t;
+ var k=reduce?1:.06;C.lx+=(T.lx-C.lx)*k;C.ly+=(T.ly-C.ly)*k;C.ox+=(T.ox-C.ox)*k;C.oy+=(T.oy-C.oy)*k;C.dim+=(T.dim-C.dim)*k;for(var q=0;q<3;q++)C.t[q]+=(T.t[q]-C.t[q])*k;
+ var m=reduce?1:.07;mp.sx+=(mp.nx-mp.sx)*m;mp.sy+=(mp.ny-mp.sy)*m;scs+=(sc-scs)*(reduce?1:.08);
+ var lv=0;if(an&&playing){an.getByteFrequencyData(adata);lv=(adata[1]+adata[2]+adata[3]+adata[4])/1020;}au+=(lv-au)*.25;eqDraw();
+ var R=Math.round,tr=R(C.t[0]*255),tg=R(C.t[1]*255),tb=R(C.t[2]*255),rgb=R((201+tr)/2)+','+R((208+tg)/2)+','+R((221+tb)/2);
+ ctx.globalAlpha=1;ctx.fillStyle='#08090D';ctx.fillRect(0,0,W,H);
+ var lx=C.lx*W,ly=C.ly*H,g=ctx.createRadialGradient(lx,ly,0,lx,ly,Math.max(W,H)*.8);
+ g.addColorStop(0,'rgba('+tr+','+tg+','+tb+','+(.2*C.dim*(1+au)).toFixed(3)+')');g.addColorStop(1,'rgba('+tr+','+tg+','+tb+',0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ var i,j,p,n=P.length,dx,dy,d,mo=mp.on&&!reduce;XY.length=n;
+ /* soft light halo that follows the cursor (eased, fades in and out) */
+ if(mo&&mp.gx<-9e3){mp.gx=mp.x;mp.gy=mp.y;}
+ mp.ga+=((mo?1:0)-mp.ga)*.1*f;mp.gx+=(mp.x-mp.gx)*.2*f;mp.gy+=(mp.y-mp.gy)*.2*f;
+ if(mp.ga>.01){var GR=260,gg=ctx.createRadialGradient(mp.gx,mp.gy,0,mp.gx,mp.gy,GR);
+  gg.addColorStop(0,'rgba(240,244,255,'+(.2*mp.ga).toFixed(3)+')');gg.addColorStop(.3,'rgba('+rgb+','+(.1*mp.ga).toFixed(3)+')');gg.addColorStop(1,'rgba('+rgb+',0)');
+  ctx.globalAlpha=1;ctx.fillStyle=gg;ctx.fillRect(mp.gx-GR,mp.gy-GR,GR*2,GR*2);}
+ for(i=0;i<n;i++){p=P[i];
+  p.vx+=(p.bx-p.vx)*.03*f;p.vy+=(p.by-p.vy)*.03*f;p.x+=p.vx*f;p.y+=p.vy*f;
+  if(p.x<0)p.x+=W;else if(p.x>=W)p.x-=W;if(p.y<0)p.y+=H;else if(p.y>=H)p.y-=H;
+  var sx=(((p.x-mp.sx*70*p.z-C.ox*W*.3*p.z)%W)+W)%W,sy=(((p.y-scs*H*2.2*p.z-mp.sy*50*p.z+C.oy*H*.3*p.z)%H)+H)%H;
+  if(mo){dx=sx-mp.x;dy=sy-mp.y;d=Math.hypot(dx,dy)+.01;if(d<150){var fo=(1-d/150)*.06*f;p.vx+=dx/d*fo;p.vy+=dy/d*fo;}}
+  XY[i]=[sx,sy,p.z,p.ph];}
+ ctx.globalAlpha=C.dim;ctx.lineWidth=1;
+ for(i=0;i<n;i++){var a1=XY[i];for(j=i+1;j<n;j++){var b1=XY[j];dx=a1[0]-b1[0];if(dx>150||dx<-150)continue;dy=a1[1]-b1[1];var LD=70+80*(a1[2]+b1[2])/2,d2=dx*dx+dy*dy;
+  if(d2<LD*LD){var al=(1-Math.sqrt(d2)/LD)*.3*Math.min(a1[2],b1[2])*(1+au*1.5);ctx.strokeStyle='rgba('+rgb+','+al.toFixed(3)+')';ctx.beginPath();ctx.moveTo(a1[0],a1[1]);ctx.lineTo(b1[0],b1[1]);ctx.stroke();}}}
+ if(mo){for(i=0;i<n;i++){var c1=XY[i];d=Math.hypot(c1[0]-mp.x,c1[1]-mp.y);if(d<200){ctx.strokeStyle='rgba(235,240,250,'+((1-d/200)*.55*(.4+.6*c1[2])).toFixed(3)+')';ctx.beginPath();ctx.moveTo(c1[0],c1[1]);ctx.lineTo(mp.x,mp.y);ctx.stroke();}}}
+ for(i=0;i<n;i++){var e=XY[i],tw=.75+.25*Math.sin(t*.001*(.6+e[2])+e[3]),r=(.7+1.7*e[2])*tw*(1+au*.7),a=(.25+.6*e[2])*tw;
+  if(mo){d=Math.hypot(e[0]-mp.x,e[1]-mp.y);if(d<200){var b=1-d/200;r*=1+b*.9;a=Math.min(1,a+b*.4);}}
+  ctx.fillStyle='rgba('+rgb+','+a.toFixed(3)+')';ctx.beginPath();ctx.arc(e[0],e[1],r,0,6.283);ctx.fill();}
+ for(i=S.length-1;i>=0;i--){var s=S[i];s.life-=dt*1.1;if(s.life<=0){S.splice(i,1);continue;}s.x+=s.vx*f;s.y+=s.vy*f;s.vx*=.95;s.vy*=.95;
+  ctx.fillStyle='rgba(235,240,250,'+(s.life*.8).toFixed(2)+')';ctx.beginPath();ctx.arc(s.x,s.y,1.2+s.life*1.4,0,6.283);ctx.fill();}
+ ctx.globalAlpha=1;var v=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*.35,W/2,H/2,Math.max(W,H)*.8);v.addColorStop(0,'rgba(8,9,13,0)');v.addColorStop(1,'rgba(8,9,13,.6)');ctx.fillStyle=v;ctx.fillRect(0,0,W,H);}
+function loop(){raf=0;if(document.hidden||reduce)return;draw(performance.now());raf=requestAnimationFrame(loop);}
+if(ctx){size();addEventListener('resize',size);ready=true;kick();
+ if(!reduce){
+  addEventListener('pointermove',function(e){mp.x=e.clientX;mp.y=e.clientY;mp.nx=e.clientX/innerWidth-.5;mp.ny=e.clientY/innerHeight-.5;if(e.pointerType!=='touch')mp.on=true;});
+  addEventListener('pointerdown',function(e){mp.x=e.clientX;mp.y=e.clientY;if(e.pointerType==='touch')mp.on=true;burst(e.clientX,e.clientY);});
+  ['pointerup','pointercancel'].forEach(function(n){addEventListener(n,function(e){if(e.pointerType==='touch')mp.on=false;});});
+  document.documentElement.addEventListener('mouseleave',function(){mp.on=false;});}
+ addEventListener('scroll',function(){var mx=document.documentElement.scrollHeight-innerHeight;sc=mx>0?scrollY/mx:0;prog.style.transform='scaleX('+sc+')';kick();},{passive:true});
+ document.addEventListener('visibilitychange',kick);}
 
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         PROJECTS SHOWCASE (THIẾT KẾ CARD HIỆN ĐẠI MỚI)
-         ======================================================================= -->
-    <section id="projects" class="showcase-section">
-      <div class="container">
-        
-        <div class="section-label-row">
-          <span class="section-num">01</span>
-          <h2 class="section-title">Selected Projects</h2>
-        </div>
-
-        <div class="projects-grid">
-          
-          <!-- Project Card 1: Ftech LMS -->
-          <div class="project-card">
-            <div class="project-top">
-              <span class="project-category">Full-Stack &amp; Architecture</span>
-              <a href="https://github.com/ngtaiphat1501/Ftech_learning_online" target="_blank" rel="noopener noreferrer" class="link-arrow" title="View GitHub Repo">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
-              </a>
-            </div>
-
-            <h3 class="project-title">
-              <a href="https://github.com/ngtaiphat1501/Ftech_learning_online" target="_blank" rel="noopener noreferrer">
-                Ftech Learning Platform
-              </a>
-            </h3>
-
-            <p class="project-summary">
-              Nền tảng học trực tuyến toàn diện (LMS) tích hợp thanh toán tự động, quản trị tài chính và đóng gói môi trường containerized cho môi trường production.
-            </p>
-
-            <div class="project-highlights">
-              <div class="highlight-item">
-                <span class="highlight-dot"></span>
-                <span>Kiến trúc phân tầng <strong>MVC Jakarta EE 10</strong> kết nối <strong>MS SQL Server 2022</strong>.</span>
-              </div>
-              <div class="highlight-item">
-                <span class="highlight-dot"></span>
-                <span>Cổng thanh toán <strong>VNPAY Sandbox</strong> với cơ chế <strong>Idempotent Checkout</strong> và mã hóa HMAC SHA-512.</span>
-              </div>
-              <div class="highlight-item">
-                <span class="highlight-dot"></span>
-                <span>Đóng gói <strong>Multi-stage Dockerfile</strong> &amp; <strong>Docker Compose</strong> mạng nội bộ bảo mật.</span>
-              </div>
-            </div>
-
-            <div class="project-tech-pills">
-              <span class="tech-tag">Java 21</span>
-              <span class="tech-tag">Jakarta EE 10</span>
-              <span class="tech-tag">SQL Server</span>
-              <span class="tech-tag">Docker</span>
-              <span class="tech-tag">Maven</span>
-              <span class="tech-tag">Chart.js</span>
-            </div>
-          </div>
-
-          <!-- Project Card 2: StudentManagementSystem -->
-          <div class="project-card">
-            <div class="project-top">
-              <span class="project-category">Core Software Engineering</span>
-              <a href="https://github.com/ngtaiphat1501/StudentManagementSystem" target="_blank" rel="noopener noreferrer" class="link-arrow" title="View GitHub Repo">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
-              </a>
-            </div>
-
-            <h3 class="project-title">
-              <a href="https://github.com/ngtaiphat1501/StudentManagementSystem" target="_blank" rel="noopener noreferrer">
-                Student Management System
-              </a>
-            </h3>
-
-            <p class="project-summary">
-              Hệ thống quản lý học vụ &amp; điểm số chuyên sâu xây dựng theo nguyên lý hướng đối tượng SOLID, phân quyền 4 vai trò và lưu trữ nhị phân an toàn.
-            </p>
-
-            <div class="project-highlights">
-              <div class="highlight-item">
-                <span class="highlight-dot"></span>
-                <span>Phân tầng rõ rệt: <code>models</code>, <code>services</code>, <code>managers</code>, <code>menus</code>, <code>utils</code>.</span>
-              </div>
-              <div class="highlight-item">
-                <span class="highlight-dot"></span>
-                <span>Hệ thống phân quyền Role-Based (Admin, Staff, Teacher, Student).</span>
-              </div>
-              <div class="highlight-item">
-                <span class="highlight-dot"></span>
-                <span>Tuần tự hóa dữ liệu nhị phân (Binary Serialization <code>.dat</code>).</span>
-              </div>
-            </div>
-
-            <div class="project-tech-pills">
-              <span class="tech-tag">Java OOP</span>
-              <span class="tech-tag">Design Patterns</span>
-              <span class="tech-tag">Binary I/O</span>
-              <span class="tech-tag">CLI Interface</span>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         TECH STACK: PHONG CÁCH MỚI (INTERACTIVE & REFINED ARSENAL)
-         ======================================================================= -->
-    <section id="stack" class="showcase-section">
-      <div class="container">
-        
-        <div class="section-label-row">
-          <span class="section-num">02</span>
-          <h2 class="section-title">Engineering Arsenal</h2>
-        </div>
-
-        <div class="stack-layout">
-          
-          <!-- Category 1: Backend & Core -->
-          <div class="stack-panel">
-            <div class="panel-header">
-              <span class="panel-icon">⚡</span>
-              <h3 class="panel-title">Backend &amp; Languages</h3>
-            </div>
-            <div class="stack-items">
-              <div class="stack-chip"><span class="chip-dot java"></span><span class="chip-name">Java 21 / 17</span></div>
-              <div class="stack-chip"><span class="chip-dot spring"></span><span class="chip-name">Spring Boot</span></div>
-              <div class="stack-chip"><span class="chip-dot jakarta"></span><span class="chip-name">Jakarta EE 10</span></div>
-              <div class="stack-chip"><span class="chip-dot python"></span><span class="chip-name">Python</span></div>
-              <div class="stack-chip"><span class="chip-dot ts"></span><span class="chip-name">TypeScript / JS</span></div>
-              <div class="stack-chip"><span class="chip-dot cpp"></span><span class="chip-name">C++</span></div>
-            </div>
-          </div>
-
-          <!-- Category 2: Databases & Storage -->
-          <div class="stack-panel">
-            <div class="panel-header">
-              <span class="panel-icon">🗄️</span>
-              <h3 class="panel-title">Databases &amp; Storage</h3>
-            </div>
-            <div class="stack-items">
-              <div class="stack-chip"><span class="chip-dot sqlserver"></span><span class="chip-name">MS SQL Server 2022</span></div>
-              <div class="stack-chip"><span class="chip-dot postgres"></span><span class="chip-name">PostgreSQL</span></div>
-              <div class="stack-chip"><span class="chip-dot mysql"></span><span class="chip-name">MySQL</span></div>
-              <div class="stack-chip"><span class="chip-dot redis"></span><span class="chip-name">Redis (Caching)</span></div>
-              <div class="stack-chip"><span class="chip-dot jpa"></span><span class="chip-name">JDBC / JPA Hibernate</span></div>
-            </div>
-          </div>
-
-          <!-- Category 3: DevOps & Architecture -->
-          <div class="stack-panel">
-            <div class="panel-header">
-              <span class="panel-icon">☁️</span>
-              <h3 class="panel-title">DevOps &amp; Infrastructure</h3>
-            </div>
-            <div class="stack-items">
-              <div class="stack-chip"><span class="chip-dot docker"></span><span class="chip-name">Docker &amp; Compose</span></div>
-              <div class="stack-chip"><span class="chip-dot linux"></span><span class="chip-name">Linux Server</span></div>
-              <div class="stack-chip"><span class="chip-dot nginx"></span><span class="chip-name">Nginx Reverse Proxy</span></div>
-              <div class="stack-chip"><span class="chip-dot actions"></span><span class="chip-name">GitHub Actions CI/CD</span></div>
-              <div class="stack-chip"><span class="chip-dot maven"></span><span class="chip-name">Maven Build System</span></div>
-            </div>
-          </div>
-
-          <!-- Category 4: Tools & Quality -->
-          <div class="stack-panel">
-            <div class="panel-header">
-              <span class="panel-icon">🛠️</span>
-              <h3 class="panel-title">Developer Tooling</h3>
-            </div>
-            <div class="stack-items">
-              <div class="stack-chip"><span class="chip-dot idea"></span><span class="chip-name">IntelliJ IDEA Ultimate</span></div>
-              <div class="stack-chip"><span class="chip-dot postman"></span><span class="chip-name">Postman API Testing</span></div>
-              <div class="stack-chip"><span class="chip-dot git"></span><span class="chip-name">Git Version Control</span></div>
-              <div class="stack-chip"><span class="chip-dot vscode"></span><span class="chip-name">VS Code</span></div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         MUSIC LOUNGE (THE WEEKND REAL VOCALS + SPOTIFY EMBED)
-         ======================================================================= -->
-    <section id="music" class="showcase-section">
-      <div class="container">
-        
-        <div class="section-label-row">
-          <span class="section-num">03</span>
-          <h2 class="section-title">Music &amp; Focus Lounge</h2>
-        </div>
-
-        <div class="music-lounge-box">
-          
-          <div class="lounge-header">
-            <div class="vinyl-disc-wrap">
-              <div class="vinyl-disc" id="vinylDisc">
-                <div class="vinyl-center"></div>
-              </div>
-            </div>
-
-            <div class="now-playing-info">
-              <div class="status-live-tag">
-                <span class="ping-dot"></span>
-                <span>NOW STREAMING • REAL VOCALS</span>
-              </div>
-              <h3 class="track-headline" id="musicTrack">Blinding Lights</h3>
-              <p class="artist-subline" id="musicArtist">The Weeknd • After Hours</p>
-            </div>
-
-            <!-- Waveform Equalizer -->
-            <div class="wave-equalizer" id="visualizer">
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-            </div>
-          </div>
-
-          <!-- Custom Player Playback Controls -->
-          <div class="lounge-controls">
-            <div class="playback-buttons">
-              <button class="player-btn" id="prevBtn" title="Bài trước">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"/></svg>
-              </button>
-              <button class="player-btn primary-play" id="playBtn" title="Phát / Dừng">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              </button>
-              <button class="player-btn" id="nextBtn" title="Bài tiếp">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"/></svg>
-              </button>
-            </div>
-
-            <div class="external-badges">
-              <a href="https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ" target="_blank" rel="noopener noreferrer" class="badge-spotify">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-                <span>Spotify</span>
-              </a>
-              <a href="https://www.youtube.com/channel/UC0WP5P-ufpRfjbNrmOWwLBQ" target="_blank" rel="noopener noreferrer" class="badge-youtube">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                <span>YouTube</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Official Spotify Embed Widget -->
-          <div class="spotify-embed-wrapper">
-            <iframe style="border-radius:12px; width: 100%; height: 152px; border: 0;" src="https://open.spotify.com/embed/artist/1Xyo4u8uXC1ZmMpatF05PJ?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         CONTACT: TINH GIẢN & TRỰC TIẾP
-         ======================================================================= -->
-    <section id="contact" class="contact-section">
-      <div class="container">
-        
-        <div class="contact-box-minimal">
-          <span class="contact-pretitle">SẴN SÀNG KẾT NỐI</span>
-          <h2 class="contact-title">Let’s build something impactful.</h2>
-          <p class="contact-desc">
-            Sẵn sàng kết nối cho các cơ hội kỹ sư phần mềm, backend architecture và đồ án thực tế.
-          </p>
-
-          <div class="contact-actions-minimal">
-            <a href="mailto:ngtaiphat1501@gmail.com" class="btn-email-primary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <span>ngtaiphat1501@gmail.com</span>
-            </a>
-
-            <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener noreferrer" class="btn-github-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              <span>GitHub Profile</span>
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  </main>
-
-  <!-- =========================================================================
-       MINIMAL FOOTER
-       ========================================================================= -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-left">
-        <p>&copy; 2026 <strong>Nguyễn Phát Tài</strong>. Hosted on GitHub Pages.</p>
-      </div>
-
-      <div class="footer-right">
-        <div class="clock-pill">
-          <span class="live-pulse"></span>
-          <span>Cần Thơ (UTC+7): </span>
-          <span id="canthoTime" class="time-display">00:00:00</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="app.js?v=3.0"></script>
+/* section moods + active nav */
+var links=[].slice.call(document.querySelectorAll('nav ul a'));
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;
+ var id=e.target.id;links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+id);});
+ inXp=id==='expertise';setSec(id);T=inXp?xpM:parse(e.target.dataset.m);kick();});},{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section').forEach(function(s){io.observe(s);});
+/* interaction layer */
+var fine=matchMedia('(hover:hover)').matches,veil=document.getElementById('veil'),h1=document.querySelector('#home h1');
+if(!reduce){document.documentElement.classList.add('js');
+ var rvs=document.querySelectorAll('h2,.about .lead,.about p,.xp>*,.wk>*,.tl li,#contact p,.ct a,#stack>.wrap>p,.stk');
+ rvs.forEach(function(el,i){el.classList.add('rv');el.style.setProperty('--d',(i%3)*.08+'s');});
+ var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target);}});},{threshold:.12});
+ rvs.forEach(function(el){ro.observe(el);});
+ var hs=[].slice.call(document.querySelectorAll('h2'));
+ addEventListener('scroll',function(){hs.forEach(function(h){var r=h.getBoundingClientRect();h.style.translate='0 '+((r.top+r.height/2-innerHeight/2)*-.07).toFixed(1)+'px';});},{passive:true});
+ addEventListener('pointermove',function(e){var x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;
+  h1.style.setProperty('--rx',(-y*8)+'deg');h1.style.setProperty('--ry',(x*12)+'deg');h1.style.setProperty('--gx',(50+x*80)+'%');
+  });
+ document.querySelectorAll('.wk').forEach(function(a){a.addEventListener('pointermove',function(e){if(e.pointerType==='touch')return;var r=a.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;a.style.transform='perspective(1100px) rotateY('+x*5+'deg) rotateX('+-y*4+'deg)';});a.addEventListener('pointerleave',function(){a.style.transform='';});});
+}
+/* extra interaction: cursor ring, magnetic controls, card spotlight, text decode */
+(function(){
+ if(reduce)return;
+ if(fine){var mg=[].slice.call(document.querySelectorAll('.btn,.link,nav ul a,.logo,.snd,.ct a'));
+  mg.forEach(function(el){el.setAttribute('data-mag','');});
+  addEventListener('pointermove',function(e){mg.forEach(function(el){var r=el.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),R=Math.max(r.width,r.height)/2+70;
+   el.style.translate=Math.hypot(dx,dy)<R?(dx*.28).toFixed(1)+'px '+(dy*.28).toFixed(1)+'px':'';});},{passive:true});}
+ document.querySelectorAll('.wk').forEach(function(a){a.addEventListener('pointermove',function(e){var r=a.getBoundingClientRect();a.style.setProperty('--sx',(e.clientX-r.left)+'px');a.style.setProperty('--sy',(e.clientY-r.top)+'px');});});
+ var G='ABCDEFGHJKLMNPQRSTUVWXYZ0123456789<>/{}[]+*#';
+ function scr(el,ms){if(el._s)return;el._s=1;var fin=el.textContent,L=fin.length,dl=[],i,t0=performance.now();el.setAttribute('aria-label',fin);for(i=0;i<L;i++)dl[i]=i/L*.65+Math.random()*.35;
+  (function f(n){var k=Math.min(1,(n-t0)/ms),o='';for(i=0;i<L;i++){var ch=fin.charAt(i);o+=(ch===' '||k>=dl[i])?ch:G.charAt(Math.random()*G.length|0);}el.textContent=o;if(k<1)requestAnimationFrame(f);else el.textContent=fin;})(t0);}
+ setTimeout(function(){document.querySelectorAll('#home .role').forEach(function(el,i){setTimeout(function(){scr(el,900);},i*180);});},350);
+ var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){scr(e.target,700);so.unobserve(e.target);}});},{threshold:.35});
+ document.querySelectorAll('main h2').forEach(function(h){so.observe(h);});
+})();
+/* page transition */
+function go(h){var t=document.querySelector(h);if(!t)return;
+ if(reduce){t.scrollIntoView();history.replaceState(null,'',h);return;}
+ veil.firstChild.textContent=(document.querySelector('nav a[href="'+h+'"]')||{textContent:'VLUX'}).textContent;veil.className='in';
+ setTimeout(function(){t.scrollIntoView({behavior:'instant'});history.replaceState(null,'',h);veil.className='out';setTimeout(function(){veil.className='';},520);},520);}
+document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;e.preventDefault();go(a.getAttribute('href'));});
+/* sound: opt-in generative ambient soundtrack that shifts with each section, plus pentatonic UI sounds (all synthesized live, no audio files) */
+var snd=document.getElementById('snd'),box=document.getElementById('sndbox'),bMus=document.getElementById('sMus'),bFx=document.getElementById('sFx'),vol=document.getElementById('sVol'),lb=snd.querySelector('.lb'),bars=[].slice.call(snd.querySelectorAll('.eq i'));
+var AC=null,master,out,mf,bus,arpOut,fxG,noiseBuf,timer=0,nextT=0,bar=0,last=6,sec='',lastW=0,lastC=0,lastH=null,eqOn=false,BIN=[1,2,3,5,8];
+var MOOD={home:{cut:3200,arpV:1,den:.7},about:{cut:1800,arpV:.7,den:.45},expertise:{cut:2600,arpV:.9,den:.65},stack:{cut:4200,arpV:1,den:.85},work:{cut:3400,arpV:1,den:.7},journey:{cut:2200,arpV:.8,den:.5},contact:{cut:1500,arpV:.7,den:.35}},mood=MOOD.home;
+var CH=[[110,164.81,220,261.63,329.63],[87.31,130.81,174.61,220,261.63],[130.81,196,261.63,329.63,392],[98,146.83,196,246.94,293.66]],BT=60/80,PEN=[0,3,5,7,10];
+var pref={on:false,mus:true,fx:true,vol:.7};
+try{var sv=JSON.parse(localStorage.getItem('vlux-snd')||'null');if(sv)pref=Object.assign(pref,sv);}catch(e){}
+function save(){try{localStorage.setItem('vlux-snd',JSON.stringify(pref));}catch(e){}}
+function pn(i){return 220*Math.pow(2,(PEN[((i%5)+5)%5]+12*Math.floor(i/5))/12);}/* A minor pentatonic, so any note sounds right with any other */
+function fxOk(){return !!(AC&&pref.on&&pref.fx&&AC.state==='running');}
+function nt(f,t0,dur,type,vol,dest,att,flt){var o=AC.createOscillator(),g=AC.createGain(),fl=AC.createBiquadFilter();o.type=type;o.frequency.value=f;fl.type='lowpass';fl.frequency.value=flt;
+ g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol,t0+att);g.gain.exponentialRampToValueAtTime(.0001,t0+dur);o.connect(fl);fl.connect(g);g.connect(dest);o.start(t0);o.stop(t0+dur+.05);}
+function pluck(f,t0,vol,dest,dur){nt(f,t0,dur,'triangle',vol,dest,.004,3600);nt(f*2,t0,dur*.5,'sine',vol*.35,dest,.004,6000);}
+function kickAt(t0,v){var o=AC.createOscillator(),g=AC.createGain();o.frequency.setValueAtTime(110,t0);o.frequency.exponentialRampToValueAtTime(40,t0+.2);g.gain.setValueAtTime(v,t0);g.gain.exponentialRampToValueAtTime(.0001,t0+.34);o.connect(g);g.connect(master);o.start(t0);o.stop(t0+.36);}
+function playBar(c,t0){var m=mood,i,ts;
+ c.slice(1,4).forEach(function(f){nt(f*1.004,t0,BT*5,'sawtooth',.026,bus,1.4,900);nt(f*.996,t0,BT*5,'sawtooth',.026,bus,1.4,900);});
+ nt(c[0],t0,BT*1.9,'sine',.2,master,.03,400);nt(c[0]*2,t0,BT*1.9,'triangle',.05,master,.03,500);nt(c[0],t0+BT*2.5,BT*1.4,'sine',.16,master,.03,400);
+ kickAt(t0,.2);kickAt(t0+BT*2,.15);
+ for(i=0;i<8;i++){ts=t0+i*BT/2;
+  if(i===0||i===4)pluck(c[i?4:3]*2,ts,.06*m.arpV,arpOut,.9);
+  else if(Math.random()<m.den){last=Math.max(3,Math.min(11,last+[-2,-1,1,2][Math.random()*4|0]));pluck(pn(last),ts,.05*m.arpV*(.8+Math.random()*.4),arpOut,.6);}}}
+function sched(){while(nextT<AC.currentTime+.5){playBar(CH[bar%4],nextT);nextT+=BT*4;bar++;}}
+function whoosh(){var t=AC.currentTime,s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=noiseBuf;f.type='bandpass';f.Q.value=1.2;f.frequency.setValueAtTime(300,t);f.frequency.exponentialRampToValueAtTime(2600,t+.45);
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.05,t+.18);g.gain.exponentialRampToValueAtTime(.0001,t+.6);s.connect(f);f.connect(g);g.connect(fxG);s.start(t);s.stop(t+.65);}
+function welcome(){var t=AC.currentTime;[5,7,10,12].forEach(function(n,i){pluck(pn(n),t+i*.09,.06,fxG,.5);});}
+function setSec(id){if(id===sec)return;var first=!sec;sec=id;mood=MOOD[id]||MOOD.home;if(!AC)return;mf.frequency.setTargetAtTime(mood.cut,AC.currentTime,.9);
+ if(!first&&fxOk()&&AC.currentTime-lastW>.9){lastW=AC.currentTime;whoosh();}}
+function chipSound(el,sp){if(!fxOk())return;var t=AC.currentTime;if(t-lastC<.045)return;lastC=t;
+ var i=[].indexOf.call(el.parentNode.children,el),used=el.classList.contains('used');pluck(pn((i*2)%9+(used?0:4)),t,Math.min(.09,.012*sp),fxG,used?.35:.5);}
+function eqDraw(){if(!playing){if(eqOn){bars.forEach(function(b){b.style.height='';});eqOn=false;}return;}eqOn=true;
+ for(var i=0;i<bars.length;i++)bars[i].style.height=(18+Math.min(1,adata[BIN[i]]/200)*82).toFixed(0)+'%';}
+function initAudio(){AC=new(window.AudioContext||window.webkitAudioContext)();
+ noiseBuf=AC.createBuffer(1,AC.sampleRate,AC.sampleRate);var nd=noiseBuf.getChannelData(0);for(var k=0;k<nd.length;k++)nd[k]=Math.random()*2-1;
+ out=AC.createGain();out.gain.value=0;an=AC.createAnalyser();an.fftSize=256;adata=new Uint8Array(an.frequencyBinCount);out.connect(an);an.connect(AC.destination);
+ mf=AC.createBiquadFilter();mf.type='lowpass';mf.frequency.value=mood.cut;mf.Q.value=.5;master=AC.createGain();master.gain.value=0;master.connect(mf);mf.connect(out);
+ bus=AC.createGain();bus.connect(master);var cv2=AC.createConvolver(),n=AC.sampleRate*2.4|0,ib=AC.createBuffer(2,n,AC.sampleRate);
+ for(var ch=0;ch<2;ch++){var d=ib.getChannelData(ch);for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3);}
+ cv2.buffer=ib;var wet=AC.createGain();wet.gain.value=.4;bus.connect(cv2);cv2.connect(wet);wet.connect(master);
+ arpOut=AC.createGain();arpOut.connect(bus);var dl=AC.createDelay(1),fb=AC.createGain();dl.delayTime.value=BT*.75;fb.gain.value=.36;arpOut.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(bus);
+ fxG=AC.createGain();fxG.connect(out);var fd=AC.createDelay(1),ff=AC.createGain(),fw=AC.createGain();fd.delayTime.value=.21;ff.gain.value=.3;fw.gain.value=.35;fxG.connect(fd);fd.connect(ff);ff.connect(fd);fd.connect(fw);fw.connect(out);}
+function refresh(){
+ if(AC){var m=pref.on&&pref.mus;master.gain.setTargetAtTime(m?.55:0,AC.currentTime,m?.7:.25);out.gain.setTargetAtTime(pref.on?pref.vol:0,AC.currentTime,.12);
+  if(m&&!timer){nextT=AC.currentTime+.1;sched();timer=setInterval(sched,120);}else if(!m&&timer){clearInterval(timer);timer=0;}}
+ playing=!!(pref.on&&AC);box.classList.toggle('on',pref.on);snd.setAttribute('aria-pressed',pref.on);lb.textContent=pref.on?'Sound on':'Sound off';
+ bMus.setAttribute('aria-pressed',pref.mus);bFx.setAttribute('aria-pressed',pref.fx);vol.value=pref.vol;kick();}
+function setOn(v){pref.on=v;save();if(v){if(!AC)initAudio();AC.resume().then(function(){if(pref.on)welcome();});}refresh();}
+if(snd){snd.addEventListener('click',function(){setOn(!pref.on);});
+ bMus.addEventListener('click',function(){pref.mus=!pref.mus;save();refresh();});bFx.addEventListener('click',function(){pref.fx=!pref.fx;save();refresh();});
+ vol.addEventListener('input',function(){pref.vol=+vol.value;save();if(AC&&pref.on)out.gain.setTargetAtTime(pref.vol,AC.currentTime,.05);});
+ document.addEventListener('visibilitychange',function(){if(!AC||!pref.on)return;if(document.hidden)AC.suspend();else AC.resume();});
+ /* UI sounds: hover plucks (nav and expertise rise up the scale), click chime */
+ document.addEventListener('pointerover',function(e){var el=e.target.closest?e.target.closest('a,button,.chip,[data-mag]'):null,prev=lastH;lastH=el;
+  if(!el||el===prev||e.pointerType==='touch'||!fxOk()||el.classList.contains('tg'))return;var t=AC.currentTime;if(t-lastC<.07)return;lastC=t;
+  var ul=el.closest('nav ul,#xpList'),i=ul?4+[].indexOf.call(ul.querySelectorAll('a,button'),el):5+(Math.random()*6|0);pluck(pn(i),t,.045,fxG,.35);});
+ document.addEventListener('pointerdown',function(e){if(!fxOk()||!e.target.closest||!e.target.closest('a,button')||e.target.closest('.tg'))return;var t=AC.currentTime;pluck(pn(7),t,.06,fxG,.3);pluck(pn(10),t+.07,.05,fxG,.35);});
+ /* a remembered "on" starts at the first click or key press, never by itself */
+ if(pref.on){pref.on=false;var auto=function(e){if(box.contains(e.target))return;removeEventListener('pointerdown',auto,true);removeEventListener('keydown',auto,true);setOn(true);};addEventListener('pointerdown',auto,true);addEventListener('keydown',auto,true);}
+ refresh();}
+/* tech stack: draggable 3D tag sphere with filters and a detail panel */
+(function(){var orb=document.getElementById('orb');if(!orb)return;
+ var IC='https://skillicons.dev/icons?i=';
+ /* [name, area, used|learn, note, skillicons.dev id (null = monogram tile), monogram] */
+ var D=[['Java 21','Backend','used','Main language across coursework and the PRJ301 capstone, Ftech Learning Online.','java'],
+  ['Jakarta EE 10','Backend','used','Web layer of the capstone, running on Apache Tomcat.',null,'EE'],
+  ['Apache Tomcat','Backend','used','Servlet container for the Ftech Learning Online capstone.',null,'Tc'],
+  ['Maven','Backend','used','Build and dependency management for the capstone.','maven'],
+  ['Apache Ant','Backend','used','Build tool for the Student Management System project.',null,'Ant'],
+  ['Spring Boot','Backend','learn','Studying next, together with Spring Security, REST APIs and microservices.','spring'],
+  ['SQL Server','Data','used','Normalized schemas in coursework (DBI202) and the capstone, on SQL Server 2022.',null,'SQL'],
+  ['Hibernate','Data','learn','Studying object-relational mapping (JPA / Hibernate) alongside Spring Boot.','hibernate'],
+  ['PostgreSQL','Data','learn','Studying, together with database tuning.','postgres'],
+  ['Python','Data','learn','Studying, as a starting point for applied AI and quantitative work.','py'],
+  ['Docker','DevOps','used','Multi-stage Dockerfile and Docker Compose that run the capstone together with SQL Server 2022.','docker'],
+  ['Git','DevOps','used','Version control, projects hosted on GitHub.','git'],
+  ['Linux','DevOps','learn','Studying Linux administration.','linux'],
+  ['Nginx','DevOps','learn','Studying, as part of deployment.','nginx'],
+  ['GitHub Actions','DevOps','learn','Studying CI/CD pipelines.','githubactions'],
+  ['Chart.js','Frontend','used','Admin dashboard and revenue analytics in the capstone.',null,'Ch'],
+  ['HTML5','Frontend','used','Front end for the capstone and personal projects, including this site.','html'],
+  ['CSS3','Frontend','used','Layouts and styling for the capstone and personal projects, including this site.','css'],
+  ['JavaScript','Frontend','used','Front-end scripting for the capstone and personal projects, including this site.','js']];
+ var info=document.getElementById('skInfo'),fb=[].slice.call(document.querySelectorAll('#flt button')),N=D.length,P=[],tags=[],i,st=reduce;
+ for(i=0;i<N;i++){var y=1-(i+.5)/N*2,r=Math.sqrt(1-y*y),th=i*2.399963,b=document.createElement('button');P.push([Math.cos(th)*r,y,Math.sin(th)*r]);
+  b.type='button';b.className='tg '+D[i][2];b.setAttribute('aria-label',D[i][0]+', '+(D[i][2]==='used'?'used in projects':'studying'));
+  var ic=document.createElement('span'),cap=document.createElement('span');ic.className='ic';cap.textContent=D[i][0];
+  if(D[i][4]){var im=new Image();im.alt='';im.draggable=false;im.loading='lazy';im.src=IC+D[i][4];(function(ic,im,m){im.onerror=function(){ic.textContent='';ic.classList.add('m');var t=document.createElement('b');t.textContent=m;ic.appendChild(t);};})(ic,im,D[i][0].slice(0,2));ic.appendChild(im);}
+  else{ic.classList.add('m');var t=document.createElement('b');t.textContent=D[i][5]||D[i][0].slice(0,2);ic.appendChild(t);}
+  b.appendChild(ic);b.appendChild(cap);orb.appendChild(b);tags.push(b);}
+ var used=D.filter(function(d){return d[2]==='used';}).length;
+ function summary(){info.innerHTML='<h3></h3><p class="meta"></p><p></p>';info.children[0].textContent=N+' technologies';info.children[1].textContent=used+' used in projects · '+(N-used)+' studying';info.children[2].textContent='Pick an icon to see where I use it.';}
+ var W=0,H=0,R=0,sel=-1,fil='all',wx=0,wy=.0035,go=-1,drag=null,moved=false,hover=false,pt={x:0,y:0},run=false,raf=0,lt=0,born=0;
+ function size(){W=orb.clientWidth;H=orb.clientHeight;R=Math.max(80,Math.min(W/2-64,H/2-24));}
+ function ok(k){var d=D[k];return fil==='all'||fil===d[2]||fil===d[1];}
+ function rotY(a){var c=Math.cos(a),s=Math.sin(a);P.forEach(function(p){var x=p[0]*c+p[2]*s,z=-p[0]*s+p[2]*c;p[0]=x;p[2]=z;});}
+ function rotX(a){var c=Math.cos(a),s=Math.sin(a);P.forEach(function(p){var y=p[1]*c-p[2]*s,z=p[1]*s+p[2]*c;p[1]=y;p[2]=z;});}
+ function rotA(k,a){var c=Math.cos(a),s=Math.sin(a);P.forEach(function(p){var d=k[0]*p[0]+k[1]*p[1]+k[2]*p[2],cx=k[1]*p[2]-k[2]*p[1],cy=k[2]*p[0]-k[0]*p[2],cz=k[0]*p[1]-k[1]*p[0];
+  p[0]=p[0]*c+cx*s+k[0]*d*(1-c);p[1]=p[1]*c+cy*s+k[1]*d*(1-c);p[2]=p[2]*c+cz*s+k[2]*d*(1-c);var l=Math.hypot(p[0],p[1],p[2]);p[0]/=l;p[1]/=l;p[2]/=l;});}
+ function render(e){for(var k=0;k<N;k++){var p=P[k],z=p[2],q=(z+1)/2,on=ok(k),t=tags[k];
+   t.style.transform='translate('+(p[0]*R*e).toFixed(1)+'px,'+(p[1]*R*e).toFixed(1)+'px) translate(-50%,-50%) scale('+((.72+.4*q)*(k===sel?1.12:1)).toFixed(3)+')';
+   t.style.opacity=((.28+.72*q)*(on?1:.14)*e).toFixed(2);t.style.zIndex=Math.round(q*100)+(k===sel?200:0);t.style.pointerEvents=(z>-.45&&on)?'auto':'none';t.tabIndex=on?0:-1;}}
+ function frame(t){raf=0;if(!run)return;var dt=Math.min(2.5,(t-lt)/16.67||1);lt=t;
+  if(go>=0){var p=P[go],ax=[p[1],-p[0],0],sn=Math.hypot(ax[0],ax[1]),an2=Math.atan2(sn,p[2]);if(an2<.012)go=-1;else{if(sn<1e-4)ax=[0,1,0];else{ax[0]/=sn;ax[1]/=sn;}rotA(ax,Math.min(an2,Math.max(.018,an2*.13))*dt);}wx=0;wy=0;}
+  else if(!drag){var twy=.0035,twx=0;if(hover){twy=Math.abs(pt.x)<.14?0:pt.x*.016;twx=Math.abs(pt.y)<.14?0:-pt.y*.016;}
+   wy+=(twy-wy)*.06*dt;wx+=(twx-wx)*.06*dt;rotY(wy*dt);rotX(wx*dt);}
+  var k=Math.min(1,(t-born)/1100);render(1-Math.pow(1-k,3));raf=requestAnimationFrame(frame);}
+ function start(){if(st||run)return;run=true;lt=performance.now();if(!born)born=lt;raf=requestAnimationFrame(frame);}
+ function pick(k,snd){if(k===sel)return;sel=k;tags.forEach(function(t,j){t.classList.toggle('sel',j===k);});
+  var d=D[k];info.innerHTML='<h3></h3><p class="meta"></p><p></p>';info.children[0].textContent=d[0];info.children[1].textContent=(d[2]==='used'?'Used in projects':'Studying');info.children[2].textContent=d[3];
+  if(!st)go=k;if(snd&&typeof chipSound==='function')chipSound(tags[k],6);}
+ orb.addEventListener('click',function(e){var b=e.target.closest('.tg');if(!b||moved)return;pick(tags.indexOf(b),true);});
+ orb.addEventListener('focusin',function(e){if(e.target.matches&&e.target.matches('.tg:focus-visible'))pick(tags.indexOf(e.target),true);});
+ fb.forEach(function(b){b.addEventListener('click',function(){fil=b.dataset.f;fb.forEach(function(o){o.setAttribute('aria-pressed',o===b);});if(st)tags.forEach(function(t,j){t.style.display=ok(j)?'':'none';});});});
+ if(!st){
+  orb.addEventListener('pointerdown',function(e){if(e.button>0)return;drag={x:e.clientX,y:e.clientY,sx:e.clientX,sy:e.clientY};moved=false;go=-1;orb.classList.add('drag');});
+  addEventListener('pointermove',function(e){var r=orb.getBoundingClientRect();pt.x=Math.max(-1,Math.min(1,(e.clientX-r.left-r.width/2)/(r.width/2)));pt.y=Math.max(-1,Math.min(1,(e.clientY-r.top-r.height/2)/(r.height/2)));
+   if(!drag)return;if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)>4)moved=true;var dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.x=e.clientX;drag.y=e.clientY;wy=dx*.007;wx=-dy*.007;rotY(wy);rotX(wx);});
+  function up(){if(drag){drag=null;orb.classList.remove('drag');setTimeout(function(){moved=false;},0);}}
+  addEventListener('pointerup',up);addEventListener('pointercancel',up);
+  orb.addEventListener('pointerenter',function(e){hover=e.pointerType==='mouse';});orb.addEventListener('pointerleave',function(){hover=false;});
+  new IntersectionObserver(function(es){if(es[0].isIntersecting)start();else{run=false;}}).observe(orb);
+  size();addEventListener('resize',size);render(0);}
+ else{orb.classList.add('static');}
+ summary();
+})();
+})();
+</script>
 </body>
 </html>
