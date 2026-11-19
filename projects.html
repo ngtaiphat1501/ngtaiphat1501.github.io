@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Projects Showcase — Nguyễn Phát Tài (VLUX)</title>
-<meta name="description" content="Trang tổng hợp dự án, kiến trúc hệ thống và demo kỹ thuật của Nguyễn Phát Tài (VLUX).">
+<title>Projects Showcase — UI Layout — Nguyễn Phát Tài (VLUX)</title>
+<meta name="description" content="Giao diện khung tổng hợp dự án, kiến trúc hệ thống và demo kỹ thuật của Nguyễn Phát Tài (VLUX).">
 <meta name="color-scheme" content="dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07080c;--surface:#0d1017;--surface-card:#121622;--surface-hover:#171c2b;
+  --bg:#07080c;--surface:#0d1017;--card:#121622;--card-hover:#171c2b;
   --ice:#f3f5fa;--silver:#c2c9d6;--mute:#7c8799;
   --line:rgba(255,255,255,0.08);--line-focus:rgba(56,189,248,0.4);
   --accent:#38bdf8;--blue:#829bcb;--green:#3fb950;
@@ -39,9 +39,7 @@ header{
 .nav-bar{
   display:flex;align-items:center;justify-content:space-between;height:68px;gap:1.5rem;
 }
-.brand{
-  display:flex;align-items:center;gap:.9rem;color:var(--ice);
-}
+.brand{display:flex;align-items:center;gap:.9rem;color:var(--ice)}
 .brand-logo{font-weight:700;font-size:1.2rem;letter-spacing:.05em}
 .brand-logo sup{font-size:.55em;color:var(--accent)}
 .brand-badge{
@@ -75,7 +73,7 @@ h1{
   font-size:clamp(1rem,1.2vw,1.15rem);color:var(--silver);max-width:68ch;margin:0 0 2.5rem;
 }
 
-/* Quick Telemetry / Metrics Bar */
+/* Quick Metrics / Stats Strip */
 .metrics-strip{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;
   padding:1.4rem;background:rgba(18,22,34,.6);border:1px solid var(--line);
@@ -86,7 +84,7 @@ h1{
 .metric-box b{font-family:var(--mono);font-size:1.45rem;color:var(--ice);font-weight:600}
 .metric-box span{font-size:.78rem;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
 
-/* Controls Bar (Filters, Search, View Layout) */
+/* Controls Bar (Filter Tabs, Search, View Mode Toggle) */
 .controls-bar{
   display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
   margin-bottom:2.5rem;flex-wrap:wrap;
@@ -102,9 +100,10 @@ h1{
   background:var(--accent);color:#06080d;border-color:var(--accent);font-weight:600;
   box-shadow:0 0 20px rgba(56,189,248,.35);
 }
-.search-box{position:relative;min-width:280px}
+.controls-right{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.search-box{position:relative;min-width:260px}
 .search-input{
-  width:100%;padding:.62rem 1rem .62rem 2.4rem;border-radius:99px;
+  width:100%;padding:.6rem 1rem .6rem 2.4rem;border-radius:99px;
   background:rgba(13,16,23,.85);border:1px solid var(--line);color:var(--ice);
   font:400 .86rem var(--sans);transition:border-color .25s;
 }
@@ -113,12 +112,24 @@ h1{
   position:absolute;left:.9rem;top:50%;transform:translateY(-50%);
   width:14px;height:14px;opacity:.5;pointer-events:none;stroke:var(--silver);
 }
-
-/* Projects Catalog Grid */
-.catalog-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:2rem;
-  margin-bottom:5rem;
+.view-toggle{display:flex;gap:.3rem;background:rgba(18,22,34,.6);padding:.3rem;border-radius:99px;border:1px solid var(--line)}
+.view-btn{
+  padding:.35rem .75rem;border-radius:99px;border:none;background:transparent;
+  color:var(--mute);cursor:pointer;font-size:.78rem;font-family:var(--mono);transition:all .2s;
 }
+.view-btn.active{background:rgba(255,255,255,.1);color:var(--ice)}
+
+/* ================================================================
+   PROJECTS CATALOG GRID (GIAO DIỆN KHUNG THẺ DỰ ÁN)
+   ================================================================ */
+.catalog-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:2rem;
+  margin-bottom:5rem;transition:all .3s ease;
+}
+.catalog-grid.list-view{
+  grid-template-columns:1fr;
+}
+
 .card-item{
   background:rgba(18,22,34,.75);border:1px solid var(--line);border-radius:20px;
   overflow:hidden;transition:all .35s cubic-bezier(.2,.7,.2,1);display:flex;
@@ -128,20 +139,26 @@ h1{
   border-color:rgba(56,189,248,.35);transform:translateY(-4px);
   box-shadow:0 20px 48px -12px rgba(0,0,0,.75),0 0 28px rgba(56,189,248,.08);
 }
+.catalog-grid.list-view .card-item{
+  flex-direction:row;align-items:stretch;
+}
 
-/* Card Visual Thumbnail Slot */
+/* Thumbnail Visual Slot */
 .card-thumb{
-  width:100%;height:190px;background:#090c13;position:relative;overflow:hidden;
+  width:100%;height:200px;background:#090c13;position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);
 }
+.catalog-grid.list-view .card-thumb{
+  width:320px;height:auto;flex-shrink:0;border-bottom:none;border-right:1px solid var(--line);
+}
 .card-thumb-bg{
-  position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(56,189,248,.12),transparent 75%);
+  position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(56,189,248,.1),transparent 75%);
 }
 .card-thumb-placeholder{
   font-family:var(--mono);font-size:.78rem;color:var(--mute);
-  display:flex;flex-direction:column;align-items:center;gap:.6rem;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:.6rem;z-index:2;text-align:center;padding:1rem;
 }
-.card-thumb-placeholder svg{width:32px;height:32px;opacity:.5;stroke:var(--silver)}
+.card-thumb-placeholder svg{width:36px;height:36px;opacity:.45;stroke:var(--silver)}
 .card-badge-top{
   position:absolute;top:1rem;left:1rem;z-index:3;display:flex;gap:.5rem;
 }
@@ -152,7 +169,7 @@ h1{
 }
 .status-tag.active{color:var(--green);border-color:rgba(63,185,80,.3)}
 
-/* Card Content Area */
+/* Card Content Body */
 .card-content{padding:1.6rem;display:flex;flex-direction:column;flex:1}
 .card-category{
   font-family:var(--mono);font-size:.72rem;color:var(--accent);
@@ -164,10 +181,10 @@ h1{
 }
 .card-summary{
   font-size:.88rem;color:var(--silver);margin:0 0 1.4rem;line-height:1.6;
-  flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  flex:1;
 }
 
-/* Card Tech Stack Tags */
+/* Card Tags */
 .card-tags{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.5rem}
 .tech-pill{
   font-family:var(--mono);font-size:.72rem;color:var(--mute);
@@ -175,7 +192,7 @@ h1{
   padding:.2rem .55rem;border-radius:6px;
 }
 
-/* Card Footer Actions */
+/* Card Action Footer */
 .card-actions{
   display:flex;align-items:center;justify-content:space-between;gap:1rem;
   border-top:1px solid var(--line);padding-top:1.2rem;margin-top:auto;
@@ -185,14 +202,14 @@ h1{
   color:var(--ice);font-weight:500;transition:gap .2s;
 }
 .card-item:hover .view-detail-btn{color:var(--accent);gap:.7rem}
-.github-link-btn{
+.ext-link-btn{
   color:var(--mute);font-size:.84rem;display:inline-flex;align-items:center;gap:.35rem;
   transition:color .2s;
 }
-.github-link-btn:hover{color:var(--ice)}
+.ext-link-btn:hover{color:var(--ice)}
 
 /* ================================================================
-   GIAO DIỆN KHUNG XEM CHI TIẾT (DETAIL VIEW / MODAL SHELL)
+   GIAO DIỆN KHUNG XEM CHI TIẾT (DETAIL VIEW MODAL SHELL)
    ================================================================ */
 .detail-modal{
   position:fixed;inset:0;z-index:100;background:rgba(4,6,10,.86);
@@ -223,22 +240,39 @@ h1{
 
 .detail-body{padding:2rem}
 
-/* Hero Media Viewport Slot (Nơi hiển thị hình ảnh / demo sau này) */
+/* Hero Media Viewport Slot (Vị trí gắn hình ảnh / video / live demo sau này) */
 .media-viewport-slot{
   width:100%;height:380px;background:#06080c;border:1px solid var(--line);
   border-radius:18px;overflow:hidden;position:relative;margin-bottom:2rem;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:var(--mute);font-family:var(--mono);font-size:.85rem;gap:1rem;
+  color:var(--mute);font-family:var(--mono);font-size:.85rem;gap:1rem;text-align:center;padding:1.5rem;
 }
 .media-viewport-slot svg{width:48px;height:48px;opacity:.4;stroke:var(--silver)}
 
-/* Two Columns Specs Layout */
+/* Tab Bar bên trong Modal Chi Tiết */
+.modal-tabs{
+  display:flex;gap:.6rem;border-bottom:1px solid var(--line);padding-bottom:.9rem;
+  margin-bottom:2rem;overflow-x:auto;scrollbar-width:none;
+}
+.mtab-btn{
+  padding:.5rem 1rem;border-radius:99px;border:1px solid transparent;
+  background:transparent;color:var(--mute);font:500 .84rem var(--sans);
+  cursor:pointer;transition:all .2s ease;white-space:nowrap;
+}
+.mtab-btn:hover{color:var(--ice)}
+.mtab-btn.active{
+  background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.35);
+  color:var(--accent);font-weight:600;
+}
+
+/* Bố Cục Thông Tin 2 Cột */
 .detail-grid{
   display:grid;grid-template-columns:1.8fr 1fr;gap:2.5rem;
 }
 @media(max-width:860px){
   .detail-grid{grid-template-columns:1fr}
-  .catalog-grid{grid-template-columns:1fr}
+  .catalog-grid.list-view .card-item{flex-direction:column}
+  .catalog-grid.list-view .card-thumb{width:100%;border-right:none;border-bottom:1px solid var(--line)}
 }
 
 .section-label{
@@ -254,6 +288,17 @@ h1{
 .meta-row{display:flex;flex-direction:column;gap:.25rem}
 .meta-lbl{font-family:var(--mono);font-size:.7rem;color:var(--mute);text-transform:uppercase}
 .meta-val{font-size:.88rem;color:var(--ice);font-weight:500}
+
+.modal-footer{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  border-top:1px solid var(--line);padding-top:1.5rem;margin-top:2.5rem;flex-wrap:wrap;
+}
+.nav-project-btns{display:flex;gap:.8rem}
+.nav-btn{
+  padding:.55rem 1.1rem;border-radius:99px;border:1px solid var(--line);
+  background:transparent;color:var(--silver);font-size:.82rem;cursor:pointer;transition:all .2s;
+}
+.nav-btn:hover{color:var(--ice);border-color:var(--silver)}
 
 /* Footer */
 footer{
@@ -273,7 +318,7 @@ footer{
   <div class="wrap nav-bar">
     <a class="brand" href="index.html">
       <span class="brand-logo">VLUX<sup>®</sup></span>
-      <span class="brand-badge">Projects Showcase</span>
+      <span class="brand-badge">Showcase UI</span>
     </a>
     <a class="back-btn" href="index.html">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -285,153 +330,157 @@ footer{
 <main class="wrap">
   <!-- Hero Section -->
   <section class="hero">
-    <div class="eyebrow">Engineering Registry · System Architecture · Live Showcase</div>
-    <h1>Projects Showcase &amp; Hub.</h1>
+    <div class="eyebrow">Portfolio System · Architecture Registry · UI Showcase</div>
+    <h1>Projects Showcase &amp; Directory.</h1>
     <p class="hero-desc">
-      Không gian trưng bày toàn bộ các sản phẩm phần mềm, kiến trúc hệ thống và giải pháp kỹ thuật do <b>Nguyễn Phát Tài</b> xây dựng. Chọn bất kỳ dự án nào để xem cấu trúc tổng thể và thông tin chi tiết.
+      Giao diện trung tâm trưng bày danh mục các dự án, kiến trúc hệ thống và bản demo trực quan. Bố cục được thiết kế sẵn sàng để tích hợp thông tin và demo thực tế.
     </p>
 
     <!-- Quick Stats Telemetry Strip -->
     <div class="metrics-strip">
       <div class="metric-box">
-        <b id="totalProjectsCount">3 Dự Án</b>
+        <b>[Số Lượng]</b>
         <span>Tổng số dự án</span>
       </div>
       <div class="metric-box">
-        <b style="color:var(--accent)">14+ Công Nghệ</b>
-        <span>Hệ sinh thái kỹ thuật</span>
+        <b style="color:var(--accent)">[Công Nghệ]</b>
+        <span>Tech Stack đa nền tảng</span>
       </div>
       <div class="metric-box">
-        <b style="color:var(--green)">100% Mã Nguồn Mở</b>
-        <span>GitHub Public Repos</span>
+        <b style="color:var(--green)">[Mã Nguồn]</b>
+        <span>Repository công khai</span>
       </div>
       <div class="metric-box">
-        <b style="color:var(--silver)">Sẵn Sàng Trải Nghiệm</b>
-        <span>Kiến trúc &amp; Demo</span>
+        <b style="color:var(--silver)">[Trạng Thái]</b>
+        <span>Hệ thống kiểm thử</span>
       </div>
     </div>
 
-    <!-- Filter & Search Controls Bar -->
+    <!-- Controls Bar (Filter Tabs, Search, View Layout Toggle) -->
     <div class="controls-bar">
       <div class="filter-tabs" id="filterTabs">
-        <button class="flt-btn active" data-filter="all">Tất Cả (3)</button>
-        <button class="flt-btn" data-filter="systems">Systems &amp; Quantitative</button>
-        <button class="flt-btn" data-filter="backend">Backend &amp; Enterprise</button>
-        <button class="flt-btn" data-filter="tools">CLI &amp; Core Architecture</button>
+        <button class="flt-btn active" data-filter="all">Tất Cả Dự Án</button>
+        <button class="flt-btn" data-filter="cat-a">Danh Mục A</button>
+        <button class="flt-btn" data-filter="cat-b">Danh Mục B</button>
+        <button class="flt-btn" data-filter="cat-c">Danh Mục C</button>
       </div>
-      <div class="search-box">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm theo tên hoặc công nghệ...">
+
+      <div class="controls-right">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm theo tên hoặc công nghệ...">
+        </div>
+        <div class="view-toggle">
+          <button class="view-btn active" id="btnGrid" onclick="switchView('grid')" title="Dạng lưới">Grid</button>
+          <button class="view-btn" id="btnList" onclick="switchView('list')" title="Dạng danh sách">List</button>
+        </div>
       </div>
     </div>
 
-    <!-- Project Cards Grid (GIAO DIỆN TỔNG) -->
+    <!-- Project Cards Grid (BỐ CỤC KHUNG THẺ TRƯNG BÀY DỰ ÁN) -->
     <div class="catalog-grid" id="catalogGrid">
       
-      <!-- CARD 1 -->
-      <article class="card-item" data-category="systems" onclick="previewProjectModal(1)">
+      <!-- CARD KHUNG MẪU 01 -->
+      <article class="card-item" data-category="cat-a" onclick="openDetailModal('01')">
         <div class="card-thumb">
           <div class="card-thumb-bg"></div>
           <div class="card-badge-top">
-            <span class="status-tag active">● Live System</span>
-            <span class="status-tag">Personal Project</span>
+            <span class="status-tag active">● Status Badge</span>
+            <span class="status-tag">Type Tag</span>
           </div>
           <div class="card-thumb-placeholder">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-            <span>[Khung Thumbnail / Visual Preview]</span>
+            <span>[Vị Trí Thumbnail / Image Preview 16:9]</span>
           </div>
         </div>
         <div class="card-content">
-          <div class="card-category">Systems &amp; Quantitative</div>
-          <h2 class="card-heading">VluxChart Terminal</h2>
+          <div class="card-category">Danh Mục A · Tag</div>
+          <h2 class="card-heading">Dự Án Mẫu 01 (Project Card Title)</h2>
           <p class="card-summary">
-            Hệ thống phân tích Order Flow &amp; vi cấu trúc thị trường tốc độ cao viết bằng Rust và Tauri 2, hỗ trợ luồng dữ liệu WebSocket đa sàn và kết xuất đồ họa nến Footprint thời gian thực.
+            Khung mô tả tóm tắt tổng quan về mục tiêu, giải pháp kỹ thuật và phạm vi của dự án. Đoạn văn bản này sẽ hiển thị thông tin cô đọng cho người xem.
           </p>
           <div class="card-tags">
-            <span class="tech-pill">Rust</span>
-            <span class="tech-pill">Tauri 2</span>
-            <span class="tech-pill">React 19</span>
-            <span class="tech-pill">WebSockets</span>
-            <span class="tech-pill">Canvas2D</span>
+            <span class="tech-pill">Tech Tag 1</span>
+            <span class="tech-pill">Tech Tag 2</span>
+            <span class="tech-pill">Tech Tag 3</span>
+            <span class="tech-pill">Tech Tag 4</span>
           </div>
           <div class="card-actions">
             <span class="view-detail-btn">Xem chi tiết &amp; Demo →</span>
-            <a class="github-link-btn" href="https://github.com/ngtaiphat1501/VluxChart" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-              <span>GitHub</span>
+            <span class="ext-link-btn">
+              <span>Mã nguồn</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
-            </a>
+            </span>
           </div>
         </div>
       </article>
 
-      <!-- CARD 2 -->
-      <article class="card-item" data-category="backend" onclick="previewProjectModal(2)">
+      <!-- CARD KHUNG MẪU 02 -->
+      <article class="card-item" data-category="cat-b" onclick="openDetailModal('02')">
         <div class="card-thumb">
           <div class="card-thumb-bg"></div>
           <div class="card-badge-top">
-            <span class="status-tag" style="color:var(--accent)">● Capstone</span>
-            <span class="status-tag">Fullstack Team</span>
+            <span class="status-tag" style="color:var(--accent)">● Status Badge</span>
+            <span class="status-tag">Type Tag</span>
           </div>
           <div class="card-thumb-placeholder">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6Z"/></svg>
-            <span>[Khung Thumbnail / Visual Preview]</span>
+            <span>[Vị Trí Thumbnail / Image Preview 16:9]</span>
           </div>
         </div>
         <div class="card-content">
-          <div class="card-category">Backend &amp; Enterprise</div>
-          <h2 class="card-heading">Ftech Learning Online</h2>
+          <div class="card-category">Danh Mục B · Tag</div>
+          <h2 class="card-heading">Dự Án Mẫu 02 (Project Card Title)</h2>
           <p class="card-summary">
-            Nền tảng đào tạo trực tuyến chuẩn Jakarta EE 10 trên Apache Tomcat, tích hợp dashboard phân tích doanh thu, cổng thanh toán VNPAY sandbox và container hóa hoàn chỉnh với Docker.
+            Khung mô tả tóm tắt tổng quan về mục tiêu, giải pháp kỹ thuật và phạm vi của dự án. Đoạn văn bản này sẽ hiển thị thông tin cô đọng cho người xem.
           </p>
           <div class="card-tags">
-            <span class="tech-pill">Java 21</span>
-            <span class="tech-pill">Jakarta EE 10</span>
-            <span class="tech-pill">Tomcat</span>
-            <span class="tech-pill">SQL Server</span>
-            <span class="tech-pill">Docker</span>
+            <span class="tech-pill">Tech Tag 1</span>
+            <span class="tech-pill">Tech Tag 2</span>
+            <span class="tech-pill">Tech Tag 3</span>
+            <span class="tech-pill">Tech Tag 4</span>
           </div>
           <div class="card-actions">
             <span class="view-detail-btn">Xem chi tiết &amp; Demo →</span>
-            <a class="github-link-btn" href="https://github.com/ngtaiphat1501/Ftech_learning_online" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-              <span>GitHub</span>
+            <span class="ext-link-btn">
+              <span>Mã nguồn</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
-            </a>
+            </span>
           </div>
         </div>
       </article>
 
-      <!-- CARD 3 -->
-      <article class="card-item" data-category="tools" onclick="previewProjectModal(3)">
+      <!-- CARD KHUNG MẪU 03 -->
+      <article class="card-item" data-category="cat-c" onclick="openDetailModal('03')">
         <div class="card-thumb">
           <div class="card-thumb-bg"></div>
           <div class="card-badge-top">
-            <span class="status-tag">● Academic System</span>
-            <span class="status-tag">Core OOP</span>
+            <span class="status-tag">● Status Badge</span>
+            <span class="status-tag">Type Tag</span>
           </div>
           <div class="card-thumb-placeholder">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m4 17 6-6-6-6M12 19h8"/></svg>
-            <span>[Khung Thumbnail / Visual Preview]</span>
+            <span>[Vị Trí Thumbnail / Image Preview 16:9]</span>
           </div>
         </div>
         <div class="card-content">
-          <div class="card-category">CLI &amp; Core Architecture</div>
-          <h2 class="card-heading">Student Management System</h2>
+          <div class="card-category">Danh Mục C · Tag</div>
+          <h2 class="card-heading">Dự Án Mẫu 03 (Project Card Title)</h2>
           <p class="card-summary">
-            Hệ thống quản lý sinh viên phân lớp theo chuẩn thiết kế hướng đối tượng Java OOP, bao gồm 4 menu phân quyền người dùng và lưu trữ dữ liệu nhị phân tách biệt.
+            Khung mô tả tóm tắt tổng quan về mục tiêu, giải pháp kỹ thuật và phạm vi của dự án. Đoạn văn bản này sẽ hiển thị thông tin cô đọng cho người xem.
           </p>
           <div class="card-tags">
-            <span class="tech-pill">Java OOP</span>
-            <span class="tech-pill">Layered CLI</span>
-            <span class="tech-pill">File I/O</span>
-            <span class="tech-pill">Binary Serialization</span>
-            <span class="tech-pill">Ant</span>
+            <span class="tech-pill">Tech Tag 1</span>
+            <span class="tech-pill">Tech Tag 2</span>
+            <span class="tech-pill">Tech Tag 3</span>
+            <span class="tech-pill">Tech Tag 4</span>
           </div>
           <div class="card-actions">
             <span class="view-detail-btn">Xem chi tiết &amp; Demo →</span>
-            <a class="github-link-btn" href="https://github.com/ngtaiphat1501/StudentManagementSystem" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-              <span>GitHub</span>
+            <span class="ext-link-btn">
+              <span>Mã nguồn</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
-            </a>
+            </span>
           </div>
         </div>
       </article>
@@ -441,7 +490,7 @@ footer{
 </main>
 
 <!-- ================================================================
-     KHUNG XEM CHI TIẾT TỔNG QUÁT (PROJECT DETAIL VIEW SHELL)
+     GIAO DIỆN KHUNG XEM CHI TIẾT (DETAIL VIEW MODAL SHELL)
      ================================================================ -->
 <div class="detail-modal" id="detailModal" role="dialog" aria-modal="true">
   <div class="detail-box">
@@ -449,20 +498,28 @@ footer{
     <!-- Modal Sticky Header -->
     <div class="detail-header">
       <div class="detail-title-group">
-        <span class="card-category" id="modalCategory" style="margin:0">Mảng Dự Án</span>
-        <h2 id="modalTitle">Tiêu Đề Dự Án</h2>
+        <span class="card-category" id="modalCategory" style="margin:0">[Danh Mục Dự Án]</span>
+        <h2 id="modalTitle">[Tiêu Đề Dự Án Chi Tiết]</h2>
       </div>
-      <button class="close-btn" onclick="closeProjectModal()" aria-label="Đóng giao diện chi tiết">✕</button>
+      <button class="close-btn" onclick="closeDetailModal()" aria-label="Đóng giao diện chi tiết">✕</button>
     </div>
 
-    <!-- Modal Content Body (Bố Cục Khung Chi Tiết) -->
+    <!-- Modal Content Body -->
     <div class="detail-body">
       
-      <!-- Khung Trình Diễn Hình Ảnh / Live Demo sau này -->
+      <!-- Khung Hiển Thị Hình Ảnh Lớn / Video / Live Demo -->
       <div class="media-viewport-slot" id="modalMediaSlot">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="m8 21 4-4 4 4M12 17v4"/></svg>
-        <span>[Vị trí khung hiển thị hình ảnh chụp màn hình / video hoặc Live Demo trực tiếp]</span>
-        <span style="font-size:.74rem;color:var(--mute)">(Khung này sẽ được gắn demo hoặc ảnh thực tế khi bạn duyệt xong giao diện tổng)</span>
+        <span style="color:var(--ice);font-weight:500">[Khung Trình Diễn: Screenshot Thực Tế / Video / Interactive Live Demo Canvas]</span>
+        <span style="font-size:.78rem;color:var(--mute)">(Vị trí này được thiết kế để gắn hình ảnh thực tế hoặc khung chạy demo trực tiếp khi duyệt xong giao diện)</span>
+      </div>
+
+      <!-- Tab Chuyển Đổi Nội Dung Trong Modal -->
+      <div class="modal-tabs">
+        <button class="mtab-btn active">1. Tổng Quan &amp; Nghiệp Vụ</button>
+        <button class="mtab-btn">2. Kiến Trúc &amp; Sơ Đồ Luồng</button>
+        <button class="mtab-btn">3. Demo / Tương Tác</button>
+        <button class="mtab-btn">4. Thông Số Kỹ Thuật</button>
       </div>
 
       <!-- Bố Cục Thông Tin 2 Cột -->
@@ -471,13 +528,13 @@ footer{
         <!-- Cột Trái: Mô Tả Kiến Trúc & Nghiệp Vụ -->
         <div>
           <div class="section-label">Tổng Quan &amp; Bài Toán Giải Quyết</div>
-          <p class="detail-desc-text" id="modalDesc1">
-            Mô tả nghiệp vụ tổng quan của dự án, bối cảnh thực hiện và các tính năng chính đã được hiện thực hóa.
+          <p class="detail-desc-text">
+            Khung mô tả bối cảnh dự án, bài toán thực tế cần giải quyết, mục tiêu đạt được và giá trị mang lại cho người dùng hoặc hệ thống.
           </p>
 
-          <div class="section-label">Kiến Trúc Kỹ Thuật &amp; Triển Khai</div>
-          <p class="detail-desc-text" id="modalDesc2">
-            Mô tả kiến trúc hệ thống, các giải pháp công nghệ, giải thuật tối ưu hóa và quy trình kiểm thử/đóng gói container.
+          <div class="section-label">Kiến Trúc Kỹ Thuật &amp; Giải Pháp</div>
+          <p class="detail-desc-text">
+            Khung phân tích kiến trúc tầng, các công nghệ lựa chọn, cơ chế xử lý dữ liệu, thuật toán tối ưu hóa hiệu năng và quy trình đóng gói kiểm thử.
           </p>
         </div>
 
@@ -486,26 +543,35 @@ footer{
           <div class="meta-panel">
             <div class="meta-row">
               <span class="meta-lbl">Vai Trò Đảm Nhiệm</span>
-              <span class="meta-val" id="modalRole">Lead Developer</span>
+              <span class="meta-val">[Vai Trò / Phụ Trách]</span>
             </div>
             <div class="meta-row">
               <span class="meta-lbl">Thời Gian Thực Hiện</span>
-              <span class="meta-val" id="modalTimeline">2026</span>
+              <span class="meta-val">[Thời Gian]</span>
             </div>
             <div class="meta-row">
               <span class="meta-lbl">Công Nghệ Cốt Lõi</span>
-              <span class="meta-val" id="modalStack">Rust · Tauri 2 · WebSockets</span>
+              <span class="meta-val">[Danh Sách Tech Stack]</span>
             </div>
             <div class="meta-row">
               <span class="meta-lbl">Mã Nguồn Dự Án</span>
-              <a class="meta-val" id="modalRepoLink" href="#" target="_blank" rel="noopener" style="color:var(--accent);display:inline-flex;align-items:center;gap:.3rem">
-                <span>Xem trên GitHub</span>
+              <span class="meta-val" style="color:var(--accent);display:inline-flex;align-items:center;gap:.3rem">
+                <span>[Liên kết GitHub Repository]</span>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
-              </a>
+              </span>
             </div>
           </div>
         </div>
 
+      </div>
+
+      <!-- Footer Điều Hướng Bên Trong Modal -->
+      <div class="modal-footer">
+        <div class="nav-project-btns">
+          <button class="nav-btn" onclick="alert('Chuyển dự án trước')">← Dự Án Trước</button>
+          <button class="nav-btn" onclick="alert('Chuyển dự án tiếp theo')">Dự Án Tiếp Theo →</button>
+        </div>
+        <button class="nav-btn" style="border-color:var(--silver);color:var(--ice)" onclick="closeDetailModal()">Đóng Khung Chi Tiết (ESC)</button>
       </div>
 
     </div>
@@ -517,71 +583,25 @@ footer{
 <footer>
   <div class="wrap footer-row">
     <div>
-      <b>VLUX® Project Hub</b> — Nguyễn Phát Tài · FPT University Cần Thơ
+      <b>VLUX® Projects Showcase UI</b> — Nguyễn Phát Tài · FPT University Cần Thơ
     </div>
     <div style="display:flex;gap:1.5rem">
       <a href="index.html" style="color:var(--silver)">Portfolio Chính</a>
       <a href="https://github.com/ngtaiphat1501" target="_blank" rel="noopener" style="color:var(--silver)">GitHub Profile</a>
-      <a href="mailto:ngtaiphat1501@gmail.com" style="color:var(--silver)">Liên Hệ</a>
     </div>
   </div>
 </footer>
 
 <script>
-/* ================================================================
-   DỮ LIỆU KHUNG MẪU TỔNG QUÁT (CHƯA GẮN NỘI DUNG CHI TIẾT)
-   ================================================================ */
-const PROJECT_SHELLS = {
-  1: {
-    title: "VluxChart Terminal",
-    category: "Systems & Quantitative",
-    role: "Lead Developer (Personal Project)",
-    timeline: "Nov 2026",
-    stack: "Rust 2021 · Tauri 2 · React 19 · WebSockets · Canvas2D",
-    repo: "https://github.com/ngtaiphat1501/VluxChart",
-    desc1: "Hệ thống terminal desktop phân tích vi cấu trúc thị trường (Order Flow, Footprint Clusters, Options GEX) với tốc độ cao, xử lý luồng dữ liệu giao dịch trực tiếp từ Bybit Linear và Binance Futures.",
-    desc2: "Kiến trúc bất đồng bộ xây dựng bằng Rust core (Tokio MPSC bounded channel, WAL CRC32 crash recovery, rust_decimal zero-float arithmetic) kết nối với giao diện React 19 / Canvas2D tối ưu 60 FPS."
-  },
-  2: {
-    title: "Ftech Learning Online",
-    category: "Backend & Enterprise",
-    role: "Fullstack Developer (Team of 5)",
-    timeline: "Oct – Nov 2026",
-    stack: "Java 21 · Jakarta EE 10 · Tomcat · SQL Server 2022 · Docker Compose",
-    repo: "https://github.com/ngtaiphat1501/Ftech_learning_online",
-    desc1: "Đồ án tốt nghiệp PRJ301: Nền tảng học trực tuyến quy mô doanh nghiệp với phân quyền đa vai trò, quản lý khóa học, mã giảm giá và cổng thanh toán trực tuyến VNPAY sandbox.",
-    desc2: "Mô hình MVC phân tầng nghiêm ngặt với Jakarta EE Servlets/Filters, tối ưu hóa cơ sở dữ liệu quan hệ SQL Server chuẩn 3NF, và đóng gói môi trường triển khai tự động bằng multi-stage Dockerfile."
-  },
-  3: {
-    title: "Student Management System",
-    category: "CLI & Core Architecture",
-    role: "Java Developer (Team Project)",
-    timeline: "Mar 2026",
-    stack: "Java OOP · Layered CLI · File I/O · Binary Serialization · Ant",
-    repo: "https://github.com/ngtaiphat1501/StudentManagementSystem",
-    desc1: "Hệ thống quản lý hồ sơ và bảng điểm sinh viên với 4 giao diện dòng lệnh độc lập phân quyền cho Quản trị viên, Cán bộ, Giảng viên và Sinh viên.",
-    desc2: "Thiết kế phân lớp OOP chặt chẽ (Models, Services, Managers, Menus), tách biệt hoàn toàn giữa luồng xử lý nghiệp vụ và cơ chế lưu trữ nhị phân tuần tự hóa (.dat)."
-  }
-};
-
-function previewProjectModal(id) {
-  const p = PROJECT_SHELLS[id];
-  if (!p) return;
-  document.getElementById("modalCategory").textContent = p.category;
-  document.getElementById("modalTitle").textContent = p.title;
-  document.getElementById("modalRole").textContent = p.role;
-  document.getElementById("modalTimeline").textContent = p.timeline;
-  document.getElementById("modalStack").textContent = p.stack;
-  document.getElementById("modalRepoLink").href = p.repo;
-  document.getElementById("modalDesc1").textContent = p.desc1;
-  document.getElementById("modalDesc2").textContent = p.desc2;
-
+function openDetailModal(id) {
+  document.getElementById("modalCategory").textContent = "Danh Mục " + id;
+  document.getElementById("modalTitle").textContent = "Dự Án Mẫu " + id + " — Giao Diện Chi Tiết";
   const modal = document.getElementById("detailModal");
   modal.classList.add("open");
   document.body.style.overflow = "hidden";
 }
 
-function closeProjectModal() {
+function closeDetailModal() {
   const modal = document.getElementById("detailModal");
   modal.classList.remove("open");
   document.body.style.overflow = "";
@@ -589,13 +609,29 @@ function closeProjectModal() {
 
 // Đóng modal khi bấm ESC
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeProjectModal();
+  if (e.key === "Escape") closeDetailModal();
 });
 
 // Đóng modal khi bấm ra ngoài khung
 document.getElementById("detailModal").addEventListener("click", (e) => {
-  if (e.target.id === "detailModal") closeProjectModal();
+  if (e.target.id === "detailModal") closeDetailModal();
 });
+
+// Chuyển chế độ xem Grid / List
+function switchView(mode) {
+  const grid = document.getElementById("catalogGrid");
+  const btnGrid = document.getElementById("btnGrid");
+  const btnList = document.getElementById("btnList");
+  if (mode === "list") {
+    grid.classList.add("list-view");
+    btnList.classList.add("active");
+    btnGrid.classList.remove("active");
+  } else {
+    grid.classList.remove("list-view");
+    btnGrid.classList.add("active");
+    btnList.classList.remove("active");
+  }
+}
 
 // Bộ lọc danh mục
 const filterBtns = document.querySelectorAll(".flt-btn");
@@ -609,16 +645,6 @@ filterBtns.forEach(b => {
       const cat = c.getAttribute("data-category");
       c.style.display = (filter === "all" || cat === filter) ? "flex" : "none";
     });
-  });
-});
-
-// Tìm kiếm nhanh
-const searchInput = document.getElementById("searchInput");
-searchInput.addEventListener("input", (e) => {
-  const q = e.target.value.toLowerCase().trim();
-  cards.forEach(c => {
-    const text = c.textContent.toLowerCase();
-    c.style.display = (!q || text.includes(q)) ? "flex" : "none";
   });
 });
 
