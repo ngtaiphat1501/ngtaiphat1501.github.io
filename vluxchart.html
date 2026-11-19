@@ -134,6 +134,14 @@ h1{
 .pv-footer{display:flex;flex-wrap:wrap;gap:.5rem;border-top:1px solid var(--line);padding-top:1.4rem;margin-top:.4rem}
 .pv-pill{font-size:.75rem;padding:.28rem .7rem;border-radius:6px;background:rgba(201,208,221,.07);color:var(--ice)}
 
+.pv-card-preview{
+  width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(201,208,221,.16);background:#090B10;
+  box-shadow:0 12px 30px -10px rgba(0,0,0,.7);margin-top:.4rem;position:relative
+}
+.pv-card-preview img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.pv-card:hover .pv-card-preview img{transform:scale(1.025)}
+
 /* video demo showcase */
 .video-section{margin-bottom:4.5rem}
 .video-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
@@ -296,6 +304,9 @@ footer{margin-top:4rem;display:flex;justify-content:space-between;flex-wrap:wrap
           </div>
           <h3>High-Precision Concurrency Engine</h3>
           <p>Multi-threaded async Tokio runtime with non-blocking channel pipelining. Solves floating-point inaccuracy by enforcing exact fixed-point arithmetic across all financial volume calculations.</p>
+          <div class="pv-card-preview">
+            <img src="assets/projects/deepchart1.png" alt="Order Flow Footprint clusters and live execution delta" loading="lazy">
+          </div>
           <ul class="pv-bullets">
             <li>Zero-float volume accounting via <code>rust_decimal</code> to eliminate rounding errors in aggregate ticks.</li>
             <li>Low-latency ring buffer queues processing up to 100,000 tick updates per second.</li>
@@ -316,6 +327,9 @@ footer{margin-top:4rem;display:flex;justify-content:space-between;flex-wrap:wrap
           </div>
           <h3>Market Feeds &amp; Zero-Loss WAL</h3>
           <p>Dual parallel WebSocket subscribers for Bybit Linear and Binance Futures feeds, linked with a low-latency local IPC bridge to MetaTrader 5 (MT5).</p>
+          <div class="pv-card-preview">
+            <img src="assets/projects/deepchart2.png" alt="CVD divergence and dynamic Value Area profile" loading="lazy">
+          </div>
           <ul class="pv-bullets">
             <li>Append-only Write-Ahead Logging (WAL) with CRC32 checksums for zero-loss crash recovery.</li>
             <li>Automatic reconnect &amp; sequence gap backfilling without stalling chart rendering.</li>
@@ -337,6 +351,9 @@ footer{margin-top:4rem;display:flex;justify-content:space-between;flex-wrap:wrap
           </div>
           <h3>Microstructure &amp; Cluster Analytics</h3>
           <p>Institutional order flow analytics decomposing candle volume into granular bid/ask aggressive execution layers in real time.</p>
+          <div class="pv-card-preview">
+            <img src="assets/projects/deepchart3.png" alt="Multi-timeframe dual chart workspace with Footprint and DOM" loading="lazy">
+          </div>
           <ul class="pv-bullets">
             <li>Real-time Footprint clusters: bid-ask volume delta computed on every tick level.</li>
             <li>Diagonal Imbalance algorithm (300% ratio) with automated cluster stacking.</li>
@@ -359,6 +376,9 @@ footer{margin-top:4rem;display:flex;justify-content:space-between;flex-wrap:wrap
           </div>
           <h3>60 FPS Hardware-Accelerated Visuals</h3>
           <p>Zero-overhead Tauri 2 IPC and custom Canvas2D rendering pipeline designed to sustain a locked 60 FPS under high-frequency market surges.</p>
+          <div class="pv-card-preview">
+            <img src="assets/projects/deepchart4.png" alt="Hardware-accelerated 3-pane multi-window terminal layout" loading="lazy">
+          </div>
           <ul class="pv-bullets">
             <li>Decoupled data ingestion thread from rendering loop to prevent frame stutters.</li>
             <li>Dynamic viewport culling: renders only active price levels on screen.</li>
@@ -388,8 +408,7 @@ footer{margin-top:4rem;display:flex;justify-content:space-between;flex-wrap:wrap
 
     <div class="video-frame" id="videoFrame">
       <video id="vDemo" controls playsinline preload="metadata" poster="assets/projects/vluxchart.jpg">
-        <source src="assets/projects/vluxchart-demo.mp4" type="video/mp4">
-        <source src="assets/projects/vluxchart.mp4" type="video/mp4">
+        <source src="assets/projects/vluxchartvideodemo.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>
