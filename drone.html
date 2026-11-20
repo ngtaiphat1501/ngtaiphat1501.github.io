@@ -773,6 +773,41 @@
       font-weight: 500
     }
 
+    /* video demo showcase */
+    .video-section {
+      margin-bottom: 5.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--line)
+    }
+
+    .video-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem
+    }
+
+    .video-frame {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(201, 208, 221, .22);
+      background: #090B10;
+      box-shadow: 0 24px 60px -15px rgba(0, 0, 0, .85), 0 0 35px rgba(130, 155, 203, .15);
+      aspect-ratio: 16/9;
+      display: grid;
+      place-items: center
+    }
+
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
     /* bottom navigation */
     .btm-nav {
       display: flex;
@@ -1116,6 +1151,10 @@
         <span class="t-vi">Yêu cầu Trao đổi &amp; Live Demo</span>
         <span class="t-en">Inquire for Live Demo</span>
         <i>↗</i>
+      </a>
+      <a class="link" href="#simulation">
+        <span class="t-vi">Xem Video Mô Phỏng 3D ↓</span>
+        <span class="t-en">Watch 3D Sim Video ↓</span>
       </a>
       <a class="link" href="#research">
         <span class="t-vi">Báo cáo Đo đạc Grand Prix 5km ↓</span>
@@ -1469,6 +1508,46 @@
             </div>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- Live 3D Simulation Video Showcase -->
+    <section class="video-section" id="simulation">
+      <div class="video-header">
+        <div>
+          <h2 class="sec-title" style="margin:0 0 .4rem">
+            <span class="t-vi">Video Mô Phỏng 3D Đua Drone &amp; Vật Cản.</span>
+            <span class="t-en">3D Autonomous Racing &amp; Obstacle Simulation.</span>
+          </h2>
+          <span style="font-size:.85rem;color:var(--mute)">
+            <span class="t-vi">Truyền hình 3D trực tiếp màn rượt đuổi 10 Drone đường hẹp 5,000 m &amp; Né vật cản tốc độ cao trên 120 km/h · 720p HD</span>
+            <span class="t-en">Real-time 3D telemetry broadcast: 10-Drone 5,000m pack racing &amp; 120 km/h dynamic obstacle gauntlet · 720p HD</span>
+          </span>
+        </div>
+        <div class="meta-tag" style="margin:0">
+          <span class="dot"></span>
+          <span class="t-vi">Vật Lý 6-DOF Khí Động Thực Tế</span>
+          <span class="t-en">Real-Time 6-DOF Physics</span>
+        </div>
+      </div>
+
+      <!-- Video Selection Tabs -->
+      <div class="video-tabs" style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.2rem">
+        <button type="button" class="video-tab-btn on" id="vTabGrandPrix" data-video="assets/projects/drone/drone_10race_sim.mp4" data-poster="assets/projects/drone/viewer_10drone_preview.png" style="all:unset;cursor:pointer;padding:.55rem 1.15rem;border-radius:99px;border:1px solid var(--line);background:var(--silver);color:var(--obs);font-size:.82rem;font-weight:600;transition:all .25s ease">
+          <span class="t-vi">▶ 1. Đấu Trường 10 Drone 5,000 m (Grand Prix Pack Race)</span>
+          <span class="t-en">▶ 1. 10-Drone 5,000 m Grand Prix (Pack Overtaking)</span>
+        </button>
+        <button type="button" class="video-tab-btn" id="vTabObstacle" data-video="assets/projects/drone/drone_obstacle_sim.mp4" data-poster="assets/projects/drone/viewer_preview.png" style="all:unset;cursor:pointer;padding:.55rem 1.15rem;border-radius:99px;border:1px solid var(--line);background:rgba(20,24,34,.65);color:var(--mute);font-size:.82rem;font-weight:500;transition:all .25s ease">
+          <span class="t-vi">▶ 2. Né Vật Cản &amp; Time Attack 500 m (Obstacle Gauntlet)</span>
+          <span class="t-en">▶ 2. Dynamic Obstacle Avoidance &amp; 500 m Time Attack</span>
+        </button>
+      </div>
+
+      <div class="video-frame" id="videoFrame">
+        <video id="droneVideo" controls playsinline preload="metadata" poster="assets/projects/drone/viewer_10drone_preview.png">
+          <source src="assets/projects/drone/drone_10race_sim.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
     </section>
 
@@ -2114,6 +2193,36 @@
     sVol.addEventListener('input', function () {
       if (au && au.mGain) au.mGain.gain.value = parseFloat(sVol.value);
     });
+
+    /* Video demo switcher */
+    var vTabs = document.querySelectorAll('.video-tab-btn');
+    var vPlayer = document.getElementById('droneVideo');
+    if (vTabs.length && vPlayer) {
+      vTabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          vTabs.forEach(function (b) {
+            b.classList.remove('on');
+            b.style.background = 'rgba(20,24,34,.65)';
+            b.style.color = 'var(--mute)';
+            b.style.fontWeight = '500';
+          });
+          btn.classList.add('on');
+          btn.style.background = 'var(--silver)';
+          btn.style.color = 'var(--obs)';
+          btn.style.fontWeight = '600';
+
+          var newSrc = btn.getAttribute('data-video');
+          var newPoster = btn.getAttribute('data-poster');
+          if (newSrc) {
+            vPlayer.pause();
+            if (newPoster) vPlayer.poster = newPoster;
+            vPlayer.querySelector('source').src = newSrc;
+            vPlayer.load();
+            vPlayer.play().catch(function () { });
+          }
+        });
+      });
+    }
   </script>
 </body>
 
