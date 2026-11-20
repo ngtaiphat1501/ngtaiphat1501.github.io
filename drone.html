@@ -1526,26 +1526,51 @@
         </div>
         <div class="meta-tag" style="margin:0">
           <span class="dot"></span>
-          <span class="t-vi">Vật Lý 6-DOF Khí Động Thực Tế</span>
-          <span class="t-en">Real-Time 6-DOF Physics</span>
+          <span class="t-vi">Tốc Độ ×2 Turbo · Vật Lý 6-DOF</span>
+          <span class="t-en">2× Turbo Speed · 6-DOF Physics</span>
         </div>
       </div>
 
+      <!-- Speed & Mode Header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;margin-bottom:1rem">
+        <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .8rem;border-radius:99px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.35);font-size:.78rem;font-weight:600;color:#38BDF8">
+          <span>⚡</span>
+          <span class="t-vi">TOÀN BỘ VIDEO ĐÃ TĂNG TỐC ×2 (TURBO 2× SPEED)</span>
+          <span class="t-en">ALL SIMULATIONS ENCODED AT TURBO 2× SPEED</span>
+        </div>
+        <span style="font-size:.8rem;color:var(--mute)">
+          <span class="t-vi">Chọn kịch bản mô phỏng để chuyển video tức thì:</span>
+          <span class="t-en">Select scenario to switch video stream:</span>
+        </span>
+      </div>
+
       <!-- Video Selection Tabs -->
-      <div class="video-tabs" style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.2rem">
-        <button type="button" class="video-tab-btn on" id="vTabGrandPrix" data-video="assets/projects/drone/drone_10race_sim.mp4" data-poster="assets/projects/drone/viewer_10drone_preview.png" style="all:unset;cursor:pointer;padding:.55rem 1.15rem;border-radius:99px;border:1px solid var(--line);background:var(--silver);color:var(--obs);font-size:.82rem;font-weight:600;transition:all .25s ease">
-          <span class="t-vi">▶ 1. Đấu Trường 10 Drone 5,000 m (Grand Prix Pack Race)</span>
-          <span class="t-en">▶ 1. 10-Drone 5,000 m Grand Prix (Pack Overtaking)</span>
+      <div class="video-tabs" style="display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1.4rem">
+        <button type="button" class="video-tab-btn on" data-video="assets/projects/drone/drone_10race_2x.mp4" data-poster="assets/projects/drone/viewer_10drone_preview.png" style="all:unset;cursor:pointer;padding:.55rem 1.15rem;border-radius:99px;border:1px solid var(--line);background:var(--silver);color:var(--obs);font-size:.82rem;font-weight:600;transition:all .25s ease">
+          <span class="t-vi">▶ 1. Đua 10 Drone 5,000m Grand Prix (2× Speed)</span>
+          <span class="t-en">▶ 1. 10-Drone 5,000m Grand Prix (2× Turbo)</span>
         </button>
-        <button type="button" class="video-tab-btn" id="vTabObstacle" data-video="assets/projects/drone/drone_obstacle_sim.mp4" data-poster="assets/projects/drone/viewer_preview.png" style="all:unset;cursor:pointer;padding:.55rem 1.15rem;border-radius:99px;border:1px solid var(--line);background:rgba(20,24,34,.65);color:var(--mute);font-size:.82rem;font-weight:500;transition:all .25s ease">
-          <span class="t-vi">▶ 2. Né Vật Cản &amp; Time Attack 500 m (Obstacle Gauntlet)</span>
-          <span class="t-en">▶ 2. Dynamic Obstacle Avoidance &amp; 500 m Time Attack</span>
+        <button type="button" class="video-tab-btn" data-video="assets/projects/drone/drone_monster_2x.mp4" data-poster="assets/projects/drone/viewer_preview.png" style="all:unset;cursor:pointer;padding:.55rem 1.15rem;border-radius:99px;border:1px solid var(--line);background:rgba(20,24,34,.65);color:var(--mute);font-size:.82rem;font-weight:500;transition:all .25s ease">
+          <span class="t-vi">▶ 2. Sinh Tồn Quái Vật Đuổi 4.2km (2× Speed)</span>
+          <span class="t-en">▶ 2. Endless Monster-Chase Survival (2× Turbo)</span>
+        </button>
+        <button type="button" class="video-tab-btn" data-video="assets/projects/drone/drone_500m_2x.mp4" data-poster="assets/projects/drone/viewer_preview.png" style="all:unset;cursor:pointer;padding:.55rem 1.15rem;border-radius:99px;border:1px solid var(--line);background:rgba(20,24,34,.65);color:var(--mute);font-size:.82rem;font-weight:500;transition:all .25s ease">
+          <span class="t-vi">▶ 3. Gauntlet Vượt Vật Cản 500m (2× Speed)</span>
+          <span class="t-en">▶ 3. 500m Obstacle Gauntlet (2× Turbo)</span>
+        </button>
+        <button type="button" class="video-tab-btn" data-video="assets/projects/drone/drone_zigzag_2x.mp4" data-poster="assets/projects/drone/viewer_preview.png" style="all:unset;cursor:pointer;padding:.55rem 1.15rem;border-radius:99px;border:1px solid var(--line);background:rgba(20,24,34,.65);color:var(--mute);font-size:.82rem;font-weight:500;transition:all .25s ease">
+          <span class="t-vi">▶ 4. Đấu Trường Lượn Sóng Zig-Zag (2× Speed)</span>
+          <span class="t-en">▶ 4. Multi-Waypoint Zig-Zag Drift (2× Turbo)</span>
+        </button>
+        <button type="button" class="video-tab-btn" data-video="assets/projects/drone/drone_slalom_2x.mp4" data-poster="assets/projects/drone/viewer_preview.png" style="all:unset;cursor:pointer;padding:.55rem 1.15rem;border-radius:99px;border:1px solid var(--line);background:rgba(20,24,34,.65);color:var(--mute);font-size:.82rem;font-weight:500;transition:all .25s ease">
+          <span class="t-vi">▶ 5. Hẻm Hẹp Precision Slalom 500m (2× Speed)</span>
+          <span class="t-en">▶ 5. Precision Slalom Corridor (2× Turbo)</span>
         </button>
       </div>
 
       <div class="video-frame" id="videoFrame">
-        <video id="droneVideo" controls playsinline preload="metadata" poster="assets/projects/drone/viewer_10drone_preview.png">
-          <source src="assets/projects/drone/drone_10race_sim.mp4" type="video/mp4">
+        <video id="droneVideo" controls autoplay muted loop playsinline preload="metadata" poster="assets/projects/drone/viewer_10drone_preview.png">
+          <source src="assets/projects/drone/drone_10race_2x.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
