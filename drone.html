@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ESP32 Bio-Brain Autonomous Drone — Projects — VLUX</title>
+  <meta name="description"
+    content="ESP32 4-Rotor Quad-X Bio-Brain: Deep Reinforcement Learning 10-Drone 5km Grand Prix & Obstacle Navigation with Edge Neural Inference by Nguyễn Phát Tài (VLUX).">
+  <meta name="color-scheme" content="dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --obs: #08090D;
+      --silver: #C9D0DD;
+      --ice: #F3F5FA;
+      --blue: #829BCB;
+      --mute: #a6aebd;
+      --line: rgba(201, 208, 221, .18);
+      --card: rgba(23, 26, 34, .75);
+      --card-border: rgba(201, 208, 221, .14);
+      --sans: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+      box-sizing: border-box;
+      color-scheme: dark
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: clip
+    }
+
+    body {
+      margin: 0;
+      min-height: 100svh;
+      background: radial-gradient(70vw 60vh at 80% 0, #1b2234, transparent 70%), var(--obs);
+      color: var(--silver);
+      font: 400 1rem/1.7 var(--sans);
+      -webkit-font-smoothing: antialiased
+    }
+
+    #bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      display: block
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 4px;
+      border-radius: 2px
+    }
+
+    .wrap {
+      width: min(1240px, 100% - 3rem);
+      margin-inline: auto
+    }
+
+    /* Language display toggle rules */
+    html[lang="vi"] .t-en {
+      display: none !important
+    }
+
+    html[lang="en"] .t-vi {
+      display: none !important
+    }
+
+    /* Navigation & Language switcher */
+    header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 20;
+      padding-top: env(safe-area-inset-top, 0px);
+      background: linear-gradient(rgba(8, 9, 13, .7), rgba(8, 9, 13, 0))
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: .8rem
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--ice);
+      letter-spacing: .05em
+    }
+
+    .logo sup {
+      font-size: .5em;
+      color: var(--mute)
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: .25rem;
+      padding: .2rem .48rem;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      background: rgba(20, 24, 34, .65);
+      font-size: .76rem;
+      font-weight: 600;
+      letter-spacing: .05em
+    }
+
+    .lang-btn {
+      all: unset;
+      cursor: pointer;
+      color: var(--mute);
+      padding: .18rem .45rem;
+      border-radius: 99px;
+      transition: all .2s ease
+    }
+
+    .lang-btn:hover {
+      color: var(--ice)
+    }
+
+    .lang-btn[aria-pressed="true"] {
+      color: var(--obs);
+      background: var(--silver);
+      font-weight: 700
+    }
+
+    .lang-sep {
+      color: var(--line);
+      font-size: .7rem;
+      user-select: none
+    }
+
+    nav a.back {
+      font-size: .85rem;
+      color: var(--mute);
+      padding: .4rem 0;
+      border-bottom: 1px solid transparent;
+      transition: color .3s, border-color .3s
+    }
+
+    nav a.back:hover {
+      color: var(--ice);
+      border-color: var(--silver)
+    }
+
+    main {
+      min-height: 100svh;
+      padding: clamp(6.5rem, 11vw, 8.5rem) 0 5rem
+    }
+
+    /* project header */
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .82rem;
+      color: var(--blue);
+      margin-bottom: 1rem;
+      letter-spacing: .02em
+    }
+
+    .meta-tag .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #38BDF8;
+      box-shadow: 0 0 10px #38BDF8
+    }
+
+    .stage {
+      perspective: 1100px
+    }
+
+    h1 {
+      margin: 0 0 1.2rem -.03em;
+      font-weight: 600;
+      color: var(--ice);
+      letter-spacing: -.04em;
+      line-height: .95;
+      font-size: clamp(2.4rem, 6.2vw, 4.6rem);
+      background: linear-gradient(105deg, #8f9ab0 0%, #F3F5FA var(--gx, 45%), #8f9ab0 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+      transform-origin: left center;
+      transition: transform .3s ease-out;
+      will-change: transform, translate
+    }
+
+    .lead {
+      font-size: clamp(1.02rem, 1.7vw, 1.3rem);
+      line-height: 1.65;
+      color: var(--ice);
+      max-width: 54ch;
+      margin: 0 0 2rem
+    }
+
+    .actions {
+      display: flex;
+      gap: 1.4rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .85rem 1.6rem;
+      border: 1px solid var(--silver);
+      border-radius: 99px;
+      color: var(--ice);
+      font-size: .85rem;
+      background: rgba(20, 24, 34, .5);
+      transition: background .3s, color .3s, border-color .3s, transform .3s;
+      cursor: pointer
+    }
+
+    .btn:hover {
+      background: var(--ice);
+      color: var(--obs);
+      border-color: var(--ice);
+      transform: translateY(-2px)
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(56, 189, 248, .25), rgba(20, 24, 34, .8));
+      border-color: rgba(56, 189, 248, .5)
+    }
+
+    .btn.primary:hover {
+      background: var(--ice);
+      color: var(--obs);
+      border-color: var(--ice)
+    }
+
+    .link {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2px;
+      font-size: .88rem;
+      color: var(--silver);
+      transition: color .3s, border-color .3s
+    }
+
+    .link:hover {
+      color: var(--ice);
+      border-color: var(--silver)
+    }
+
+    /* Private R&D Banner */
+    .rd-banner {
+      padding: 1.2rem 1.5rem;
+      border-radius: 14px;
+      background: rgba(56, 189, 248, .07);
+      border: 1px solid rgba(56, 189, 248, .25);
+      margin-bottom: 3rem;
+      display: grid;
+      gap: .5rem
+    }
+
+    .rdb-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .76rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 700;
+      color: #38BDF8
+    }
+
+    .rdb-text {
+      font-size: .86rem;
+      color: #E2E8F0;
+      line-height: 1.65;
+      margin: 0
+    }
+
+    /* showcase visual */
+    .showcase {
+      margin-bottom: 4rem
+    }
+
+    .frame {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(201, 208, 221, .22);
+      background: linear-gradient(145deg, rgba(23, 26, 34, .9), rgba(17, 20, 28, .8));
+      box-shadow: 0 24px 60px -15px rgba(0, 0, 0, .85), 0 0 30px rgba(130, 155, 203, .12);
+      display: grid;
+      place-items: center
+    }
+
+    .frame img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block
+    }
+
+    .caption {
+      font-size: .84rem;
+      color: var(--mute);
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .5rem
+    }
+
+    /* spec grid */
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4.5rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line)
+    }
+
+    .spec-item {
+      display: grid;
+      gap: .3rem
+    }
+
+    .spec-label {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--blue)
+    }
+
+    .spec-val {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--ice)
+    }
+
+    .spec-sub {
+      font-size: .82rem;
+      color: var(--mute)
+    }
+
+    /* architectural pillars (vertical scroll stream) */
+    .sec-title {
+      font-size: clamp(1.8rem, 3.6vw, 2.5rem);
+      font-weight: 500;
+      color: var(--ice);
+      letter-spacing: -.02em;
+      margin: 0 0 1rem
+    }
+
+    .pillars-section {
+      margin-bottom: 5.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--line)
+    }
+
+    .pv-wrap {
+      display: grid;
+      grid-template-columns: minmax(300px, 4.6fr) 7.4fr;
+      gap: clamp(2rem, 4.5vw, 4.5rem);
+      align-items: stretch;
+      position: relative
+    }
+
+    .pv-aside {
+      height: 100%;
+      position: relative
+    }
+
+    @media(max-width:880px) {
+      .pv-wrap {
+        grid-template-columns: 1fr;
+        gap: 2rem
+      }
+
+      .pv-sticky {
+        position: static !important;
+        max-height: none !important
+      }
+    }
+
+    .pv-sticky {
+      position: sticky;
+      top: 5.5rem;
+      display: grid;
+      gap: 1.2rem;
+      max-height: calc(100vh - 6.5rem);
+      overflow-y: auto;
+      scrollbar-width: none
+    }
+
+    .pv-sticky::-webkit-scrollbar {
+      display: none
+    }
+
+    .pv-lead {
+      font-size: .95rem;
+      color: var(--mute);
+      line-height: 1.7;
+      margin: 0
+    }
+
+    .pv-nav {
+      display: grid;
+      gap: .5rem;
+      margin-top: .4rem
+    }
+
+    .pv-step {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: .75rem 1.1rem;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      color: var(--mute);
+      font-size: .88rem;
+      transition: all .3s cubic-bezier(.2, .7, .2, 1);
+      cursor: pointer;
+      background: none;
+      text-decoration: none
+    }
+
+    .pv-step:hover {
+      color: var(--ice);
+      background: rgba(201, 208, 221, .05)
+    }
+
+    .pv-step.on {
+      color: var(--ice);
+      border-color: rgba(130, 155, 203, .35);
+      background: linear-gradient(90deg, rgba(130, 155, 203, .14), transparent);
+      box-shadow: inset 3px 0 0 var(--blue)
+    }
+
+    .pv-idx {
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      color: var(--blue);
+      font-variant-numeric: tabular-nums
+    }
+
+    .pv-step.on .pv-idx {
+      color: var(--ice)
+    }
+
+    .pv-active-box {
+      padding: 1rem 1.2rem;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(130, 155, 203, .1), rgba(20, 24, 34, .6));
+      border: 1px solid rgba(130, 155, 203, .28);
+      display: grid;
+      gap: .3rem;
+      transition: border-color .3s
+    }
+
+    .pv-ab-label {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--blue);
+      font-weight: 600
+    }
+
+    .pv-ab-title {
+      font-size: .92rem;
+      font-weight: 500;
+      color: var(--ice);
+      line-height: 1.4
+    }
+
+    .pv-ab-metric {
+      font-size: .8rem;
+      color: var(--silver);
+      font-family: Consolas, monospace
+    }
+
+    .pv-quick-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .65rem;
+      margin-top: .4rem
+    }
+
+    .pv-stat {
+      padding: .8rem .95rem;
+      border-radius: 12px;
+      background: rgba(20, 24, 34, .55);
+      border: 1px solid rgba(201, 208, 221, .12);
+      display: grid;
+      gap: .15rem
+    }
+
+    .pv-stat-n {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--ice);
+      font-family: Consolas, monospace
+    }
+
+    .pv-stat-l {
+      font-size: .72rem;
+      color: var(--mute);
+      line-height: 1.3
+    }
+
+    .pv-cards {
+      display: grid;
+      gap: 2rem
+    }
+
+    .pv-card {
+      padding: clamp(1.6rem, 3vw, 2.4rem);
+      border-radius: 20px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 20px 45px -12px rgba(0, 0, 0, .65);
+      display: grid;
+      gap: 1.1rem;
+      transition: border-color .3s, box-shadow .3s;
+      scroll-margin-top: 6rem;
+      position: relative
+    }
+
+    .pv-card:hover {
+      border-color: rgba(130, 155, 203, .35);
+      box-shadow: 0 24px 55px -10px rgba(0, 0, 0, .85)
+    }
+
+    .pv-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .78rem;
+      color: var(--blue);
+      letter-spacing: .08em;
+      font-weight: 600
+    }
+
+    .pv-card-num {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: rgba(201, 208, 221, .25);
+      font-variant-numeric: tabular-nums
+    }
+
+    .pv-card h3 {
+      font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+      color: var(--ice);
+      font-weight: 500;
+      margin: 0;
+      letter-spacing: -.01em
+    }
+
+    .pv-card p {
+      color: var(--mute);
+      font-size: .93rem;
+      line-height: 1.7;
+      margin: 0
+    }
+
+    .pv-bullets {
+      list-style: none;
+      padding: 0;
+      margin: .4rem 0 0;
+      display: grid;
+      gap: .65rem
+    }
+
+    .pv-bullets li {
+      position: relative;
+      padding-left: 1.4rem;
+      font-size: .88rem;
+      color: var(--silver);
+      line-height: 1.6
+    }
+
+    .pv-bullets li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--blue)
+    }
+
+    .pv-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      border-top: 1px solid var(--line);
+      padding-top: 1.4rem;
+      margin-top: .4rem
+    }
+
+    .pv-pill {
+      font-size: .75rem;
+      padding: .28rem .7rem;
+      border-radius: 6px;
+      background: rgba(201, 208, 221, .07);
+      color: var(--ice)
+    }
+
+    /* Research Section */
+    .research-section {
+      margin-bottom: 5.5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--line)
+    }
+
+    .rpt-nav {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem
+    }
+
+    .rpt-tab {
+      all: unset;
+      cursor: pointer;
+      padding: .65rem 1.25rem;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      background: rgba(20, 24, 34, .55);
+      font-size: .84rem;
+      font-weight: 500;
+      color: var(--mute);
+      transition: all .25s ease
+    }
+
+    .rpt-tab:hover {
+      color: var(--ice);
+      border-color: var(--silver)
+    }
+
+    .rpt-tab.on {
+      color: var(--obs);
+      background: var(--silver);
+      border-color: var(--silver);
+      font-weight: 600
+    }
+
+    .tab-pane {
+      display: none
+    }
+
+    .tab-pane.on {
+      display: grid;
+      gap: 1.8rem;
+      animation: fadeIn .35s ease
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .rpt-card {
+      padding: clamp(1.6rem, 3vw, 2.4rem);
+      border-radius: 18px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      display: grid;
+      gap: 1.3rem
+    }
+
+    .rpt-card h3 {
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--ice);
+      margin: 0;
+      letter-spacing: -.01em
+    }
+
+    .rpt-card p {
+      color: var(--silver);
+      font-size: .92rem;
+      line-height: 1.75;
+      margin: 0
+    }
+
+    .rpt-card ul {
+      padding-left: 1.4rem;
+      margin: 0;
+      color: var(--silver);
+      font-size: .9rem;
+      line-height: 1.75;
+      display: grid;
+      gap: .5rem
+    }
+
+    .tbl-wrap {
+      overflow-x: auto;
+      margin: 1.2rem 0;
+      border-radius: 12px;
+      border: 1px solid rgba(201, 208, 221, .14)
+    }
+
+    table.rpt-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .86rem;
+      text-align: left
+    }
+
+    table.rpt-table th {
+      background: rgba(20, 24, 34, .85);
+      color: var(--ice);
+      font-weight: 600;
+      padding: .85rem 1rem;
+      border-bottom: 1px solid var(--line);
+      letter-spacing: .02em
+    }
+
+    table.rpt-table td {
+      padding: .8rem 1rem;
+      border-bottom: 1px solid rgba(201, 208, 221, .08);
+      color: var(--silver)
+    }
+
+    table.rpt-table tr:last-child td {
+      border-bottom: none
+    }
+
+    table.rpt-table tr:hover td {
+      background: rgba(201, 208, 221, .03)
+    }
+
+    table.rpt-table td.num {
+      font-family: Consolas, monospace;
+      color: #38BDF8;
+      font-weight: 500
+    }
+
+    /* bottom navigation */
+    .btm-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--line)
+    }
+
+    footer {
+      margin-top: 4rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: .82rem;
+      color: var(--mute)
+    }
+
+    /* transitions & interactions */
+    #prog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--ice));
+      transform: scaleX(0);
+      transform-origin: left;
+      z-index: 30
+    }
+
+    #veil {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      background: #0b0d13;
+      pointer-events: none;
+      display: grid;
+      place-items: center;
+      clip-path: inset(0 0 100% 0)
+    }
+
+    #veil:not(.in):not(.out) {
+      transition: none
+    }
+
+    #veil.in,
+    #veil.out {
+      transition: clip-path .5s cubic-bezier(.7, 0, .2, 1)
+    }
+
+    #veil.in {
+      clip-path: inset(0)
+    }
+
+    #veil.out {
+      clip-path: inset(100% 0 0 0)
+    }
+
+    #veil span {
+      font-size: 1.1rem;
+      color: var(--silver);
+      letter-spacing: .04em
+    }
+
+    .rip {
+      position: fixed;
+      z-index: 60;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 50%;
+      border: 1px solid var(--ice);
+      pointer-events: none;
+      animation: rip .7s ease-out forwards
+    }
+
+    @keyframes rip {
+      to {
+        transform: scale(14);
+        opacity: 0
+      }
+    }
+
+    [data-mag] {
+      transition-property: translate, background-color, color, border-color;
+      transition-duration: .4s, .3s, .3s, .3s;
+      transition-timing-function: cubic-bezier(.2, .7, .2, 1), ease, ease, ease
+    }
+
+    /* sound widget */
+    .snd {
+      display: flex;
+      gap: .65rem;
+      align-items: center;
+      padding: .65rem 1.15rem;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      background: rgba(8, 9, 13, .62);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      color: var(--ice);
+      font: 500 .82rem var(--sans);
+      cursor: pointer;
+      transition: border-color .3s
+    }
+
+    .snd:hover {
+      border-color: var(--silver)
+    }
+
+    .eq {
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+      height: 14px
+    }
+
+    .eq i {
+      display: block;
+      width: 3px;
+      height: 30%;
+      background: var(--silver);
+      border-radius: 2px;
+      transition: height .2s ease
+    }
+
+    @keyframes eqBounce {
+
+      0%,
+      100% {
+        height: 20%
+      }
+
+      50% {
+        height: 95%
+      }
+    }
+
+    .snd.on .eq i:nth-child(1) {
+      animation: eqBounce .75s ease-in-out infinite .1s
+    }
+
+    .snd.on .eq i:nth-child(2) {
+      animation: eqBounce .6s ease-in-out infinite .3s
+    }
+
+    .snd.on .eq i:nth-child(3) {
+      animation: eqBounce .9s ease-in-out infinite .15s
+    }
+
+    .snd.on .eq i:nth-child(4) {
+      animation: eqBounce .7s ease-in-out infinite .4s
+    }
+
+    .snd.on .eq i:nth-child(5) {
+      animation: eqBounce .8s ease-in-out infinite .25s
+    }
+
+    .sndbox {
+      position: fixed;
+      right: max(1rem, env(safe-area-inset-right, 0px));
+      bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+      z-index: 25;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: .5rem
+    }
+
+    .sndpanel {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .4rem .65rem;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      background: rgba(8, 9, 13, .75);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px) scale(0.96);
+      transition: opacity .35s cubic-bezier(.2, .7, .2, 1), transform .35s cubic-bezier(.2, .7, .2, 1)
+    }
+
+    .sndpanel.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1)
+    }
+
+    .snd.on {
+      border-color: var(--silver);
+      background: rgba(20, 24, 34, .8)
+    }
+
+    .sndpanel button {
+      all: unset;
+      cursor: pointer;
+      font: 500 .75rem var(--sans);
+      color: var(--mute);
+      padding: .32rem .7rem;
+      border-radius: 99px;
+      border: 1px solid transparent
+    }
+
+    .sndpanel button[aria-pressed=true] {
+      color: var(--ice);
+      border-color: var(--line);
+      background: rgba(201, 208, 221, .08)
+    }
+
+    .sndpanel button:focus-visible {
+      outline: 2px solid var(--blue)
+    }
+
+    #sVol {
+      width: 80px;
+      accent-color: var(--silver);
+      cursor: pointer
+    }
+
+    @media(max-width:640px) {
+      .sndbox {
+        right: max(.75rem, env(safe-area-inset-right, 0px));
+        bottom: calc(.75rem + env(safe-area-inset-bottom, 0px))
+      }
+
+      .sndpanel {
+        max-width: calc(100vw - 1.5rem)
+      }
+    }
+
+    .rise {
+      animation: rise 1.1s cubic-bezier(.2, .7, .2, 1) both
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+
+    @media(max-width:480px) {
+      .wrap {
+        width: min(1240px, 100% - 1.75rem)
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div id="prog" aria-hidden="true"></div>
+  <div class="sndbox" id="sndbox">
+    <div class="sndpanel" id="sndpanel" role="group" aria-label="Sound settings">
+      <button type="button" id="sMus" aria-pressed="true">Music</button>
+      <input id="sVol" type="range" min="0" max="1" step=".05" value=".7" aria-label="Volume">
+    </div>
+    <button id="snd" class="snd" type="button" aria-pressed="false" aria-label="Toggle sound">
+      <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      <span class="lb">Sound off</span>
+    </button>
+  </div>
+  <div id="veil" aria-hidden="true"><span>VLUX</span></div>
+
+  <header>
+    <div class="wrap">
+      <nav aria-label="Chính">
+        <a class="logo" href="index.html" aria-label="VLUX, trang chủ">VLUX<sup>®</sup></a>
+        <div class="nav-right">
+          <div class="lang-switch" role="group" aria-label="Chọn ngôn ngữ">
+            <button class="lang-btn" id="btnVi" data-lang="vi" aria-pressed="true">VI</button>
+            <span class="lang-sep">/</span>
+            <button class="lang-btn" id="btnEn" data-lang="en" aria-pressed="false">EN</button>
+          </div>
+          <a class="back" href="projects.html">
+            <span class="t-vi">← Danh mục dự án</span>
+            <span class="t-en">← Back to Projects</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Meta tag & Hero Heading -->
+    <div class="meta-tag">
+      <span class="dot"></span>
+      <span class="t-vi">Hệ Thống Tự Hành Nhúng &amp; Học Tăng Cường Sâu · Hoàn Thành 11/2026</span>
+      <span class="t-en">Embedded Autonomous Systems &amp; Deep RL · Completed Nov 2026</span>
+    </div>
+
+    <div class="stage">
+      <h1 id="h1">ESP32 Bio-Brain Autonomous Drone.</h1>
+    </div>
+
+    <p class="lead">
+      <span class="t-vi">Hệ thống drone đua tự hành 4 cánh Quad-X (6-DOF) ứng dụng Học tăng cường sâu (PPO) trên đấu
+        trường 10 drone đường hẹp 5,000 m và thế giới sinh tồn vượt chướng ngại vật. Tối ưu hóa suy luận nơ-ron nhúng
+        thời gian thực trên vi điều khiển ESP32-S3 lõi kép kết hợp cảm biến LiDAR 360° và ToF.</span>
+      <span class="t-en">Autonomous Quad-X 6-DOF racing quadrotor system powered by Deep Reinforcement Learning (PPO) in
+        10-drone narrow 5,000 m Grand Prix arenas and dynamic obstacle survival fields. Real-time edge neural inference
+        optimized on dual-core ESP32-S3 with 360° planar LiDAR and ToF laser altimetry.</span>
+    </p>
+
+    <!-- Private R&D Banner -->
+    <div class="rd-banner">
+      <div class="rdb-tag">
+        <span>🔒</span>
+        <span class="t-vi">Mã Nguồn Độc Quyền R&amp;D (Proprietary &amp; Private Source)</span>
+        <span class="t-en">Proprietary Research &amp; Development (Private Repository)</span>
+      </div>
+      <p class="rdb-text">
+        <span class="t-vi"><strong>NGHIÊN CỨU KỸ THUẬT NỘI BỘ:</strong> Toàn bộ mã nguồn mô phỏng vật lý, thuật toán
+          huấn luyện mạng nơ-ron (PPO), trọng số mô hình và firmware nhúng C/C++ trên ESP32 thuộc tài sản nghiên cứu độc
+          quyền của Nguyễn Phát Tài và không công khai trên mạng. Dự án sẵn sàng cho live demo kỹ thuật và trao đổi
+          chuyên môn trực tiếp.</span>
+        <span class="t-en"><strong>PROPRIETARY RESEARCH ASSET:</strong> All physics simulation environments, deep RL
+          training algorithms (PPO), checkpoint weights, and embedded C/C++ firmware on ESP32 are proprietary
+          engineering research by Nguyễn Phát Tài and kept in a private repository. Available for on-demand live
+          technical demonstrations upon inquiry.</span>
+      </p>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <a class="btn primary" href="index.html#contact">
+        <span class="t-vi">Yêu cầu Trao đổi &amp; Live Demo</span>
+        <span class="t-en">Inquire for Live Demo</span>
+        <i>↗</i>
+      </a>
+      <a class="link" href="#research">
+        <span class="t-vi">Báo cáo Đo đạc Grand Prix 5km ↓</span>
+        <span class="t-en">5km Grand Prix Telemetry ↓</span>
+      </a>
+      <a class="link" href="#pillars">
+        <span class="t-vi">Trụ cột Kiến trúc Thuật toán ↓</span>
+        <span class="t-en">Algorithmic Pillars ↓</span>
+      </a>
+      <a class="link" href="#hardware">
+        <span class="t-vi">Sơ đồ Phần cứng ESP32-S3 ↓</span>
+        <span class="t-en">ESP32-S3 Hardware BOM ↓</span>
+      </a>
+    </div>
+
+    <!-- Spec Grid -->
+    <section class="spec-grid">
+      <div class="spec-item">
+        <span class="spec-label"><span class="t-vi">Khung sườn &amp; Trọng lượng</span><span class="t-en">Airframe &amp;
+            Weight</span></span>
+        <span class="spec-val">0.65 kg (AUW)</span>
+        <span class="spec-sub"><span class="t-vi">Carbon 5" Quad-X · Cánh 5143</span><span class="t-en">Carbon 5" Quad-X
+            · 5143 Props</span></span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label"><span class="t-vi">Vi điều khiển Nhúng</span><span class="t-en">Flight
+            Processor</span></span>
+        <span class="spec-val" style="color:#38BDF8">ESP32-S3 N16R8</span>
+        <span class="spec-sub"><span class="t-vi">Dual-Core 240MHz · Hardware FPU</span><span class="t-en">Dual-Core
+            240MHz · Hardware FPU</span></span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label"><span class="t-vi">Tốc độ Suy luận AI</span><span class="t-en">Neural
+            Inference</span></span>
+        <span class="spec-val" style="color:#4ADE80">&lt; 0.35 ms / lần</span>
+        <span class="spec-sub"><span class="t-vi">Core 0: AI 20Hz · Core 1: PID 500Hz</span><span class="t-en">Core 0:
+            AI 20Hz · Core 1: PID 500Hz</span></span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label"><span class="t-vi">Động lực &amp; Vận tốc</span><span class="t-en">Propulsion &amp;
+            Speed</span></span>
+        <span class="spec-val">&gt; 120 km/h</span>
+        <span class="spec-sub"><span class="t-vi">4× Motor 2207 (6.2N) · Pin 4S 100C</span><span class="t-en">4× 2207
+            Motors (6.2N) · 4S 100C</span></span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label"><span class="t-vi">Hợp nhất Cảm biến</span><span class="t-en">Sensor
+            Fusion</span></span>
+        <span class="spec-val">LiDAR + ToF + IMU</span>
+        <span class="spec-sub"><span class="t-vi">STL27L 360° + MTF-01 + ICM-42688</span><span class="t-en">STL27L 360°
+            + MTF-01 + ICM-42688</span></span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label"><span class="t-vi">Đấu trường Grand Prix</span><span class="t-en">Grand Prix
+            Track</span></span>
+        <span class="spec-val">5,000 m × 10 m</span>
+        <span class="spec-sub"><span class="t-vi">10 Drone đồng thời · Va chạm 160Hz</span><span class="t-en">10 Drones
+            Pack · 160Hz Collision</span></span>
+      </div>
+    </section>
+
+    <!-- Showcase Image (4-Panel Scientific Grand Prix Telemetry) -->
+    <section class="showcase">
+      <div class="frame">
+        <img src="assets/projects/drone/race_10drone_5km.png"
+          alt="ESP32 10-Drone 5km Grand Prix Telemetry & Trajectory Analysis (4 Panels)" loading="lazy">
+      </div>
+      <div class="caption">
+        <span>
+          <span class="t-vi">Biểu đồ Phân tích Đua 10 Drone 5,000m: Bản đồ đường đua toàn mạch 5km, Phóng to làn Frenet
+            Frame né va chạm ở hẻm 10m, Tiến trình vượt từ P10 lên P1 và Biên dạng tốc độ qua từng khúc cua.</span>
+          <span class="t-en">10-Drone 5,000m Grand Prix Telemetry: Full 5km Circuit with Crash Points, Frenet Frame
+            Lateral Overtaking in 10m Corridor, Grid Standings Progression (P10 to P1), and Speed Profile.</span>
+        </span>
+        <span>
+          <span class="t-vi">Mô phỏng Động lực học 6-DOF &amp; Khí động học Prop-Wash</span>
+          <span class="t-en">6-DOF Quadrotor Dynamics &amp; Prop-Wash Aerodynamics</span>
+        </span>
+      </div>
+    </section>
+
+    <!-- Architectural Pillars -->
+    <section class="pillars-section" id="pillars">
+      <div class="pv-wrap">
+        <div class="pv-aside">
+          <div class="pv-sticky">
+            <div class="meta-tag">
+              <span class="dot"></span>
+              <span class="t-vi">Nguyên Lý Thiết Kế</span>
+              <span class="t-en">Design Principles</span>
+            </div>
+            <h2 class="sec-title">
+              <span class="t-vi">Trụ Cột Tự Hành.</span>
+              <span class="t-en">Autonomous Pillars.</span>
+            </h2>
+            <p class="pv-lead">
+              <span class="t-vi">Bốn phân hệ kỹ thuật hợp nhất tạo nên khả năng tự định vị, né chướng ngại vật ở vận tốc
+                trên 100 km/h và vượt mặt đối thủ trong hẻm hẹp của drone. Cuộn xuống để xem chi tiết.</span>
+              <span class="t-en">Four unified engineering pillars establishing high-speed obstacle avoidance at 100+
+                km/h and aggressive pack overtaking in narrow corridors. Scroll down to inspect each pillar.</span>
+            </p>
+            <div class="pv-nav" id="pvNav">
+              <a href="#pillar-1" class="pv-step on">
+                <span class="pv-idx">01</span>
+                <span class="pv-label">
+                  <span class="t-vi">Động lực học 6-DOF &amp; Khí động</span>
+                  <span class="t-en">6-DOF Physics &amp; Aerodynamics</span>
+                </span>
+              </a>
+              <a href="#pillar-2" class="pv-step">
+                <span class="pv-idx">02</span>
+                <span class="pv-label">
+                  <span class="t-vi">Học tăng cường PPO &amp; Tiến hóa</span>
+                  <span class="t-en">Deep RL PPO &amp; Rival Evolution</span>
+                </span>
+              </a>
+              <a href="#pillar-3" class="pv-step">
+                <span class="pv-idx">03</span>
+                <span class="pv-label">
+                  <span class="t-vi">Thị giác LiDAR 360° &amp; ToF</span>
+                  <span class="t-en">360° LiDAR &amp; ToF Laser Fusion</span>
+                </span>
+              </a>
+              <a href="#pillar-4" class="pv-step">
+                <span class="pv-idx">04</span>
+                <span class="pv-label">
+                  <span class="t-vi">Suy luận nơ-ron C/C++ trên ESP32</span>
+                  <span class="t-en">ESP32 Dual-Core Edge Inference</span>
+                </span>
+              </a>
+            </div>
+
+            <div class="pv-active-box" id="pvActiveBox">
+              <div class="pv-ab-label">
+                <span class="t-vi">Đang xem phân hệ</span>
+                <span class="t-en">Active Pillar</span>
+              </div>
+              <div class="pv-ab-title" id="pvAbTitle">01 / Động Lực Học 6-DOF &amp; Khí Động Cánh Quạt</div>
+              <div class="pv-ab-metric" id="pvAbMetric">6-DOF Quad-X · Mô phỏng Slipstream &amp; Prop-Wash · Khối lượng
+                0.65 kg</div>
+            </div>
+
+            <div class="pv-quick-stats">
+              <div class="pv-stat">
+                <span class="pv-stat-n">160 Hz</span>
+                <span class="pv-stat-l"><span class="t-vi">Vòng lặp Vật lý</span><span class="t-en">Physics
+                    Loop</span></span>
+              </div>
+              <div class="pv-stat">
+                <span class="pv-stat-n">&lt;0.35 ms</span>
+                <span class="pv-stat-l"><span class="t-vi">Độ trễ AI ESP32</span><span class="t-en">ESP32 AI
+                    Latency</span></span>
+              </div>
+              <div class="pv-stat">
+                <span class="pv-stat-n">5,000 m</span>
+                <span class="pv-stat-l"><span class="t-vi">Đường đua 10 Drone</span><span class="t-en">10-Drone Grand
+                    Prix</span></span>
+              </div>
+              <div class="pv-stat">
+                <span class="pv-stat-n">100% P1</span>
+                <span class="pv-stat-l"><span class="t-vi">Tỷ lệ Về Nhất</span><span class="t-en">P1 Win
+                    Rate</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pv-cards">
+          <!-- Pillar 1 -->
+          <article class="pv-card" id="pillar-1">
+            <div class="pv-card-top">
+              <span class="pv-card-tag"><span class="t-vi">Phân Hệ Vật Lý &amp; Khí Động Học</span><span
+                  class="t-en">Physics &amp; Aerodynamics System</span></span>
+              <span class="pv-card-num">01</span>
+            </div>
+            <h3>
+              <span class="t-vi">Động Lực Học 6-DOF &amp; Khí Động Cánh Quạt Thực Tế</span>
+              <span class="t-en">Realistic 6-DOF Quad-X Dynamics &amp; Aerodynamics</span>
+            </h3>
+            <p>
+              <span class="t-vi">Khác với các mô hình điểm chất điểm (point-mass) lý tưởng hóa, môi trường mô phỏng xây
+                dựng trọn vẹn phương trình vi phân chuyển động 6 bậc tự do (6-DOF) của khung Quad-X đối xứng 250mm, tính
+                đến ma trận quán tính xoay 3 chiều, mô-men con quay (Gyroscopic Precession) của 4 cánh quạt quay nghịch
+                chiều và trần bão hòa lực đẩy động cơ 6.2 N mỗi cánh.</span>
+              <span class="t-en">Unlike simplified point-mass models, our simulation environment integrates the complete
+                6-degree-of-freedom (6-DOF) rigid body equations of motion for a 250mm Quad-X airframe, incorporating
+                full 3D inertia tensors, gyroscopic precession from counter-rotating props, and individual motor thrust
+                saturation caps of 6.2 N.</span>
+            </p>
+            <ul class="pv-bullets">
+              <li><span class="t-vi"><strong>Hiệu ứng Núp gió (Slipstream Draft):</strong> Khi drone bám sát đuôi drone
+                  phía trước trong cự ly 12.0m, lực cản khí động giảm tới 35%, tạo lực gia tốc tự nhiên giúp thực hiện
+                  các pha vượt mặt tốc độ cao.</span><span class="t-en"><strong>Slipstream Draft:</strong> Following
+                  within 12.0m behind another drone reduces aerodynamic drag by up to 35%, delivering high-speed
+                  slingshot acceleration.</span></li>
+              <li><span class="t-vi"><strong>Nhiễu động Luồng xoáy (Prop-Wash Turbulence):</strong> Điểm rơi vào luồng
+                  gió cuộn đuôi của đối thủ làm giảm hiệu suất nâng và tạo rung lắc ngẫu nhiên, buộc bộ não AI phải chủ
+                  động lách làn vượt mặt chứ không thể bám đè thẳng hàng.</span><span class="t-en"><strong>Prop-Wash
+                    Turbulence:</strong> Crossing directly behind another drone's wake induces lift degradation and
+                  rotational buffeting, compelling the policy to step out laterally.</span></li>
+              <li><span class="t-vi"><strong>Hiệu ứng Mặt đất (Ground Effect) &amp; Độ trễ Động cơ (Motor Tau):</strong>
+                  Lực nâng tăng phi tuyến khi bay sát mặt đất (&lt;0.4m), kết hợp hằng số trễ quán tính cuộn dây motor τ
+                  ≈ 20ms mô phỏng chuẩn xác độ trễ điện tử ngoài đời thực.</span><span class="t-en"><strong>Ground
+                    Effect &amp; Motor Tau:</strong> Nonlinear lift surge below 0.4m ground proximity combined with
+                  realistic motor coil response lag (τ ≈ 20ms).</span></li>
+            </ul>
+            <div class="pv-footer">
+              <span class="pv-pill">6-DOF Rigid Body</span>
+              <span class="pv-pill">Slipstream Draft</span>
+              <span class="pv-pill">Prop-Wash Turbulence</span>
+              <span class="pv-pill">160 Hz Physics Loop</span>
+              <span class="pv-pill">Motor Tau 20ms</span>
+            </div>
+          </article>
+
+          <!-- Pillar 2 -->
+          <article class="pv-card" id="pillar-2">
+            <div class="pv-card-top">
+              <span class="pv-card-tag"><span class="t-vi">Phân Hệ Học Tăng Cường &amp; Tiến Hóa</span><span
+                  class="t-en">Deep RL &amp; Evolution System</span></span>
+              <span class="pv-card-num">02</span>
+            </div>
+            <h3>
+              <span class="t-vi">Học Tăng Cường PPO &amp; Tiến Hóa Đối Kháng Bất Đối Xứng</span>
+              <span class="t-en">Deep RL PPO &amp; Asymmetric Rival League Evolution</span>
+            </h3>
+            <p>
+              <span class="t-vi">Huấn luyện mạng nơ-ron Actor-Critic nhiều tầng (MLP 60 → 128 → 128 → 4) bằng thuật toán
+                Proximal Policy Optimization (PPO) kết hợp cơ chế tiến hóa bất đối xứng độc đáo giữa Drone Hero (#0) và
+                9 Drone Đối thủ (#1..#9) trên đường đua 5,000m.</span>
+              <span class="t-en">Multi-layer Actor-Critic network (MLP 60 → 128 → 128 → 4) trained via Proximal Policy
+                Optimization (PPO) coupled with an innovative asymmetric competitive co-evolution regime across 5,000m
+                Grand Prix circuits.</span>
+            </p>
+            <ul class="pv-bullets">
+              <li><span class="t-vi"><strong>Cơ chế Tự sửa chữa &amp; Tua ngược (Rewind Recovery):</strong> Drone Hero
+                  (#0) tự động nâng cấp sau mỗi cuộc đua. Khi xảy ra va chạm, môi trường tự động tua ngược thời gian
+                  ~45m trước điểm va chạm để huấn luyện mạng nơ-ron tìm ra đường vượt sạch thay vì mắc kẹt trong bế
+                  tắc.</span><span class="t-en"><strong>Rewind Recovery Curriculum:</strong> Hero #0 continuously
+                  refines policy weights; upon collision, the sim rewinds ~45m prior to the incident to train
+                  collision-free overtaking trajectories.</span></li>
+              <li><span class="t-vi"><strong>Giải đấu Đối thủ Tăng tiến (Rival League):</strong> 9 drone đối thủ được
+                  nâng cấp sau mỗi vòng đấu: tăng dần trần tốc độ từ 76% lên 100%, đồng thời hấp thụ trọng số bộ não vô
+                  địch của vòng trước, tạo ra áp lực cạnh tranh khốc liệt như các giải đua drone chuyên
+                  nghiệp.</span><span class="t-en"><strong>Rival League Progression:</strong> 9 rival drones upgrade
+                  across tournament rounds, scaling pace from 76% to 100% and absorbing the previous round's champion
+                  weights.</span></li>
+              <li><span class="t-vi"><strong>Hàm thưởng Khắc nghiệt:</strong> Thưởng theo khoảng cách tiến độ dọc làn
+                  đường (Progress Delta), phạt nặng độ lệch làn ngang (Cross-Track Penalty), phạt gia tốc giật (Control
+                  Smoothness) và phạt tuyệt đối khi hai drone chạm cánh nhau (&lt; 0.62m).</span><span
+                  class="t-en"><strong>Reward Formulation:</strong> Dense longitudinal progress incentives, lateral
+                  corridor penalties, action smoothness regularizers, and catastrophic collision penalties for
+                  separation &lt; 0.62m.</span></li>
+            </ul>
+            <div class="pv-footer">
+              <span class="pv-pill">PPO Actor-Critic</span>
+              <span class="pv-pill">Asymmetric Co-Evolution</span>
+              <span class="pv-pill">Rewind Recovery</span>
+              <span class="pv-pill">Rival League</span>
+              <span class="pv-pill">Zero-Collision Guard</span>
+            </div>
+          </article>
+
+          <!-- Pillar 3 -->
+          <article class="pv-card" id="pillar-3">
+            <div class="pv-card-top">
+              <span class="pv-card-tag"><span class="t-vi">Phân Hệ Cảm Biến &amp; Thị Giác Nhúng</span><span
+                  class="t-en">Sensors &amp; Embedded Perception</span></span>
+              <span class="pv-card-num">03</span>
+            </div>
+            <h3>
+              <span class="t-vi">Hợp Nhất Cảm Biến Thời Gian Thực &amp; Thị Giác LiDAR 360°</span>
+              <span class="t-en">Real-Time Sensor Fusion &amp; 360° Planar LiDAR</span>
+            </h3>
+            <p>
+              <span class="t-vi">Thiết kế vector quan sát 60 chiều trích xuất dữ liệu cảm biến đa tầng khớp 1-đối-1 với
+                các linh kiện phần cứng có thể lắp đặt thực tế trên drone đua FPV 5-inch, bao gồm LiDAR quét phẳng 360°,
+                cảm biến độ cao ToF laser và cụm IMU tốc độ cao.</span>
+              <span class="t-en">A 60-dimensional observation space mapped 1-to-1 against off-the-shelf physical sensors
+                mounted on a 5-inch FPV racing quad, combining 360° planar LiDAR, ToF laser altimetry, and high-rate SPI
+                IMU data.</span>
+            </p>
+            <ul class="pv-bullets">
+              <li><span class="t-vi"><strong>11 Cung Thị giác Phía trước [-62° .. +62°]:</strong> Cảm biến LiDAR
+                  STL27L/LD19 quét 360° với cự ly 30m, phân cụm thành 11 quạt quét góc hẹp phía trước để phát hiện cột
+                  chướng ngại, bờ rào đường đua và vị trí drone đối thủ.</span><span class="t-en"><strong>11 Frontal
+                    Vision Cones [-62°..+62°]:</strong> 360° planar LiDAR STL27L (30m range) grouped into 11 forward
+                  detection sectors for obstacle columns, track kerbs, and rival drones.</span></li>
+              <li><span class="t-vi"><strong>3 Vùng Giám sát Điểm mù:</strong> Trích xuất cự ly quét sườn trái
+                  (+55°..+130°), sườn phải (-130°..-55°) và đuôi (&gt;130°) giúp drone chủ động khép góc phòng thủ và
+                  tránh bị đối thủ húc ngang khi vào cua.</span><span class="t-en"><strong>3 Blind-Spot Monitoring
+                    Zones:</strong> Lateral left, lateral right, and rear proximity zones prevent sideswipes and
+                  rear-end collisions during tight cornering.</span></li>
+              <li><span class="t-vi"><strong>Giữ Độ Cao Chuẩn 1.50m Bằng ToF Laser:</strong> Module MTF-01 đo khoảng
+                  cách laser ToF chiếu đất kết hợp thuật toán bù góc nghiêng pitch/roll, giữ độ cao bay là là mặt đất ổn
+                  định tới ±1 cm bất kể gió lốc.</span><span class="t-en"><strong>1.50m Precision AGL via ToF
+                    Laser:</strong> MTF-01 ground-facing ToF laser with attitude compensation maintains altitude within
+                  ±1 cm under high-speed turbulence.</span></li>
+            </ul>
+            <div class="pv-footer">
+              <span class="pv-pill">LiDAR 360° STL27L</span>
+              <span class="pv-pill">ToF Laser MTF-01</span>
+              <span class="pv-pill">IMU ICM-42688-P</span>
+              <span class="pv-pill">Kalman EKF Fusion</span>
+              <span class="pv-pill">60-Dim State Vector</span>
+            </div>
+          </article>
+
+          <!-- Pillar 4 -->
+          <article class="pv-card" id="pillar-4">
+            <div class="pv-card-top">
+              <span class="pv-card-tag"><span class="t-vi">Phân Hệ Suy Luận Nhúng &amp; Điều Khiển</span><span
+                  class="t-en">Edge Inference &amp; Flight Control</span></span>
+              <span class="pv-card-num">04</span>
+            </div>
+            <h3>
+              <span class="t-vi">Suy Luận Nơ-ron Nhúng C/C++ Trên Vi Điều Khiển ESP32-S3</span>
+              <span class="t-en">C/C++ Edge Neural Inference on Dual-Core ESP32-S3</span>
+            </h3>
+            <p>
+              <span class="t-vi">Chuyển đổi toàn bộ trọng số mạng nơ-ron từ PyTorch sang mã nguồn C/C++ thuần độc lập
+                hoàn toàn (drone_policy.h / drone_10race_policy.h), chạy trực tiếp trên vi điều khiển ESP32-S3 lõi kép
+                240MHz mà không cần bất kỳ framework AI cồng kềnh nào.</span>
+              <span class="t-en">Complete PyTorch neural policy compiled into self-contained C/C++ headers
+                (drone_policy.h / drone_10race_policy.h), executing bare-metal on dual-core ESP32-S3 240MHz without
+                heavy runtime dependencies.</span>
+            </p>
+            <ul class="pv-bullets">
+              <li><span class="t-vi"><strong>Thời Gian Suy Luận Siêu Tốc &lt; 0.35 ms:</strong> Sử dụng bộ tính toán số
+                  thực FPU phần cứng tích hợp trên nhân Xtensa LX7 của ESP32-S3, hoàn thành một lượt tính toán mạng
+                  nơ-ron 4 tầng chỉ mất 0.32–0.35 ms (tần số 20 Hz chỉ chiếm &lt;1% CPU Core 0).</span><span
+                  class="t-en"><strong>Sub-0.35ms Neural Inference:</strong> Hardware FPU execution on Xtensa LX7 core
+                  computes 4-layer forward pass in 0.32–0.35 ms (20 Hz loop consumes &lt;1% Core 0 CPU).</span></li>
+              <li><span class="t-vi"><strong>Kiến Trúc Hai Nhân Bất Đồng Bộ (Dual-Core Flight Engine):</strong> Core 0
+                  chuyên trách bộ não AI đọc LiDAR và suy luận lệnh bay; Core 1 chạy vòng lặp PID góc và tốc độ góc 500
+                  Hz xuất xung DShot300 trực tiếp tới ESC động cơ.</span><span class="t-en"><strong>Dual-Core Asymmetric
+                    Architecture:</strong> Core 0 executes AI inference &amp; LiDAR parsing; Core 1 runs 500 Hz
+                  attitude/rate PID loop streaming DShot300 pulses to 4-in-1 ESC.</span></li>
+              <li><span class="t-vi"><strong>Không Phân Mảnh Bộ Nhớ (Zero Dynamic Allocation):</strong> Tất cả biến
+                  trạng thái và đệm tính toán nơ-ron được cấp phát tĩnh (static buffers), đảm bảo không bao giờ bị tràn
+                  RAM hay đứng máy khi đang bay ở 120 km/h.</span><span class="t-en"><strong>Zero Heap
+                    Fragmentation:</strong> Static memory allocation throughout ensures zero memory leaks or
+                  garbage-collection stalls at 120 km/h racing speeds.</span></li>
+            </ul>
+            <div class="pv-footer">
+              <span class="pv-pill">ESP32-S3 Dual-Core</span>
+              <span class="pv-pill">Pure C/C++ Header</span>
+              <span class="pv-pill">FPU Acceleration</span>
+              <span class="pv-pill">DShot300 ESC Output</span>
+              <span class="pv-pill">500 Hz Rate PID</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research & Evaluation Section -->
+    <section class="research-section" id="research">
+      <div class="meta-tag">
+        <span class="dot"></span>
+        <span class="t-vi">Báo Cáo Nghiên Cứu Định Lượng</span>
+        <span class="t-en">Quantitative Benchmark Report</span>
+      </div>
+      <h2 class="sec-title">
+        <span class="t-vi">Dữ Liệu Đo Đạc &amp; Sơ Đồ Kỹ Thuật.</span>
+        <span class="t-en">Telemetry Benchmark &amp; Engineering Specs.</span>
+      </h2>
+
+      <div class="rpt-nav" role="tablist">
+        <button class="rpt-tab on" data-tab="tab-grandprix" role="tab" aria-selected="true">
+          <span class="t-vi">§ 1 Đấu Trường 10 Drone 5,000m</span>
+          <span class="t-en">§ 1 10-Drone 5,000m Grand Prix</span>
+        </button>
+        <button class="rpt-tab" data-tab="tab-survival" role="tab" aria-selected="false">
+          <span class="t-vi">§ 2 Thế Giới Vượt Vật Cản &amp; Sinh Tồn</span>
+          <span class="t-en">§ 2 Obstacle Arena &amp; Endless Survival</span>
+        </button>
+        <button class="rpt-tab" data-tab="tab-hardware" role="tab" aria-selected="false" id="hardware">
+          <span class="t-vi">§ 3 Danh Mục Linh Kiện BOM &amp; Đấu Dây</span>
+          <span class="t-en">§ 3 Hardware BOM &amp; Wiring Diagram</span>
+        </button>
+        <button class="rpt-tab" data-tab="tab-proprietary" role="tab" aria-selected="false">
+          <span class="t-vi">§ 4 Bản Quyền R&amp;D &amp; Demo</span>
+          <span class="t-en">§ 4 Proprietary Notice &amp; Live Demo</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: 10-Drone 5km Grand Prix -->
+      <div class="tab-pane on" id="tab-grandprix">
+        <div class="rpt-card">
+          <h3>
+            <span class="t-vi">Bảng Điểm Thi Đấu Đua 10 Drone Đường Hẹp 5,000 m × 10 m (Grand Prix Scorecard)</span>
+            <span class="t-en">10-Drone 5,000 m × 10 m Narrow Grand Prix Scorecard</span>
+          </h3>
+          <p>
+            <span class="t-vi">Kiểm nghiệm năng lực thi đấu của Drone Hero (#0) xuất phát từ các hàng phía sau so le đối
+              đầu với 9 drone đối thủ được trang bị cùng động cơ vật lý và nâng cấp độ khó theo từng vòng giải
+              đấu:</span>
+            <span class="t-en">Comprehensive tournament evaluation of Hero #0 starting from staggered grid positions
+              against 9 rival drones sharing identical physical mechanics across escalating tournament rounds:</span>
+          </p>
+
+          <div class="tbl-wrap">
+            <table class="rpt-table">
+              <thead>
+                <tr>
+                  <th><span class="t-vi">Vòng Đấu (Cấp Đối Thủ)</span><span class="t-en">Round (Rival Level)</span></th>
+                  <th><span class="t-vi">Tỉ Lệ Về Nhất P1</span><span class="t-en">1st Win Rate %</span></th>
+                  <th><span class="t-vi">Tỉ Lệ Lên Bục Podium</span><span class="t-en">Top-3 Podium %</span></th>
+                  <th><span class="t-vi">Hoàn Thành 5km</span><span class="t-en">5km Finish %</span></th>
+                  <th><span class="t-vi">Tỉ Lệ Va Chạm</span><span class="t-en">Hero Crash %</span></th>
+                  <th><span class="t-vi">Thời Gian TB</span><span class="t-en">Avg Time</span></th>
+                  <th><span class="t-vi">Vận Tốc Đỉnh</span><span class="t-en">Top Speed</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Vòng 1 (Rival 76% Pace)</strong></td>
+                  <td class="num">100.0%</td>
+                  <td class="num">100.0%</td>
+                  <td class="num">100.0%</td>
+                  <td class="num">0.0%</td>
+                  <td class="num">184.2 s</td>
+                  <td class="num">118.5 km/h</td>
+                </tr>
+                <tr>
+                  <td><strong>Vòng 3 (Rival 88% Pace)</strong></td>
+                  <td class="num">95.8%</td>
+                  <td class="num">100.0%</td>
+                  <td class="num">100.0%</td>
+                  <td class="num">0.0%</td>
+                  <td class="num">169.4 s</td>
+                  <td class="num">124.2 km/h</td>
+                </tr>
+                <tr>
+                  <td><strong>Vòng 5+ (Rival 100% Elite)</strong></td>
+                  <td class="num">91.7%</td>
+                  <td class="num">100.0%</td>
+                  <td class="num">95.8%</td>
+                  <td class="num">4.2%</td>
+                  <td class="num">158.6 s</td>
+                  <td class="num">129.8 km/h</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <span class="t-vi"><strong>Quy tắc thi đấu cực đoan:</strong> Đường đua dài đúng 5,000m uốn lượn liên tục
+              nhưng chỉ rộng đúng 10.0m (±5.0m tính từ tâm). Hai drone bất kỳ va chạm cánh (khoảng cách 3D &le; 0.62m) ở
+              tần số kiểm tra 160Hz đều bị tính là hỏng động lực ngay lập tức và văng khỏi đường đua. Drone Hero duy trì
+              tỉ lệ sống sót và cán đích trên 95% ở giải đấu cấp độ Elite cao nhất.</span>
+            <span class="t-en"><strong>Strict Zero-Collision Rules:</strong> Continuous 5,000m winding track constrained
+              within a strict 10.0m corridor (±5.0m from centerline). Any 3D proximity &le; 0.62m at 160Hz triggers dual
+              catastrophic airframe destruction. Hero #0 maintains &gt;95% survival and finish rate against elite level
+              opponents.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Tab 2: Obstacle Arena & Endless Survival -->
+      <div class="tab-pane" id="tab-survival">
+        <div class="rpt-card">
+          <h3>
+            <span class="t-vi">Thế Giới Sinh Tồn Quái Vật Đuổi &amp; 4 Đấu Trường Vượt Vật Cản</span>
+            <span class="t-en">Endless Monster-Chase Survival &amp; 4 Finite Obstacle Gauntlets</span>
+          </h3>
+          <p>
+            <span class="t-vi">Bên cạnh đấu trường Grand Prix 10 drone, bộ não AI còn được kiểm tra sức chịu tải trên 5
+              kịch bản vượt vật cản động và sinh tồn đường dài:</span>
+            <span class="t-en">Beyond the multi-drone Grand Prix, the neural policy was stress-tested across 5 distinct
+              dynamic obstacle navigation and endurance survival worlds:</span>
+          </p>
+
+          <div class="frame" style="margin:1rem 0">
+            <img src="assets/projects/drone/race_trajectory.png"
+              alt="4-Panel Obstacle Gauntlets and Endless Monster Chase Trajectory" loading="lazy">
+          </div>
+
+          <ul>
+            <li><span class="t-vi"><strong>1. Endless Monster-Chase Stream (Sinh tồn vô tận):</strong> Một sóng năng
+                lượng di chuyển với vận tốc tăng dần liên tục bám sát phía sau, ép drone phải bay tốc độ cao vượt qua
+                hàng trăm cột chướng ngại ngẫu nhiên. Drone đạt kỷ lục sinh tồn <strong>4,200 m (3,600 bước điều
+                  khiển)</strong> mà không xảy ra va chạm.</span><span class="t-en"><strong>1. Endless Monster-Chase
+                  Stream:</strong> An accelerating pursuit wavefront forces the drone forward through hundreds of
+                procedural cylindrical columns, achieving a record survival run of <strong>4,200 m (3,600 control
+                  steps)</strong>.</span></li>
+            <li><span class="t-vi"><strong>2. 100m Narrow Alleys (Hẻm hẹp đường tắt vs Đường vòng):</strong> Đấu trường
+                với các khe hẹp chỉ vừa thân drone (khoảng trống 0.9m) thách thức AI cân bằng giữa việc mạo hiểm chọn
+                đường tắt để tiết kiệm thời gian hoặc đi đường vòng an toàn.</span><span class="t-en"><strong>2. 100m
+                  Narrow Alleys:</strong> Ultra-narrow corridor slits (0.9m clearance) challenging the AI to weigh
+                shortcut risk against safe perimeter routes.</span></li>
+            <li><span class="t-vi"><strong>3. 500m Long-Range Endurance Gauntlet:</strong> Thử thách bay đường trường
+                500m với mật độ chướng ngại vật tăng dần kết hợp gió giật ngẫu nhiên 3 phương.</span><span
+                class="t-en"><strong>3. 500m Long-Range Endurance Gauntlet:</strong> 500m endurance gauntlet with
+                escalating obstacle density and stochastic 3D wind gusts.</span></li>
+            <li><span class="t-vi"><strong>4. Multi-Waypoint Zig-Zag Arena:</strong> Chuỗi cổng đích ngoằn ngoèo chữ Z
+                đòi hỏi kỹ năng chúi mũi nghiêng góc roll &gt; 45° để drift đổi hướng mà không bị văng
+                thành.</span><span class="t-en"><strong>4. Multi-Waypoint Zig-Zag Arena:</strong> Sharp zig-zag gates
+                requiring aggressive roll angles &gt; 45° to drift without overshooting corridor boundaries.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tab 3: Hardware BOM & Pinout -->
+      <div class="tab-pane" id="tab-hardware">
+        <div class="rpt-card">
+          <h3>
+            <span class="t-vi">Danh Mục Linh Kiện Thực Tế (BOM) &amp; Sơ Đồ Gán Chân ESP32-S3</span>
+            <span class="t-en">Hardware Bill of Materials (BOM) &amp; ESP32-S3 Pinout Mapping</span>
+          </h3>
+          <p>
+            <span class="t-vi">Mô hình tính toán được thiết kế khớp 1-đối-1 với thông số vật lý của các linh kiện FPV
+              racing tiêu chuẩn ngoài đời thực, với tổng trọng lượng AUW đạt đúng chuẩn 0.65 kg:</span>
+            <span class="t-en">Engineered with a strict 1-to-1 match against commercial off-the-shelf FPV racing
+              components, achieving an All-Up Weight (AUW) of exactly 0.65 kg:</span>
+          </p>
+
+          <div class="tbl-wrap">
+            <table class="rpt-table">
+              <thead>
+                <tr>
+                  <th><span class="t-vi">Khối Chức Năng</span><span class="t-en">Subsystem</span></th>
+                  <th><span class="t-vi">Linh Kiện Khuyến Nghị</span><span class="t-en">Recommended Part</span></th>
+                  <th><span class="t-vi">Chân Trên ESP32-S3</span><span class="t-en">ESP32-S3 GPIO</span></th>
+                  <th><span class="t-vi">Giao Thức / Tần Số</span><span class="t-en">Protocol / Rate</span></th>
+                  <th><span class="t-vi">Khối Lượng</span><span class="t-en">Weight</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Khung sườn (Frame)</strong></td>
+                  <td>Carbon 5" Quad-X (Wheelbase 250mm, arm 125mm)</td>
+                  <td>—</td>
+                  <td>Cơ khí chống rung 5mm</td>
+                  <td class="num">~125 g</td>
+                </tr>
+                <tr>
+                  <td><strong>Vi điều khiển (MCU)</strong></td>
+                  <td>ESP32-S3-WROOM-1 (N16R8) Dual-Core 240MHz</td>
+                  <td>Core 0 / Core 1</td>
+                  <td>FPU hardware + Wi-Fi ESP-NOW</td>
+                  <td class="num">~12 g</td>
+                </tr>
+                <tr>
+                  <td><strong>Động cơ &amp; Cánh</strong></td>
+                  <td>4× Brushless 2207 (1950KV) + Cánh 3 lá 5143</td>
+                  <td>GPIO 4, 5, 6, 7 (ESC)</td>
+                  <td>Max 6.2N lực đẩy/motor</td>
+                  <td class="num">~155 g</td>
+                </tr>
+                <tr>
+                  <td><strong>ESC Động lực</strong></td>
+                  <td>ESC 4-in-1 BLHeli_S / Bluejay 45A–55A</td>
+                  <td>S1..S4 (GPIO 4..7)</td>
+                  <td>DShot300 / PWM 400Hz</td>
+                  <td class="num">~18 g</td>
+                </tr>
+                <tr>
+                  <td><strong>Cảm biến IMU</strong></td>
+                  <td>ICM-42688-P / BMI270 (Chống rung Soft-mount)</td>
+                  <td>GPIO 10, 11, 12, 13 (SPI)</td>
+                  <td>SPI 8 MHz (Ngắt 500 Hz)</td>
+                  <td class="num">~3 g</td>
+                </tr>
+                <tr>
+                  <td><strong>Cảm biến Độ cao 1.5m</strong></td>
+                  <td>MTF-01 (ToF Laser 0.05–8m + Optical Flow)</td>
+                  <td>GPIO 15 (UART RX)</td>
+                  <td>UART 115200 baud (100 Hz)</td>
+                  <td class="num">~6 g</td>
+                </tr>
+                <tr>
+                  <td><strong>Thị giác Né Cột 360°</strong></td>
+                  <td>LiDAR Quét Phẳng Mini STL27L / LD19 (30m)</td>
+                  <td>GPIO 18 (UART1 RX)</td>
+                  <td>UART 230400 baud</td>
+                  <td class="num">~45 g</td>
+                </tr>
+                <tr>
+                  <td><strong>Định vị GPS &amp; La bàn</strong></td>
+                  <td>u-blox M10 GPS + La bàn từ QMC5883L</td>
+                  <td>GPIO 43/44, GPIO 8/9</td>
+                  <td>UART 115200 + I2C 400kHz</td>
+                  <td class="num">~14 g</td>
+                </tr>
+                <tr>
+                  <td><strong>Thu sóng An toàn</strong></td>
+                  <td>Receiver ELRS 2.4GHz (Hardware Kill-Switch)</td>
+                  <td>GPIO 16, 17 (UART2)</td>
+                  <td>CRSF 420000 baud</td>
+                  <td class="num">~3 g</td>
+                </tr>
+                <tr>
+                  <td><strong>Pin &amp; Nguồn Năng lượng</strong></td>
+                  <td>Pin LiPo 4S 1500mAh 100C + Mạch BEC 5V/3A</td>
+                  <td>GPIO 1 (ADC đo VBAT)</td>
+                  <td>Dòng xả liên tục &gt; 120A</td>
+                  <td class="num">~265 g</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <span class="t-vi"><strong>Tổng trọng lượng cất cánh toàn máy (AUW):</strong> ~646 g (&approx; 0.65 kg),
+              khớp tuyệt đối với tham số mô phỏng <code>DRONE_MASS = 0.65f</code> trong toàn bộ bộ não nơ-ron
+              C/C++.</span>
+            <span class="t-en"><strong>All-Up Flying Weight (AUW):</strong> ~646 g (&approx; 0.65 kg), perfectly
+              matching the physics simulation parameter <code>DRONE_MASS = 0.65f</code> used across the embedded C/C++
+              firmware.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Tab 4: Proprietary Notice -->
+      <div class="tab-pane" id="tab-proprietary">
+        <div class="rpt-card">
+          <h3 style="color:#38BDF8">
+            <span class="t-vi">Thông Báo Bản Quyền Sở Hữu Trí Tuệ &amp; Thẩm Định Kỹ Thuật (Proprietary R&amp;D)</span>
+            <span class="t-en">Intellectual Property &amp; Technical Evaluation Notice</span>
+          </h3>
+          <p>
+            <span class="t-vi">1. <strong>Tài sản Nghiên cứu Độc quyền:</strong> Dự án này là công trình nghiên cứu và
+              phát triển độc lập của Nguyễn Phát Tài trong lĩnh vực robot tự hành, học tăng cường sâu (Deep
+              Reinforcement Learning) và kỹ thuật nhúng vi xử lý hiệu năng cao.</span>
+            <span class="t-en">1. <strong>Proprietary Research Asset:</strong> This project represents independent
+              research and development by Nguyễn Phát Tài spanning autonomous robotics, deep reinforcement learning, and
+              high-performance embedded systems engineering.</span>
+          </p>
+          <p>
+            <span class="t-vi">2. <strong>Bảo Mật Mã Nguồn (Closed-Source Codebase):</strong> Nhằm bảo vệ giá trị sở hữu
+              trí tuệ, toàn bộ mã nguồn mô phỏng môi trường Gym/Vectorized, các checkpoint huấn luyện (best_policy.pt),
+              và file header C/C++ xuất cho vi điều khiển ESP32 được lưu trữ bảo mật trong kho lưu trữ riêng (Private
+              Repository) và không phân phối công khai.</span>
+            <span class="t-en">2. <strong>Closed-Source Codebase:</strong> To protect intellectual property value, all
+              Gym/Vectorized simulation environments, training checkpoints (best_policy.pt), and compiled C/C++ header
+              firmware for ESP32 are strictly maintained within a private repository and not publicly
+              distributed.</span>
+          </p>
+          <p>
+            <span class="t-vi">3. <strong>Hỗ Trợ Live Demo Kỹ Thuật &amp; Tuyển Dụng:</strong> Quý đối tác, nhà nghiên
+              cứu hoặc nhà tuyển dụng quan tâm thẩm định kiến trúc thuật toán có thể liên hệ trực tiếp để được cung cấp
+              video mô phỏng thời gian thực, xem trực tiếp mã nguồn nội bộ hoặc chứng kiến phiên chạy live-viewer 3D 10
+              drone.</span>
+            <span class="t-en">3. <strong>Live Demo &amp; Evaluation Inquiries:</strong> Prospective engineering
+              partners, researchers, or technical hiring teams seeking to evaluate the algorithmic architecture can
+              connect directly for real-time telemetry screen-sharing, live 3D viewer demonstrations, or private
+              technical review.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="btm-nav">
+      <a href="projects.html" class="btn">
+        <span class="t-vi">← Quay lại Tất cả Dự án</span>
+        <span class="t-en">← Back to All Projects</span>
+      </a>
+      <a href="index.html" class="link">
+        <span class="t-vi">Về Trang Tổng quan</span>
+        <span class="t-en">Return to Home Overview</span>
+      </a>
+    </div>
+
+    <footer>
+      <span>VLUX® — Nguyễn Phát Tài · Cần Thơ</span>
+      <span>
+        <span class="t-vi">Kỹ thuật vượt qua mọi giới hạn.</span>
+        <span class="t-en">Engineering beyond boundaries.</span>
+      </span>
+    </footer>
+  </main>
+
+  <script>
+    /* reduce-motion check */
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var fine = matchMedia('(hover:hover)').matches;
+
+    /* Language Switcher Controller */
+    var currentLang = localStorage.getItem('vlux_lang') || 'vi';
+    var pvAbTitle = document.getElementById('pvAbTitle'), pvAbMetric = document.getElementById('pvAbMetric');
+
+    var pillarMeta = {
+      'pillar-1': {
+        vi: { title: '01 / Động Lực Học 6-DOF & Khí Động Cánh Quạt', metric: '6-DOF Quad-X · Mô phỏng Slipstream & Prop-Wash · Khối lượng 0.65 kg' },
+        en: { title: '01 / 6-DOF Dynamics & Prop-Wash Aerodynamics', metric: '6-DOF Quad-X · Slipstream & Prop-Wash Aerodynamics · 0.65 kg AUW' }
+      },
+      'pillar-2': {
+        vi: { title: '02 / Học Tăng Cường PPO & Tiến Hóa Đối Kháng', metric: 'PPO MLP 60→128→128→4 · Rewind Recovery 45m · Rival League 76%→100%' },
+        en: { title: '02 / Deep RL PPO & Asymmetric Co-Evolution', metric: 'PPO MLP 60→128→128→4 · 45m Rewind Recovery · Rival League 76%→100%' }
+      },
+      'pillar-3': {
+        vi: { title: '03 / Hợp Nhất Cảm Biến Thời Gian Thực & LiDAR 360°', metric: '11 cung thị giác LiDAR STL27L · ToF Laser 1.50m · EKF IMU SPI' },
+        en: { title: '03 / Real-Time Sensor Fusion & 360° LiDAR', metric: '11 Frontal LiDAR Sectors · ToF Laser 1.50m · High-Rate SPI EKF IMU' }
+      },
+      'pillar-4': {
+        vi: { title: '04 / Suy Luận Nơ-ron C/C++ Trên Vi Điều Khiển ESP32-S3', metric: 'Xuất C Header thuần · Hardware FPU < 0.35 ms · PID Góc 500 Hz DShot300' },
+        en: { title: '04 / C/C++ Edge Neural Inference on ESP32-S3', metric: 'Pure C Header · Hardware FPU < 0.35 ms · 500 Hz Attitude PID DShot300' }
+      }
+    };
+
+    function setLanguage(lang) {
+      currentLang = (lang === 'en') ? 'en' : 'vi';
+      document.documentElement.setAttribute('lang', currentLang);
+      localStorage.setItem('vlux_lang', currentLang);
+
+      var langBtns = document.querySelectorAll('.lang-btn');
+      langBtns.forEach(function (btn) {
+        var bLang = btn.getAttribute('data-lang') || (btn.id === 'btnEn' ? 'en' : 'vi');
+        var isActive = bLang === currentLang;
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+
+      if (pvAbTitle && pvAbMetric) {
+        var activeStep = document.querySelector('.pv-step.on');
+        var activeId = activeStep ? activeStep.getAttribute('href').replace('#', '') : 'pillar-1';
+        if (pillarMeta[activeId] && pillarMeta[activeId][currentLang]) {
+          pvAbTitle.textContent = pillarMeta[activeId][currentLang].title;
+          pvAbMetric.textContent = pillarMeta[activeId][currentLang].metric;
+        }
+      }
+    }
+    setLanguage(currentLang);
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.lang-btn');
+      if (btn) {
+        e.preventDefault();
+        var bLang = btn.getAttribute('data-lang') || (btn.id === 'btnEn' ? 'en' : 'vi');
+        setLanguage(bLang);
+      }
+    });
+
+    /* Page transition curtain (#veil in/out) */
+    var veil = document.getElementById('veil');
+    requestAnimationFrame(function () {
+      veil.classList.add('out');
+      setTimeout(function () { veil.className = ''; }, 520);
+    });
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href$=".html"], a[href^="index.html#"], a[href^="projects.html#"]');
+      if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      var targetHref = a.getAttribute('href');
+      if (!targetHref || targetHref.startsWith('#')) return;
+      e.preventDefault();
+      veil.querySelector('span').textContent = 'VLUX';
+      veil.className = 'in';
+      setTimeout(function () { location.href = targetHref; }, 520);
+    });
+    addEventListener('pageshow', function (e) {
+      if (e.persisted) { veil.className = 'out'; setTimeout(function () { veil.className = ''; }, 520); }
+    });
+
+    /* scroll progress bar */
+    var pg = document.getElementById('prog');
+    addEventListener('scroll', function () {
+      var m = document.documentElement.scrollHeight - innerHeight;
+      pg.style.transform = 'scaleX(' + (m > 0 ? scrollY / m : 0) + ')';
+    }, { passive: true });
+
+    /* pointer ripple */
+    addEventListener('pointerdown', function (e) {
+      var r = document.createElement('div'); r.className = 'rip';
+      r.style.left = e.clientX + 'px'; r.style.top = e.clientY + 'px';
+      document.body.appendChild(r);
+      setTimeout(function () { r.remove(); }, 750);
+    });
+
+    /* magnetic controls */
+    if (fine && !reduce) {
+      var mg = [].slice.call(document.querySelectorAll('nav a, .logo, .snd, .btn, .lang-btn, .rpt-tab, .pv-step'));
+      mg.forEach(function (el) { el.setAttribute('data-mag', ''); });
+      addEventListener('pointermove', function (e) {
+        mg.forEach(function (el) {
+          var r = el.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2), R = Math.max(r.width, r.height) / 2 + 60;
+          el.style.translate = Math.hypot(dx, dy) < R ? (dx * .25).toFixed(1) + 'px ' + (dy * .25).toFixed(1) + 'px' : '';
+        });
+      }, { passive: true });
+    }
+
+    /* Architectural Pillars - Vertical Scroll Spy & Active Sidebar Feedback */
+    var pvCards = [].slice.call(document.querySelectorAll('.pv-card')), pvSteps = [].slice.call(document.querySelectorAll('.pv-step'));
+    if (pvCards.length && pvSteps.length) {
+      var pvObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            pvSteps.forEach(function (step) {
+              step.classList.toggle('on', step.getAttribute('href') === '#' + id);
+            });
+            if (pillarMeta[id] && pvAbTitle && pvAbMetric) {
+              var meta = pillarMeta[id][currentLang] || pillarMeta[id]['vi'];
+              pvAbTitle.textContent = meta.title;
+              pvAbMetric.textContent = meta.metric;
+            }
+          }
+        });
+      }, { rootMargin: '-25% 0px -45% 0px' });
+      pvCards.forEach(function (card) { pvObs.observe(card); });
+      document.addEventListener('click', function (e) {
+        var step = e.target.closest('.pv-step');
+        if (!step) return;
+        e.preventDefault();
+        var target = document.querySelector(step.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+
+    /* Research Section Tab Switcher */
+    var rptTabs = [].slice.call(document.querySelectorAll('.rpt-tab'));
+    var rptPanels = [].slice.call(document.querySelectorAll('.tab-pane'));
+    if (rptTabs.length && rptPanels.length) {
+      rptTabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var targetId = tab.getAttribute('data-tab');
+          rptTabs.forEach(function (t) {
+            var on = t === tab;
+            t.classList.toggle('on', on);
+            t.setAttribute('aria-selected', on ? 'true' : 'false');
+          });
+          rptPanels.forEach(function (p) {
+            p.classList.toggle('on', p.id === targetId);
+          });
+        });
+      });
+    }
+
+    /* text scramble decode */
+    var G = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789<>/{}[]+*#';
+    function scr(el, ms) {
+      if (!el || el._s) return; el._s = 1; var fin = el.textContent, L = fin.length, dl = [], i, t0 = performance.now();
+      for (i = 0; i < L; i++)dl[i] = i / L * .65 + Math.random() * .35;
+      (function f(n) {
+        var k = Math.min(1, (n - t0) / ms), o = '';
+        for (i = 0; i < L; i++) { var c = fin.charAt(i); o += (c === ' ' || k >= dl[i]) ? c : G.charAt(Math.random() * G.length | 0); }
+        el.textContent = o; if (k < 1) requestAnimationFrame(f); else { el.textContent = fin; el._s = 0; }
+      })(t0);
+    }
+    setTimeout(function () { scr(document.getElementById('h1'), 900); }, 250);
+
+    /* heading 3D tilt + scroll parallax */
+    var h1 = document.getElementById('h1');
+    if (!reduce) {
+      addEventListener('scroll', function () {
+        var r = h1.getBoundingClientRect();
+        h1.style.translate = '0 ' + ((r.top + r.height / 2 - innerHeight / 2) * -.07).toFixed(1) + 'px';
+      }, { passive: true });
+      addEventListener('pointermove', function (e) {
+        var x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+        h1.style.setProperty('--rx', (-y * 8) + 'deg'); h1.style.setProperty('--ry', (x * 12) + 'deg'); h1.style.setProperty('--gx', (50 + x * 80) + '%');
+      });
+    }
+
+    /* Interactive particle field with burst physics & audio reactivity */
+    var cv = document.getElementById('bg'), ctx = cv.getContext('2d'), ready = false, raf = 0, W = 0, H = 0, P = [], S = [], XY = [];
+    var mp = { x: -1e4, y: -1e4, on: false, nx: 0, ny: 0, sx: 0, sy: 0, gx: -1e4, gy: -1e4, ga: 0 }, lt = 0, sc = 0, scs = 0;
+    function kick() { if (reduce && ready) draw(0); else if (!raf && ready) loop(); }
+    function mkPt() {
+      var z = .25 + .75 * Math.random(), a = Math.random() * 6.283, s = (.1 + .25 * Math.random()) * z;
+      return { x: Math.random() * W, y: Math.random() * H, z: z, bx: Math.cos(a) * s, by: Math.sin(a) * s, vx: 0, vy: 0, ph: Math.random() * 6.283 };
+    }
+    function size() {
+      var d = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = Math.round(W * d); cv.height = Math.round(H * d); ctx.setTransform(d, 0, 0, d, 0, 0);
+      var n = Math.round(Math.max(48, Math.min(120, W * H / 13500))); if (W < 700) n = Math.min(n, 55);
+      while (P.length < n) P.push(mkPt()); P.length = n; if (ready) kick();
+    }
+    function step(dt) {
+      dt = Math.min(dt, .05); var f = Math.pow(.96, dt * 60); scs += (sc - scs) * Math.min(1, dt * 6);
+      var ax = mp.gx - mp.sx, ay = mp.gy - mp.sy; mp.sx += ax * Math.min(1, dt * 8); mp.sy += ay * Math.min(1, dt * 8);
+      var dist = Math.hypot(ax, ay); mp.ga = Math.max(0, Math.min(1, dist / 160)) * f;
+      for (var i = 0; i < P.length; i++) {
+        var p = P[i]; p.x += p.bx * p.z * (1 + scs * 1.8) + p.vx; p.y += p.by * p.z * (1 + scs * 1.8) + p.vy;
+        p.vx *= f; p.vy *= f; p.ph += dt * (.8 + p.z);
+        if (mp.on) {
+          var dx = p.x - mp.nx, dy = p.y - mp.ny, d = Math.hypot(dx, dy), R = 140;
+          if (d < R && d > 0) { var force = (1 - d / R) * 18 * p.z; p.vx += (dx / d) * force * dt; p.vy += (dy / d) * force * dt; }
+        }
+        if (mp.ga > .02) {
+          var gx = p.x - mp.sx, gy = p.y - mp.sy, gd = Math.hypot(gx, gy);
+          if (gd < 220 && gd > 0) { var gf = (1 - gd / 220) * 28 * mp.ga * p.z; p.vx += (gx / gd) * gf * dt; p.vy += (gy / gd) * gf * dt; }
+        }
+        if (p.x < -20) p.x = W + 20; else if (p.x > W + 20) p.x = -20;
+        if (p.y < -20) p.y = H + 20; else if (p.y > H + 20) p.y = -20;
+      }
+      for (var j = S.length - 1; j >= 0; j--) {
+        var s = S[j]; s.x += s.vx; s.y += s.vy; s.vx *= f; s.vy *= f; s.life -= dt * 1.2;
+        if (s.life <= 0) S.splice(j, 1);
+      }
+    }
+    function draw(dt) {
+      step(dt); ctx.clearRect(0, 0, W, H);
+      var maxD = W < 700 ? 80 : 110, maxD2 = maxD * maxD; XY.length = 0;
+      for (var i = 0; i < P.length; i++) {
+        var p = P[i]; XY.push(p.x, p.y);
+        var lum = .35 + .45 * Math.sin(p.ph), rad = Math.max(.8, p.z * 1.8 * (1 + scs * .5)), alpha = Math.min(1, (.25 + .5 * p.z) * lum * (1 + scs * .6));
+        ctx.beginPath(); ctx.arc(p.x, p.y, rad, 0, 6.283); ctx.fillStyle = 'rgba(201,208,221,' + alpha.toFixed(3) + ')'; ctx.fill();
+        if (p.z > .7 && lum > .6) {
+          ctx.beginPath(); ctx.arc(p.x, p.y, rad * 3, 0, 6.283); ctx.fillStyle = 'rgba(130,155,203,' + (alpha * .25).toFixed(3) + ')'; ctx.fill();
+        }
+      }
+      var stepK = W < 700 ? 2 : 1;
+      for (var i = 0; i < P.length; i += stepK) {
+        var x1 = XY[i * 2], y1 = XY[i * 2 + 1];
+        for (var j = i + 1; j < P.length; j++) {
+          var dx = x1 - XY[j * 2], dy = y1 - XY[j * 2 + 1], d2 = dx * dx + dy * dy;
+          if (d2 < maxD2) {
+            var a = (1 - Math.sqrt(d2) / maxD) * .16 * (P[i].z + P[j].z) * .5 * (1 + scs * .8);
+            ctx.strokeStyle = 'rgba(130,155,203,' + a.toFixed(3) + ')'; ctx.lineWidth = .6;
+            ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(XY[j * 2], XY[j * 2 + 1]); ctx.stroke();
+          }
+        }
+      }
+      for (var k = 0; k < S.length; k++) {
+        var sp = S[k]; ctx.beginPath(); ctx.arc(sp.x, sp.y, (sp.r || 3) * sp.life, 0, 6.283);
+        ctx.fillStyle = 'rgba(' + (sp.hue || '243,245,250') + ',' + (sp.life * .8).toFixed(3) + ')'; ctx.fill();
+      }
+    }
+    function loop(t) {
+      raf = requestAnimationFrame(loop); var dt = lt ? Math.min((t - lt) / 1000, .1) : .016; lt = t;
+      if (au && au.an && sndOn) {
+        au.an.getByteFrequencyData(au.fd); var sum = 0, cnt = Math.min(au.fd.length, 32);
+        for (var i = 0; i < cnt; i++)sum += au.fd[i]; sc = (sum / cnt) / 255;
+      } else sc = 0;
+      draw(dt);
+    }
+    size(); addEventListener('resize', size, { passive: true });
+    ready = true; kick();
+
+    /* mouse events for particle physics & bursts */
+    function burst(x, y) {
+      for (var i = 0; i < P.length; i++) {
+        var dx = P[i].x - x, dy = P[i].y - y, d = Math.hypot(dx, dy) + .01;
+        if (d < 280) { var f = (1 - d / 280) * 4.5; P[i].vx += dx / d * f; P[i].vy += dy / d * f; }
+      }
+      for (var j = 0; j < 14; j++) {
+        var a = Math.random() * 6.283, s = 2 + Math.random() * 3.2;
+        S.push({ x: x, y: y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 1, r: 2.5, hue: '243,245,250' });
+      }
+    }
+    if (!reduce) {
+      addEventListener('pointermove', function (e) {
+        mp.x = e.clientX; mp.y = e.clientY; mp.nx = e.clientX; mp.ny = e.clientY; mp.gx = e.clientX; mp.gy = e.clientY;
+        if (e.pointerType !== 'touch') mp.on = true;
+      }, { passive: true });
+      addEventListener('pointerdown', function (e) {
+        mp.x = e.clientX; mp.y = e.clientY; mp.nx = e.clientX; mp.ny = e.clientY; mp.gx = e.clientX; mp.gy = e.clientY;
+        if (e.pointerType === 'touch') mp.on = true;
+        burst(e.clientX, e.clientY);
+      });
+      ['pointerup', 'pointercancel'].forEach(function (n) {
+        addEventListener(n, function (e) { if (e.pointerType === 'touch') mp.on = false; });
+      });
+    }
+
+    /* sound engine */
+    var AC = window.AudioContext || window.webkitAudioContext, au = null, sndOn = false;
+    var sndBtn = document.getElementById('snd'), sndPanel = document.getElementById('sndpanel'), sMus = document.getElementById('sMus'), sVol = document.getElementById('sVol');
+    function initAu() {
+      if (au) return au;
+      try {
+        var ctx = new AC();
+        var mGain = ctx.createGain(); mGain.gain.value = parseFloat(sVol.value) || .7;
+        var an = ctx.createAnalyser(); an.fftSize = 64; an.smoothingTimeConstant = .8;
+        mGain.connect(an); an.connect(ctx.destination);
+        var aud = new Audio('assets/audio/blinding-lights.mp3'); aud.loop = true; aud.crossOrigin = 'anonymous';
+        var src = ctx.createMediaElementSource(aud); src.connect(mGain);
+        au = { ctx: ctx, mGain: mGain, an: an, fd: new Uint8Array(an.frequencyBinCount), aud: aud, playing: false };
+        aud.addEventListener('error', function () {
+          if (aud.src.indexOf('starboy') === -1) { aud.src = 'assets/audio/starboy.mp3'; if (au.playing) aud.play().catch(function () { }); }
+        });
+        return au;
+      } catch (e) { return null; }
+    }
+    function applySnd(on) {
+      sndOn = on; sndBtn.classList.toggle('on', on); sndBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      sndBtn.querySelector('.lb').textContent = on ? 'Sound on' : 'Sound off';
+      sndPanel.classList.toggle('show', on);
+      var a = initAu(); if (!a) return;
+      if (a.ctx.state === 'suspended' && on) a.ctx.resume();
+      if (on) {
+        if (sMus.getAttribute('aria-pressed') === 'true') { a.aud.play().then(function () { a.playing = true; }).catch(function () { }); }
+      } else {
+        a.aud.pause(); a.playing = false;
+      }
+    }
+    sndBtn.addEventListener('click', function (e) {
+      e.stopPropagation(); applySnd(!sndOn);
+    });
+    sMus.addEventListener('click', function (e) {
+      e.stopPropagation(); var cur = sMus.getAttribute('aria-pressed') === 'true';
+      sMus.setAttribute('aria-pressed', cur ? 'false' : 'true');
+      if (!au) return;
+      if (cur) { au.aud.pause(); au.playing = false; } else if (sndOn) { au.aud.play().then(function () { au.playing = true; }).catch(function () { }); }
+    });
+    sVol.addEventListener('input', function () {
+      if (au && au.mGain) au.mGain.gain.value = parseFloat(sVol.value);
+    });
+  </script>
+</body>
+
+</html>
